@@ -2,7 +2,8 @@ CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
     email VARCHAR(100) UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
-    fecha_creacion TIMESTAMP DEFAULT NOW()
+    fecha_creacion TIMESTAMP DEFAULT NOW(),
+    admin BOOLEAN DEFAULT FALSE NOT NULL,
 );
 
 CREATE TABLE personas (
