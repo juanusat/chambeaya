@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 410 400">
+  <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
+  <defs>
+    <style>
+      .st0 {
+        mask: url(#mask);
+      }
+
+      .st1 {
+        opacity: .3;
+      }
+
+      .st1, .st2 {
+        fill: #d74828;
+      }
+
+      .st3 {
+        opacity: .1;
+      }
+
+      .st4 {
+        fill: #681f13;
+      }
+
+      .st5 {
+        fill: url(#Degradado_sin_nombre_20);
+      }
+    </style>
+    <linearGradient id="Degradado_sin_nombre_20" data-name="Degradado sin nombre 20" x1="202.9" y1="251.5" x2="0" y2="251.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#000"/>
+      <stop offset=".3" stop-color="#fff"/>
+    </linearGradient>
+    <mask id="mask" x="0" y="103.2" width="205" height="296.8" maskUnits="userSpaceOnUse">
+      <rect class="st5" x="0" y="103.2" width="202.9" height="296.5"/>
+    </mask>
+  </defs>
+  <path class="st4" d="M410,149.2v204.8c0,25.4-20.6,46-46,46H46C20.6,400,0,379.4,0,354v-204.8C0,123.8,20.6,103.2,46,103.2h42.8l43.9,43.9,61.2-43.9-36.7,168.3,47.9,66.3,47.9-66.3-36.7-168.3,61.2,43.9,43.9-43.9h42.8c25.4,0,46,20.6,46,46Z"/>
+  <path class="st3" d="M410,149.2v204.8c0,23.7-17.9,43.1-40.9,45.7v-168.5c-.1-11.6-5.7-22.5-15.2-29.3l-76.6-54.9,29.3-29.3,62.5,44.8v-59.1c23,2.5,40.9,22,40.9,45.7Z"/>
+  <g class="st0">
+    <path class="st1" d="M205,356.1v43.9H46c-25.4,0-46-20.6-46-46v-204.8c0-25.4,20.6-46,46-46h42.8l43.9,43.9H54.6c-4.6,0-8.4,3.7-8.4,8.4v192.3c0,4.6,3.8,8.4,8.4,8.4h150.5Z"/>
+  </g>
+  <path class="st2" d="M343.7,84.7c0-14.4-11.7-26.2-26.2-26.2h-33.2v-17.5c0-22.7-18.4-41.1-41.1-41.1h-76.6c-22.7,0-41.1,18.4-41.1,41.1v17.5h-33.2c-14.4,0-26.2,11.7-26.2,26.2h85.5v-43.7c0-8.2,6.7-14.9,14.9-14.9h76.6c8.2,0,14.9,6.7,14.9,14.9v43.7h85.5Z"/>
+  <path class="st1" d="M410,149.2v204.8c0,23.7-17.9,43.1-40.9,45.7v-168.5c-.1-11.6-5.7-22.5-15.2-29.3l-76.6-54.9,29.3-29.3,62.5,44.8v-59.1c23,2.5,40.9,22,40.9,45.7Z"/>
+</svg>
