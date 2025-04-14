@@ -1,0 +1,100 @@
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/pago.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+    <div class="app">
+        <div class="page">
+            <div class="width-m">
+                <div class="titulo">
+                    <h1>Proceso de pago del Contrato</h1>
+                </div>
+
+                <div class="contenedor-principal">
+                    <div class="info-pago-container">
+                        <div class="formulario-pago">
+                            <h2>Información de pago</h2>
+                            <div class="checkbox-container">
+                                <label for="metodo-pago">Tarjeta de crédito o débito</label>
+                            </div>
+
+                            <p class="obligatorio">* Indica un campo obligatorio</p>
+
+                            <div class="formul-pago">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre*</label>
+                                        <input type="text" id="nombre" placeholder="Nombre">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="numero">Número de Tarjeta*</label>
+                                        <input type="text" id="numero" placeholder="Número de Tarjeta">
+                                    </div>
+
+                                    <div class="fila-doble">
+                                        <div class="form-group">
+                                            <label for="fecha">Fecha de Vencimiento*</label>
+                                            <input type="text" id="fecha" placeholder="MM/YY">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cvc">Código de Seguridad (CVC)*</label>
+                                            <input type="text" id="cvc" placeholder="CVC">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pais">País*</label>
+                                        <input type="text" id="pais" placeholder="Perú">
+                                    </div>
+
+                                    <button type="submit" class="btn-pago">FINALIZAR PAGO</button>
+                                </form>
+                            </div>
+
+                            <p class="terminos">
+                                Al hacer clic en el botón "Finalizar compra", aceptas nuestros <a href="#">Términos de
+                                    Uso y Política de Privacidad</a>, y autorizas a ChambaYa a cobrar la tarifa de
+                                suscripción de US 300.00 + impuestos aplicables/mensual hasta que canceles. El precio
+                                está sujeto a cambios. Pueden cancelar en cualquier momento desde la configuración de tu
+                                cuenta para evitar cargas futuros.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="resumen-contrato">
+                        <h3>Tu Contrato</h3>
+                        <table>
+                            <tr>
+                                <td>Pago</td>
+                                <td>PE 300</td>
+                            </tr>
+                            <tr>
+                                <td>Destinatario</td>
+                                <td>Jose Fiestas Fiestas</td>
+                            </tr>
+                            <tr>
+                                <td>Servicio</td>
+                                <td>Pesca en lancha</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="js">
+        <script src="/static/js/main.js"></script>
+    </div>
+</body>
+
+</html>
