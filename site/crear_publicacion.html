@@ -1,0 +1,59 @@
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Publicación</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/crear-publicacion.css">
+</head>
+
+<body>
+    <div class="app">        
+        <div class="page">
+            <div class="width-m">
+                <div class="job-post-container">
+                    <div class="job-post-header">
+                        <span>Crea tu publicación de trabajo</span>
+                        <button class="close-button">✕</button>
+                    </div>
+                    <div class="job-post-body">
+                        <label for="title">Añade un título</label>
+                        <input type="text" id="title" class="input-field">
+                
+                        <label for="description">Añade un descripcion</label>
+                        <textarea id="description" class="textarea-field"></textarea>
+                
+                        <div class="job-post-footer">
+                            <div class="upload-section">
+                                <label class="footer-label">Agrega a tu publicación</label>
+                                <label class="file-upload-button">
+                                    <span class="icon">🖼️</span>
+                                    <span class="icon">👥</span>
+                                    Adjuntar archivos
+                                    <input type="file" multiple hidden>
+                                </label>
+                            </div>
+                        
+                            <div class="price-section">
+                                <label for="price">Precio</label>
+                                <input type="text" id="price" class="price-input">
+                            </div>
+                        </div>
+                        
+                        
+                
+                        <button class="submit-button">Publicar Oferta de Trabajo</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="js">
+        <script src="/static/js/main.js"></script>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+.job-post-container {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: white;
+    margin-block: 30px;
+}
+
+.job-post-header {
+    background-color: #ddd;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.job-post-body {
+    padding: 20px;
+}
+
+.input-field, .textarea-field, .price-input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #999;
+    border-radius: 4px;
+}
+
+.textarea-field {
+    height: 100px;
+    resize: none;
+}
+
+.job-post-footer {
+    display: grid;
+    gap: 20px;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 100px;
+    margin-bottom: 15px;
+}
+
+.upload-section,
+.price-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.footer-label {
+    white-space: nowrap;
+}
+
+.file-upload-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background-color: white;
+    border: 1px solid #999;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.file-upload-button input[type="file"] {
+    display: none;
+}
+
+.icon {
+    font-size: 16px;
+}
+
+.price-section {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    
+ }
+
+.price-input {
+    
+    height: 38px;
+}
+
+.upload-section{
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+}
+.file-upload-button{
+    margin-bottom: 15px;
+    margin-top:5px;
+    height: 38px;
+}
+
+.submit-button {
+    font-size: inherit;
+    width: 100%;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #999;
+    border-radius: 4px;
+    cursor: pointer;
+}
