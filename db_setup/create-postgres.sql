@@ -3,7 +3,7 @@ create table contrato (
     servicio_id int,
     cliente_id int,
     prestador_id int,
-    estado varchar(20) CHECK (estado IN ('pendiente', 'en progreso', 'completado', 'cancelado')) DEFAULT 'pendiente' not null,
+    estado varchar(20) CHECK (estado IN ('pendiente', 'rechazado' ,'en espera', 'en progreso', 'completado', 'finalizado' , 'cancelado')) DEFAULT 'pendiente' not null,
     fecha_inicio date not null,
     fecha_finalizacion date not null,
     primary key (contrato_id)
@@ -32,7 +32,7 @@ create table comprobante_contrato (
 create table comentario (
     comentario_id serial,
     contrato_id int,
-    calificacion int,
+    calificacion int CHECK (calificacion BETWEEN 1 AND 5),
     comentario varchar(255) not null,
     fecha_creacion date not null,
     primary key (comentario_id)
@@ -55,7 +55,7 @@ create table metodo_pago (
 
 create table publicacion_medio (
     publicacion_medio_id serial,
-    pulicacion_id integer not null,
+    publicacion_id integer not null,
     tamanio integer not null,
     fecha_hora timestamp not null,
     primary key (publicacion_medio_id)
@@ -118,4 +118,4 @@ alter table publicacion
 add constraint fk_publicacion_usuario_id_usuario_id foreign key(usuario_id) references usuario(usuario_id);
 
 alter table publicacion_medio
-add constraint fk_publicacion_medio_pulicacion_id_publicacion_id foreign key(pulicacion_id) references publicacion(publicacion_id);
+add constraint fk_publicacion_medio_publicacion_id_publicacion_id foreign key(publicacion_id) references publicacion(publicacion_id); 

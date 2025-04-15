@@ -7,7 +7,7 @@ create table contrato (
     fecha_inicio date not null,
     fecha_finalizacion date not null,
     primary key (contrato_id),
-    check (estado in ('pendiente', 'en progreso', 'completado', 'cancelado'))
+    check (estado in ('pendiente', 'rechazado' ,'en espera', 'en progreso', 'completado', 'finalizado' , 'cancelado'))
 );
 
 create table usuario (
