@@ -1,0 +1,213 @@
+/*CSS REGISTRARSE*/
+.auth-container {
+    background: white;
+    border-radius: 24px; /* más redondeado */
+    padding: 40px;
+    max-width: 600px;
+    margin: 60px auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.auth-tabs {
+    display: flex;
+    border-bottom: 1px solid #000000;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.tab-btn.active {
+    border: 1px solid #000;
+    border-bottom: none;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+.auth-form-box {
+    padding: 20px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.auth-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.auth-main-btn {
+    background-color: #ccc;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.auth-separator {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.auth-social-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #eee;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.auth-policy {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.auth-policy a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.auth-social-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.auth-social-btn google{
+    width: 2000px;
+}
+
+
+/*CSS LOGIN*/
+.auth-container {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    max-width: 600px;
+    margin: 40px auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+}
+
+.auth-tabs {
+    display: flex;
+    border-bottom: 1px solid #000;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #f1f1f1;
+}
+
+.tab-btn.active {
+    border: 1px solid #000;
+    border-bottom: none;
+    background: white;
+    font-weight: bold;
+}
+
+.auth-form-box {
+    padding: 20px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.auth-form input[type="email"],
+.auth-form input[type="text"],
+.auth-form input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.auth-main-btn {
+    background-color: #ccc;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.auth-separator {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.auth-social-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.auth-social-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #eee;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    justify-content: center;
+}
+
+.auth-policy {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.auth-policy a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+}
+
+.forgot-link {
+    font-size: 0.9rem;
+    text-align: center;
+    display: block;
+    margin-top: 8px;
+    text-decoration: underline;
+    color: #000;
+}
+
+.hidden {
+    display: none;
+}
