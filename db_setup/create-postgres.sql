@@ -3,19 +3,20 @@ create table contrato (
     servicio_id int,
     cliente_id int,
     prestador_id int,
-    estado varchar(20) CHECK (estado IN ('pendiente', 'en progreso', 'completado', 'cancelado')) DEFAULT 'pendiente',
-    fecha_inicio date,
-    fecha_finalizacion date,
+    estado varchar(20) CHECK (estado IN ('pendiente', 'en progreso', 'completado', 'cancelado')) DEFAULT 'pendiente' not null,
+    fecha_inicio date not null,
+    fecha_finalizacion date not null,
     primary key (contrato_id)
 );
 
 create table usuario (
     usuario_id serial,
+    username varchar(16) not null unique,
     email varchar(100) not null unique,
     password_hash varchar(64) not null,
-    fecha_creacion date,
-    admin boolean not null,
-    url_picture varchar(40),
+    fecha_creacion date not null,
+    admin boolean default false not null,
+    url_picture varchar(40) null,
     primary key (usuario_id)
 );
 
@@ -23,8 +24,8 @@ create table comprobante_contrato (
     comprobante_contrato_id serial,
     contrato_id int,
     monto numeric(7,2) not null,
-    metodo_pago_id int,
-    fecha_pago date,
+    metodo_pago_id int not null,
+    fecha_pago date not null,
     primary key (comprobante_contrato_id)
 );
 
@@ -32,8 +33,8 @@ create table comentario (
     comentario_id serial,
     contrato_id int,
     calificacion int,
-    comentario varchar(255),
-    fecha_creacion date,
+    comentario varchar(255) not null,
+    fecha_creacion date not null,
     primary key (comentario_id)
 );
 
@@ -42,11 +43,9 @@ create table persona (
     usuario_id int unique,
     nombre varchar(100) not null,
     apellido varchar(100) not null,
-    fecha_nacimiento date,
+    fecha_nacimiento date not null,
     primary key (persona_id)
 );
-
-
 
 create table metodo_pago (
     metodo_pago_id serial,
@@ -57,8 +56,8 @@ create table metodo_pago (
 create table publicacion_medio (
     publicacion_medio_id serial,
     pulicacion_id integer not null,
-    tamanio integer,
-    fecha_hora timestamp,
+    tamanio integer not null,
+    fecha_hora timestamp not null,
     primary key (publicacion_medio_id)
 );
 
@@ -66,8 +65,8 @@ create table empresa (
     empresa_id serial,
     usuario_id int unique,
     nombre varchar(255) not null unique,
-    descripcion varchar(255),
-    fecha_creacion date,
+    descripcion varchar(255) not null,
+    fecha_creacion date not null,
     primary key (empresa_id)
 );
 
@@ -84,7 +83,7 @@ create table publicacion (
     titulo varchar(80) not null,
     descripcion varchar(255) not null,
     precio decimal not null,
-    fecha_creacion date,
+    fecha_creacion date not null,
     primary key (publicacion_id)
 );
 
