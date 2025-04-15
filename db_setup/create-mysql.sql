@@ -1,111 +1,122 @@
-CREATE TABLE contrato (
-    contrato_id INT AUTO_INCREMENT PRIMARY KEY,
-    servicio_id INT,
-    cliente_id INT,
-    prestador_id INT,
-    estado VARCHAR(20) DEFAULT 'pendiente' CHECK (estado IN ('pendiente', 'en progreso', 'completado', 'cancelado')),
-    fecha_inicio DATE,
-    fecha_finalizacion DATE
+create table contrato (
+    contrato_id int auto_increment,
+    servicio_id int,
+    cliente_id int,
+    prestador_id int,
+    estado varchar(20) not null default 'pendiente',
+    fecha_inicio date not null,
+    fecha_finalizacion date not null,
+    primary key (contrato_id),
+    check (estado in ('pendiente', 'en progreso', 'completado', 'cancelado'))
 );
 
-CREATE TABLE usuario (
-    usuario_id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password_hash VARCHAR(64) NOT NULL,
-    fecha_creacion DATE,
-    admin TINYINT(1) NOT NULL,
-    url_picture VARCHAR(40)
+create table usuario (
+    usuario_id int auto_increment,
+    username varchar(16) not null unique,
+    email varchar(100) not null unique,
+    password_hash varchar(64) not null,
+    fecha_creacion date not null,
+    admin boolean not null default false,
+    url_picture varchar(40),
+    primary key (usuario_id)
 );
 
-CREATE TABLE comprobante_contrato (
-    comprobante_contrato_id INT AUTO_INCREMENT PRIMARY KEY,
-    contrato_id INT,
-    monto DECIMAL(7,2) NOT NULL,
-    metodo_pago_id INT,
-    fecha_pago DATE
+create table comprobante_contrato (
+    comprobante_contrato_id int auto_increment,
+    contrato_id int,
+    monto decimal(7,2) not null,
+    metodo_pago_id int not null,
+    fecha_pago date not null,
+    primary key (comprobante_contrato_id)
 );
 
-CREATE TABLE comentario (
-    comentario_id INT AUTO_INCREMENT PRIMARY KEY,
-    contrato_id INT,
-    calificacion INT,
-    comentario VARCHAR(255),
-    fecha_creacion DATE
+create table comentario (
+    comentario_id int auto_increment,
+    contrato_id int,
+    calificacion int,
+    comentario varchar(255) not null,
+    fecha_creacion date not null,
+    primary key (comentario_id)
 );
 
-CREATE TABLE persona (
-    persona_id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT UNIQUE,
-    nombre VARCHAR(100) NOT NULL,
-    apellido VARCHAR(100) NOT NULL,
-    fecha_nacimiento DATE
+create table persona (
+    persona_id int auto_increment,
+    usuario_id int unique,
+    nombre varchar(100) not null,
+    apellido varchar(100) not null,
+    fecha_nacimiento date not null,
+    primary key (persona_id)
 );
 
-CREATE TABLE metodo_pago (
-    metodo_pago_id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL UNIQUE
+create table metodo_pago (
+    metodo_pago_id int auto_increment,
+    nombre varchar(50) not null unique,
+    primary key (metodo_pago_id)
 );
 
-CREATE TABLE publicacion_medio (
-    publicacion_medio_id INT AUTO_INCREMENT PRIMARY KEY,
-    pulicacion_id INT NOT NULL,
-    tamanio INT,
-    fecha_hora TIMESTAMP
+create table publicacion_medio (
+    publicacion_medio_id int auto_increment,
+    pulicacion_id int not null,
+    tamanio int not null,
+    fecha_hora datetime not null,
+    primary key (publicacion_medio_id)
 );
 
-CREATE TABLE empresa (
-    empresa_id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT UNIQUE,
-    nombre VARCHAR(255) NOT NULL UNIQUE,
-    descripcion VARCHAR(255),
-    fecha_creacion DATE
+create table empresa (
+    empresa_id int auto_increment,
+    usuario_id int unique,
+    nombre varchar(255) not null unique,
+    descripcion varchar(255) not null,
+    fecha_creacion date not null,
+    primary key (empresa_id)
 );
 
-CREATE TABLE categoria (
-    categoria_id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL UNIQUE
+create table categoria (
+    categoria_id int auto_increment,
+    nombre varchar(100) not null unique,
+    primary key (categoria_id)
 );
 
-CREATE TABLE publicacion (
-    publicacion_id INT AUTO_INCREMENT PRIMARY KEY,
-    categoria_id INT,
-    usuario_id INT,
-    titulo VARCHAR(80) NOT NULL,
-    descripcion VARCHAR(255) NOT NULL,
-    precio DECIMAL NOT NULL,
-    fecha_creacion DATE
+create table publicacion (
+    publicacion_id int auto_increment,
+    categoria_id int,
+    usuario_id int,
+    titulo varchar(80) not null,
+    descripcion varchar(255) not null,
+    precio decimal not null,
+    fecha_creacion date not null,
+    primary key (publicacion_id)
 );
 
--- Claves foráneas
-ALTER TABLE comentario
-ADD CONSTRAINT fk_comentario_contrato_id FOREIGN KEY (contrato_id) REFERENCES contrato(contrato_id);
+alter table comentario
+add constraint fk_comentario_contrato_id_contrato_id foreign key (contrato_id) references contrato(contrato_id);
 
-ALTER TABLE comprobante_contrato
-ADD CONSTRAINT fk_comprobante_contrato_contrato_id FOREIGN KEY (contrato_id) REFERENCES contrato(contrato_id);
+alter table comprobante_contrato
+add constraint fk_comprobante_contrato_contrato_id_contrato_id foreign key (contrato_id) references contrato(contrato_id);
 
-ALTER TABLE comprobante_contrato
-ADD CONSTRAINT fk_comprobante_contrato_metodo_pago_id FOREIGN KEY (metodo_pago_id) REFERENCES metodo_pago(metodo_pago_id);
+alter table comprobante_contrato
+add constraint fk_comprobante_contrato_metodo_pago_id_metodo_pago_id foreign key (metodo_pago_id) references metodo_pago(metodo_pago_id);
 
-ALTER TABLE contrato
-ADD CONSTRAINT fk_contrato_cliente_id FOREIGN KEY (cliente_id) REFERENCES usuario(usuario_id);
+alter table contrato
+add constraint fk_contrato_cliente_id_usuario_id foreign key (cliente_id) references usuario(usuario_id);
 
-ALTER TABLE contrato
-ADD CONSTRAINT fk_contrato_prestador_id FOREIGN KEY (prestador_id) REFERENCES usuario(usuario_id);
+alter table contrato
+add constraint fk_contrato_prestador_id_usuario_id foreign key (prestador_id) references usuario(usuario_id);
 
-ALTER TABLE contrato
-ADD CONSTRAINT fk_contrato_servicio_id FOREIGN KEY (servicio_id) REFERENCES publicacion(publicacion_id);
+alter table contrato
+add constraint fk_contrato_servicio_id_publicacion_id foreign key (servicio_id) references publicacion(publicacion_id);
 
-ALTER TABLE empresa
-ADD CONSTRAINT fk_empresa_usuario_id FOREIGN KEY (usuario_id) REFERENCES usuario(usuario_id);
+alter table empresa
+add constraint fk_empresa_usuario_id_usuario_id foreign key (usuario_id) references usuario(usuario_id);
 
-ALTER TABLE persona
-ADD CONSTRAINT fk_persona_usuario_id FOREIGN KEY (usuario_id) REFERENCES usuario(usuario_id);
+alter table persona
+add constraint fk_persona_usuario_id_usuario_id foreign key (usuario_id) references usuario(usuario_id);
 
-ALTER TABLE publicacion
-ADD CONSTRAINT fk_publicacion_categoria_id FOREIGN KEY (categoria_id) REFERENCES categoria(categoria_id);
+alter table publicacion
+add constraint fk_publicacion_categoria_id_categoria_id foreign key (categoria_id) references categoria(categoria_id);
 
-ALTER TABLE publicacion
-ADD CONSTRAINT fk_publicacion_usuario_id FOREIGN KEY (usuario_id) REFERENCES usuario(usuario_id);
+alter table publicacion
+add constraint fk_publicacion_usuario_id_usuario_id foreign key (usuario_id) references usuario(usuario_id);
 
-ALTER TABLE publicacion_medio
-ADD CONSTRAINT fk_publicacion_medio_publicacion_id FOREIGN KEY (pulicacion_id) REFERENCES publicacion(publicacion_id);
+alter table publicacion_medio
+add constraint fk_publicacion_medio_pulicacion_id_publicacion_id foreign key (pulicacion_id) references publicacion(publicacion_id);
