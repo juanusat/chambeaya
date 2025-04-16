@@ -1,0 +1,101 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.titulo h1 {
+    margin: 30px 300px 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+}
+
+.input-container {
+    position: relative;
+    display: inline-block;
+}
+
+.input-container input {
+    width: 100%; /* Deja espacio para el botón */
+}
+
+.input-container button {
+    position: absolute;
+    left: 95%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    outline: none;
+}
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    margin-bottom: 75px;
+}
+
+h3 {
+    margin-bottom: 15;
+}
+
+.previa_cuenta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* espacio entre las secciones */
+    border: 1px solid;
+    padding: 20px;
+    height: 20%;
+    background-color: hsl(0, 0%, 95%);
+}
+
+.fila-superior {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.form_actual,
+.act_foto {
+    display: flex;
+    flex-direction: column;
+}
+
+.form_actual {
+    gap: 10px;
+    width: 30%;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: hsl(0, 0%, 95%);
+}
+
+textarea {
+    margin-bottom: 15;
+    resize: none;
+}
+
+button {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #1352ff;
+    color: white;
+}
+
+.imagen img {
+    width: 100px;       /* o el tamaño que tú quieras */
+    height: 100px;
+    object-fit: cover; /* mantiene la imagen centrada y recortada */
+    border-radius: 50%;
+    border: 2px solid #000; /* opcional: borde negro para resaltar */
+  }
