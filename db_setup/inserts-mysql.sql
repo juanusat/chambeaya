@@ -2,30 +2,30 @@
 -- De esos 20 usuarios (5 empresas , 15 personas) 
 
 -- Mujeres
-CALL registrar_persona_usuario_cf('Valeria', 'Romero', '2001-04-12', 'valeria.romero@gmail.com', 'hash123', 'Mujer-1.jpg');
-CALL registrar_persona_usuario_cf('Lucía', 'Fernández', '2000-11-08', 'lucia.fernandez@hotmail.com', 'hash456', 'Mujer-2.jpg');
-CALL registrar_persona_usuario_cf('Camila', 'Torres', '1999-02-25', 'camila.torres@yahoo.com', 'hash789', 'Mujer-3.jpg');
-CALL registrar_persona_usuario_cf('Diana', 'Rivas', '2002-06-19', 'diana.rivas@gmail.com', 'hash101', 'Mujer-4.jpg');
-CALL registrar_persona_usuario_cf('Andrea', 'Martínez', '2003-01-30', 'andrea.martinez@outlook.com', 'hash202', 'Mujer-5.jpg');
-CALL registrar_persona_usuario_cf('Sofía', 'Guzmán', '2000-12-15', 'sofia.guzman@mail.com', 'hash303', 'Mujer-6.jpg');
-CALL registrar_persona_usuario_sf('Paula', 'Herrera', '2001-07-07', 'paula.herrera@gmail.com', 'hash404');
+CALL registrar_persona_usuario_cf('Valeria', 'Romero', '2001-04-12', 'valeria.romero@gmail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'Mujer-1.jpg');
+CALL registrar_persona_usuario_cf('Lucía', 'Fernández', '2000-11-08', 'lucia.fernandez@hotmail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'Mujer-2.jpg');
+CALL registrar_persona_usuario_cf('Camila', 'Torres', '1999-02-25', 'camila.torres@yahoo.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'Mujer-3.jpg');
+CALL registrar_persona_usuario_cf('Diana', 'Rivas', '2002-06-19', 'diana.rivas@gmail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'Mujer-4.jpg');
+CALL registrar_persona_usuario_cf('Andrea', 'Martínez', '2003-01-30', 'andrea.martinez@outlook.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'Mujer-5.jpg');
+CALL registrar_persona_usuario_cf('Sofía', 'Guzmán', '2000-12-15', 'sofia.guzman@mail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'Mujer-6.jpg');
+CALL registrar_persona_usuario_sf('Paula', 'Herrera', '2001-07-07', 'paula.herrera@gmail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b');
 
 -- Hombres
-CALL registrar_persona_usuario_cf('Mateo', 'López', '1998-03-14', 'mateo.lopez@gmail.com', 'hash505', 'Hombre-1.jpg');
-CALL registrar_persona_usuario_cf('Sebastián', 'Castillo', '1999-09-01', 'sebastian.castillo@hotmail.com', 'hash606', 'Hombre-2.jpg');
-CALL registrar_persona_usuario_cf('Diego', 'Ramírez', '2001-05-18', 'diego.ramirez@yahoo.com', 'hash707', 'Hombre-3.jpg');
-CALL registrar_persona_usuario_cf('Lucas', 'Sánchez', '2000-10-23', 'lucas.sanchez@gmail.com', 'hash808', 'Hombre-4.jpg');
-CALL registrar_persona_usuario_cf('Gabriel', 'Vargas', '2002-02-02', 'gabriel.vargas@outlook.com', 'hash909', 'Hombre-5.jpg');
-CALL registrar_persona_usuario_cf('Tomás', 'Navarro', '2003-08-29', 'tomas.navarro@mail.com', 'hash000', 'Hombre-6.jpg');
-CALL registrar_persona_usuario_cf('Bruno', 'Flores', '1997-06-10', 'bruno.flores@gmail.com', 'hashabc', 'Hombre-7.jpg');
-CALL registrar_persona_usuario_sf('Álvaro', 'Rojas', '1998-01-05', 'alvaro.rojas@gmail.com', 'hashdef');
+CALL registrar_persona_usuario_cf('Mateo', 'López', '1998-03-14', 'mateo.lopez@gmail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'Hombre-1.jpg');
+CALL registrar_persona_usuario_cf('Sebastián', 'Castillo', '1999-09-01', 'sebastian.castillo@hotmail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'Hombre-2.jpg');
+CALL registrar_persona_usuario_cf('Diego', 'Ramírez', '2001-05-18', 'diego.ramirez@yahoo.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'Hombre-3.jpg');
+CALL registrar_persona_usuario_cf('Lucas', 'Sánchez', '2000-10-23', 'lucas.sanchez@gmail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'Hombre-4.jpg');
+CALL registrar_persona_usuario_cf('Gabriel', 'Vargas', '2002-02-02', 'gabriel.vargas@outlook.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'Hombre-5.jpg');
+CALL registrar_persona_usuario_cf('Tomás', 'Navarro', '2003-08-29', 'tomas.navarro@mail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'Hombre-6.jpg');
+CALL registrar_persona_usuario_cf('Bruno', 'Flores', '1997-06-10', 'bruno.flores@gmail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'Hombre-7.jpg');
+CALL registrar_persona_usuario_sf('Álvaro', 'Rojas', '1998-01-05', 'alvaro.rojas@gmail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b');
 
 --Empresas
-CALL registrar_empresa_usuario_cf('TechNova', 'Empresa de tecnología e innovación', 'contacto@technova.com', 'hash001', 'TechNova_.jpg');
-CALL registrar_empresa_usuario_cf('AgroPerú', 'Empresa dedicada a soluciones agrícolas', 'info@agroperu.pe', 'hash002', 'AgroPeru.jpg');
-CALL registrar_empresa_usuario_cf('Constructora Andina', 'Empresa constructora especializada en obras civiles', 'admin@constructoraandina.com', 'hash003', 'ConstructoraAndina.png');
-CALL registrar_empresa_usuario_cf('BioVida', 'Empresa de productos naturales y ecológicos', 'ventas@biovida.pe', 'hash004', 'BioVida.jpeg');
-CALL registrar_empresa_usuario_sf('EduDigital', 'Plataforma de educación virtual e innovación educativa', 'soporte@edudigital.com', 'hash005');
+CALL registrar_empresa_usuario_cf('TechNova', 'Empresa de tecnología e innovación', 'contacto@technova.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'TechNova_.jpg');
+CALL registrar_empresa_usuario_cf('AgroPerú', 'Empresa dedicada a soluciones agrícolas', 'info@agroperu.pe', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'AgroPeru.jpg');
+CALL registrar_empresa_usuario_cf('Constructora Andina', 'Empresa constructora especializada en obras civiles', 'admin@constructoraandina.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'ConstructoraAndina.png');
+CALL registrar_empresa_usuario_cf('BioVida', 'Empresa de productos naturales y ecológicos', 'ventas@biovida.pe', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'BioVida.jpeg');
+CALL registrar_empresa_usuario_sf('EduDigital', 'Plataforma de educación virtual e innovación educativa', 'soporte@edudigital.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b');
 
 
 -- De esas 15 personas (10 con servicios, 5 sin servicios); 
