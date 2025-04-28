@@ -2,3 +2,4 @@ ev/
 __pycache__/
 nota--*
 .env
+*-i.*
