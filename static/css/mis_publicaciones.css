@@ -1,0 +1,70 @@
+* { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+    h1.section-title {
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+    .publicaciones {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .card {
+      border-bottom: 1px solid #ddd;
+      padding: 16px 0;
+    }
+    .card:last-child {
+      border-bottom: none;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+    }
+    .card-header h3 {
+      font-size: 1rem;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    .meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 16px;
+    }
+    .author-name {
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+    .author-avatar {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #ccc;
+      flex-shrink: 0;
+    }
+    .star-rating {
+      margin-left: auto;
+      display: flex;
+    }
+    .star-rating i {
+      margin-left: 4px;
+      color: #ddd;
+    }
+    .card-body p {
+      margin: 6px 0;
+      font-size: 0.95rem;
+    }
+    .card-body p span {
+      font-weight: bold;
+    }
