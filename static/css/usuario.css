@@ -1,0 +1,104 @@
+* { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+    .profile-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    /* Avatar circular */
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 20px;
+      flex-shrink: 0;
+    }
+    .avatar i {
+      font-size: 40px;
+      color: #888;
+    }
+    .profile-name {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-right: auto;
+    }
+    .profile-rating .fa-star {
+      color: #ddd;
+      margin-right: 4px;
+    }
+    /* Tabs */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 24px;
+    }
+    .tabs .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      font-weight: bold;
+    }
+    .tabs .tab.active {
+      border-color: #333;
+      color: #333;
+    }
+    /* Layout */
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 24px;
+    }
+    /* Detalles */
+    .details, .publicaciones {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .details h2, .publicaciones h2 {
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+    }
+    /* Publicaciones cards */
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+    .card-header h3 {
+      font-size: 1rem;
+      margin: 0;
+    }
+    .card-header .time {
+      font-size: 0.85rem;
+      color: #666;
+    }
+    .card-body p {
+      margin: 6px 0;
+      font-size: 0.95rem;
+    }
+    .card-body p span {
+      font-weight: bold;
+    }
