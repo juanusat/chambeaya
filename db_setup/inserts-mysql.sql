@@ -20,7 +20,7 @@ CALL registrar_persona_usuario_cf('Tomás', 'Navarro', '2003-08-29', 'tomas.nava
 CALL registrar_persona_usuario_cf('Bruno', 'Flores', '1997-06-10', 'bruno.flores@gmail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'Hombre-7.jpg');
 CALL registrar_persona_usuario_sf('Álvaro', 'Rojas', '1998-01-05', 'alvaro.rojas@gmail.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b');
 
---Empresas
+-- Empresas
 CALL registrar_empresa_usuario_cf('TechNova', 'Empresa de tecnología e innovación', 'contacto@technova.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'TechNova_.jpg');
 CALL registrar_empresa_usuario_cf('AgroPerú', 'Empresa dedicada a soluciones agrícolas', 'info@agroperu.pe', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'AgroPeru.jpg');
 CALL registrar_empresa_usuario_cf('Constructora Andina', 'Empresa constructora especializada en obras civiles', 'admin@constructoraandina.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'ConstructoraAndina.png');
@@ -30,36 +30,36 @@ CALL registrar_empresa_usuario_sf('EduDigital', 'Plataforma de educación virtua
 
 -- De esas 15 personas (10 con servicios, 5 sin servicios); 
 	-- Primero las categorias 
-INSERT INTO categoria (nombre) VALUES ('Tecnología'); --1
-INSERT INTO categoria (nombre) VALUES ('Salud'); --2
-INSERT INTO categoria (nombre) VALUES ('Educación'); --3
-INSERT INTO categoria (nombre) VALUES ('Ingeniería');--4
-INSERT INTO categoria (nombre) VALUES ('Administración');--5
-INSERT INTO categoria (nombre) VALUES ('Marketing');--6
-INSERT INTO categoria (nombre) VALUES ('Contabilidad');--7
-INSERT INTO categoria (nombre) VALUES ('Recursos Humanos');--8
-INSERT INTO categoria (nombre) VALUES ('Diseño Gráfico');--9
-INSERT INTO categoria (nombre) VALUES ('Logística');--10
-INSERT INTO categoria (nombre) VALUES ('Carpintería');--11
-INSERT INTO categoria (nombre) VALUES ('Albañilería');--12
-INSERT INTO categoria (nombre) VALUES ('Electricidad');--13
-INSERT INTO categoria (nombre) VALUES ('Fontanería');--14
-INSERT INTO categoria (nombre) VALUES ('Pintura');--15
-INSERT INTO categoria (nombre) VALUES ('Mecánica Automotriz');--16
-INSERT INTO categoria (nombre) VALUES ('Chef');--17
-INSERT INTO categoria (nombre) VALUES ('Mesero');--18
-INSERT INTO categoria (nombre) VALUES ('Seguridad');--19
-INSERT INTO categoria (nombre) VALUES ('Limpieza');--20
-INSERT INTO categoria (nombre) VALUES ('Niñera');--21
-INSERT INTO categoria (nombre) VALUES ('Jardinería');--22
-INSERT INTO categoria (nombre) VALUES ('Repartidor');--23
-INSERT INTO categoria (nombre) VALUES ('Panadería');--24
-INSERT INTO categoria (nombre) VALUES ('Barbería');--25
-INSERT INTO categoria (nombre) VALUES ('Peluquería');--26
-INSERT INTO categoria (nombre) VALUES ('Confección');--27
-INSERT INTO categoria (nombre) VALUES ('Soldadura');--28
-INSERT INTO categoria (nombre) VALUES ('Gasfitería');--29
-INSERT INTO categoria (nombre) VALUES ('Técnico en Computación');--30
+INSERT INTO categoria (nombre) VALUES ('Tecnología'); -- 1
+INSERT INTO categoria (nombre) VALUES ('Salud'); -- 2
+INSERT INTO categoria (nombre) VALUES ('Educación'); -- 3
+INSERT INTO categoria (nombre) VALUES ('Ingeniería');-- 4
+INSERT INTO categoria (nombre) VALUES ('Administración');-- 5
+INSERT INTO categoria (nombre) VALUES ('Marketing');-- 6
+INSERT INTO categoria (nombre) VALUES ('Contabilidad');-- 7
+INSERT INTO categoria (nombre) VALUES ('Recursos Humanos');-- 8
+INSERT INTO categoria (nombre) VALUES ('Diseño Gráfico');-- 9
+INSERT INTO categoria (nombre) VALUES ('Logística');-- 10
+INSERT INTO categoria (nombre) VALUES ('Carpintería');-- 11
+INSERT INTO categoria (nombre) VALUES ('Albañilería');-- 12
+INSERT INTO categoria (nombre) VALUES ('Electricidad');-- 13
+INSERT INTO categoria (nombre) VALUES ('Fontanería');-- 14
+INSERT INTO categoria (nombre) VALUES ('Pintura');-- 15
+INSERT INTO categoria (nombre) VALUES ('Mecánica Automotriz');-- 16
+INSERT INTO categoria (nombre) VALUES ('Chef');-- 17
+INSERT INTO categoria (nombre) VALUES ('Mesero');-- 18
+INSERT INTO categoria (nombre) VALUES ('Seguridad');-- 19
+INSERT INTO categoria (nombre) VALUES ('Limpieza');-- 20
+INSERT INTO categoria (nombre) VALUES ('Niñera');-- 21
+INSERT INTO categoria (nombre) VALUES ('Jardinería');-- 22
+INSERT INTO categoria (nombre) VALUES ('Repartidor');-- 23
+INSERT INTO categoria (nombre) VALUES ('Panadería');-- 24
+INSERT INTO categoria (nombre) VALUES ('Barbería');-- 25
+INSERT INTO categoria (nombre) VALUES ('Peluquería');-- 26
+INSERT INTO categoria (nombre) VALUES ('Confección');-- 27
+INSERT INTO categoria (nombre) VALUES ('Soldadura');-- 28
+INSERT INTO categoria (nombre) VALUES ('Gasfitería');-- 29
+INSERT INTO categoria (nombre) VALUES ('Técnico en Computación');-- 30
 
 	-- Ahora las 10 publicaciones
 INSERT INTO publicacion (categoria_id, usuario_id, titulo, descripcion, precio, fecha_creacion)
@@ -140,7 +140,7 @@ VALUES
 	-- Publicación 7: prestador_id = 6
 	(7, 2, 6, 'finalizado', '2025-03-04', '2025-03-30');
 
---4 ya finalizados con paga (comentarios) 
+-- 4 ya finalizados con paga (comentarios) 
 	-- primero los metodo de pago 
 INSERT INTO metodo_pago (nombre)
 VALUES
