@@ -56,7 +56,7 @@ create table metodo_pago (
 
 create table publicacion_medio (
     publicacion_medio_id int auto_increment,
-    pulicacion_id int not null,
+    publicacion_id int not null,
     tamanio int not null,
     fecha_hora datetime not null,
     primary key (publicacion_medio_id)
@@ -119,4 +119,4 @@ alter table publicacion
 add constraint fk_publicacion_usuario_id_usuario_id foreign key (usuario_id) references usuario(usuario_id);
 
 alter table publicacion_medio
-add constraint fk_publicacion_medio_pulicacion_id_publicacion_id foreign key (pulicacion_id) references publicacion(publicacion_id);
+add constraint fk_publicacion_medio_pulicacion_id_publicacion_id foreign key (publicacion_id) references publicacion(publicacion_id);
