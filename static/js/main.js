@@ -7,8 +7,8 @@
     footerElement.classList.add('footer');
 
     Promise.all([
-        fetch('/templates/header.html').then(res => res.text()),
-        fetch('/templates/footer.html').then(res => res.text())
+        fetch('/static/templates/header.html').then(res => res.text()),
+        fetch('/static/templates/footer.html').then(res => res.text())
     ]).then(([headerHTML, footerHTML]) => {
         headerElement.innerHTML = headerHTML;
         footerElement.innerHTML = footerHTML;

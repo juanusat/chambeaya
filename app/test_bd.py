@@ -1,6 +1,6 @@
 import json
 from tabulate import tabulate
-from conn_bd import obtener_conexion
+from bd_conn import obtener_conexion
 import datetime
 
 def obtener_datos():
