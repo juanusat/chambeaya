@@ -65,8 +65,10 @@ def get_usuario_by_username(username):
     try:
         with conn.cursor(pymysql.cursors.DictCursor) as cursor:
             cursor.execute(
-                "SELECT usuario_id, username, email, fecha_creacion, admin, url_picture "
-                "FROM usuario WHERE username=%s;",
+                "SELECT usu.username, per.nombre, per.apellido, "
+                "usu.email, per.fecha_nacimiento, usu.url_picture FROM usuario usu "
+                "INNER JOIN persona per ON per.usuario_id = usu.usuario_id "
+                "WHERE username=%s;",
                 (username,)
             )
             return cursor.fetchone()
