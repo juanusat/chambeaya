@@ -3,3 +3,5 @@ __pycache__/
 nota--*
 .env
 *-i.*
+chatia/
+cia.sh
