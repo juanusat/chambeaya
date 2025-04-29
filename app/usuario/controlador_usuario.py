@@ -58,3 +58,17 @@ def delete_usuario(user_id):
             conn.commit()
     finally:
         conn.close()
+        
+def get_usuario_by_username(username):
+    print(username)
+    conn = get_db_connection()
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute(
+                "SELECT usuario_id, username, email, fecha_creacion, admin, url_picture "
+                "FROM usuario WHERE username=%s;",
+                (username,)
+            )
+            return cursor.fetchone()
+    finally:
+        conn.close()
