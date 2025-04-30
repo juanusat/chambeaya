@@ -85,7 +85,7 @@ create table publicacion (
     usuario_id integer,
     titulo varchar(80) not null,
     descripcion varchar(255) not null,
-    precio decimal not null unique,
+    precio decimal not null,
     estado boolean not null,
     fecha_creacion date not null,
     primary key (publicacion_id)
@@ -100,9 +100,6 @@ add constraint fk_comprobante_contrato_contrato_id_contrato_id foreign key(contr
 alter table comprobante_contrato
 add constraint fk_comprobante_contrato_metodo_pago_id_metodo_pago_id foreign key(metodo_pago_id) references metodo_pago(metodo_pago_id);
 
-alter table contrato 
-add constraint fk_contrato_precio_publicacion_precio foreign key(precio) references publicacion(precio);
-
 alter table contrato
 add constraint fk_contrato_cliente_id_usuario_id foreign key(cliente_id) references usuario(usuario_id);
 
@@ -114,9 +111,6 @@ add constraint fk_contrato_servicio_id_publicacion_id foreign key(servicio_id) r
 
 alter table empresa
 add constraint fk_empresa_usuario_id_usuario_id foreign key(usuario_id) references usuario(usuario_id);
-
-alter table persona 
-add constraint chk_telefono check (telefono like '+%' and char_length(telefono) between 8 and 16); 
 
 alter table persona
 add constraint fk_persona_usuario_id_usuario_id foreign key(usuario_id) references usuario(usuario_id);
