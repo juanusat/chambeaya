@@ -94,29 +94,28 @@ INSERT INTO publicacion_medio (publicacion_id, tamanio, fecha_hora) VALUES
 (10, 86520, '2025-03-01 14:25:55');
 
 
--- Inserción de contratos relacionados con publicaciones
-INSERT INTO contrato (servicio_id, cliente_id, prestador_id, estado, fecha_inicio, fecha_finalizacion)
+INSERT INTO contrato (servicio_id, cliente_id, prestador_id, precio ,estado, fecha_inicio, fecha_finalizacion)
 VALUES
-    -- Publicación 1: prestador_id = 2
-    (1, 5, 2, 'finalizado', '2025-01-14', '2025-01-20'),
-    
-    -- Publicación 2: prestador_id = 1
-    (2, 3, 1, 'cancelado', '2025-03-28', '2025-04-10'),
-    
-    -- Publicación 3: prestador_id = 12
-    (3, 4, 12, 'finalizado', '2025-02-20', '2025-02-25'),
-    
-    -- Publicación 4: prestador_id = 10
-    (4, 6, 10, 'en progreso', '2025-04-05', '2025-04-20'),
-    
-    -- Publicación 5: prestador_id = 7
-    (5, 9, 7, 'finalizado', '2025-02-01', '2025-02-15'),
-    
-    -- Publicación 6: prestador_id = 13
-    (6, 11, 13, 'en progreso', '2025-02-09', '2025-02-16'),
-    
-    -- Publicación 7: prestador_id = 6
-    (7, 2, 6, 'finalizado', '2025-03-04', '2025-03-30');
+	-- Publicación 1: prestador_id = 2
+	(1, 5, 2, 150.00,'finalizado', '2025-01-14', '2025-01-20'),
+	
+	-- Publicación 2: prestador_id = 1
+	(2, 3, 1, 300.00,'cancelado', '2025-03-28', '2025-04-10'),
+	
+	-- Publicación 3: prestador_id = 12
+	(3, 4, 12, 1200.00,'finalizado', '2025-02-20', '2025-02-25'),
+	
+	-- Publicación 4: prestador_id = 10
+	(4, 6, 10, 850.00,'en progreso', '2025-04-05', '2025-04-20'),
+	
+	-- Publicación 5: prestador_id = 7
+	(5, 9, 7, 50.00,'finalizado', '2025-02-01', '2025-02-15'),
+	
+	-- Publicación 6: prestador_id = 13
+	(6, 11, 13, 1100.00,'en progreso', '2025-02-09', '2025-02-16'),
+	
+	-- Publicación 7: prestador_id = 6
+	(7, 2, 6, 2000.00,'finalizado', '2025-03-04', '2025-03-30');
 
 -- Inserción de métodos de pago
 INSERT INTO metodo_pago (nombre) VALUES
