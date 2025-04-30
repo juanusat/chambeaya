@@ -1,30 +1,30 @@
 -- Necesito 20 usuarios 
 -- De esos 20 usuarios (5 empresas , 15 personas) 
 -- Mujeres
-CALL registrar_persona_usuario_cf('Valeria', 'Romero','968797956', '2001-04-12', 'valeria.romero@gmail.com', 'hash123','romerito12' ,'Mujer-1.jpg');
-CALL registrar_persona_usuario_cf('Lucía', 'Fernández','935702359', '2000-11-08', 'lucia.fernandez@hotmail.com', 'hash456','lucifer000','Mujer-2.jpg');
-CALL registrar_persona_usuario_cf('Camila', 'Torres','942771215', '1999-02-25', 'camila.torres@yahoo.com', 'hash789','c.torres99','Mujer-3.jpg');
-CALL registrar_persona_usuario_cf('Diana', 'Rivas','917272400', '2002-06-19', 'diana.rivas@gmail.com', 'hash101','dianarvs02','Mujer-4.jpg');
-CALL registrar_persona_usuario_cf('Andrea', 'Martínez','941581685', '2003-01-30', 'andrea.martinez@outlook.com', 'hash202','a.mart2003','Mujer-5.jpg');
-CALL registrar_persona_usuario_cf('Sofía', 'Guzmán','999060906', '2000-12-15', 'sofia.guzman@mail.com', 'hash303','sg.12','Mujer-6.jpg');
-CALL registrar_persona_usuario_sf('Paula', 'Herrera','934028397', '2001-07-07', 'paula.herrera@gmail.com','hash404','herrera.p');
+CALL registrar_persona_usuario_cf('Valeria', 'Romero','968797956', '2001-04-12', 'valeria.romero@gmail.com', 'hash123','romerito12' ,'Mujer-1.jpg', 'Soy una persona comprometida con el aprendizaje constante y la mejora continua, con especial interés en el desarrollo profesional y humano.');
+CALL registrar_persona_usuario_cf('Lucía', 'Fernández','935702359', '2000-11-08', 'lucia.fernandez@hotmail.com', 'hash456','lucifer000','Mujer-2.jpg', 'Cuento con una actitud proactiva y una sólida capacidad de análisis. Me adapto con facilidad a distintos entornos y disfruto trabajar en equipo.');
+CALL registrar_persona_usuario_cf('Camila', 'Torres','942771215', '1999-02-25', 'camila.torres@yahoo.com', 'hash789','c.torres99','Mujer-3.jpg', 'Me considero una persona responsable, perseverante y con alto sentido ético. Valoro el trabajo bien hecho y el compromiso en cada tarea.');
+CALL registrar_persona_usuario_cf('Diana', 'Rivas','917272400', '2002-06-19', 'diana.rivas@gmail.com', 'hash101','dianarvs02','Mujer-4.jpg', 'Con una fuerte vocación por el servicio y la educación, me esfuerzo en aportar con ideas que generen impacto positivo en las personas.');
+CALL registrar_persona_usuario_cf('Andrea', 'Martínez','941581685', '2003-01-30', 'andrea.martinez@outlook.com', 'hash202','a.mart2003','Mujer-5.jpg', 'Soy una persona organizada, empática y con gran interés por la cultura y el desarrollo social.');
+CALL registrar_persona_usuario_cf('Sofía', 'Guzmán','999060906', '2000-12-15', 'sofia.guzman@mail.com', 'hash303','sg.12','Mujer-6.jpg', 'Me caracterizo por ser entusiasta, colaborativa y con una mentalidad orientada al crecimiento profesional continuo.');
+CALL registrar_persona_usuario_sf('Paula', 'Herrera','934028397', '2001-07-07', 'paula.herrera@gmail.com','hash404','herrera.p', 'Tengo un marcado interés en temas de salud mental y educación. Mi objetivo es contribuir con iniciativas que generen bienestar y equidad.');
 
 -- Hombres
-CALL registrar_persona_usuario_cf('Mateo', 'López','928613369', '1998-03-14', 'mateo.lopez@gmail.com', 'hash505','el.lopez98','Hombre-1.jpg');
-CALL registrar_persona_usuario_cf('Sebastián', 'Castillo','947520982', '1999-09-01', 'sebastian.castillo@hotmail.com', 'hash606','s.castle01','Hombre-2.jpg');
-CALL registrar_persona_usuario_cf('Diego', 'Ramírez','997572428', '2001-05-18', 'diego.ramirez@yahoo.com', 'hash707','dram.05','Hombre-3.jpg');
-CALL registrar_persona_usuario_cf('Lucas', 'Sánchez','954838183', '2000-10-23', 'lucas.sanchez@gmail.com', 'hash808','ellucas.02','Hombre-4.jpg');
-CALL registrar_persona_usuario_cf('Gabriel', 'Vargas','931858631', '2002-02-06', 'gabriel.vargas@outlook.com', 'hash909','loco.vargas06','Hombre-5.jpg');
-CALL registrar_persona_usuario_cf('Tomás', 'Navarro','968625532', '2003-08-29', 'tomas.navarro@mail.com', 'hash000','tomas.navarro','Hombre-6.jpg');
-CALL registrar_persona_usuario_cf('Bruno', 'Flores','943937946', '1997-06-10', 'bruno.flores@gmail.com', 'hashabc','brunoxflowers','Hombre-7.jpg');
-CALL registrar_persona_usuario_sf('Álvaro', 'Rojas','920928263', '1998-01-05', 'alvaro.rojas@gmail.com', 'hashdef','a.red98');
+CALL registrar_persona_usuario_cf('Mateo', 'López','928613369', '1998-03-14', 'mateo.lopez@gmail.com', 'hash505','el.lopez98','Hombre-1.jpg', 'Soy un profesional orientado a resultados, con alto sentido de responsabilidad y enfoque en la mejora de procesos.');
+CALL registrar_persona_usuario_cf('Sebastián', 'Castillo','947520982', '1999-09-01', 'sebastian.castillo@hotmail.com', 'hash606','s.castle01','Hombre-2.jpg', 'Cuento con una sólida ética de trabajo, gran disposición para el aprendizaje y capacidad de liderazgo en contextos colaborativos.');
+CALL registrar_persona_usuario_cf('Diego', 'Ramírez','997572428', '2001-05-18', 'diego.ramirez@yahoo.com', 'hash707','dram.05','Hombre-3.jpg', 'Soy una persona analítica, organizada y con vocación por el desarrollo creativo y la innovación aplicada.');
+CALL registrar_persona_usuario_cf('Lucas', 'Sánchez','954838183', '2000-10-23', 'lucas.sanchez@gmail.com', 'hash808','ellucas.02','Hombre-4.jpg', 'Me destaco por mi compromiso, pensamiento crítico y capacidad para afrontar nuevos desafíos con una visión estratégica.');
+CALL registrar_persona_usuario_cf('Gabriel', 'Vargas','931858631', '2002-02-06', 'gabriel.vargas@outlook.com', 'hash909','loco.vargas06','Hombre-5.jpg', 'Tengo gran interés por la tecnología y la resolución de problemas. Soy constante, curioso y orientado a soluciones.');
+CALL registrar_persona_usuario_cf('Tomás', 'Navarro','968625532', '2003-08-29', 'tomas.navarro@mail.com', 'hash000','tomas.navarro','Hombre-6.jpg', 'Me considero una persona positiva, comprometida y con disposición para contribuir al desarrollo de proyectos sostenibles.');
+CALL registrar_persona_usuario_cf('Bruno', 'Flores','943937946', '1997-06-10', 'bruno.flores@gmail.com', 'hashabc','brunoxflowers','Hombre-7.jpg', 'Soy un profesional orientado a la excelencia, con experiencia en entornos creativos y habilidades para el trabajo colaborativo.');
+CALL registrar_persona_usuario_sf('Álvaro', 'Rojas','920928263', '1998-01-05', 'alvaro.rojas@gmail.com', 'hashdef','a.red98', 'Tengo interés en el desarrollo integral y continuo, manteniendo siempre una actitud receptiva, respetuosa y comprometida.');
 
 -- Empresas
-CALL registrar_empresa_usuario_cf('TechNova', 'Empresa de tecnología e innovación', 'contacto@technova.com', 'hash001','nova_tech.pe','TechNova_.jpg');
-CALL registrar_empresa_usuario_cf('AgroPerú', 'Empresa dedicada a soluciones agrícolas', 'info@agroperu.pe', 'hash002','agroperu.pe','AgroPeru.jpg');
-CALL registrar_empresa_usuario_cf('Constructora Andina', 'Empresa constructora especializada en obras civiles','const.andinap','admin@constructoraandina.com', 'hash003', 'ConstructoraAndina.png');
-CALL registrar_empresa_usuario_cf('BioVida', 'Empresa de productos naturales y ecológicos', 'ventas@biovida.pe', 'hash004','biovid.peru','BioVida.jpeg');
-CALL registrar_empresa_usuario_sf('EduDigital', 'Plataforma de educación virtual e innovación educativa', 'soporte@edudigital.com', 'hash005','e.digital');
+CALL registrar_empresa_usuario_cf('TechNova', '20123456781', 'contacto@technova.com', 'hash001','nova_tech.pe','TechNova_.jpg','Empresa de tecnología e innovación');
+CALL registrar_empresa_usuario_cf('AgroPerú', '10456789374', 'info@agroperu.pe', 'hash002','agroperu.pe','AgroPeru.jpg','Empresa dedicada a soluciones agrícolas');
+CALL registrar_empresa_usuario_cf('Constructora Andina', '20567891236','const.andinap','admin@constructoraandina.com', 'hash003', 'ConstructoraAndina.png','Empresa constructora especializada en obras civiles');
+CALL registrar_empresa_usuario_cf('BioVida', '10234567896', 'ventas@biovida.pe', 'hash004','biovid.peru','BioVida.jpeg','Empresa de productos naturales y ecológicos');
+CALL registrar_empresa_usuario_sf('EduDigital', '20678912340', 'soporte@edudigital.com', 'hash005','e.digital','Plataforma de educación virtual e innovación educativa');
 
 -- Categorías
 INSERT INTO categoria (nombre) VALUES 
