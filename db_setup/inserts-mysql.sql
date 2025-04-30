@@ -60,18 +60,18 @@ INSERT INTO categoria (nombre) VALUES
 ('Técnico en Computación');-- 30
 
 -- Publicaciones
-INSERT INTO publicacion (categoria_id, usuario_id, titulo, descripcion, precio, fecha_creacion)
+INSERT INTO publicacion (categoria_id, usuario_id, titulo, descripcion, precio, estado, fecha_creacion)
 VALUES
-(20, 2, 'Servicios de limpieza de casas', 'Limpieza profunda para viviendas, incluye limpieza de alfombras y ventanas.', 150.00, '2025-01-12'),  
-(2, 1, 'Consulta médica privada', 'Atención médica para consulta de salud general y bienestar.', 300.00, '2025-03-25'),  
-(16, 12, 'Reparación de motores de autos', 'Mantenimiento y reparación de motores automotrices para vehículos particulares.', 1200.00, '2025-02-18'),  
-(5, 10, 'Consultoría empresarial', 'Asesoramiento en la creación y expansión de empresas, con enfoque en crecimiento estratégico.', 850.00, '2025-04-03'),  
-(3, 7, 'Clases particulares de inglés', 'Cursos de inglés personalizados, desde nivel básico hasta avanzado.', 50.00, '2025-01-30'),  
-(12, 13, 'Reformas de albañilería', 'Servicio de albañilería para renovaciones de interiores y exteriores en casas y oficinas.', 1100.00, '2025-02-07'),  
-(4, 6, 'Proyectos de ingeniería civil', 'Diseño y ejecución de proyectos de construcción, incluyendo estructuras y cimentación.', 2000.00, '2025-03-02'),  
-(6, 9, 'Marketing digital para negocios', 'Creación y gestión de campañas publicitarias en redes sociales y Google Ads.', 500.00, '2025-04-14'),  
-(9, 11, 'Diseño de logotipos y branding', 'Creación de identidad visual para empresas, incluyendo logotipos y material gráfico.', 400.00, '2025-01-19'),  
-(14, 8, 'Instalación de fontanería en edificios', 'Instalación y mantenimiento de sistemas de fontanería en proyectos residenciales y comerciales.', 900.00, '2025-03-10');
+(20, 2, 'Servicios de limpieza de casas', 'Limpieza profunda para viviendas, incluye limpieza de alfombras y ventanas.', 150.00, TRUE, '2025-01-12'),  
+(2, 1, 'Consulta médica privada', 'Atención médica para consulta de salud general y bienestar.', 300.00, TRUE, '2025-03-25'),  
+(16, 12, 'Reparación de motores de autos', 'Mantenimiento y reparación de motores automotrices para vehículos particulares.', 1200.00, TRUE, '2025-02-18'),  
+(5, 10, 'Consultoría empresarial', 'Asesoramiento en la creación y expansión de empresas, con enfoque en crecimiento estratégico.', 850.00, TRUE, '2025-04-03'),  
+(3, 7, 'Clases particulares de inglés', 'Cursos de inglés personalizados, desde nivel básico hasta avanzado.', 50.00, TRUE, '2025-01-30'),  
+(12, 13, 'Reformas de albañilería', 'Servicio de albañilería para renovaciones de interiores y exteriores en casas y oficinas.', 1100.00, TRUE, '2025-02-07'),  
+(4, 6, 'Proyectos de ingeniería civil', 'Diseño y ejecución de proyectos de construcción, incluyendo estructuras y cimentación.', 2000.00, TRUE, '2025-03-02'),  
+(6, 9, 'Marketing digital para negocios', 'Creación y gestión de campañas publicitarias en redes sociales y Google Ads.', 500.00, TRUE, '2025-04-14'),  
+(9, 11, 'Diseño de logotipos y branding', 'Creación de identidad visual para empresas, incluyendo logotipos y material gráfico.', 400.00, TRUE, '2025-01-19'),  
+(14, 8, 'Instalación de fontanería en edificios', 'Instalación y mantenimiento de sistemas de fontanería en proyectos residenciales y comerciales.', 900.00, TRUE, '2025-03-10');
 
 -- Publicación medio
 INSERT INTO publicacion_medio (publicacion_id, tamanio, fecha_hora) VALUES
