@@ -32,7 +32,7 @@
 
 
 	-- Crear Persona_usuario sin foto(Defecto)
-		CREATE OR REPLACE FUNCTION registrar_persona_usuario_sf(
+	CREATE OR REPLACE FUNCTION registrar_persona_usuario_sf(
     _nombre varchar,
     _apellido varchar,
     _fecha_nac date,
