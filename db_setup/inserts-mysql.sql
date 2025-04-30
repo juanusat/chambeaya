@@ -22,7 +22,7 @@ CALL registrar_persona_usuario_sf('Álvaro', 'Rojas','920928263', '1998-01-05', 
 -- Empresas
 CALL registrar_empresa_usuario_cf('TechNova', '20123456781', 'contacto@technova.com', 'hash001','nova_tech.pe','TechNova_.jpg','Empresa de tecnología e innovación');
 CALL registrar_empresa_usuario_cf('AgroPerú', '10456789374', 'info@agroperu.pe', 'hash002','agroperu.pe','AgroPeru.jpg','Empresa dedicada a soluciones agrícolas');
-CALL registrar_empresa_usuario_cf('Constructora Andina', '20567891236','const.andinap','admin@constructoraandina.com', 'hash003', 'ConstructoraAndina.png','Empresa constructora especializada en obras civiles');
+CALL registrar_empresa_usuario_cf('Constructora Andina', '20567891236','const.andinap','hash003', 'admin@constructoraandina.com', 'ConstructoraAndina.png','Empresa constructora especializada en obras civiles');
 CALL registrar_empresa_usuario_cf('BioVida', '10234567896', 'ventas@biovida.pe', 'hash004','biovid.peru','BioVida.jpeg','Empresa de productos naturales y ecológicos');
 CALL registrar_empresa_usuario_sf('EduDigital', '20678912340', 'soporte@edudigital.com', 'hash005','e.digital','Plataforma de educación virtual e innovación educativa');
 
