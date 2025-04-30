@@ -9,7 +9,7 @@ CREATE PROCEDURE registrar_persona_usuario_cf(
     IN _email VARCHAR(100),
     IN _password_hash VARCHAR(255),
     IN _username VARCHAR(50),
-    IN _url_picture VARCHAR(255) DEFAULT NULL
+    IN _url_picture VARCHAR(255)
 )
 BEGIN
     DECLARE nueva_persona_id INT;
@@ -86,7 +86,7 @@ CREATE PROCEDURE registrar_empresa_usuario_cf(
     IN _email VARCHAR(255),
     IN _password_hash VARCHAR(255),
     IN _username VARCHAR(255),
-    IN _url_picture VARCHAR(255) DEFAULT NULL
+    IN _url_picture VARCHAR(255)
 )
 BEGIN
     DECLARE nueva_empresa_id INT;
