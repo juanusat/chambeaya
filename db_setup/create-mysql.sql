@@ -3,16 +3,18 @@ create table contrato (
     servicio_id int,
     cliente_id int,
     prestador_id int,
+    precio decimal not null,
     estado varchar(20) not null default 'pendiente',
     fecha_inicio date not null,
     fecha_finalizacion date not null,
     primary key (contrato_id),
-    check (estado in ('pendiente', 'rechazado' ,'en espera', 'en progreso', 'completado', 'finalizado' , 'cancelado'))
+    check (estado in ('pendiente', 'rechazado', 'en espera', 'en progreso', 'completado', 'finalizado', 'cancelado'))
 );
 
 create table usuario (
     usuario_id int auto_increment,
     username varchar(16) not null unique,
+    descripcion varchar(255) not null,
     email varchar(100) not null unique,
     password_hash varchar(64) not null,
     fecha_creacion date not null,
@@ -36,7 +38,8 @@ create table comentario (
     calificacion int,
     comentario varchar(255) not null,
     fecha_creacion date not null,
-    primary key (comentario_id)
+    primary key (comentario_id),
+    check (calificacion between 1 and 5)
 );
 
 create table persona (
@@ -44,6 +47,7 @@ create table persona (
     usuario_id int unique,
     nombre varchar(100) not null,
     apellido varchar(100) not null,
+    telefono varchar(20) not null,
     fecha_nacimiento date not null,
     primary key (persona_id)
 );
@@ -84,39 +88,40 @@ create table publicacion (
     titulo varchar(80) not null,
     descripcion varchar(255) not null,
     precio decimal not null,
+    estado boolean not null,
     fecha_creacion date not null,
     primary key (publicacion_id)
 );
 
 alter table comentario
-add constraint fk_comentario_contrato_id_contrato_id foreign key (contrato_id) references contrato(contrato_id);
+add constraint fk_comentario_contrato_id foreign key (contrato_id) references contrato(contrato_id);
 
 alter table comprobante_contrato
-add constraint fk_comprobante_contrato_contrato_id_contrato_id foreign key (contrato_id) references contrato(contrato_id);
+add constraint fk_comprobante_contrato_contrato_id foreign key (contrato_id) references contrato(contrato_id);
 
 alter table comprobante_contrato
-add constraint fk_comprobante_contrato_metodo_pago_id_metodo_pago_id foreign key (metodo_pago_id) references metodo_pago(metodo_pago_id);
+add constraint fk_comprobante_contrato_metodo_pago_id foreign key (metodo_pago_id) references metodo_pago(metodo_pago_id);
 
 alter table contrato
-add constraint fk_contrato_cliente_id_usuario_id foreign key (cliente_id) references usuario(usuario_id);
+add constraint fk_contrato_cliente_id foreign key (cliente_id) references usuario(usuario_id);
 
 alter table contrato
-add constraint fk_contrato_prestador_id_usuario_id foreign key (prestador_id) references usuario(usuario_id);
+add constraint fk_contrato_prestador_id foreign key (prestador_id) references usuario(usuario_id);
 
 alter table contrato
-add constraint fk_contrato_servicio_id_publicacion_id foreign key (servicio_id) references publicacion(publicacion_id);
+add constraint fk_contrato_servicio_id foreign key (servicio_id) references publicacion(publicacion_id);
 
 alter table empresa
-add constraint fk_empresa_usuario_id_usuario_id foreign key (usuario_id) references usuario(usuario_id);
+add constraint fk_empresa_usuario_id foreign key (usuario_id) references usuario(usuario_id);
 
 alter table persona
-add constraint fk_persona_usuario_id_usuario_id foreign key (usuario_id) references usuario(usuario_id);
+add constraint fk_persona_usuario_id foreign key (usuario_id) references usuario(usuario_id);
 
 alter table publicacion
-add constraint fk_publicacion_categoria_id_categoria_id foreign key (categoria_id) references categoria(categoria_id);
+add constraint fk_publicacion_categoria_id foreign key (categoria_id) references categoria(categoria_id);
 
 alter table publicacion
-add constraint fk_publicacion_usuario_id_usuario_id foreign key (usuario_id) references usuario(usuario_id);
+add constraint fk_publicacion_usuario_id foreign key (usuario_id) references usuario(usuario_id);
 
 alter table publicacion_medio
-add constraint fk_publicacion_medio_pulicacion_id_publicacion_id foreign key (publicacion_id) references publicacion(publicacion_id);
+add constraint fk_publicacion_medio_publicacion_id foreign key (publicacion_id) references publicacion(publicacion_id);
