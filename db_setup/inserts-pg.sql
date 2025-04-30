@@ -1,30 +1,30 @@
 -- Necesito 20 usuarios 
 -- De esos 20 usuarios (5 empresas , 15 personas) 
 -- Mujeres
-SELECT registrar_persona_usuario_cf('Valeria', 'Romero', '2001-04-12', 'valeria.romero@gmail.com', 'hash123', 'Mujer-1.jpg');
-SELECT registrar_persona_usuario_cf('Lucía', 'Fernández', '2000-11-08', 'lucia.fernandez@hotmail.com', 'hash456', 'Mujer-2.jpg');
-SELECT registrar_persona_usuario_cf('Camila', 'Torres', '1999-02-25', 'camila.torres@yahoo.com', 'hash789', 'Mujer-3.jpg');
-SELECT registrar_persona_usuario_cf('Diana', 'Rivas', '2002-06-19', 'diana.rivas@gmail.com', 'hash101', 'Mujer-4.jpg');
-SELECT registrar_persona_usuario_cf('Andrea', 'Martínez', '2003-01-30', 'andrea.martinez@outlook.com', 'hash202', 'Mujer-5.jpg');
-SELECT registrar_persona_usuario_cf('Sofía', 'Guzmán', '2000-12-15', 'sofia.guzman@mail.com', 'hash303', 'Mujer-6.jpg');
-SELECT registrar_persona_usuario_sf('Paula', 'Herrera', '2001-07-07', 'paula.herrera@gmail.com', 'hash404');
+SELECT registrar_persona_usuario_cf('Valeria', 'Romero', '2001-04-12', 'valeria.romero@gmail.com', 'hash123','romerito12' ,'Mujer-1.jpg');
+SELECT registrar_persona_usuario_cf('Lucía', 'Fernández', '2000-11-08', 'lucia.fernandez@hotmail.com', 'hash456','lucifer000','Mujer-2.jpg');
+SELECT registrar_persona_usuario_cf('Camila', 'Torres', '1999-02-25', 'camila.torres@yahoo.com', 'hash789','c.torres99','Mujer-3.jpg');
+SELECT registrar_persona_usuario_cf('Diana', 'Rivas', '2002-06-19', 'diana.rivas@gmail.com', 'hash101','dianarvs02','Mujer-4.jpg');
+SELECT registrar_persona_usuario_cf('Andrea', 'Martínez', '2003-01-30', 'andrea.martinez@outlook.com', 'hash202','a.mart2003','Mujer-5.jpg');
+SELECT registrar_persona_usuario_cf('Sofía', 'Guzmán', '2000-12-15', 'sofia.guzman@mail.com', 'hash303','sg.12','Mujer-6.jpg');
+SELECT registrar_persona_usuario_sf('Paula', 'Herrera', '2001-07-07', 'paula.herrera@gmail.com','hash404','herrera.p');
 
 -- Hombres
-SELECT registrar_persona_usuario_cf('Mateo', 'López', '1998-03-14', 'mateo.lopez@gmail.com', 'hash505', 'Hombre-1.jpg');
-SELECT registrar_persona_usuario_cf('Sebastián', 'Castillo', '1999-09-01', 'sebastian.castillo@hotmail.com', 'hash606', 'Hombre-2.jpg');
-SELECT registrar_persona_usuario_cf('Diego', 'Ramírez', '2001-05-18', 'diego.ramirez@yahoo.com', 'hash707', 'Hombre-3.jpg');
-SELECT registrar_persona_usuario_cf('Lucas', 'Sánchez', '2000-10-23', 'lucas.sanchez@gmail.com', 'hash808', 'Hombre-4.jpg');
-SELECT registrar_persona_usuario_cf('Gabriel', 'Vargas', '2002-02-02', 'gabriel.vargas@outlook.com', 'hash909', 'Hombre-5.jpg');
-SELECT registrar_persona_usuario_cf('Tomás', 'Navarro', '2003-08-29', 'tomas.navarro@mail.com', 'hash000', 'Hombre-6.jpg');
-SELECT registrar_persona_usuario_cf('Bruno', 'Flores', '1997-06-10', 'bruno.flores@gmail.com', 'hashabc', 'Hombre-7.jpg');
-SELECT registrar_persona_usuario_sf('Álvaro', 'Rojas', '1998-01-05', 'alvaro.rojas@gmail.com', 'hashdef');
+SELECT registrar_persona_usuario_cf('Mateo', 'López', '1998-03-14', 'mateo.lopez@gmail.com', 'hash505','el.lopez98','Hombre-1.jpg');
+SELECT registrar_persona_usuario_cf('Sebastián', 'Castillo', '1999-09-01', 'sebastian.castillo@hotmail.com', 'hash606','s.castle01','Hombre-2.jpg');
+SELECT registrar_persona_usuario_cf('Diego', 'Ramírez', '2001-05-18', 'diego.ramirez@yahoo.com', 'hash707','dram.05','Hombre-3.jpg');
+SELECT registrar_persona_usuario_cf('Lucas', 'Sánchez', '2000-10-23', 'lucas.sanchez@gmail.com', 'hash808','ellucas.02','Hombre-4.jpg');
+SELECT registrar_persona_usuario_cf('Gabriel', 'Vargas', '2002-02-06', 'gabriel.vargas@outlook.com', 'hash909','loco.vargas06','Hombre-5.jpg');
+SELECT registrar_persona_usuario_cf('Tomás', 'Navarro', '2003-08-29', 'tomas.navarro@mail.com', 'hash000','tomas.navarro','Hombre-6.jpg');
+SELECT registrar_persona_usuario_cf('Bruno', 'Flores', '1997-06-10', 'bruno.flores@gmail.com', 'hashabc','brunoxflowers','Hombre-7.jpg');
+SELECT registrar_persona_usuario_sf('Álvaro', 'Rojas', '1998-01-05', 'alvaro.rojas@gmail.com', 'hashdef','a.red98');
 
 --Empresas
-SELECT registrar_empresa_usuario_cf('TechNova', 'Empresa de tecnología e innovación', 'contacto@technova.com', 'hash001', 'TechNova_.jpg');
-SELECT registrar_empresa_usuario_cf('AgroPerú', 'Empresa dedicada a soluciones agrícolas', 'info@agroperu.pe', 'hash002', 'AgroPeru.jpg');
-SELECT registrar_empresa_usuario_cf('Constructora Andina', 'Empresa constructora especializada en obras civiles', 'admin@constructoraandina.com', 'hash003', 'ConstructoraAndina.png');
-SELECT registrar_empresa_usuario_cf('BioVida', 'Empresa de productos naturales y ecológicos', 'ventas@biovida.pe', 'hash004', 'BioVida.jpeg');
-SELECT registrar_empresa_usuario_sf('EduDigital', 'Plataforma de educación virtual e innovación educativa', 'soporte@edudigital.com', 'hash005');
+SELECT registrar_empresa_usuario_cf('TechNova', 'Empresa de tecnología e innovación', 'contacto@technova.com', 'hash001','nova_tech.pe','TechNova_.jpg');
+SELECT registrar_empresa_usuario_cf('AgroPerú', 'Empresa dedicada a soluciones agrícolas', 'info@agroperu.pe', 'hash002','agroperu.pe','AgroPeru.jpg');
+SELECT registrar_empresa_usuario_cf('Constructora Andina', 'Empresa constructora especializada en obras civiles','const.andinap','admin@constructoraandina.com', 'hash003', 'ConstructoraAndina.png');
+SELECT registrar_empresa_usuario_cf('BioVida', 'Empresa de productos naturales y ecológicos', 'ventas@biovida.pe', 'hash004','biovid.peru','BioVida.jpeg');
+SELECT registrar_empresa_usuario_sf('EduDigital', 'Plataforma de educación virtual e innovación educativa', 'soporte@edudigital.com', 'hash005','e.digital');
 
 
 -- De esas 15 personas (10 con servicios, 5 sin servicios); 
