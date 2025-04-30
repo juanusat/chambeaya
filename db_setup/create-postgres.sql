@@ -4,7 +4,7 @@ create table contrato (
     cliente_id int,
     prestador_id int,
 	precio decimal not null,
-    estado varchar(20) CHECK (estado IN ('pendiente', 'rechazado' ,'en espera', 'en progreso', 'completado', 'finalizado' , 'cancelado')) DEFAULT 'pendiente' not null,
+    estado varchar(20) check (estado in ('pendiente', 'rechazado' ,'en espera', 'en progreso', 'completado', 'finalizado' , 'cancelado')) default 'pendiente' not null,
     fecha_inicio date not null,
     fecha_finalizacion date not null,
     primary key (contrato_id)
@@ -34,7 +34,7 @@ create table comprobante_contrato (
 create table comentario (
     comentario_id serial,
     contrato_id int,
-    calificacion int CHECK (calificacion BETWEEN 1 AND 5),
+    calificacion int check (calificacion between 1 and 5),
     comentario varchar(255) not null,
     fecha_creacion date not null,
     primary key (comentario_id)
