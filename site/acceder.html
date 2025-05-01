@@ -7,78 +7,85 @@
     <title>ChambeaYa</title>
     <link rel="stylesheet" href="/static/css/main.css">
     <link rel="stylesheet" href="/static/css/acceder.css">
-    
+
 </head>
 
 <body>
     <div class="app">
-        <div class="auth-container">
-            <div class="auth-tabs">
-                <button class="tab-btn active" onclick="mostrarFormulario('registro')">Registrarse</button>
-                <button class="tab-btn" onclick="mostrarFormulario('login')">Iniciar Sesión</button>
-            </div>
-
-            <div class="auth-form-box">
-                <!-- Registro -->
-                <form id="registro" class="auth-form">
-                    <label>Dirección de correo electrónico*</label>
-                    <input type="email" required>
-
-                    <label>Nombre*</label>
-                    <input type="email" required>
-
-                    <label>Contraseña*</label>
-                    <input type="password" required>
-
-                    <p class="auth-policy">
-                        Al hacer clic en Continuar con Google, Facebook, o Apple, aceptas las
-                        <a href="#">condiciones de uso</a> y la
-                        <a href="#">política de privacidad</a> de ChambeaYa
-                    </p>
-
-                    <button type="submit" class="auth-main-btn">Iniciar Sesión</button>
-                    <div class="auth-separator">O</div>
-
-                    <div class="auth-social-container">
-                        <button type="button" class="auth-social-btn google">
-                            <i class="fab fa-google"></i> Registrarme con Google
-                        </button>
-                        <button type="button" class="auth-social-btn facebook">
-                            <i class="fab fa-facebook"></i> Registrarme con Facebook
-                        </button>
+        <div class="header"></div>
+        <div class="page">
+            <div class="width-f">
+                <div class="auth-container">
+                    <div class="auth-tabs">
+                        <button class="tab-btn active" onclick="mostrarFormulario('registro')">Registrarse</button>
+                        <button class="tab-btn" onclick="mostrarFormulario('login')">Iniciar Sesión</button>
                     </div>
-                </form>
 
-                
-                <!-- Login -->
-                <form id="login" class="auth-form hidden">
-                    <label>Dirección de correo electrónico*</label>
-                    <input type="email" required>
+                    <div class="auth-form-box">
+                        <!-- Registro -->
+                        <form id="registro" class="auth-form">
+                            <label>Dirección de correo electrónico*</label>
+                            <input type="email" required>
 
-                    <label>Contraseña*</label>
-                    <input type="password" required>
+                            <label>Nombre*</label>
+                            <input type="email" required>
 
-                    <label class="checkbox-container">
-                        <input type="checkbox" checked>
-                        <span class="checkmark"></span> Mantener la sesión iniciada
-                    </label>
+                            <label>Contraseña*</label>
+                            <input type="password" required>
 
-                    <a href="#" class="forgot-link">¿Has olvidado tu contraseña?</a>
+                            <p class="auth-policy">
+                                Al hacer clic en Continuar con Google, Facebook, o Apple, aceptas las
+                                <a href="#">condiciones de uso</a> y la
+                                <a href="#">política de privacidad</a> de ChambeaYa
+                            </p>
 
-                    <button type="submit" class="auth-main-btn">Iniciar Sesión</button>
-                    <div class="auth-separator">O</div>
+                            <button type="submit" class="auth-main-btn">Iniciar Sesión</button>
+                            <div class="auth-separator">O</div>
 
-                    <div class="auth-social-container">
-                        <button type="button" class="auth-social-btn google">
-                            <i class="fab fa-google"></i> Registrarme con Google
-                        </button>
-                        <button type="button" class="auth-social-btn facebook">
-                            <i class="fab fa-facebook"></i> Registrarme con Facebook
-                        </button>
+                            <div class="auth-social-container">
+                                <button type="button" class="auth-social-btn google">
+                                    <i class="fab fa-google"></i> Registrarme con Google
+                                </button>
+                                <button type="button" class="auth-social-btn facebook">
+                                    <i class="fab fa-facebook"></i> Registrarme con Facebook
+                                </button>
+                            </div>
+                        </form>
+
+
+                        <!-- Login -->
+                        <form id="login" class="auth-form hidden">
+                            <label>Nombre de usuario*</label>
+                            <input type="text" id="username" required autocomplete="off">
+
+                            <label>Contraseña*</label>
+                            <input type="password" id="password" required>
+
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="keep-logged-in" checked>
+                                <span class="checkmark"></span> Mantener la sesión iniciada
+                            </label>
+
+                            <a href="#" class="forgot-link">¿Has olvidado tu contraseña?</a>
+
+                            <button type="submit" class="auth-main-btn">Iniciar Sesión</button>
+
+                            <div class="auth-separator">O</div>
+
+                            <div class="auth-social-container">
+                                <button type="button" class="auth-social-btn google">
+                                    <i class="fab fa-google"></i> Registrarme con Google
+                                </button>
+                                <button type="button" class="auth-social-btn facebook">
+                                    <i class="fab fa-facebook"></i> Registrarme con Facebook
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
+        <div class="footer"></div>
     </div>
 
     <script src="/static/js/main.js"></script>
