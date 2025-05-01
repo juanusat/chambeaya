@@ -180,3 +180,86 @@ def get_contratos_by_categoria_nombre(nom_cat):
             return cursor.fetchall()
     finally:
         conn.close()
+
+def get_contratos_by_estado(estado_nombre):
+    conn = get_db_connection()
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute("""
+                SELECT
+                    c.contrato_id,
+                    p.titulo AS servicio,
+                    CASE
+                        WHEN per_cli.usuario_id IS NOT NULL THEN per_cli.nombre
+                        WHEN emp_cli.usuario_id IS NOT NULL THEN emp_cli.nombre
+                        ELSE 'Desconocido'
+                    END AS nombre_cliente,
+                    CASE
+                        WHEN per_pres.usuario_id IS NOT NULL THEN per_pres.nombre
+                        WHEN emp_pres.usuario_id IS NOT NULL THEN emp_pres.nombre
+                        ELSE 'Desconocido'
+                    END AS nombre_prestador,
+                    c.precio,
+                    c.estado,
+                    c.fecha_inicio,
+                    c.fecha_finalizacion
+                FROM contrato c
+                JOIN publicacion p ON c.servicio_id = p.publicacion_id
+                JOIN usuario u_cli ON c.cliente_id = u_cli.usuario_id
+                LEFT JOIN persona per_cli ON per_cli.usuario_id = u_cli.usuario_id
+                LEFT JOIN empresa emp_cli ON emp_cli.usuario_id = u_cli.usuario_id
+                JOIN usuario u_pres ON c.prestador_id = u_pres.usuario_id
+                LEFT JOIN persona per_pres ON per_pres.usuario_id = u_pres.usuario_id
+                LEFT JOIN empresa emp_pres ON emp_pres.usuario_id = u_pres.usuario_id
+                WHERE c.estado = %s;
+            """, (estado_nombre,))
+            return cursor.fetchall()
+    finally:
+        conn.close()
+
+
+def create_contrato(data):
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "INSERT INTO contrato (servicio_id, cliente_id, prestador_id, precio, fecha_inicio, fecha_finalizacion)"
+                " VALUES (%s,%s,%s,%s,%s,%s);",
+                (
+                    data['servicio_id'],
+                    data['cliente_id'],
+                    data['prestador_id'],
+                    data['precio'],
+                    data['fecha_inicio'],
+                    data['fecha_finalizacion'],
+                ),
+            )
+            conn.commit()
+            return cursor.lastrowid
+    finally:
+        conn.close() 
+
+def update_contrato(conts_id, data):
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "UPDATE contrato SET estado=%s, fecha_finalizacion=%s WHERE contrato_id=%s;",
+                (data['estado'], data['fecha_finalizacion'], conts_id),
+            )
+            conn.commit()
+    finally:
+        conn.close()
+
+def darbaja_contrato(conts_id):
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "UPDATE contrato SET  estado='cancelado'  WHERE contrato_id=%s;",
+                (conts_id,),
+            )
+            conn.commit()
+    finally:
+        conn.close()
+

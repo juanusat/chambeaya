@@ -2,6 +2,7 @@ from flask import Flask, render_template, abort
 import json
 from datetime import date
 from app.publicacion.routes_publicacion import publicaciones_bp
+from app.contrato.routes_contrato import contratos_bp
 from app.usuario.routes_usuario import usuarios_bp
 from app.usuario.controlador_usuario import get_usuario_by_username
 
@@ -12,6 +13,7 @@ def create_app():
     # Registramos los Blueprints con sus prefijos
     app.register_blueprint(publicaciones_bp, url_prefix='/api/publicaciones')
     app.register_blueprint(usuarios_bp, url_prefix='/api/usuarios')
+    app.register_blueprint(contratos_bp, url_prefix='/api/contratos')
     
     @app.route('/')
     def inicio():
