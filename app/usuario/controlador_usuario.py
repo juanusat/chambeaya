@@ -60,7 +60,6 @@ def delete_usuario(user_id):
         conn.close()
         
 def get_usuario_by_username(username):
-    print(username)
     conn = get_db_connection()
     try:
         with conn.cursor(pymysql.cursors.DictCursor) as cursor:
