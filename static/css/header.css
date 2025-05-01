@@ -38,7 +38,7 @@
     gap: 8px;
 }
 
-.header-user a {
+.header-user>a {
     background-color: var(--colorE-100);
     font-size: 20px;
     height: 38px;
@@ -48,7 +48,7 @@
     border-radius: 50%;
 }
 
-.header-user a:hover {
+.header-user>a:hover {
     background-color: var(--colorE-900);
     color: white;
 }
@@ -62,4 +62,127 @@
 
 .header-public .btn-setaccount:hover {
     background-color: var(--colorA-300);
+}
+
+
+picture {
+    height: inherit;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+picture img {
+    height: 100%;
+}
+
+
+.dropdown {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background-color: white;
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.dropdown.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.dropdown .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    border-style: solid;
+    border-radius: 6px;
+    border-color: #cecece;
+    border-width: 0px;
+    padding: 12px 0px;
+}
+
+.dropdown .user-info .pic {
+    width: 60px;
+    height: 60px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 auto 5px;
+    overflow: hidden;
+}
+
+.dropdown .user-info .pic img {
+    height: inherit;
+}
+.dropdown .user-info .user-name {
+    font-weight: bold;
+}
+.dropdown .user-info .user-nick {
+    color: #9c9c9c;
+}
+
+.dropdown .link-perfil {
+    background-color: #eeeeee;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+.dropdown .link-perfil:hover {
+    background-color: #d8d8d8;
+}
+
+div#dropdownMenu li a {
+    display: grid;
+    font-size: 16px;
+    grid-gap: 6px;
+    grid-auto-flow: column;
+    white-space: nowrap;
+    grid-template-columns: 28px 1fr;
+    width: 100%;
+    align-items: center;
+    border-radius: 4px;
+    padding-block: 8px;
+    padding-inline: 16px;
+    background-color: #f7f7f7;
+}
+
+.dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 0 0;
+}
+
+.dropdown ul li {
+    display: flex;
+    align-items: center;
+    margin: 6px 0px 0px 0px;
+    cursor: pointer;
+}
+
+.dropdown ul li .dot {
+    width: 16px;
+    height: 16px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+div#dropdownMenu li a span {
+    justify-self: flex-start;
+}
+
+div#dropdownMenu li a:hover {
+    background-color: #dbdbdb;
+    color: black;
 }

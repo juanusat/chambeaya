@@ -9,10 +9,69 @@
         <div class="center"></div>
         <div class="options">
             <div class="header-user">
-                <a href="#"><i class="fa-solid fa-plus"></i></a>
+                <a href="/nueva-publicacion"><i class="fa-solid fa-plus"></i></a>
                 <a href="#"><i class="fa-solid fa-bell"></i></a>
-                <a href="#"><i class="fa-solid fa-circle-user"></i></i></a>
+                <a href="#">
+                    <picture>
+                        <img src="/static/upload/default-pic-profile.jpg" alt="foto de perfil">
+                    </picture>
+                </a>
+                <div class="dropdown" id="dropdownMenu">
+                    <div class="user-info">
+                        <div class="pic">
+                            <img src="/static/upload/default-pic-profile.jpg" alt="foto de perfil">
+                        </div>
+                        <div class="user-name">USERNAME</div>
+                        <div class="user-nick">@USERNICK</div>
+                        <a class="link-perfil" href="/@USERNICK">Ver Perfil</a>
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="/mis-publicaciones">
+                                <i class="fa-solid fa-briefcase"></i>
+                                <span>Mis Publicaciones</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/mis-contratos">
+                                <i class="fa-solid fa-file-contract"></i>
+                                <span>Mis Contratos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="btnLogut">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <span>Cerrar sesión</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
+    <script>
+        const profileIcon = document.querySelector('.header picture');
+        const dropdownMenu = document.querySelector('.header #dropdownMenu');
+
+        profileIcon.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!profileIcon.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+        document.querySelector("#btnLogut").addEventListener('click', function () {
+            fetch('/api/auth/logout', {
+                method: 'POST',
+                credentials: 'include'
+            }).then(res => {
+                if (res.ok) {
+                    window.location.href = '/';
+                }
+            });
+        })
+
+    </script>
 </div>
