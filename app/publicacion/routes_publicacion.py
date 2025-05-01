@@ -44,7 +44,7 @@ def obtener_publicaciones_by_palabra(palabra):
 def nueva_publicacion():
     data = request.get_json()
     new_id = create_publicacion(data)
-    return jsonify({'publicacion_id': new_id}), 201
+    return jsonify({'publicacion_id': new_id}), 200
 
 @publicaciones_bp.route('/editar_publicacion/<int:pub_id>', methods=['PUT'])
 def editar_publicacion(pub_id):
