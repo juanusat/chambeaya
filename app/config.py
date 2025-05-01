@@ -1,0 +1,9 @@
+SECRET_KEY = 'ESTAESUNACLAVEDEMASIADOSEGURACOMOPARAQUEPUEDASERADIVINADA'
+JWT_CONFIG = {
+    "JWT_SECRET_KEY": SECRET_KEY,
+    "JWT_TOKEN_LOCATION": ["cookies"],
+    "JWT_ACCESS_COOKIE_NAME": "access_token",
+    "JWT_COOKIE_SECURE": False,         # True en producción con HTTPS
+    "JWT_COOKIE_SAMESITE": "Lax",
+    "JWT_COOKIE_CSRF_PROTECT": False    # True si quieres protección CSRF
+}
