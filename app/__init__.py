@@ -1,34 +1,89 @@
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, Response, request
 import json
 from datetime import date
 from app.publicacion.routes_publicacion import publicaciones_bp
 from app.contrato.routes_contrato import contratos_bp
 from app.usuario.routes_usuario import usuarios_bp
 from app.usuario.controlador_usuario import get_usuario_by_username
+from app.auth.routes_auth import auth_bp
+from flask_jwt_extended import JWTManager
+from app.config import JWT_CONFIG, SECRET_KEY
+import jwt
 
+def custom_render_html(template_path):
+    with open(f"site/{template_path}", 'r', encoding='utf-8') as f:
+        html = f.read()
+
+    token = request.cookies.get('access_token')
+    header = ''
+
+    if token:
+        try:
+            payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+            username = payload['sub'] if 'sub' in payload else payload.get('identity')
+            user = get_usuario_by_username(username)
+            if user:
+                header_file = 'static/templates/header_user.html'
+
+                with open(header_file, 'r', encoding='utf-8') as f:
+                    header = f.read()
+
+                header = header.replace('USERNAME', user['nombre'] + ' ' + user['apellido'])
+                header = header.replace('USERNICK', user['username'], -1)
+                header = header.replace('default-pic-profile.jpg', user['url_picture'] or 'default-pic-profile.jpg', -1)
+        except jwt.ExpiredSignatureError:
+            pass
+        except jwt.InvalidTokenError:
+            pass
+    else:
+        with open('static/templates/header.html', 'r', encoding='utf-8') as f:
+            header = f.read()
+
+    with open('static/templates/footer.html', 'r', encoding='utf-8') as f:
+        footer = f.read()
+
+    html = html.replace('<div class="header"></div>', header)
+    html = html.replace('<div class="footer"></div>', footer)
+
+    return html
 
 def create_app():
     app = Flask(__name__, static_folder='./../static', template_folder='./../site')
+    for key, value in JWT_CONFIG.items():
+        app.config[key] = value
+    
+    JWTManager(app)
 
-    # Registramos los Blueprints con sus prefijos
+    app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(publicaciones_bp, url_prefix='/api/publicaciones')
     app.register_blueprint(usuarios_bp, url_prefix='/api/usuarios')
     app.register_blueprint(contratos_bp, url_prefix='/api/contratos')
     
     @app.route('/')
     def inicio():
-        return render_template('inicio.html')
+        html = custom_render_html('inicio.html')
+        return Response(html, mimetype='text/html')
 
     @app.route('/@<username>')
     def perfil(username):
-        user = get_usuario_by_username(username)
-        if not user:
+        user_dict = get_usuario_by_username(username)
+        if not user_dict:
             abort(404, description="Usuario no encontrado")
-        for key, value in user.items():
+        for key, value in user_dict.items():
             if isinstance(value, date):
-                user[key] = value.isoformat()
+                user_dict[key] = value.isoformat()
 
-        user_json = json.dumps(user)
-        return render_template('usuario.html', user=user, user_json=user_json)
+        user_json = json.dumps(user_dict)
+        html = custom_render_html('usuario.html')
+        titulo_pagina = f"{user_dict['nombre']} {user_dict['apellido']}"
+        titulo_pagina += f" (@{user_dict['username']})"
+        html = html.replace('(USERNAME)', titulo_pagina)
+        html = html.replace('["json"]', user_json)
+        return Response(html, mimetype='text/html')
+
+    @app.route('/acceder')
+    def acceder():
+        html = custom_render_html('acceder.html')
+        return Response(html, mimetype='text/html')
 
     return app
