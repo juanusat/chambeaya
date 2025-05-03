@@ -18,7 +18,7 @@ def login():
 
     expires = timedelta(days=30) if remember else None
     access_token = create_access_token(
-        identity=user['usuario_id'],
+        identity=str(user['usuario_id']),
         additional_claims={"username": user['username']},
         expires_delta=expires
     )
