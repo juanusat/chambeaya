@@ -1,4 +1,5 @@
 from flask import Flask, render_template, abort, Response, request
+from flask import redirect, url_for, make_response
 import json
 from datetime import date
 from app.publicacion.routes_publicacion import publicaciones_bp
@@ -10,9 +11,11 @@ from flask_jwt_extended import (
     JWTManager,
     verify_jwt_in_request,
     get_jwt_identity,
-    get_jwt
+    get_jwt,
+    unset_jwt_cookies
 )
 from flask_jwt_extended.exceptions import NoAuthorizationError
+from jwt.exceptions import ExpiredSignatureError
 from flask import g
 from app.config import JWT_CONFIG, SECRET_KEY
 import jwt
@@ -50,6 +53,13 @@ def create_app():
     
     JWTManager(app)
     
+    @app.errorhandler(ExpiredSignatureError)
+    def handle_token_expired_error(error):
+        # Eliminar la cookie del JWT
+        response = make_response(redirect(url_for('inicio')))
+        unset_jwt_cookies(response)
+    
+        return response
     @app.before_request
     def cargar_usuario_en_g():
         try:
