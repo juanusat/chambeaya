@@ -10,6 +10,7 @@ def login():
     data = request.json
     username = data.get("username")
     password = data.get("password")
+    remember = data.get("remember", False)
 
     user = verificar_credenciales(username, password)
     if not user:
