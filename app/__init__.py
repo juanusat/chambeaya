@@ -6,7 +6,14 @@ from app.contrato.routes_contrato import contratos_bp
 from app.usuario.routes_usuario import usuarios_bp
 from app.usuario.controlador_usuario import get_usuario_by_username
 from app.auth.routes_auth import auth_bp
-from flask_jwt_extended import JWTManager
+from flask_jwt_extended import (
+    JWTManager,
+    verify_jwt_in_request,
+    get_jwt_identity,
+    get_jwt
+)
+from flask_jwt_extended.exceptions import NoAuthorizationError
+from flask import g
 from app.config import JWT_CONFIG, SECRET_KEY
 import jwt
 
@@ -14,27 +21,16 @@ def custom_render_html(template_path):
     with open(f"site/{template_path}", 'r', encoding='utf-8') as f:
         html = f.read()
 
-    token = request.cookies.get('access_token')
     header = ''
-
-    if token:
-        try:
-            payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
-            username = payload['sub'] if 'sub' in payload else payload.get('identity')
-            user = get_usuario_by_username(username)
-            if user:
-                header_file = 'static/templates/header_user.html'
-
-                with open(header_file, 'r', encoding='utf-8') as f:
-                    header = f.read()
-
-                header = header.replace('USERNAME', user['nombre'] + ' ' + user['apellido'])
-                header = header.replace('USERNICK', user['username'], -1)
-                header = header.replace('default-pic-profile.jpg', user['url_picture'] or 'default-pic-profile.jpg', -1)
-        except jwt.ExpiredSignatureError:
-            pass
-        except jwt.InvalidTokenError:
-            pass
+    if getattr(g, 'user_id', None):
+        user = get_usuario_by_username(g.username)
+        if user:
+            header_file = 'static/templates/header_user.html'
+            with open(header_file, 'r', encoding='utf-8') as f:
+                header = f.read()
+            header = header.replace('USERNAME', user['nombre'] + ' ' + user['apellido'])
+            header = header.replace('USERNICK', user['username'])
+            header = header.replace('default-pic-profile.jpg', user['url_picture'] or 'default-pic-profile.jpg')
     else:
         with open('static/templates/header.html', 'r', encoding='utf-8') as f:
             header = f.read()
@@ -53,6 +49,17 @@ def create_app():
         app.config[key] = value
     
     JWTManager(app)
+    
+    @app.before_request
+    def cargar_usuario_en_g():
+        try:
+            verify_jwt_in_request()
+            g.user_id = int(get_jwt_identity())
+            claims = get_jwt()
+            g.username = claims.get("username")
+        except NoAuthorizationError:
+            g.user_id = None
+            g.username = None
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(publicaciones_bp, url_prefix='/api/publicaciones')
