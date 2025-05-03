@@ -25,22 +25,22 @@ document.getElementById('login').addEventListener('submit', async function (e) {
     try {
         const response = await fetch('/api/auth/login', {
             method: 'POST',
+            credentials: 'same-origin', // para enviar/recibir cookies
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ username, password, remember: keepLoggedIn })
         });
 
         const data = await response.json();
 
         if (response.ok) {
-            // Guardar el token en el almacenamiento adecuado
-            if (keepLoggedIn) {
-                localStorage.setItem('token', data.access_token);
-            } else {
-                sessionStorage.setItem('token', data.access_token);
+            localStorage.setItem('logged', 'true');
+            localStorage.setItem('keepLoggedIn', keepLoggedIn ? 'true' : 'false');
+
+            if (!keepLoggedIn) {
+                sessionStorage.setItem('sessionActive', 'true');
             }
 
-            // Redirigir o recargar
-            window.location.href = '/'; // O a donde quieras enviar al usuario logueado
+            window.location.href = '/';
         } else {
             alert('Error de inicio de sesión: ' + (data.msg || 'Intenta de nuevo'));
         }
