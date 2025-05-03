@@ -2,4 +2,4 @@ python-dotenv
 pymysql
 tabulate
 flask
-Flask-JWT-Extended
+flask-jwt-extended==4.6.0
