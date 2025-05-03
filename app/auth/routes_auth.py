@@ -14,9 +14,11 @@ def login():
     if not user:
         return jsonify({"msg": "Credenciales inválidas"}), 401
 
-    access_token = create_access_token(identity=username)
+    access_token = create_access_token(
+        identity=user['usuario_id'],
+        additional_claims={"username": user['username']}
+    )
     
-    # Crear respuesta y agregar cookie JWT
     resp = make_response(jsonify({"msg": "Inicio de sesión exitoso"}))
     set_access_cookies(resp, access_token)
     return resp
