@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, make_response
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, set_access_cookies, unset_jwt_cookies
 from app.auth.controlador_auth import verificar_credenciales
+from datetime import timedelta
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -14,11 +15,13 @@ def login():
     if not user:
         return jsonify({"msg": "Credenciales inválidas"}), 401
 
+    expires = timedelta(days=30) if remember else None
     access_token = create_access_token(
         identity=user['usuario_id'],
-        additional_claims={"username": user['username']}
+        additional_claims={"username": user['username']},
+        expires_delta=expires
     )
-    
+
     resp = make_response(jsonify({"msg": "Inicio de sesión exitoso"}))
     set_access_cookies(resp, access_token)
     return resp
