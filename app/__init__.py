@@ -14,7 +14,7 @@ def custom_render_html(template_path):
     with open(f"site/{template_path}", 'r', encoding='utf-8') as f:
         html = f.read()
 
-    token = request.cookies.get('access_token')
+    token = request.cookies.get(JWT_CONFIG['JWT_ACCESS_COOKIE_NAME'])
     header = ''
 
     if token:
