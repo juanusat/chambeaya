@@ -1,7 +1,8 @@
-from flask import Blueprint, request, jsonify, abort
+from flask import Blueprint, request, jsonify, abort, g, redirect, url_for
 
 from app.contrato.controlador_contrato import (
   get_all_contratos, 
+  get_mis_contratos, 
   get_contratos_by_prestador_id,
   get_contratos_by_cliente_id,
   get_contratos_by_publicacion_id,
@@ -16,7 +17,10 @@ contratos_bp = Blueprint('contratos', __name__)
 
 @contratos_bp.route('/', methods=['GET'])
 def listar_contratos():
-    conts = get_all_contratos()
+    if not getattr(g, 'user_id', None):
+        return redirect(url_for('inicio'))
+
+    conts = get_mis_contratos(getattr(g, 'user_id', None))
     return jsonify(conts), 200
 
 @contratos_bp.route('/prestador/<int:prestador_id>', methods=['GET'])

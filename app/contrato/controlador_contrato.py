@@ -2,6 +2,17 @@ import pymysql
 import pymysql.cursors
 from app.bd_conn import get_db_connection
 
+def get_mis_contratos(user_id):
+    conn = get_db_connection()
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute("""
+                SELECT * FROM contrato WHERE prestador_id = %s OR cliente_id = %s
+            """, (user_id, user_id))
+            return cursor.fetchall()
+    finally:
+        conn.close()
+
 def get_all_contratos(): 
     conn = get_db_connection()
     try:
