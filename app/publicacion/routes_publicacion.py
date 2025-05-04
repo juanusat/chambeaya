@@ -44,6 +44,8 @@ def obtener_publicaciones_by_palabra(palabra):
 
 @publicaciones_bp.route('/nueva_publicacion', methods=['POST']) # VALIDAR G
 def nueva_publicacion():
+    if not getattr(g, 'user_id', None):
+        return redirect(url_for('inicio'))
     data = request.get_json()
     new_id = create_publicacion(data)
     return jsonify({'publicacion_id': new_id}), 200
