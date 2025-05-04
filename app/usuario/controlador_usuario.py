@@ -36,6 +36,64 @@ def create_usuario(data):
     finally:
         conn.close()
 
+# registrar usuario
+def registrar_persona_usuario_cf(data):
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "CALL registrar_persona_usuario_cf(%s, %s, %s, %s, %s, %s, %s, %s, %s);",
+                (data['nombre'], data['apellido'], data['telefono'], data['fecha_nac'], data['email'], 
+                 data['password_hash'], data['username'], data['url_picture'], data['descripcion'])
+            )
+            conn.commit()
+            return cursor.fetchone()[0]  # Retorna el ID del usuario creado
+    finally:
+        conn.close()
+
+def registrar_persona_usuario_sf(data):
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "CALL registrar_persona_usuario_sf(%s, %s, %s, %s, %s, %s, %s, %s);",
+                (data['nombre'], data['apellido'], data['telefono'], data['fecha_nac'], data['email'], 
+                 data['password_hash'], data['username'], data['descripcion'])
+            )
+            conn.commit()
+            return cursor.fetchone()[0]  # Retorna el ID del usuario creado
+    finally:
+        conn.close()
+
+def registrar_empresa_usuario_cf(data):
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "CALL registrar_empresa_usuario_cf(%s, %s, %s, %s, %s, %s, %s);",
+                (data['nombre_empresa'], data['descripcion_empresa'], data['email'], data['password_hash'], 
+                 data['username'], data['url_picture'], data['descripcion'])
+            )
+            conn.commit()
+            return cursor.fetchone()[0]  # Retorna el ID del usuario creado
+    finally:
+        conn.close()
+
+def registrar_empresa_usuario_sf(data):
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "CALL registrar_empresa_usuario_sf(%s, %s, %s, %s, %s, %s, %s);",
+                (data['nombre_empresa'], data['descripcion_empresa'], data['email'], data['password_hash'], 
+                 data['username'], data['descripcion'])
+            )
+            conn.commit()
+            return cursor.fetchone()[0]  # Retorna el ID del usuario creado
+    finally:
+        conn.close()
+
+#Aqui acaba 
 
 def update_usuario(user_id, data):
     conn = get_db_connection()
