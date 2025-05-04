@@ -8,6 +8,8 @@ from app.comprobante_pago.routes_comprobante_pago import comprobante_pago_bp
 from app.usuario.routes_usuario import usuarios_bp
 from app.usuario.controlador_usuario import get_usuario_by_username, get_usuario_profile_by_username
 from app.auth.routes_auth import auth_bp
+from app.categoria.routes_categoria import categoria_bp
+
 from flask_jwt_extended import (
     JWTManager,
     verify_jwt_in_request,
@@ -83,6 +85,7 @@ def create_app():
     app.register_blueprint(usuarios_bp, url_prefix='/api/usuarios')
     app.register_blueprint(contratos_bp, url_prefix='/api/contratos')
     app.register_blueprint(comprobante_pago_bp, url_prefix='/api/comprobante_pago')
+    app.register_blueprint(categoria_bp, url_prefix='/api/categoria')
     @app.route('/')
     def inicio():
         html = custom_render_html('inicio.html')
@@ -131,6 +134,16 @@ def create_app():
     @app.route('/mis-publicaciones')
     def mis_publicaciones():
         html = custom_render_html('mis_publicaciones.html')
+        return Response(html, mimetype='text/html')
+       
+    @app.route('/crear-publicacion')   
+    def crear_publicaciones():
+        html = custom_render_html('crear_publicacion.html')
+        return Response(html, mimetype='text/html')
+    
+    @app.route('/mi-cuenta')   
+    def configurar_cuenta():
+        html = custom_render_html('mi_cuenta.html')
         return Response(html, mimetype='text/html')
 
     return app
