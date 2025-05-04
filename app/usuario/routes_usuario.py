@@ -5,6 +5,10 @@ from app.usuario.controlador_usuario import (
     create_usuario,
     update_usuario,
     delete_usuario,
+    registrar_persona_usuario_cf,
+    registrar_persona_usuario_sf,
+    registrar_empresa_usuario_cf,
+    registrar_empresa_usuario_sf
 )
 
 usuarios_bp = Blueprint('usuarios', __name__)
@@ -37,3 +41,29 @@ def editar_usuario(user_id):
 def borrar_usuario(user_id):
     delete_usuario(user_id)
     return jsonify({'message': 'Eliminado exitosamente'}), 200
+
+# Nuevas rutas para registrar personas y empresas(Lucho)
+
+@usuarios_bp.route('/registrar_persona_cf', methods=['POST'])
+def registrar_persona_con_foto():
+    data = request.get_json()
+    user_id = registrar_persona_usuario_cf(data)
+    return jsonify({'usuario_id': user_id}), 201
+
+@usuarios_bp.route('/registrar_persona_sf', methods=['POST'])
+def registrar_persona_sin_foto():
+    data = request.get_json()
+    user_id = registrar_persona_usuario_sf(data)
+    return jsonify({'usuario_id': user_id}), 201
+
+@usuarios_bp.route('/registrar_empresa_cf', methods=['POST'])
+def registrar_empresa_con_foto():
+    data = request.get_json()
+    empresa_id = registrar_empresa_usuario_cf(data)
+    return jsonify({'empresa_id': empresa_id}), 201
+
+@usuarios_bp.route('/registrar_empresa_sf', methods=['POST'])
+def registrar_empresa_sin_foto():
+    data = request.get_json()
+    empresa_id = registrar_empresa_usuario_sf(data)
+    return jsonify({'empresa_id': empresa_id}), 201
