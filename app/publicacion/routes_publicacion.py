@@ -13,7 +13,7 @@ from app.publicacion.controlador_publicacion import (
 
 publicaciones_bp = Blueprint('publicaciones', __name__)
 
-@publicaciones_bp.route('/', methods=['GET']) # NO SE USA
+@publicaciones_bp.route('/', methods=['GET']) # YA ESTÁ
 def listar_publicaciones():
     if not getattr(g, 'user_id', None):
         return redirect(url_for('inicio'))
