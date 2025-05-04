@@ -3,7 +3,8 @@ create table contrato (
     servicio_id int,
     cliente_id int,
     prestador_id int,
-    estado varchar(20) CHECK (estado IN ('pendiente', 'rechazado' ,'en espera', 'en progreso', 'completado', 'finalizado' , 'cancelado')) DEFAULT 'pendiente' not null,
+	precio decimal not null,
+    estado varchar(20) check (estado in ('pendiente', 'rechazado' ,'en espera', 'en progreso', 'completado', 'finalizado' , 'cancelado')) default 'pendiente' not null,
     fecha_inicio date not null,
     fecha_finalizacion date not null,
     primary key (contrato_id)
@@ -12,6 +13,7 @@ create table contrato (
 create table usuario (
     usuario_id serial,
     username varchar(16) not null unique,
+	descripcion varchar(255) not null,
     email varchar(100) not null unique,
     password_hash varchar(64) not null,
     fecha_creacion date not null,
@@ -32,7 +34,7 @@ create table comprobante_contrato (
 create table comentario (
     comentario_id serial,
     contrato_id int,
-    calificacion int CHECK (calificacion BETWEEN 1 AND 5),
+    calificacion int check (calificacion between 1 and 5),
     comentario varchar(255) not null,
     fecha_creacion date not null,
     primary key (comentario_id)
@@ -43,6 +45,7 @@ create table persona (
     usuario_id int unique,
     nombre varchar(100) not null,
     apellido varchar(100) not null,
+	telefono varchar(20) not null,
     fecha_nacimiento date not null,
     primary key (persona_id)
 );
@@ -83,6 +86,7 @@ create table publicacion (
     titulo varchar(80) not null,
     descripcion varchar(255) not null,
     precio decimal not null,
+    estado boolean not null,
     fecha_creacion date not null,
     primary key (publicacion_id)
 );
@@ -118,4 +122,4 @@ alter table publicacion
 add constraint fk_publicacion_usuario_id_usuario_id foreign key(usuario_id) references usuario(usuario_id);
 
 alter table publicacion_medio
-add constraint fk_publicacion_medio_publicacion_id_publicacion_id foreign key(publicacion_id) references publicacion(publicacion_id); 
+add constraint fk_publicacion_medio_publicacion_id_publicacion_id foreign key(publicacion_id) references publicacion(publicacion_id);

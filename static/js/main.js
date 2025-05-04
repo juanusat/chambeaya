@@ -1,23 +1,50 @@
 (function () {
     const appElement = document.querySelector('.app');
-    let headerElement = document.createElement('div');
-    headerElement.classList.add('header');
+    let headerElement = document.querySelector('.header');
+    let footerElement = document.querySelector('.footer');
 
-    let footerElement = document.createElement('div');
-    footerElement.classList.add('footer');
+    if (!headerElement) {
+        headerElement = document.createElement('div');
+        headerElement.classList.add('header');
+    }
 
-    Promise.all([
-        fetch('/templates/header.html').then(res => res.text()),
-        fetch('/templates/footer.html').then(res => res.text())
-    ]).then(([headerHTML, footerHTML]) => {
-        headerElement.innerHTML = headerHTML;
-        footerElement.innerHTML = footerHTML;
+    if (!footerElement) {
+        footerElement = document.createElement('div');
+        footerElement.classList.add('footer');
+    }
 
-        appElement.insertBefore(headerElement, appElement.firstChild);
-        appElement.appendChild(footerElement);
+    const shouldLoadHeader = headerElement.innerHTML.trim() === '';
+    const shouldLoadFooter = footerElement.innerHTML.trim() === '';
 
+    if (!shouldLoadHeader && !shouldLoadFooter) {
         appElement.classList.remove('loading');
-    }).catch(err => {
-        console.error('Error cargando plantillas:', err);
-    });
+        return;
+    }
+
+    const headerPromise = shouldLoadHeader
+        ? fetch('/static/templates/header.html').then(res => res.text())
+        : Promise.resolve(headerElement.innerHTML);
+
+    const footerPromise = shouldLoadFooter
+        ? fetch('/static/templates/footer.html').then(res => res.text())
+        : Promise.resolve(footerElement.innerHTML);
+
+    Promise.all([headerPromise, footerPromise])
+        .then(([headerHTML, footerHTML]) => {
+            if (shouldLoadHeader) {
+                headerElement.innerHTML = headerHTML;
+                appElement.insertBefore(headerElement, appElement.firstChild);
+            }
+
+            if (shouldLoadFooter) {
+                footerElement.innerHTML = footerHTML;
+                appElement.appendChild(footerElement);
+            }
+
+            appElement.classList.remove('loading');
+        })
+        .catch(err => {
+            console.error('Error cargando plantillas:', err);
+        });
+
 })();

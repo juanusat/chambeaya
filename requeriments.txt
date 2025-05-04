@@ -1,0 +1,5 @@
+python-dotenv
+pymysql
+tabulate
+flask
+flask-jwt-extended==4.6.0

@@ -4,52 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi cuenta</title>
+    <script src="/static/js/validar-sesion.js"></script>
     <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="shortcut icon" href="/static/brand/favicon-chambeaya.png" type="image/png">
     <link rel="stylesheet" href="/static/css/mi_cuenta.css">
 </head>
 
 <body>
-    <div class="app">        
+    <div class="app">
+        <div class="header"></div>
         <div class="page">
             <div class="cuenta">
-                    <div class="titulo">
-                        <h1>Mi perfil</h1>
-                    </div>
-                    <div class="contenedor">
-                        <div class="previa_cuenta">
-                            <div class="fila-superior">
-                              <div class="imagen">
+                <div class="titulo">
+                    <h1>Mi perfil</h1>
+                </div>
+                <div class="contenedor">
+                    <div class="previa_cuenta">
+                        <div class="fila-superior">
+                            <div class="imagen">
                                 <img src="#" alt="foto">
-                              </div>
-                              <div class="info-cuenta">
+                            </div>
+                            <div class="info-cuenta">
                                 <h2>Pancracio Pedalifo</h2>
                                 <p>Asistente de ventas</p>
                                 <h3>Perfil completado <span>50%</span></h3>
-                              </div>
                             </div>
-                            
-                            <div class="act_foto">
-                              <button class="submit">Actualizar foto</button>
-                            </div>
-                          </div>
-                        <div class="form_actual">
-                            <label for="correo">Correo electronico</label>
-                            <div class="input-container">
+                        </div>
+
+                        <div class="act_foto">
+                            <button class="submit">Actualizar foto</button>
+                        </div>
+                    </div>
+                    <div class="form_actual">
+                        <label for="correo">Correo electronico</label>
+                        <div class="input-container">
                             <input type="text" id="correo" name="correo" placeholder="example@gmail.com">
                             <button type="button"><i class="fa-solid fa-pen-to-square"></i></button>
-                            </div>
-                            <samp></samp>
-                            <label for="clave">Contraseña</label>
-                            <input type="text" name="clave" id="clave">
-                            <samp></samp>
-                            <label for="descripcion">Descripcion</label>
-                            <textarea name="descripcion" id="descripcion" rows="5" ></textarea>
-                            <button class="confirmar">Confirmar cambios</button>
                         </div>
+                        <samp></samp>
+                        <label for="clave">Contraseña</label>
+                        <input type="text" name="clave" id="clave">
+                        <samp></samp>
+                        <label for="descripcion">Descripcion</label>
+                        <textarea name="descripcion" id="descripcion" rows="5"></textarea>
+                        <button class="confirmar">Confirmar cambios</button>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="footer"></div>
     </div>
     <div class="js">
         <script src="/static/js/main.js"></script>

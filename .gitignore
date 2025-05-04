@@ -2,3 +2,7 @@ ev/
 __pycache__/
 nota--*
 .env
+*-i.*
+chatia/
+cia.sh
+tmux-export*
