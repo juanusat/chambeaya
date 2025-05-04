@@ -7,10 +7,12 @@ def get_all_publicaciones(user_id):
     conn = get_db_connection()
     try:
         with conn.cursor(pymysql.cursors.DictCursor) as cursor:
-            cursor.execute("""
-                SELECT * FROM publicacion
-                    where  usuario_id=%s
-            """(user_id),)
+            cursor.execute("""SELECT p.titulo, cat.nombre AS categoria, u.username AS nombre_usuario , p.precio, p.fecha_creacion, p.descripcion 
+                            FROM publicacion p 
+                            INNER JOIN categoria cat ON p.categoria_id = cat.categoria_id
+                            INNER JOIN usuario u ON p.usuario_id = u.usuario_id
+                            WHERE u.usuario_id = %s;
+                           """, (user_id,))
             return cursor.fetchall()
     finally:
         conn.close() 

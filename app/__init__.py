@@ -127,5 +127,10 @@ def create_app():
     def buscar_publicaciones(termino_busqueda):
         html = custom_render_html('busqueda.html')
         return Response(html, mimetype='text/html')
+    
+    @app.route('/mis-publicaciones')
+    def mis_publicaciones():
+        html = custom_render_html('mis_publicaciones.html')
+        return Response(html, mimetype='text/html')
 
     return app
