@@ -1,104 +1,194 @@
-body{
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f8f8; /* Fondo ligero */
+  margin: 0;
+  padding: 0;
 }
-  .contratos {
-    max-width: 800px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-  }
-  
-  /* Encabezado superior */
-  .fila_superior {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    margin-top: 15;
-  }
-  
-  .fila_superior h1 {
-    margin: 0;
-    font-size: 1.8em;
-  }
-  
-  .fila_superior button {
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    background-color: white;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .fila_superior p{
-    margin-top: 50;
-  }
-  
-  /* Contenedor de las tarjetas */
-  .contenedor > .contratos {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  /* Tarjeta individual */
-  .card {
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-  }
-  
-  /* Cabecera de la tarjeta */
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-  
-  .card-header .nombre {
-    font-size: 1.1em;
-  }
-  
-  /* Perfil a la derecha */
-  .perfil {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .perfil img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: #ccc;
-  }
-  
-  /* Información del contrato */
-  .info {
-    font-size: 0.95em;
-    line-height: 1.5;
-    margin-bottom: 10px;
-  }
 
-  .rating {
-    float: right;
-    display: flex;
-    gap: 4px;
-    font-size: 1.5em;
-    cursor: pointer;
-  }
-  
-  .rating span {
-    color: white; /* relleno blanco */
-    text-shadow: 0 0 1px black, 0 0 1px black; /* simula borde negro */
-    transition: color 0.2s;
-  }
-  
-  .rating span.hover,
-  .rating span.selected {
-    color: gold; /* relleno dorado al pasar o seleccionar */
-  }
+.contratos-container { /* Contenedor principal de la sección */
+  max-width: 800px;
+  margin: 20px auto; /* Centra el contenedor y añade margen */
+  padding: 0 20px; /* Añade padding a los lados */
+}
+
+/* Encabezado superior */
+.fila_superior {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.fila_superior h1 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #333;
+}
+
+.fila_superior button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.fila_superior p {
+  margin: 0; /* Eliminar margen superior */
+  font-size: 0.9em;
+  color: #555;
+}
+
+/* Contenedor de las tarjetas */
+.lista-contratos { /* Renombrado */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Tarjeta individual */
+.card {
+  background-color: white;
+  border: 1px solid #ddd; /* Borde más sutil */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Cabecera de la tarjeta (Título y Tag) */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee; /* Línea separadora */
+  padding-bottom: 10px; /* Espacio debajo de la línea */
+  margin-bottom: 10px; /* Espacio entre el header y los detalles */
+}
+
+.card-header .nombre {
+  font-size: 1.2em; /* Tamaño del título */
+  font-weight: bold;
+  color: #333;
+}
+
+/* Estilos para la etiqueta (tag) */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: #e0e0e0; /* Fondo gris claro */
+  border-radius: 9999px; /* Bordes completamente redondeados */
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem; /* Tamaño de fuente */
+  gap: 0.4rem;
+  color: #555; /* Color de texto */
+  font-weight: normal; /* Peso normal para el texto del tag */
+}
+
+.tag i {
+  color: #777; /* Color del icono */
+}
+
+
+/* Nuevo estilo para la fila del cliente/prestador y el precio */
+.client-price-row {
+  display: flex; /* Usa flexbox */
+  align-items: center; /* Centra verticalmente */
+  margin-bottom: 15px; /* Espacio debajo de esta fila */
+  font-size: 0.95em;
+  color: #555;
+}
+
+/* Estilos para el bloque de información del cliente/prestador */
+.client-info {
+  display: flex; /* Usa flexbox para alinear nombre y foto */
+  align-items: center; /* Centra verticalmente */
+  gap: 10px; /* Espacio entre el texto y la foto */
+}
+
+.client-info p {
+  margin: 0; /* Eliminar margen por defecto */
+}
+
+/* Estilo para el nombre del cliente/prestador */
+.client-name {
+  font-weight: bold; /* Negrita para el nombre */
+  color: #333; /* Color oscuro para el nombre */
+}
+
+/* Estilo para la imagen de perfil */
+.perfil-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; /* Forma circular */
+  object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+  /* Si usas un placeholder, el background-color ya está en el src */
+  /* background-color: #ccc; /* Fondo gris si no hay imagen */
+}
+
+
+/* Estilo para el precio como un tag/recuadro */
+.price-tag {
+  display: inline-block; /* Permite aplicar padding y border */
+  border: 1px solid #bbb; /* Borde gris claro */
+  margin-left: auto; /* Empuja el precio a la derecha */
+  margin-right: 350px;
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 0.3rem 0.8rem; /* Espacio interno */
+  font-weight: bold;
+  background-color: #f9f9f9; /* Fondo ligeramente gris */
+  color: #000; /* Color de texto negro */
+}
+
+.price-tag span {
+  font-weight: bold; /* Asegura que el valor del precio también sea negrita */
+}
+
+
+/* Información del contrato (descripción) */
+.info {
+  font-size: 0.95em;
+  line-height: 1.6;
+  color: #555;
+}
+
+.info p {
+  margin: 0; /* Eliminar margen por defecto */
+}
+
+
+/* Estilos de rating (manteniendo los tuyos, aunque no se ven en la imagen de ejemplo) */
+.rating {
+  display: flex;
+  gap: 4px;
+  font-size: 1.2em; /* Tamaño de las estrellas */
+  cursor: pointer;
+  align-items: center; /* Centra verticalmente las estrellas */
+}
+
+.rating span {
+  color: white;
+  text-shadow: 0 0 1px black, 0 0 1px black;
+  transition: color 0.2s;
+}
+
+.rating span.hover,
+.rating span.selected {
+  color: gold;
+}
+
+
+/* Asegurar que el contenedor principal de la aplicación y la página ocupen la altura completa si es necesario */
+.app,
+.page {
+  min-height: 100vh;
+}
+
+

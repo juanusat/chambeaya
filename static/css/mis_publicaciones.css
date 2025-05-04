@@ -1,70 +1,108 @@
-* { box-sizing: border-box; margin:0; padding:0; }
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      color: #333;
-      line-height: 1.5;
-    }
-    .container {
-      max-width: 960px;
-      margin: 40px auto;
-      padding: 0 16px;
-    }
-    h1.section-title {
-      font-size: 1.5rem;
-      margin-bottom: 16px;
-    }
-    .publicaciones {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 16px;
-    }
-    .card {
-      border-bottom: 1px solid #ddd;
-      padding: 16px 0;
-    }
-    .card:last-child {
-      border-bottom: none;
-    }
-    .card-header {
-      display: flex;
-      align-items: center;
-    }
-    .card-header h3 {
-      font-size: 1rem;
-      font-weight: bold;
-      flex-shrink: 0;
-    }
-    .meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-left: 16px;
-    }
-    .author-name {
-      font-size: 0.95rem;
-      white-space: nowrap;
-    }
-    .author-avatar {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: #ccc;
-      flex-shrink: 0;
-    }
-    .star-rating {
-      margin-left: auto;
-      display: flex;
-    }
-    .star-rating i {
-      margin-left: 4px;
-      color: #ddd;
-    }
-    .card-body p {
-      margin: 6px 0;
-      font-size: 0.95rem;
-    }
-    .card-body p span {
-      font-weight: bold;
-    }
+/* Estilos generales para el cuerpo */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8; /* Fondo ligeramente gris como en la imagen */
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor principal para centrar el contenido */
+.container {
+  padding: 2rem;
+  max-width: 800px; /* Ancho máximo similar al de la imagen */
+  margin: auto; /* Centra el contenedor */
+}
+
+/* Título de la sección */
+.section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #333; /* Color de texto oscuro */
+}
+
+/* Contenedor de las publicaciones (tarjetas) */
+.publicaciones {
+  display: flex; /* Usa flexbox para el layout vertical */
+  flex-direction: column; /* Apila los elementos verticalmente */
+  gap: 1.5rem; /* Espacio entre las tarjetas */
+}
+
+/* Estilos para cada tarjeta de publicación */
+.card {
+  border: 1px solid #ddd; /* Borde más sutil */
+  border-radius: 10px; /* Bordes ligeramente menos redondeados */
+  padding: 1.5rem;
+  background-color: #fff; /* Fondo blanco para las tarjetas */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra más pronunciada */
+  transition: box-shadow 0.3s ease; /* Transición suave para la sombra */
+}
+
+/* Efecto hover en las tarjetas (opcional, pero mejora la interactividad) */
+.card:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Nuevo estilo para el contenedor del título y la etiqueta */
+.card-header {
+    display: flex; /* Usa flexbox para alinear horizontalmente */
+    justify-content: space-between; /* Espacia el título a la izquierda y el tag a la derecha */
+    align-items: center; /* Centra verticalmente el título y el tag */
+    border-bottom: 1px solid #eee; /* Línea separadora debajo del header */
+    padding-bottom: 1rem; /* Espacio entre la línea y el contenido de abajo */
+    margin-bottom: 1rem; /* Espacio entre el header y el resto de la tarjeta */
+}
+
+
+/* Título dentro de la tarjeta (ajustado para el nuevo contenedor) */
+.card-header h3 {
+  margin: 0; /* Eliminar margen por defecto */
+  font-size: 1.35rem; /* Tamaño de fuente ligeramente mayor */
+  color: #333; /* Color de texto oscuro */
+}
+
+/* Estilos para la etiqueta (tag) - ajustado para el nuevo contenedor */
+.card-header .tag {
+  /* Mantener estilos existentes, solo asegurar que no haya margen derecho excesivo si está en flexbox */
+  display: inline-flex;
+  align-items: center;
+  background-color: #e0e0e0; /* Fondo gris más claro */
+  border-radius: 9999px; /* Bordes completamente redondeados */
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem; /* Tamaño de fuente ligeramente menor */
+  /* margin-top: 0.5rem;  Eliminado, ya que align-items: center lo alinea verticalmente */
+  margin: 0; /* Eliminar márgenes por defecto */
+  gap: 0.4rem;
+  color: #555; /* Color de texto para el tag */
+}
+
+/* Estilos para el precio - ajustado el margen superior */
+.price {
+  display: inline-block;
+  border: 1px solid #bbb; /* Borde gris claro */
+  border-radius: 8px;
+  padding: 0.3rem 0.8rem; /* Ajuste de padding */
+  margin: 0 0 1rem 0; /* Ajuste de margen superior (ahora 0), inferior y a los lados */
+  font-weight: bold;
+  background-color: #f9f9f9; /* Fondo ligeramente gris para el precio */
+  color: #000; /* Color de texto negro */
+}
+
+/* Estilos para el párrafo de descripción */
+.card p {
+  margin: 0; /* Eliminar margen superior e inferior por defecto */
+  line-height: 1.6;
+  color: #555; /* Color de texto para el párrafo */
+}
+
+/* Estilos para el icono dentro del tag */
+.card-header .tag i {
+  font-size: 0.9rem; /* Tamaño del icono */
+  color: #777; /* Color del icono */
+}
+
+/* Asegurar que el contenedor principal de la aplicación y la página ocupen la altura completa si es necesario */
+.app, .page, .full-height-container {
+    min-height: 100vh; /* Ocupa al menos la altura completa de la ventana */
+}
+
