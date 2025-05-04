@@ -3,29 +3,14 @@ import pymysql.cursors
 from app.bd_conn import get_db_connection
 
 
-def get_all_publicaciones():
+def get_all_publicaciones(user_id):
     conn = get_db_connection()
     try:
         with conn.cursor(pymysql.cursors.DictCursor) as cursor:
             cursor.execute("""
-                SELECT 
-                    CASE 
-                        WHEN per.usuario_id IS NOT NULL THEN per.nombre
-                        WHEN emp.usuario_id IS NOT NULL THEN emp.nombre
-                        ELSE 'Desconocido'
-                    END AS publicador,
-                    cat.nombre AS categoria,
-                    p.titulo,
-                    p.descripcion,
-                    p.precio,
-                    p.estado,
-                    p.fecha_creacion
-                FROM publicacion p
-                JOIN usuario u ON p.usuario_id = u.usuario_id
-                JOIN categoria cat ON p.categoria_id = cat.categoria_id
-                LEFT JOIN persona per ON per.usuario_id = u.usuario_id
-                LEFT JOIN empresa emp ON emp.usuario_id = u.usuario_id;
-            """)
+                SELECT * FROM publicacion
+                    where  usuario_id=%s
+            """(user_id),)
             return cursor.fetchall()
     finally:
         conn.close() 

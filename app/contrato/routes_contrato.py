@@ -18,7 +18,6 @@ contratos_bp = Blueprint('contratos', __name__)
 def listar_contratos():
     if not getattr(g, 'user_id', None):
         return redirect(url_for('inicio'))
-
     conts = get_mis_contratos(getattr(g, 'user_id', None))
     return jsonify(conts), 200
 

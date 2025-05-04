@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, abort
+from flask import Blueprint, request, jsonify, abort, g, redirect, url_for
 from app.publicacion.controlador_publicacion import (
     get_all_publicaciones,
     get_publicacion_by_id,
@@ -15,7 +15,9 @@ publicaciones_bp = Blueprint('publicaciones', __name__)
 
 @publicaciones_bp.route('/', methods=['GET']) # NO SE USA
 def listar_publicaciones():
-    pubs = get_all_publicaciones()
+    if not getattr(g, 'user_id', None):
+        return redirect(url_for('inicio'))
+    pubs = get_all_publicaciones(getattr(g, 'user_id', None))
     return jsonify(pubs), 200
 
 @publicaciones_bp.route('/<int:pub_id>', methods=['GET']) # NO SE USA

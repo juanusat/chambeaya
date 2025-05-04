@@ -5,10 +5,11 @@
     if (pathParts[0] === "buscar" && pathParts[1]) {
         const titulo = pathParts[1];
 
-        fetch(`/api/publicaciones/${titulo}/`)
+        fetch(`/api/publicaciones/${titulo}`)
             .then(response => response.json())
             .then(data => {
                 const container = document.querySelector(".job-cards-list");
+                container.innerHTML="";
                 if (!container) return;
 
                 data.forEach(pub => {
