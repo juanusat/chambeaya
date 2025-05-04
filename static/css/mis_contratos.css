@@ -139,7 +139,7 @@ body {
   display: inline-block; /* Permite aplicar padding y border */
   border: 1px solid #bbb; /* Borde gris claro */
   margin-left: auto; /* Empuja el precio a la derecha */
-  margin-right: 350px;
+  margin-right: 52%;
   border-radius: 8px; /* Bordes redondeados */
   padding: 0.3rem 0.8rem; /* Espacio interno */
   font-weight: bold;
