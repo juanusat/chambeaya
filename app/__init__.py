@@ -32,7 +32,13 @@ def custom_render_html(template_path):
             header_file = 'static/templates/header_user.html'
             with open(header_file, 'r', encoding='utf-8') as f:
                 header = f.read()
-            header = header.replace('USERNAME', user['nombre'] + ' ' + user['apellido'])
+            if user.get('persona_id'):
+                display_name = f"{user['persona_nombre']} {user['persona_apellido']}"
+            elif user.get('empresa_id'):
+                display_name = user['empresa_nombre']
+            else:
+                display_name = user['username']
+            header = header.replace('USERNAME', display_name)
             header = header.replace('USERNICK', user['username'])
             header = header.replace('default-pic-profile.jpg', user['url_picture'] or 'default-pic-profile.jpg')
     else:
