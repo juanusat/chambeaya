@@ -1,4 +1,6 @@
 (function () {
+    window.siteA = location.port == '4250'
+
     const appElement = document.querySelector('.app');
     let headerElement = document.querySelector('.header');
     let footerElement = document.querySelector('.footer');
