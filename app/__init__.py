@@ -6,7 +6,7 @@ from app.publicacion.routes_publicacion import publicaciones_bp
 from app.contrato.routes_contrato import contratos_bp
 from app.comprobante_pago.routes_comprobante_pago import comprobante_pago_bp
 from app.usuario.routes_usuario import usuarios_bp
-from app.usuario.controlador_usuario import get_usuario_by_username
+from app.usuario.controlador_usuario import get_usuario_by_username, get_usuario_profile_by_username
 from app.auth.routes_auth import auth_bp
 from flask_jwt_extended import (
     JWTManager,
@@ -32,7 +32,13 @@ def custom_render_html(template_path):
             header_file = 'static/templates/header_user.html'
             with open(header_file, 'r', encoding='utf-8') as f:
                 header = f.read()
-            header = header.replace('USERNAME', user['nombre'] + ' ' + user['apellido'])
+            if user.get('persona_id'):
+                display_name = f"{user['persona_nombre']} {user['persona_apellido']}"
+            elif user.get('empresa_id'):
+                display_name = user['empresa_nombre']
+            else:
+                display_name = user['username']
+            header = header.replace('USERNAME', display_name)
             header = header.replace('USERNICK', user['username'])
             header = header.replace('default-pic-profile.jpg', user['url_picture'] or 'default-pic-profile.jpg')
     else:
@@ -84,21 +90,35 @@ def create_app():
 
     @app.route('/@<username>')
     def perfil(username):
-        user_dict = get_usuario_by_username(username)
-        if not user_dict:
+        profile = get_usuario_profile_by_username(username)
+        if not profile:
             abort(404, description="Usuario no encontrado")
-        for key, value in user_dict.items():
+        for key, value in profile.items():
             if isinstance(value, date):
-                user_dict[key] = value.isoformat()
+                profile[key] = value.isoformat()
 
-        user_json = json.dumps(user_dict)
+        if profile['persona_id'] is not None:
+            user_type = 'persona'
+            # acá profile['persona_nombre'], profile['persona_apellido'], etc.
+        elif profile['empresa_id'] is not None:
+            user_type = 'empresa'
+            # acá profile['empresa_nombre'], profile['empresa_descripcion'], etc.
+        else:
+            user_type = 'desconocido'
+
+        # Prepara JSON y título de página
+        user_json = json.dumps(profile)
+        if user_type == 'persona':
+            titulo = f"{profile['persona_nombre']} {profile['persona_apellido']} (@{profile['username']})"
+        elif user_type == 'empresa':
+            titulo = f"{profile['empresa_nombre']} (@{profile['username']})"
+        else:
+            titulo = f"@{profile['username']}"
+
         html = custom_render_html('usuario.html')
-        titulo_pagina = f"{user_dict['nombre']} {user_dict['apellido']}"
-        titulo_pagina += f" (@{user_dict['username']})"
-        html = html.replace('(USERNAME)', titulo_pagina)
+        html = html.replace('(USERNAME)', titulo)
         html = html.replace('["json"]', user_json)
         return Response(html, mimetype='text/html')
-
     @app.route('/acceder')
     def acceder():
         html = custom_render_html('acceder.html')
