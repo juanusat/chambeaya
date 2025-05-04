@@ -16,19 +16,19 @@ from app.usuario.controlador_usuario import (
 
 usuarios_bp = Blueprint('usuarios', __name__)
 
-@usuarios_bp.route('/', methods=['GET'])
+@usuarios_bp.route('/', methods=['GET']) # NO SE USA
 def listar_usuarios():
     users = get_all_usuarios()
     return jsonify(users), 200
 
-@usuarios_bp.route('/<int:user_id>', methods=['GET'])
+@usuarios_bp.route('/<int:user_id>', methods=['GET']) # NO SE USA
 def obtener_usuario(user_id):
     user = get_usuario_by_id(user_id)
     if not user:
         abort(404, description="Usuario no encontrado")
     return jsonify(user), 200
 
-@usuarios_bp.route('/', methods=['POST'])
+@usuarios_bp.route('/', methods=['POST']) # JUAN REVISA ESTO
 def nuevo_usuario():
     data = request.get_json()
     new_id = create_usuario(data)
@@ -65,7 +65,7 @@ def editar_usuario(user_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@usuarios_bp.route('/<int:user_id>', methods=['DELETE'])
+@usuarios_bp.route('/<int:user_id>', methods=['DELETE']) # NO SE USA
 def borrar_usuario(user_id):
     delete_usuario(user_id)
     return jsonify({'message': 'Eliminado exitosamente'}), 200

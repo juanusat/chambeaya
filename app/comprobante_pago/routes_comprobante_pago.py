@@ -17,7 +17,7 @@ def listar_comprobantes():
     
 
 # Obtener los comprobantes de un cliente
-@comprobante_pago_bp.route('/cliente/<int:cliente_id>', methods=['GET'])
+@comprobante_pago_bp.route('/cliente/<int:cliente_id>', methods=['GET']) 
 def listar_comprobantes_cliente(cliente_id):
     try:
         comprobantes = get_comprobantes_by_cliente_id(cliente_id)

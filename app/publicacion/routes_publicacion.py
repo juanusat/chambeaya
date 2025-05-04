@@ -13,12 +13,12 @@ from app.publicacion.controlador_publicacion import (
 
 publicaciones_bp = Blueprint('publicaciones', __name__)
 
-@publicaciones_bp.route('/', methods=['GET'])
+@publicaciones_bp.route('/', methods=['GET']) # NO SE USA
 def listar_publicaciones():
     pubs = get_all_publicaciones()
     return jsonify(pubs), 200
 
-@publicaciones_bp.route('/<int:pub_id>', methods=['GET'])
+@publicaciones_bp.route('/<int:pub_id>', methods=['GET']) # NO SE USA
 def obtener_publicacion(pub_id):
     pub = get_publicacion_by_id(pub_id)
     if not pub:
@@ -40,24 +40,24 @@ def obtener_publicaciones_by_palabra(palabra):
     pubs= get_publicacion_by_palabra(palabra)
     return jsonify(pubs), 200
 
-@publicaciones_bp.route('/nueva_publicacion', methods=['POST'])
+@publicaciones_bp.route('/nueva_publicacion', methods=['POST']) # VALIDAR G
 def nueva_publicacion():
     data = request.get_json()
     new_id = create_publicacion(data)
     return jsonify({'publicacion_id': new_id}), 200
 
-@publicaciones_bp.route('/editar_publicacion/<int:pub_id>', methods=['PUT'])
+@publicaciones_bp.route('/editar_publicacion/<int:pub_id>', methods=['PUT']) # VALIDAR G
 def editar_publicacion(pub_id):
     data = request.get_json()
     update_publicacion(pub_id, data)
     return jsonify({'message': 'Actualizado exitosamente'}), 200
 
-@publicaciones_bp.route('/borrar_publicacion/<int:pub_id>', methods=['DELETE'])
+@publicaciones_bp.route('/borrar_publicacion/<int:pub_id>', methods=['DELETE']) # NO SE USA
 def borrar_publicacion(pub_id):
     delete_publicacion(pub_id)
     return jsonify({'message': 'Eliminado exitosamente'}), 200 
 
-@publicaciones_bp.route('/dar_baja_publicacion/<int:pub_id>', methods=['PUT'])
+@publicaciones_bp.route('/dar_baja_publicacion/<int:pub_id>', methods=['PUT']) # VALIDAR G
 def darbaja_publicacion(pub_id):
     darbaja_publicacion(pub_id)
     return jsonify({'message':'Dado de baja exitosamente'}), 200
