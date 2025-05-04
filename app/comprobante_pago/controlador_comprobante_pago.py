@@ -2,7 +2,16 @@ import pymysql
 import pymysql.cursors
 from app.bd_conn import get_db_connection
 
-
+def get_mis_comprobantes_pago(user_id):
+    conn = get_db_connection()
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute("""
+                SELECT*from comprobante_contrato cc join contrato c ON c.contrato_id=cc.contrato_id where prestador_id = %s OR cliente_id = %s
+                            """, (user_id, user_id))
+            return cursor.fetchall()
+    finally:
+        conn.close()
 # Obtener todos los comprobantes de contrato
 def get_all_comprobantes_pago():
     conn = get_db_connection()
@@ -121,10 +130,16 @@ def create_comprobante_pago(data):
     conn = get_db_connection()
     try:
         with conn.cursor() as cursor:
-            cursor.execute("""
-            INSERT INTO comprobante_contrato (contrato_id, monto, metodo_pago_id, fecha_pago)
-            VALUES (%s, %s, %s, %s);
-            """, (data['contrato_id'], data['monto'], data['metodo_pago_id'], data['fecha_pago']))
+            cursor.execute(
+                "INSERT INTO comprobante_contrato (contrato_id, monto, metodo_pago_id, fecha_pago)"
+                "VALUES (%s, %s, %s, %s);",
+                (
+                    data['contrato_id'], 
+                    data['monto'], 
+                    data['metodo_pago_id'], 
+                    data['fecha_pago']
+                ),
+            )
             conn.commit()
             return cursor.lastrowid
     finally:

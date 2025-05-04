@@ -1,6 +1,7 @@
-from flask import Blueprint, request, jsonify, abort
+from flask import Blueprint, request, jsonify, abort,g, redirect, url_for
 
 from app.comprobante_pago.controlador_comprobante_pago import (
+    get_mis_comprobantes_pago,
     get_comprobantes_by_cliente_id,
     get_comprobantes_by_prestador_id,
     create_comprobante_pago,
@@ -12,7 +13,9 @@ comprobante_pago_bp = Blueprint('comprobante_pago', __name__)
 # Obtener todos los comprobantes de contrato (sin filtro)
 @comprobante_pago_bp.route('/', methods=['GET'])
 def listar_comprobantes():
-        comprobantes = get_all_comprobantes_pago()
+        if not getattr(g, 'user_id', None):
+            return redirect(url_for('inicio'))
+        comprobantes = get_mis_comprobantes_pago(getattr(g, 'user_id', None))
         return jsonify(comprobantes), 200
     
 
