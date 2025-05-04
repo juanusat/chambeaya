@@ -1,104 +1,227 @@
-* { box-sizing: border-box; margin:0; padding:0; }
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      color: #333;
-      line-height: 1.5;
-    }
-    .container {
-      max-width: 960px;
-      margin: 40px auto;
-      padding: 0 16px;
-    }
-    .profile-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 24px;
-    }
-    /* Avatar circular */
-    .avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 20px;
-      flex-shrink: 0;
-    }
-    .avatar i {
-      font-size: 40px;
-      color: #888;
-    }
-    .profile-name {
-      font-size: 1.8rem;
-      font-weight: bold;
-      margin-right: auto;
-    }
-    .profile-rating .fa-star {
-      color: #ddd;
-      margin-right: 4px;
-    }
-    /* Tabs */
-    .tabs {
-      display: flex;
-      border-bottom: 1px solid #ddd;
-      margin-bottom: 24px;
-    }
-    .tabs .tab {
-      padding: 10px 20px;
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-      font-weight: bold;
-    }
-    .tabs .tab.active {
-      border-color: #333;
-      color: #333;
-    }
-    /* Layout */
-    .content {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 24px;
-    }
-    /* Detalles */
-    .details, .publicaciones {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 16px;
-    }
-    .details h2, .publicaciones h2 {
-      margin-bottom: 12px;
-      font-size: 1.2rem;
-    }
-    /* Publicaciones cards */
-    .card {
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 8px;
-      margin-bottom: 12px;
-    }
-    .card-header h3 {
-      font-size: 1rem;
-      margin: 0;
-    }
-    .card-header .time {
-      font-size: 0.85rem;
-      color: #666;
-    }
-    .card-body p {
-      margin: 6px 0;
-      font-size: 0.95rem;
-    }
-    .card-body p span {
-      font-weight: bold;
-    }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  color: #333;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+/* Profile Header */
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 20px; /* Espacio debajo del header */
+  border-bottom: 1px solid #ddd; /* Línea separadora debajo del header */
+}
+
+/* Avatar circular */
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #ddd; /* Fondo gris para el círculo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  flex-shrink: 0;
+  overflow: hidden; /* Asegura que la imagen de perfil se recorte si es muy grande */
+}
+
+.avatar i {
+  font-size: 40px;
+  color: #888; /* Color del icono */
+}
+
+/* Contenedor para nombre y rating */
+.profile-info {
+  display: flex;
+  flex-direction: column; /* Apila nombre y rating verticalmente */
+  justify-content: center; /* Centra verticalmente si hay espacio */
+  flex-grow: 1; /* Permite que este contenedor ocupe el espacio restante */
+}
+
+
+.profile-name {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 5px; /* Espacio entre nombre y rating */
+  color: #333;
+}
+
+.profile-rating .fa-star,
+.profile-rating .fa-regular { /* Estilos para estrellas llenas y vacías */
+  color: gold; /* Color dorado para las estrellas */
+  margin-right: 4px;
+  font-size: 1.2em; /* Tamaño de las estrellas */
+}
+
+.profile-rating .fa-regular {
+   color: #ddd; /* Color gris para estrellas vacías */
+}
+
+/* Layout del Contenido */
+.content {
+  display: grid; /* Usamos grid para el layout de dos columnas */
+  grid-template-columns: 1fr 2fr; /* Columna izquierda (Detalles) 1 parte, columna derecha (Publicaciones) 2 partes */
+  gap: 24px; /* Espacio entre las columnas */
+}
+
+/* Detalles y Publicaciones sections */
+.details,
+.publicaciones {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra ligera */
+}
+
+/* Estilos para los títulos de sección */
+.details h2,
+.publicaciones h2 {
+  margin-top: 0; /* Asegura que no haya margen superior extra */
+  margin-bottom: 12px;
+  font-size: 1.4rem; /* Tamaño de título de sección */
+  color: #333;
+  border-bottom: 1px solid #eee; /* Línea debajo del título de sección */
+  padding-bottom: 8px;
+}
+
+
+/* Estilo para el párrafo de descripción dentro de Detalles */
+.details p {
+  margin: 0 0 10px 0; /* Margen inferior para separar párrafos */
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Estilo para el texto en negrita dentro de Detalles */
+.details p strong {
+  font-weight: bold;
+  color: #333; /* Color oscuro para el texto en negrita */
+}
+
+
+/* Publicaciones cards */
+.publicaciones .card { /* Especificidad para tarjetas dentro de publicaciones */
+  border: 1px solid #eee; /* Borde más ligero para tarjetas individuales */
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: #fff; /* Fondo blanco */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Sombra más sutil */
+  transition: box-shadow 0.3s ease;
+}
+
+.publicaciones .card:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  margin-bottom: 12px; /* Espacio entre el header y la fila de detalles/precio */
+}
+
+.card-header h3 {
+  font-size: 1.1rem; /* Tamaño del título de la publicación */
+  margin: 0;
+  color: #333;
+}
+
+.card-header .time {
+  font-size: 0.8rem; /* Tamaño de la hora */
+  color: #666;
+}
+
+/* Estilo para la fila del cliente/prestador y el precio */
+.card-details-row {
+  display: flex; /* Usa flexbox */
+  align-items: center; /* Centra verticalmente */
+  margin-bottom: 15px; /* Espacio debajo de esta fila */
+  font-size: 0.95em;
+  color: #555;
+}
+
+/* Estilos para el bloque de información del cliente/prestador */
+.client-info {
+  display: flex; /* Usa flexbox para alinear texto y foto */
+  align-items: center; /* Centra verticalmente */
+  gap: 10px; /* Espacio entre el texto y la foto */
+}
+
+.client-info p {
+  margin: 0; /* Eliminar margen por defecto */
+}
+
+/* Estilo para el nombre del cliente/prestador */
+.client-name {
+  font-weight: bold; /* Negrita para el nombre */
+  color: #333; /* Color oscuro para el nombre */
+}
+
+/* Estilo para la imagen de perfil */
+.perfil-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; /* Forma circular */
+  object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+  background-color: #ccc; /* Fondo gris si no hay imagen */
+}
+
+
+/* Estilo para el precio como un tag/recuadro */
+.price-tag {
+  display: inline-block; /* Permite aplicar padding y border */
+  border: 1px solid #bbb; /* Borde gris claro */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 0.3rem 0.8rem; /* Espacio interno */
+  font-weight: bold;
+  background-color: #f9f9f9; /* Fondo ligeramente gris */
+  color: #000; /* Color de texto negro */
+  margin-left: auto;
+  margin-right: 35%;
+}
+
+.price-tag span {
+  font-weight: bold; /* Asegura que el valor del precio también sea negrita */
+}
+
+
+/* Estilo para la descripción del contrato/publicación */
+.card-description p {
+  margin: 0; /* Eliminar margen por defecto */
+  line-height: 1.6;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+
+/* Asegurar que el contenedor principal de la aplicación y la página ocupen la altura completa si es necesario */
+.app,
+.page,
+.full-height-container {
+  min-height: 100vh;
+}
+
+/* Estilos para el contenedor JS (si es necesario) */
+.js {
+  /* Puedes añadir estilos aquí si quieres */
+}

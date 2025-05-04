@@ -7,7 +7,11 @@ from app.usuario.controlador_usuario import (
     delete_usuario,
     update_usuario_persona,
     update_usuario_empresa,
-    get_validar_username_usuario
+    get_validar_username_usuario,
+    registrar_persona_usuario_cf,
+    registrar_persona_usuario_sf,
+    registrar_empresa_usuario_cf,
+    registrar_empresa_usuario_sf
 )
 
 usuarios_bp = Blueprint('usuarios', __name__)
@@ -35,6 +39,7 @@ def nuevo_usuario():
 #     data = request.get_json()
 #     update_usuario(user_id, data)
 #     return jsonify({'message': 'Actualizado exitosamente'}), 200
+
 @usuarios_bp.route('/<int:user_id>', methods=['PUT'])
 def editar_usuario(user_id):
     data = request.get_json()
@@ -73,3 +78,27 @@ def validar_username(username):
         return jsonify({'existe': True, 'message': 'El username ya está en uso'}), 200
     else:
         return jsonify({'existe': False, 'message': 'El username está disponible'}), 200
+
+@usuarios_bp.route('/registrar_persona_cf', methods=['POST'])
+def registrar_persona_con_foto():
+    data = request.get_json()
+    user_id = registrar_persona_usuario_cf(data)
+    return jsonify({'usuario_id': user_id}), 201
+
+@usuarios_bp.route('/registrar_persona_sf', methods=['POST'])
+def registrar_persona_sin_foto():
+    data = request.get_json()
+    user_id = registrar_persona_usuario_sf(data)
+    return jsonify({'usuario_id': user_id}), 201
+
+@usuarios_bp.route('/registrar_empresa_cf', methods=['POST'])
+def registrar_empresa_con_foto():
+    data = request.get_json()
+    empresa_id = registrar_empresa_usuario_cf(data)
+    return jsonify({'empresa_id': empresa_id}), 201
+
+@usuarios_bp.route('/registrar_empresa_sf', methods=['POST'])
+def registrar_empresa_sin_foto():
+    data = request.get_json()
+    empresa_id = registrar_empresa_usuario_sf(data)
+    return jsonify({'empresa_id': empresa_id}), 201
