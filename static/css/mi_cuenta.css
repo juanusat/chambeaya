@@ -3,99 +3,223 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     color: #333;
+    background-color: #f8f8f8; /* Fondo ligero similar a la imagen */
     margin: 0;
     padding: 0;
 }
 
+/* Contenedor principal de la sección de cuenta */
+.cuenta {
+    max-width: 1000px; /* Ajusta el ancho máximo para acomodar las dos columnas */
+    margin: 20px auto; /* Centra el contenedor y añade margen */
+    padding: 0 20px; /* Añade padding a los lados */
+}
+
+/* Título de la página */
 .titulo h1 {
-    margin: 30px 300px 30px;
+    /* Ajusta el margen para que esté alineado a la izquierda con el contenido */
+    margin: 20px 0;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 25px;
+    font-size: 2em; /* Tamaño de fuente del título */
+    color: #333;
 }
 
-.input-container {
-    position: relative;
-    display: inline-block;
-}
-
-.input-container input {
-    width: 100%; /* Deja espacio para el botón */
-}
-
-.input-container button {
-    position: absolute;
-    left: 95%;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    font: inherit;
-    color: inherit;
-    cursor: pointer;
-    outline: none;
-}
-
+/* Contenedor de las dos columnas (previa_cuenta y form_actual) */
 .contenedor {
-    display: flex;
-    justify-content: center;
-    gap: 150px;
-    margin-bottom: 75px;
+    display: flex; /* Usa Flexbox para crear las columnas */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    gap: 30px; /* Espacio entre las dos columnas */
+    margin-bottom: 30px; /* Margen inferior */
+    flex-wrap: wrap; /* Permite que las columnas se apilen en pantallas pequeñas */
 }
 
-h3 {
-    margin-bottom: 15;
-}
-
+/* Contenedor de la vista previa de la cuenta (columna izquierda) */
 .previa_cuenta {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* espacio entre las secciones */
-    border: 1px solid;
+    /* gap: 10px; Eliminado, el espaciado se manejará con márgenes internos */
+    border: 1px solid #ddd; /* Borde más sutil */
+    border-radius: 8px; /* Bordes redondeados */
     padding: 20px;
-    height: 20%;
-    background-color: hsl(0, 0%, 95%);
+    background-color: #f0f0f0; /* Fondo gris claro */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra ligera */
+    height: 200px; /* Ancho fijo para la columna izquierda, ajusta si es necesario */
+    flex-shrink: 0; /* Evita que se encoja demasiado */
 }
 
 .fila-superior {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 20px;
-}
-
-.form_actual,
-.act_foto {
-    display: flex;
-    flex-direction: column;
-}
-
-.form_actual {
-    gap: 10px;
-    width: 30%;
-    border: 1px solid;
-    border-radius: 5px;
-    padding: 20px;
-    background-color: hsl(0, 0%, 95%);
-}
-
-textarea {
-    margin-bottom: 15;
-    resize: none;
-}
-
-button {
-    padding: 5px;
-    border-radius: 5px;
-    background-color: #1352ff;
-    color: white;
+    gap: 20px; /* Espacio entre la imagen y la info */
+    margin-bottom: 20px; /* Espacio debajo de esta fila */
 }
 
 .imagen img {
-    width: 100px;       /* o el tamaño que tú quieras */
-    height: 100px;
-    object-fit: cover; /* mantiene la imagen centrada y recortada */
-    border-radius: 50%;
-    border: 2px solid #000; /* opcional: borde negro para resaltar */
-  }
+    width: 80px; /* Tamaño de la imagen */
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%; /* Circular */
+    border: 2px solid #ccc; /* Borde sutil */
+    background-color: #ccc; /* Fondo gris si no hay imagen */
+}
+
+.info-cuenta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info-cuenta h2 {
+    margin: 0 0 5px 0; /* Margen inferior para separar del párrafo */
+    font-size: 1.5em; /* Tamaño del nombre */
+    color: #333;
+}
+
+.info-cuenta p {
+    margin: 0 0 10px 0; /* Margen inferior para separar del perfil completado */
+    font-size: 0.9em; /* Tamaño del título/rol */
+    color: #555;
+}
+
+.info-cuenta h3 {
+    margin: 0; /* Eliminar margen por defecto del h3 */
+    font-size: 0.9em; /* Tamaño del texto de perfil completado */
+    color: #555;
+}
+
+.info-cuenta h3 span {
+    font-weight: bold; /* Negrita para el porcentaje */
+    color: #333;
+}
+
+
+.act_foto {
+    /* display: flex; Eliminado, ya que es un solo botón */
+    /* flex-direction: column; Eliminado */
+    text-align: center; /* Centra el botón si es necesario */
+    margin-top: auto; /* Empuja el botón hacia abajo si el contenido de arriba es más corto */
+}
+
+.act_foto button {
+    padding: 10px 15px; /* Ajusta el padding del botón */
+    border-radius: 5px;
+    background-color: #e0e0e0; /* Fondo gris del botón */
+    color: #333; /* Color de texto oscuro */
+    border: 1px solid #ccc; /* Borde del botón */
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease;
+}
+
+.act_foto button:hover {
+    background-color: #d0d0d0; /* Fondo ligeramente más oscuro al pasar el mouse */
+}
+
+
+/* Contenedor del formulario de actualización (columna derecha) */
+.form_actual {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre los grupos de label/input */
+    width: 400px; /* Ancho fijo para la columna derecha, ajusta si es necesario */
+    border: 1px solid #ddd; /* Borde más sutil */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 20px;
+    background-color: #f0f0f0; /* Fondo gris claro */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra ligera */
+    flex-grow: 1; /* Permite que ocupe el espacio restante si es necesario */
+}
+
+.form_actual label {
+    font-weight: bold; /* Negrita para las etiquetas */
+    color: #333;
+    margin-bottom: 5px; /* Espacio entre label y input */
+    display: block; /* Asegura que la label esté en su propia línea */
+}
+
+.input-container {
+    position: relative;
+    display: flex; /* Usa flexbox para alinear input y botón */
+    align-items: center; /* Centra verticalmente */
+    border: 1px solid #ccc; /* Borde del input */
+    border-radius: 5px;
+    overflow: hidden; /* Asegura que el contenido no se desborde */
+    background-color: #fff; /* Fondo blanco para el input */
+}
+
+.input-container input[type="text"],
+.input-container-descripcion textarea { /* Estilos para input y textarea */
+    flex-grow: 1; /* Permite que el input/textarea ocupe el espacio restante */
+    border: none; /* Elimina el borde por defecto */
+    outline: none; /* Elimina el outline al enfocar */
+    padding: 10px; /* Padding interno */
+    font-size: 1em;
+    color: #555;
+    background: none; /* Fondo transparente */
+}
+
+.input-container button,
+.input-container-descripcion button { /* Estilos para los botones de edición */
+    background: none;
+    border: none;
+    padding: 10px; /* Padding para el área de clic */
+    margin: 0;
+    font: inherit;
+    color: #555; /* Color del icono */
+    cursor: pointer;
+    outline: none;
+    flex-shrink: 0; /* Evita que el botón se encoja */
+    transition: color 0.2s ease;
+}
+
+.input-container button:hover,
+.input-container-descripcion button:hover {
+    color: #333; /* Color más oscuro al pasar el mouse */
+}
+
+
+.input-container-descripcion { /* Contenedor para el textarea */
+    position: relative;
+    display: flex; /* Usa flexbox */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #fff; /* Fondo blanco */
+}
+
+.input-container-descripcion textarea {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 1em;
+    color: #555;
+    resize: vertical; /* Permite redimensionar solo verticalmente */
+    min-height: 80px; /* Altura mínima para el textarea */
+}
+
+/* Estilo para el botón "Confirmar cambios" */
+.form_actual .confirmar {
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #1352ff; /* Color azul */
+    color: white;
+    border: none; /* Elimina el borde por defecto */
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 10px; /* Espacio encima del botón */
+    transition: background-color 0.2s ease;
+}
+
+.form_actual .confirmar:hover {
+    background-color: #003bb5; /* Color azul más oscuro al pasar el mouse */
+}
+
+/* Eliminado el estilo para samp, no es necesario */
+/* samp {
+    display: block;
+    margin-bottom: 10px;
+} */
+
+
