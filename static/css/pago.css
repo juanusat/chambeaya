@@ -148,3 +148,132 @@ body {
     text-align: right;
     font-weight: bold;
 }
+/* Mantén todo tu CSS anterior aquí */
+/* ... todos los estilos que proporcionaste antes ... */
+
+/* --- NUEVOS ESTILOS ADICIONALES PARA EL SELECTOR DE MÉTODO Y FORMULARIOS DINÁMICOS --- */
+
+/* Estilo para el contenedor de la selección del método de pago */
+.metodo-pago-container {
+    background-color: #f9f9f9; /* Similar al formulario */
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px; /* Espacio entre la selección y la info de pago */
+    border: 1px solid #ddd; /* Borde sutil */
+}
+
+.metodo-pago-container h2 {
+     font-size: 20px;
+     margin-bottom: 15px;
+     color: #333;
+}
+
+/* Estilo para el select del método de pago */
+.metodo-pago-container select {
+     width: 100%;
+     padding: 10px;
+     border: 1px solid #ddd;
+     border-radius: 4px;
+     font-size: 14px;
+     box-sizing: border-box; /* Importante para que padding no afecte width */
+     margin-top: 5px; /* Espacio entre label y select */
+     display: block; /* Asegura que ocupe su propia línea */
+}
+
+/* Estilo para el label del select */
+.metodo-pago-container label {
+    display: block; /* Hace que el label esté en su propia línea */
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+
+/* Regla para ocultar todos los divs de formulario de método por defecto */
+/* El JavaScript se encargará de mostrar el correcto */
+.metodo-form {
+    display: none; /* Oculto por defecto */
+    margin-top: 20px; /* Espacio entre el h2/obligatorio y el contenido del método */
+}
+
+@media (max-width: 767px) {
+
+    /* Change main grid to a single column */
+    .contenedor-principal {
+        grid-template-columns: 1fr; /* Single column for small screens */
+        gap: 20px; /* Adjust gap if needed for single column */
+    }
+
+    /* Remove grid-column span on title if necessary (optional) */
+    .titulo h1 {
+       /* grid-column: unset; */ /* Keep 1 / -1 to ensure it spans the single column */
+       font-size: 20px; /* Slightly smaller title on small screens */
+    }
+
+    /* Make double-input row stack vertically */
+    .fila-doble {
+        display: block; /* Stacks children vertically */
+        gap: 0; /* Remove gap when stacking */
+    }
+
+    /* Ensure form groups inside .fila-doble take full width */
+    .fila-doble .form-group {
+        flex: unset; /* Remove flex property */
+        width: 100%; /* Ensure they take full width */
+        margin-bottom: 15px; /* Restore margin between stacked items */
+    }
+
+     /* Adjust padding on .width-m for very small screens if needed */
+     .width-m {
+         padding: 15px;
+     }
+
+    /* Optional: Adjust font sizes for smaller screens */
+    body {
+        font-size: 15px;
+    }
+
+    .info-pago-container h2 {
+        font-size: 18px;
+    }
+
+    .resumen-contrato h3 {
+         font-size: 16px;
+    }
+}
+
+/* --- ESTILOS RESPONSIVOS (Asegúrate de que tu media query original esté aquí) --- */
+@media (max-width: 767px) {
+    /* ... tus estilos responsivos anteriores para .contenedor-principal, .fila-doble, etc. ... */
+
+     .metodo-pago-container {
+         margin-bottom: 20px; /* Ajusta el espacio en pantallas pequeñas */
+         padding: 15px; /* Un poco menos padding en móvil */
+     }
+
+     .metodo-form {
+         margin-top: 15px; /* Ajusta el espacio superior en móvil */
+     }
+
+     /* Asegúrate de que los inputs y select dentro de metodo-pago-container */
+     /* también sean 100% de ancho en móvil si no lo son ya */
+     .metodo-pago-container select,
+     .metodo-pago-container input[type="text"], /* Por si agregas inputs aquí */
+     .metodo-pago-container input[type="email"] {
+        width: 100%;
+        box-sizing: border-box;
+     }
+}
+
+/* Asegúrate de tener esta regla de box-sizing en tus estilos generales de input si no está */
+/* Es importante cuando usas width: 100% */
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
+}
+
+/* El botón .btn-pago ya tenía width: 100% y margin-top, debe funcionar correctamente */

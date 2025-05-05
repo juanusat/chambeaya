@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -21,59 +22,81 @@
                 </div>
 
                 <div class="contenedor-principal">
-                    <div class="info-pago-container">
-                        <div class="formulario-pago">
-                            <h2>Información de pago</h2>
-                            <div class="checkbox-container">
-                                <label for="metodo-pago">Tarjeta de crédito o débito</label>
+                    <div>
+                        <div class="metodo-pago-container">
+                            <h2>Selecciona tu Método de Pago</h2>
+                            <div class="form-group">
+                                <label for="metodo-pago">Método:</label>
+                                <select id="metodo-pago" name="metodo-pago">
+                                    <option value="tarjeta">Tarjeta de Crédito o Débito</option>
+                                    <option value="paypal">PayPal</option>
+                                    <option value="deposito">Depósito o Transferencia Bancaria</option>
+                                    </select>
                             </div>
+                        </div>
+                        <div class="info-pago-container">
+                            <div class="formulario-pago">
+                                <h2>Información de pago</h2>
+                                <p class="obligatorio">* Indica un campo obligatorio</p>
 
-                            <p class="obligatorio">* Indica un campo obligatorio</p>
+                                <form id="payment-form">
 
-                            <div class="formul-pago">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="nombre">Nombre*</label>
-                                        <input type="text" id="nombre" placeholder="Nombre">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="numero">Número de Tarjeta*</label>
-                                        <input type="text" id="numero" placeholder="Número de Tarjeta">
-                                    </div>
-
-                                    <div class="fila-doble">
+                                    <div id="tarjeta-form" class="metodo-form">
                                         <div class="form-group">
-                                            <label for="fecha">Fecha de Vencimiento*</label>
-                                            <input type="text" id="fecha" placeholder="MM/YY">
+                                            <label for="nombre">Nombre en la Tarjeta (*)</label>
+                                            <input type="text" id="nombre" name="nombre_tarjeta" placeholder="Nombre Apellido" required>
                                         </div>
+
                                         <div class="form-group">
-                                            <label for="cvc">Código de Seguridad (CVC)*</label>
-                                            <input type="text" id="cvc" placeholder="CVC">
+                                            <label for="numero">Número de Tarjeta (*)</label>
+                                            <input type="text" id="numero" name="numero_tarjeta" placeholder="Número de Tarjeta" required>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label for="pais">País*</label>
-                                        <input type="text" id="pais" placeholder="Perú">
-                                    </div>
+                                        <div class="fila-doble">
+                                            <div class="form-group">
+                                                <label for="fecha">Fecha de Vencimiento (*)</label>
+                                                <input type="text" id="fecha" name="fecha_vencimiento" placeholder="MM/AA" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cvc">Código de Seguridad (CVC)*</label>
+                                                <input type="text" id="cvc" name="cvc" placeholder="CVC" required>
+                                            </div>
+                                        </div>
 
+                                        <div class="form-group">
+                                            <label for="pais">País de Emisión (*)</label>
+                                            <input type="text" id="pais" name="pais" placeholder="Tu país" required>
+                                        </div>
+                                        </div>
+                                    <div id="paypal-form" class="metodo-form">
+                                        <p>Serás redirigido a la página segura de PayPal para completar tu pago.</p>
+                                        <p style="font-size: 14px; color: #555;">Asegúrate de tener tu cuenta de PayPal lista.</p>
+                                        </div>
+                                    <div id="deposito-form" class="metodo-form">
+                                        <p>Por favor, realiza un depósito o transferencia bancaria a la siguiente cuenta:</p>
+                                        <div style="background-color: #eee; padding: 15px; border-radius: 4px; margin-bottom: 15px; word-break: break-all;">
+                                            <p><strong>Banco:</strong> [Nombre del Banco Aquí]</p>
+                                            <p><strong>Número de Cuenta:</strong> [Número de Cuenta Aquí]</p>
+                                            <p><strong>Titular:</strong> ChambaYa S.A.C.</p>
+                                            <p><strong>Monto:</strong> PE 300.00</p>
+                                        </div>
+                                        <p style="font-size: 14px; color: #555;">Importante: Envía el comprobante de pago a <a href="mailto:soporte@chambeaya.com">soporte@chambeaya.com</a> con la referencia de tu contrato para validar la transacción.</p>
+                                        <div class="form-group">
+                                            <label for="deposito-referencia">Número de Operación / Referencia (Opcional):</label>
+                                            <input type="text" id="deposito-referencia" name="deposito-referencia" placeholder="Ej: N° de transferencia">
+                                         </div>
+                                    </div>
                                     <button type="submit" class="btn-pago">FINALIZAR PAGO</button>
                                 </form>
-                            </div>
 
-                            <p class="terminos">
-                                Al hacer clic en el botón "Finalizar compra", aceptas nuestros <a href="#">Términos de
-                                    Uso y Política de Privacidad</a>, y autorizas a ChambaYa a cobrar la tarifa de
-                                suscripción de US 300.00 + impuestos aplicables/mensual hasta que canceles. El precio
-                                está sujeto a cambios. Pueden cancelar en cualquier momento desde la configuración de tu
-                                cuenta para evitar cargas futuros.
-                            </p>
-                        </div>
-                    </div>
-
-
-                    <div class="resumen-contrato">
+                                <p class="terminos">
+                                    Al hacer clic en el botón "Finalizar Pago", aceptas nuestros <a href="#">Términos de
+                                        Uso y Política de Privacidad</a>, y autorizas a ChambaYa a cobrar la tarifa de
+                                    suscripción de US 300.00 + impuestos aplicables/mensual hasta que canceles. El precio
+                                    está sujeto a cambios. Pueden cancelar en cualquier momento desde la configuración de tu
+                                    cuenta para evitar cargas futuros.
+                                </p>
+                            </div> </div> </div> <div class="resumen-contrato">
                         <h3>Tu Contrato</h3>
                         <table>
                             <tr>
@@ -89,14 +112,52 @@
                                 <td>Pesca en lancha</td>
                             </tr>
                         </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer"></div>
-    </div>
-    <div class="js">
+                        </div> </div> </div> </div> <div class="footer"></div>
+    </div> <div class="js">
         <script src="/static/js/main.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const metodoPagoSelect = document.getElementById('metodo-pago');
+                // Seleccionamos todos los divs dentro del formulario principal con la clase metodo-form
+                const formulariosMetodo = document.querySelectorAll('#payment-form .metodo-form');
+
+                function mostrarFormulario(metodoId) {
+                    // Ocultar todos los formularios de método
+                    formulariosMetodo.forEach(form => {
+                        form.style.display = 'none';
+                        // Opcional: Remover el atributo 'required' de los inputs no visibles
+                        // para evitar validación HTML5 cuando no son relevantes
+                         form.querySelectorAll('input').forEach(input => {
+                              if (input.hasAttribute('required')) {
+                                  input.setAttribute('data-required', 'true'); // Guarda que era requerido
+                                  input.removeAttribute('required');
+                              }
+                         });
+                    });
+
+                    // Mostrar el formulario correspondiente al método seleccionado
+                    const formularioActual = document.getElementById(metodoId + '-form');
+                    if (formularioActual) {
+                        formularioActual.style.display = 'block'; // Usa 'grid' o 'flex' si tu layout interno lo requiere
+                        // Opcional: Añadir el atributo 'required' de vuelta a los inputs del formulario visible
+                         formularioActual.querySelectorAll('input[data-required]').forEach(input => {
+                             input.setAttribute('required', 'required');
+                             input.removeAttribute('data-required'); // Limpia el atributo temporal
+                         });
+                    }
+                }
+
+                // Mostrar el formulario inicial al cargar la página
+                // (Esto mostrará el que tenga el valor seleccionado por defecto en el <select>, que es 'tarjeta')
+                mostrarFormulario(metodoPagoSelect.value);
+
+                // Añadir evento para cambiar el formulario cuando cambia la selección
+                metodoPagoSelect.addEventListener('change', function() {
+                    mostrarFormulario(this.value);
+                });
+
+            });
+        </script>
     </div>
 </body>
 
