@@ -5,13 +5,33 @@
     if (pathParts[0] === "buscar" && pathParts[1]) {
         const titulo = pathParts[1];
 
+        // Realiza la solicitud al backend
         fetch(`/api/publicaciones/${titulo}`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
-                const container = document.querySelector(".job-cards-list");
-                container.innerHTML="";
-                if (!container) return;
+                console.log("Datos recibidos:", data);
 
+                const container = document.querySelector(".job-cards-list");
+                if (!container) {
+                    console.error("Contenedor .job-cards-list no encontrado en el DOM.");
+                    return;
+                }
+
+                // Limpia el contenedor antes de agregar nuevas publicaciones
+                container.innerHTML = "";
+
+                // Verifica si hay publicaciones
+                if (data.length === 0) {
+                    container.innerHTML = `<p>No se encontraron publicaciones para "${titulo}".</p>`;
+                    return;
+                }
+
+                // Renderiza las publicaciones
                 data.forEach(pub => {
                     const card = document.createElement("div");
                     card.className = "card";
@@ -26,12 +46,12 @@
                                 <span class="provider-name">${pub.nombre_usuario}</span>
                                 <div class="provider-circle"></div>
                             </div>
-                            <div class="price-tag">Precio: <span>${pub.precio}</span></div>
+                            <div class="price-tag">Precio: <span>${pub.precio || "No disponible"}</span></div>
                             <div class="fecha-post">Publicado el: <span>${new Date(pub.fecha_creacion).toLocaleDateString()}</span></div>
                         </div>
 
                         <div class="job-description">
-                            <p>${pub.descripcion}</p>
+                            <p>${pub.descripcion || "Sin descripción disponible."}</p>
                         </div>
                     `;
                     container.appendChild(card);
@@ -39,6 +59,10 @@
             })
             .catch(error => {
                 console.error("Error al cargar publicaciones:", error);
+                const container = document.querySelector(".job-cards-list");
+                if (container) {
+                    container.innerHTML = `<p>Ocurrió un error al cargar las publicaciones. Por favor, intenta nuevamente más tarde.</p>`;
+                }
             });
     }
-})()
+})();

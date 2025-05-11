@@ -15,11 +15,11 @@
         <div class="page">
             <div class="full-height-container">
                 <div class="job-listing-container">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Buscar en ChambeaYa">
-                        <button><i class="fa-solid fa-tag"></i></button>
-                        <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
+                    <form class="search-bar" id="searchForm">
+                        <input type="text" placeholder="Buscar en ChambeaYa" id="iptBuscar" name="query">
+                        <button type="button"><i class="fa-solid fa-tag"></i></button>
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
 
                     <div class="job-cards-list">
 
@@ -104,6 +104,7 @@
     <div class="js">
         <script src="/static/js/main.js"></script>
         <script src="/static/js/busqueda.js"></script>
+        <script src="/static/js/buscar.js"></script>
     </div>
 
 </body>
