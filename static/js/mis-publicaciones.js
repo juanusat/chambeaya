@@ -33,7 +33,6 @@
                 container.appendChild(card);
             });
         })
-    console.log("Publicaciones agregadas:", document.querySelectorAll(".card").length)
         .catch(error => {
             console.error("Error al cargar publicaciones:", error);
         });
