@@ -136,6 +136,11 @@ def create_app():
         html = custom_render_html('mis_publicaciones.html')
         return Response(html, mimetype='text/html')
        
+    @app.route('/mis-contratos')
+    def mis_contratos():
+        html = custom_render_html('mis_contratos.html')
+        return Response(html, mimetype='text/html')
+       
     @app.route('/crear-publicacion')   
     def crear_publicaciones():
         html = custom_render_html('crear_publicacion.html')
