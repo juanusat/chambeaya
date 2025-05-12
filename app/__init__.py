@@ -126,6 +126,7 @@ def create_app():
     def acceder():
         html = custom_render_html('acceder.html')
         return Response(html, mimetype='text/html')
+    
     @app.route('/buscar/<termino_busqueda>')
     def buscar_publicaciones(termino_busqueda):
         html = custom_render_html('busqueda.html')
