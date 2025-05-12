@@ -26,6 +26,8 @@ def obtener_usuario(user_id):
 
 @usuarios_bp.route('/', methods=['POST'])
 def nuevo_usuario(): #JUAN.Lo va a revisar
+
+    
     data = request.get_json()
     new_id = create_usuario(data)
     return jsonify({'usuario_id': new_id}), 201

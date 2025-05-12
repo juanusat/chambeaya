@@ -6,7 +6,7 @@ from app.publicacion.routes_publicacion import publicaciones_bp
 from app.contrato.routes_contrato import contratos_bp
 from app.comprobante_pago.routes_comprobante_pago import comprobante_pago_bp
 from app.usuario.routes_usuario import usuarios_bp
-from app.usuario.controlador_usuario import get_usuario_by_username, get_usuario_profile_by_username
+from app.usuario.controlador_usuario import get_usuario_by_username, get_usuario_profile_by_username, get_usuario_profile_by_id
 from app.auth.routes_auth import auth_bp
 from app.categoria.routes_categoria import categoria_bp
 
@@ -158,7 +158,36 @@ def create_app():
     
     @app.route('/mi-cuenta')   
     def configurar_cuenta():
+        if not getattr(g, 'user_id', None):
+            return redirect(url_for('inicio'))
+
+        profile = get_usuario_profile_by_id(g.user_id)
+        if not profile:
+            abort(404, description="Usuario no encontrado")
+        for key, value in profile.items():
+            if isinstance(value, date):
+                profile[key] = value.isoformat()
+
+        if profile['persona_id'] is not None:
+            user_type = 'persona'
+            # acá profile['persona_nombre'], profile['persona_apellido'], etc.
+        elif profile['empresa_id'] is not None:
+            user_type = 'empresa'
+            # acá profile['empresa_nombre'], profile['empresa_descripcion'], etc.
+        else:
+            user_type = 'desconocido'
+
+        # Prepara JSON y título de página
+        user_json = json.dumps(profile)
+        if user_type == 'persona':
+            titulo = f"{profile['persona_nombre']} {profile['persona_apellido']} (@{profile['username']})"
+        elif user_type == 'empresa':
+            titulo = f"{profile['empresa_nombre']} (@{profile['username']})"
+        else:
+            titulo = f"@{profile['username']}"
+
         html = custom_render_html('mi_cuenta.html')
+        html = html.replace('["json"]', user_json)
         return Response(html, mimetype='text/html')
 
     return app
