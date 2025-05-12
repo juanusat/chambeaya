@@ -22,19 +22,17 @@ document.querySelector(".submit-button").addEventListener("click", function () {
     const titulo = document.getElementById("title").value;
     const descripcion = document.getElementById("description").value;
     const precio = document.getElementById("price").value;
-
+    const categoria_id = Number(document.getElementById("categoria").value)
     // Asegúrate de tener estos valores definidos
-    const categoria_id = 1; // ← puedes cambiarlo luego por selección real
 
     const datos = {
         titulo,
         descripcion,
         precio,
-        usuario_id,
         categoria_id
     };
 
-    fetch("/nueva_publicacion", {
+    fetch("/api/publicaciones/nueva_publicacion", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -45,7 +43,7 @@ document.querySelector(".submit-button").addEventListener("click", function () {
     .then(data => {
         console.log("Publicación creada con ID:", data.publicacion_id);
         alert("¡Publicación exitosa!");
-        window.location.href = "/publicaciones"; // Redirecciona si quieres
+        window.location.href = "/mis-publicaciones"; // Redirecciona si quieres
     })
     .catch(err => {
         console.error("Error al crear publicación:", err);

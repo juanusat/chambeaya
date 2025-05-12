@@ -47,6 +47,7 @@ def nueva_publicacion():
     if not getattr(g, 'user_id', None):
         return redirect(url_for('inicio'))
     data = request.get_json()
+    data['usuario_id'] = g.user_id
     new_id = create_publicacion(data)
     return jsonify({'publicacion_id': new_id}), 200
 
