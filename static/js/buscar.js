@@ -20,7 +20,7 @@
       const tagTerm = input.value.trim();
       if (tagTerm) {
         const encoded = encodeURIComponent(tagTerm);
-        location.href = `/etiqueta/${encoded}`;
+        location.href = `/categoria/${encoded}`;
       }
     });
   

@@ -151,6 +151,18 @@ body {
   color: #666;
 }
 
+/* Estilo para el tag dentro del card-header */
+.card-header .tag {
+  display: inline-block;
+  background-color: #e0e0e0; /* Fondo gris claro */
+  border-radius: 12px; /* Bordes redondeados */
+  padding: 0.2rem 0.6rem; /* Espaciado interno */
+  font-size: 0.85rem; /* Tamaño de fuente pequeño */
+  font-weight: bold;
+  color: #555; /* Color de texto */
+  margin-left: auto; /* Alinea el tag a la derecha */
+}
+
 /* Estilo para la fila del cliente/prestador y el precio */
 .card-details-row {
   display: flex; /* Usa flexbox */
@@ -196,8 +208,7 @@ body {
   font-weight: bold;
   background-color: #f9f9f9; /* Fondo ligeramente gris */
   color: #000; /* Color de texto negro */
-  margin-left: auto;
-  margin-right: 35%;
+  
 }
 
 .price-tag span {
@@ -221,7 +232,3 @@ body {
   min-height: 100vh;
 }
 
-/* Estilos para el contenedor JS (si es necesario) */
-.js {
-  /* Puedes añadir estilos aquí si quieres */
-}

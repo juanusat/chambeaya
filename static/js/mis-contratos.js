@@ -1,5 +1,9 @@
-// mis-contratos.js
+const userName = localStorage.getItem('userName');
+console.log('Nombre del usuario:', userName);
 (function () {
+    const userName = localStorage.getItem('userName'); // Obtener el username del usuario actual
+    console.log('Nombre del usuario:', userName);
+
     // Hacemos la petición a la API de contratos
     fetch('/api/contratos/')
         .then(response => {
@@ -9,37 +13,38 @@
             return response.json();
         })
         .then(data => {
-            console.log(data)
+            console.log(data);
             const container = document.querySelector('#lista-contratos');
-            container.innerHTML = ''
-            if (!container) return console.warn('No se encontró el contenedor .contratos');
+            if (!container) return console.warn('No se encontró el contenedor #lista-contratos');
+            container.innerHTML = '';
 
             // Iteramos sobre cada contrato y creamos su tarjeta
             data.forEach(contrato => {
                 const card = document.createElement('div');
                 card.className = 'card';
+
+                // Determinar si el usuario actual es el cliente o el empleador
+                const isCliente = contrato.username_cliente === userName;
+                const role = isCliente ? 'Empleador' : 'Cliente';
+                const name = isCliente ? contrato.empleador : contrato.cliente;
+
                 card.innerHTML = `
                     <div class="card-header">
                         <div class="title-dates-row">
-                            <!-- Aquí deberías sustituir servicio_id por el nombre real del servicio,
-                                 si tu API lo devuelve como campo adicional (ej. contrato.servicio_nombre) -->
-                            <span class="nombre">Servicio #${contrato.servicio_id}</span>
+                            <span class="nombre">${contrato.servicio}</span>
                             <div class="dates">
                                 <span class="date-label">Inicio:</span>
                                 <span class="date-value">${new Date(contrato.fecha_inicio).toLocaleDateString()}</span>
                             </div>
                         </div>
                         <div class="tag">
-                            <!-- El estado del contrato (pendiente, en curso, finalizado, etc.) -->
                             ${contrato.estado}
                         </div>
                     </div>
 
                     <div class="client-price-row">
                         <div class="client-info">
-                            <!-- De igual manera, sustituye cliente_id por nombre si lo tienes disponible -->
-                            <p>Cliente: <span class="client-name">ID ${contrato.cliente_id}</span></p>
-                            <!-- Puedes reemplazar el src por la URL real de la foto de perfil -->
+                            <p>${role}: <span class="client-name">${name}</span></p>
                             <img src="https://placehold.co/30x30/ccc/333?text=Perfil"
                                  alt="Perfil" class="perfil-img">
                         </div>
@@ -49,7 +54,7 @@
                     </div>
 
                     <div class="info">
-                        <!-- Puedes usar la descripción o cualquier otro campo que te venga -->
+                        <p>${contrato.descripcion_servicio}</p>
                         <p>Fecha de finalización: <strong>${new Date(contrato.fecha_finalizacion).toLocaleDateString()}</strong></p>
                     </div>
                 `;
