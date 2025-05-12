@@ -187,6 +187,36 @@ def get_usuario_by_username(username):
     finally:
         conn.close()
 
+def get_usuario_profile_by_id(user_id):
+    conn = get_db_connection()
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute("""
+                SELECT
+                  usu.usuario_id,
+                  usu.username,
+                  usu.email,
+                  usu.url_picture,
+                usu.descripcion,
+                  -- Datos de persona (si existen)
+                  per.persona_id,
+                  per.nombre   AS persona_nombre,
+                  per.apellido AS persona_apellido,
+                  per.telefono AS persona_telefono,
+                  per.fecha_nacimiento AS persona_fecha_nacimiento,
+                  emp.empresa_id,
+                  emp.nombre        AS empresa_nombre,
+                  emp.descripcion   AS empresa_descripcion,
+                  emp.fecha_creacion AS empresa_fecha_creacion
+                FROM usuario usu
+                LEFT JOIN persona per ON per.usuario_id = usu.usuario_id
+                LEFT JOIN empresa emp ON emp.usuario_id = usu.usuario_id
+                WHERE usu.usuario_id = %s;
+            """, (user_id,))
+            return cursor.fetchone()
+    finally:
+        conn.close()
+
 def get_usuario_profile_by_username(username):
     conn = get_db_connection()
     try:
