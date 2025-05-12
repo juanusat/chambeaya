@@ -131,9 +131,23 @@ def create_app():
         html = custom_render_html('busqueda.html')
         return Response(html, mimetype='text/html')
     
+    @app.route('/categoria/<termino_busqueda>')
+    def buscar_categoria(termino_busqueda):
+        html = custom_render_html('busqueda.html')
+        return Response(html, mimetype='text/html')
+    
     @app.route('/mis-publicaciones')
     def mis_publicaciones():
+        if not getattr(g, 'user_id', None):
+            return redirect(url_for('inicio'))
         html = custom_render_html('mis_publicaciones.html')
+        return Response(html, mimetype='text/html')
+       
+    @app.route('/mis-contratos')
+    def mis_contratos():
+        if not getattr(g, 'user_id', None):
+            return redirect(url_for('inicio'))
+        html = custom_render_html('mis_contratos.html')
         return Response(html, mimetype='text/html')
        
     @app.route('/crear-publicacion')   

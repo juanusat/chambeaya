@@ -197,13 +197,13 @@ def get_usuario_profile_by_username(username):
                   usu.username,
                   usu.email,
                   usu.url_picture,
+                usu.descripcion,
                   -- Datos de persona (si existen)
                   per.persona_id,
                   per.nombre   AS persona_nombre,
                   per.apellido AS persona_apellido,
                   per.telefono AS persona_telefono,
                   per.fecha_nacimiento AS persona_fecha_nacimiento,
-                  -- Datos de empresa (si existen)
                   emp.empresa_id,
                   emp.nombre        AS empresa_nombre,
                   emp.descripcion   AS empresa_descripcion,

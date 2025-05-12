@@ -33,6 +33,9 @@ document.getElementById('login').addEventListener('submit', async function (e) {
         const data = await response.json();
 
         if (response.ok) {
+            // Guardar el nombre de usuario en localStorage
+            localStorage.setItem('userName', username);
+
             localStorage.setItem('logged', 'true');
             localStorage.setItem('keepLoggedIn', keepLoggedIn ? 'true' : 'false');
 
