@@ -141,14 +141,15 @@ def create_publicacion(data):
     try:
         with conn.cursor() as cursor:
             cursor.execute(
-                "INSERT INTO publicacion (categoria_id, usuario_id, titulo, descripcion, precio, fecha_creacion)"
-                " VALUES (%s,%s,%s,%s,%s,CURDATE());",
+                "INSERT INTO publicacion (categoria_id, usuario_id, titulo, descripcion, precio, fecha_creacion, estado)"
+                " VALUES (%s,%s,%s,%s,%s,CURDATE(),%s);",
                 (
                     data['categoria_id'],
                     data['usuario_id'],
                     data['titulo'],
                     data['descripcion'],
                     data['precio'],
+                    1
                 ),
             )
             conn.commit()
