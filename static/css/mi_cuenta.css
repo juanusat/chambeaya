@@ -149,6 +149,7 @@ body {
 }
 
 .input-container input[type="text"],
+.input-container input[type="password"],
 .input-container-descripcion textarea { /* Estilos para input y textarea */
     flex-grow: 1; /* Permite que el input/textarea ocupe el espacio restante */
     border: none; /* Elimina el borde por defecto */
