@@ -7,11 +7,18 @@ def get_all_publicaciones(user_id):
     conn = get_db_connection()
     try:
         with conn.cursor(pymysql.cursors.DictCursor) as cursor:
-            cursor.execute("""SELECT p.titulo, cat.nombre AS categoria, u.username AS nombre_usuario , p.precio, p.fecha_creacion, p.descripcion 
+            cursor.execute("""SELECT 
+                                p.publicacion_id AS id,  -- Incluye el ID de la publicación
+                                p.titulo, 
+                                cat.nombre AS categoria, 
+                                u.username AS nombre_usuario, 
+                                p.precio, 
+                                p.fecha_creacion, 
+                                p.descripcion 
                             FROM publicacion p 
                             INNER JOIN categoria cat ON p.categoria_id = cat.categoria_id
                             INNER JOIN usuario u ON p.usuario_id = u.usuario_id
-                            WHERE u.usuario_id = %s;
+                            WHERE u.usuario_id = %s and p.estado = True;
                            """, (user_id,))
             return cursor.fetchall()
     finally:
@@ -167,15 +174,19 @@ def delete_publicacion(pub_id):
     conn = get_db_connection()
     try:
         with conn.cursor() as cursor:
+            # Eliminar registros relacionados en la tabla contrato
+            cursor.execute("DELETE FROM contrato WHERE servicio_id=%s;", (pub_id,))
+            # Ahora eliminar la publicación
             cursor.execute("DELETE FROM publicacion WHERE publicacion_id=%s;", (pub_id,))
             conn.commit()
     finally:
-        conn.close() 
+        conn.close()
 
 def darbaja_publicacion(pub_id): 
     conn = get_db_connection()
     try: 
         with conn.cursor() as cursor: 
-            cursor.execute("UPDATE publicacion SET estado=False WHERE publicacion_id=%s;",(pub_id,))
+            cursor.execute("UPDATE publicacion SET estado=False WHERE publicacion_id=%s;", (pub_id,))
+            conn.commit()  # Confirma los cambios en la base de datos
     finally:
         conn.close()

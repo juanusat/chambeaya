@@ -56,13 +56,10 @@ def editar_publicacion(pub_id):
     update_publicacion(pub_id, data)
     return jsonify({'message': 'Actualizado exitosamente'}), 200
 
-@publicaciones_bp.route('/borrar_publicacion/<int:pub_id>', methods=['DELETE']) # NO SE USA
-def borrar_publicacion(pub_id):
-    delete_publicacion(pub_id)
-    return jsonify({'message': 'Eliminado exitosamente'}), 200 
-
 @publicaciones_bp.route('/dar_baja_publicacion/<int:pub_id>', methods=['PUT']) # VALIDAR G
-def darbaja_publicacion(pub_id):
-    darbaja_publicacion(pub_id)
-    return jsonify({'message':'Dado de baja exitosamente'}), 200
+def dar_baja_publicacion_route(pub_id):  # Cambié el nombre de la función
+    if not getattr(g, 'user_id', None):
+        return redirect(url_for('inicio'))
+    darbaja_publicacion(pub_id)  # Llama a la función del controlador
+    return jsonify({'message': 'Dado de baja exitosamente'}), 200
 
