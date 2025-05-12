@@ -18,8 +18,6 @@
         });
 })();
 
-
-
 document.querySelector(".submit-button").addEventListener("click", function () {
     const titulo = document.getElementById("title").value;
     const descripcion = document.getElementById("description").value;
