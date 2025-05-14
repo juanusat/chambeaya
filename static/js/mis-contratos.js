@@ -1,8 +1,7 @@
-const userName = localStorage.getItem('userName');
-console.log('Nombre del usuario:', userName);
 (function () {
-    const userName = localStorage.getItem('userName'); // Obtener el username del usuario actual
-    console.log('Nombre del usuario:', userName);
+    // Obtener y parsear los datos del usuario desde el elemento con id 'user-data'
+    const userData = JSON.parse(document.getElementById('user-data').textContent);
+    console.log(userData);
 
     // Hacemos la petición a la API de contratos
     fetch('/api/contratos/')
@@ -24,7 +23,7 @@ console.log('Nombre del usuario:', userName);
                 card.className = 'card';
 
                 // Determinar si el usuario actual es el cliente o el empleador
-                const isCliente = contrato.username_cliente === userName;
+                const isCliente = contrato.username_cliente === userData.username;
                 const role = isCliente ? 'Empleador' : 'Cliente';
                 const name = isCliente ? contrato.empleador : contrato.cliente;
 

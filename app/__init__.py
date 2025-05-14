@@ -148,7 +148,32 @@ def create_app():
     def mis_contratos():
         if not getattr(g, 'user_id', None):
             return redirect(url_for('inicio'))
+
+        profile = get_usuario_profile_by_id(g.user_id)
+        if not profile:
+            abort(404, description="Usuario no encontrado")
+        for key, value in profile.items():
+            if isinstance(value, date):
+                profile[key] = value.isoformat()
+
+        if profile['persona_id'] is not None:
+            user_type = 'persona'
+        elif profile['empresa_id'] is not None:
+            user_type = 'empresa'
+        else:
+            user_type = 'desconocido'
+
+        # Prepara JSON y título de página
+        user_json = json.dumps(profile)
+        if user_type == 'persona':
+            titulo = f"{profile['persona_nombre']} {profile['persona_apellido']} (@{profile['username']})"
+        elif user_type == 'empresa':
+            titulo = f"{profile['empresa_nombre']} (@{profile['username']})"
+        else:
+            titulo = f"@{profile['username']}"
+
         html = custom_render_html('mis_contratos.html')
+        html = html.replace('["json"]', user_json)
         return Response(html, mimetype='text/html')
        
     @app.route('/crear-publicacion')   
