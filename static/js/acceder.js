@@ -33,6 +33,12 @@ document.getElementById('login').addEventListener('submit', async function (e) {
         const data = await response.json();
 
         if (response.ok) {
+            localStorage.setItem('logged', 'true');
+            localStorage.setItem('keepLoggedIn', keepLoggedIn ? 'true' : 'false');
+
+            if (!keepLoggedIn) {
+                sessionStorage.setItem('sessionActive', 'true');
+            }
             window.location.href = '/';
         } else {
             alert('Error de inicio de sesión: ' + (data.msg || 'Intenta de nuevo'));
