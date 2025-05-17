@@ -14,21 +14,24 @@
 
 <body >
     <div class="app">
-        <div class="header"></div>
-        <div class="page">
+        <div class="header"></div> <div class="page">
             <div class="contratos-container">
                 <div class="fila_superior">
                     <h1>Mis contratos</h1>
-                    <p>Ordenar por: <span><button type="menu">Más reciente <i
-                                    class="fa-solid fa-caret-down"></i></button></span></p>
+                    <div class="ordenar-container">
+                        <p>Ordenar por:</p>
+                        <button type="button">Más reciente <i class="fa-solid fa-caret-down"></i></button>
+                    </div>
                 </div>
                 <div class="contenedor">
                     <div class="lista-contratos" id="lista-contratos">
                         <div class="card">
                             <div class="card-header">
-                                <div class="title-dates-row"> <span class="nombre">Pintor de casas a Domicilio</span>
-                                    <div class="dates"> <span class="date-label">Inicio:</span> <span
-                                            class="date-value">4/05/2025</span>
+                                <div class="title-dates-row">
+                                    <span class="nombre">Pintor de casas a Domicilio</span>
+                                    <div class="dates">
+                                        <span class="date-label">Inicio:</span>
+                                        <span class="date-value">4/05/2025</span>
                                     </div>
                                 </div>
                                 <div class="tag">
@@ -39,10 +42,11 @@
                             <div class="client-price-row">
                                 <div class="client-info">
                                     <p>Cliente: <span class="client-name">Marcos Pluto</span></p>
-                                    <img src="https://placehold.co/30x30/ccc/333?text=Perfil" alt="Perfil"
-                                        class="perfil-img">
+                                    <img src="https://placehold.co/35x35/2c3e50/ffffff?text=MP" alt="Perfil Marcos Pluto" class="perfil-img">
                                 </div>
-                                <div class="price-tag">Precio: <span>$500</span></div>
+                                <div class="price-actions">
+                                    <div class="price-tag">Precio: <span>$500</span></div>
+                                </div>
                             </div>
                             <div class="info">
                                 <p>¿Quieres renovar el aspecto de tu hogar sin complicaciones? Ofrezco un servicio de
@@ -52,13 +56,52 @@
                                     excelente calidad que garantizan durabilidad y un acabado profesional. Ideal para
                                     quienes necesitan resultados inmediatos sin sacrificar calidad.</p>
                             </div>
+
+                            <button class="resumen-pagos-btn">
+                                Resumen de Pago(s)
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="resumen-pagos-contenido">
+                                <div class="pago-item">
+                                    <h4>1° Pago:</h4>
+                                    <div class="pago-detalle">
+                                        <span class="label">Monto:</span>
+                                        <span class="value">150$</span>
+                                    </div>
+                                    <div class="pago-detalle">
+                                        <span class="label">Fecha de Pago:</span>
+                                        <span class="value">4/05/2025</span>
+                                    </div>
+                                    <div class="pago-detalle">
+                                        <span class="label">Método de Pago:</span>
+                                        <span class="value">Crédito</span>
+                                    </div>
+                                </div>
+                                <div class="pago-item">
+                                    <h4>2° Pago:</h4>
+                                     <div class="pago-detalle">
+                                        <span class="label">Monto:</span>
+                                        <span class="value">150$</span>
+                                    </div>
+                                    <div class="pago-detalle">
+                                        <span class="label">Fecha de Pago:</span>
+                                        <span class="value">4/05/2025</span>
+                                    </div>
+                                    <div class="pago-detalle">
+                                        <span class="label">Método de Pago:</span>
+                                        <span class="value">Crédito</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="card">
                             <div class="card-header">
-                                <div class="title-dates-row"> <span class="nombre">Pintor de casas a Domicilio</span>
-                                    <div class="dates"> <span class="date-label">Inicio:</span> <span
-                                            class="date-value">4/05/2025</span>
+                                 <div class="title-dates-row">
+                                    <span class="nombre">Pintor de casas a Domicilio</span>
+                                    <div class="dates">
+                                        <span class="date-label">Inicio:</span>
+                                        <span class="date-value">4/05/2025</span>
                                     </div>
                                 </div>
                                 <div class="tag">
@@ -68,11 +111,13 @@
 
                             <div class="client-price-row">
                                 <div class="client-info">
-                                    <p>Prestador: <span class="client-name">Marcos Pluto</span></p>
-                                    <img src="https://placehold.co/30x30/ccc/333?text=Perfil" alt="Perfil"
-                                        class="perfil-img">
+                                    <p>Empleador: <span class="client-name">Marcos Pluto</span></p>
+                                    <img src="https://placehold.co/35x35/e74c3c/ffffff?text=MP" alt="Perfil Marcos Pluto" class="perfil-img">
                                 </div>
-                                <div class="price-tag">Precio: <span>$500</span></div>
+                                <div class="price-actions">
+                                    <button class="pagar-btn">Pagar</button>
+                                    <div class="price-tag">Precio: <span>$500</span></div>
+                                </div>
                             </div>
                             <div class="info">
                                 <p>¿Busco renovar el aspecto de mi hogar de manera rápida y sin complicaciones? Estoy en
@@ -83,42 +128,113 @@
                                     acordados y pueda ofrecer resultados impecables sin sacrificar la rapidez del
                                     trabajo.</p>
                             </div>
+
+                            <button class="resumen-pagos-btn">
+                                Resumen de Pago(s)
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="resumen-pagos-contenido">
+                               <div class="pago-item">
+                                    <h4>1° Pago:</h4>
+                                    <div class="pago-detalle">
+                                        <span class="label">Monto:</span>
+                                        <span class="value">150$</span>
+                                    </div>
+                                    <div class="pago-detalle">
+                                        <span class="label">Fecha de Pago:</span>
+                                        <span class="value">4/05/2025</span>
+                                    </div>
+                                    <div class="pago-detalle">
+                                        <span class="label">Método de Pago:</span>
+                                        <span class="value">Crédito</span>
+                                    </div>
+                                </div>
+                                <div class="pago-item">
+                                    <h4>2° Pago:</h4>
+                                     <div class="pago-detalle">
+                                        <span class="label">Monto:</span>
+                                        <span class="value">150$</span>
+                                    </div>
+                                    <div class="pago-detalle">
+                                        <span class="label">Fecha de Pago:</span>
+                                        <span class="value">4/05/2025</span>
+                                    </div>
+                                    <div class="pago-detalle">
+                                        <span class="label">Método de Pago:</span>
+                                        <span class="value">Crédito</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="card">
                             <div class="card-header">
-                                <div class="title-dates-row"> <span class="nombre">Pintor de casas a Domicilio</span>
-                                    <div class="dates"> <span class="date-label">Inicio:</span> <span
-                                            class="date-value">4/05/2025</span>
+                                <div class="title-dates-row">
+                                    <span class="nombre">Servicio de Jardinería Semanal</span>
+                                     <div class="dates">
+                                        <span class="date-label">Inicio:</span>
+                                        <span class="date-value">10/05/2025</span>
                                     </div>
                                 </div>
                                 <div class="tag">
-                                    <i class="fa-solid fa-tag"></i> Pintura
+                                    <i class="fa-solid fa-leaf"></i> Jardinería
                                 </div>
                             </div>
 
                             <div class="client-price-row">
                                 <div class="client-info">
-                                    <p>Cliente: <span class="client-name">Marcos Pluto</span></p>
-                                    <img src="https://placehold.co/30x30/ccc/333?text=Perfil" alt="Perfil"
-                                        class="perfil-img">
+                                    <p>Cliente: <span class="client-name">Ana Torres</span></p>
+                                    <img src="https://placehold.co/35x35/3498db/ffffff?text=AT" alt="Perfil Ana Torres" class="perfil-img">
                                 </div>
-                                <div class="price-tag">Precio: <span>$500</span></div>
+                                <div class="price-actions">
+                                    <div class="price-tag">Precio: <span>$120</span></div>
+                                </div>
                             </div>
                             <div class="info">
-                                <p>¿Quieres renovar el aspecto de tu hogar sin complicaciones? Ofrezco un servicio de
-                                    pintura a domicilio enfocado en la rapidez, eficiencia y atención al detalle. Me
-                                    encargo de cada etapa del trabajo, desde la preparación de superficies hasta la
-                                    limpieza final, para que no tengas que preocuparte por nada. Utilizo pinturas de
-                                    excelente calidad que garantizan durabilidad y un acabado profesional. Ideal para
-                                    quienes necesitan resultados inmediatos sin sacrificar calidad.</p>
+                                <p>Mantenimiento semanal de jardín, incluye corte de césped, poda de arbustos y control de malezas. Servicio confiable y profesional para mantener tu jardín siempre hermoso.</p>
+                            </div>
+                            <button class="resumen-pagos-btn">
+                                Resumen de Pago(s)
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="resumen-pagos-contenido">
+                               <div class="pago-item">
+                                    <h4>1° Pago:</h4>
+                                    <div class="pago-detalle">
+                                        <span class="label">Monto:</span>
+                                        <span class="value">60$</span>
+                                    </div>
+                                    <div class="pago-detalle">
+                                        <span class="label">Fecha de Pago:</span>
+                                        <span class="value">10/05/2025</span>
+                                    </div>
+                                    <div class="pago-detalle">
+                                        <span class="label">Método de Pago:</span>
+                                        <span class="value">Transferencia</span>
+                                    </div>
+                                </div>
+                                 <div class="pago-item">
+                                    <h4>2° Pago:</h4>
+                                     <div class="pago-detalle">
+                                        <span class="label">Monto:</span>
+                                        <span class="value">60$</span>
+                                    </div>
+                                    <div class="pago-detalle">
+                                        <span class="label">Fecha de Pago:</span>
+                                        <span class="value">17/05/2025</span>
+                                    </div>
+                                    <div class="pago-detalle">
+                                        <span class="label">Método de Pago:</span>
+                                        <span class="value">Transferencia</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="footer"></div>
-    </div>
+        <div class="footer"></div> </div>
     <div class="js">
         <script src="/static/js/main.js"></script>
         <script src="/static/js/mis-contratos.js"></script>
