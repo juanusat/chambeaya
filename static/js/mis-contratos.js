@@ -27,6 +27,7 @@
                 const role = isCliente ? 'Empleador' : 'Cliente';
                 const name = isCliente ? contrato.empleador : contrato.cliente;
 
+                // Crear el contenido de la tarjeta
                 card.innerHTML = `
                     <div class="card-header">
                         <div class="title-dates-row">
@@ -47,8 +48,9 @@
                             <img src="https://placehold.co/30x30/ccc/333?text=Perfil"
                                  alt="Perfil" class="perfil-img">
                         </div>
-                        <div class="price-tag">
-                            Precio: <span>$${contrato.precio}</span>
+                        <div class="price-actions">
+                            ${isCliente ? '<button class="pagar-btn">Pagar</button>' : ''}
+                            <div class="price-tag">Precio: <span>$${contrato.precio}</span></div>
                         </div>
                     </div>
 
@@ -56,8 +58,85 @@
                         <p>${contrato.descripcion_servicio}</p>
                         <p>Fecha de finalización: <strong>${new Date(contrato.fecha_finalizacion).toLocaleDateString()}</strong></p>
                     </div>
+
+                    <button class="resumen-pagos-btn" data-contrato-id="${contrato.contrato_id}">
+                        Resumen de Pago(s)
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="resumen-pagos-contenido" id="comprobantes-${contrato.contrato_id}">
+                        <!-- Aquí se cargarán los comprobantes -->
+                    </div>
                 `;
                 container.appendChild(card);
+            });
+
+            // Agregar evento a los botones de "Resumen de Pago(s)"
+            container.addEventListener('click', event => {
+                if (event.target.classList.contains('resumen-pagos-btn')) {
+                    const contratoId = event.target.getAttribute('data-contrato-id');
+                    const comprobantesContainer = document.getElementById(`comprobantes-${contratoId}`);
+                    const icon = event.target.querySelector('i');
+
+                    // Alternar visibilidad del contenido
+                    if (comprobantesContainer.style.display === 'block') {
+                        comprobantesContainer.style.display = 'none';
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                        return;
+                    }
+
+                    // Mostrar el contenido y cargar comprobantes si no están cargados
+                    comprobantesContainer.style.display = 'block';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+
+                    if (comprobantesContainer.childElementCount > 0) {
+                        console.log(`Comprobantes para contrato ${contratoId} ya cargados.`);
+                        return; // No hacer nada si ya están cargados
+                    }
+
+                    // Hacer la petición para obtener los comprobantes de este contrato
+                    fetch(`/api/comprobante_pago/contrato/${contratoId}`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
+                        .then(comprobantes => {
+                            console.log(`Comprobantes para contrato ${contratoId}:`, comprobantes);
+                            comprobantesContainer.innerHTML = '';
+
+                            if (comprobantes.length === 0) {
+                                comprobantesContainer.innerHTML = '<p>No hay comprobantes para este contrato.</p>';
+                                return;
+                            }
+
+                            comprobantes.forEach((comprobante, index) => {
+                                const comprobanteItem = document.createElement('div');
+                                comprobanteItem.className = 'pago-item';
+                                comprobanteItem.innerHTML = `
+                                    <h4>${index + 1}° Pago:</h4>
+                                    <div class="pago-detalle">
+                                        <span class="label">Monto:</span>
+                                        <span class="value">$${comprobante.monto}</span>
+                                    </div>
+                                    <div class="pago-detalle">
+                                        <span class="label">Fecha de Pago:</span>
+                                        <span class="value">${new Date(comprobante.fecha_pago).toLocaleDateString()}</span>
+                                    </div>
+                                    <div class="pago-detalle">
+                                        <span class="label">Método de Pago:</span>
+                                        <span class="value">${comprobante.metodo_pago}</span>
+                                    </div>
+                                `;
+                                comprobantesContainer.appendChild(comprobanteItem);
+                            });
+                        })
+                        .catch(error => {
+                            console.error(`Error al cargar comprobantes para contrato ${contratoId}:`, error);
+                        });
+                }
             });
 
             console.log('Contratos agregados:', container.querySelectorAll('.card').length);
