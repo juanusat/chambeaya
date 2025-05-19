@@ -144,3 +144,21 @@ def create_comprobante_pago(data):
             return cursor.lastrowid
     finally:
         conn.close()
+
+def get_comprobantes_by_contrato_id(contrato_id):
+    conn = get_db_connection()
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute("""
+                SELECT
+                    cc.comprobante_contrato_id,
+                    cc.monto,
+                    m.nombre AS metodo_pago,
+                    cc.fecha_pago
+                FROM comprobante_contrato cc
+                JOIN metodo_pago m ON cc.metodo_pago_id = m.metodo_pago_id
+                WHERE cc.contrato_id = %s;
+            """, (contrato_id,))
+            return cursor.fetchall()
+    finally:
+        conn.close()

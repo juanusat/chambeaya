@@ -1,231 +1,388 @@
+
 body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  color: #333;
-  background-color: #f8f8f8;
-  margin: 0;
-  padding: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
 }
 
 .contratos-container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 0 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
 }
 
 /* Encabezado superior */
 .fila_superior {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .fila_superior h1 {
-  margin: 0;
-  font-size: 1.8em;
-  color: #333;
+    margin: 0;
+    font-size: 1.8em;
+    color: #333;
 }
 
-.fila_superior button {
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  background-color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.9em;
-  display: inline-flex; /* Permite alinear el texto y el icono */
-  align-items: center;
-  gap: 5px; /* Espacio entre texto y icono */
+.fila_superior .ordenar-container { /* Contenedor para el texto y el botón */
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.fila_superior p {
-  margin: 0;
-  font-size: 0.9em;
-  color: #555;
+.fila_superior .ordenar-container p {
+     margin: 0;
+     font-size: 0.9em;
+     color: #555;
 }
+
+.fila_superior button { /* Botón "Más reciente" */
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
 
 /* Contenedor de las tarjetas */
 .lista-contratos {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* Tarjeta individual */
 .card {
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.3s ease;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
 }
 
 .card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
 }
 
 /* Cabecera de la tarjeta (Título, Fechas y Tag) */
 .card-header {
-  display: flex;
-  justify-content: space-between; /* Espacia el contenido */
-  align-items: center;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Cambiado de flex-start para mantener consistencia con original */
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
 }
 
-/* Contenedor para Título y Fechas */
 .title-dates-row {
-  display: flex;
-  align-items: center;
-  flex-grow: 1; /* Permite que este contenedor ocupe espacio */
-  margin-right: 10px; /* Espacio a la derecha antes del tag */
-  flex-wrap: wrap; /* Permite que el título y las fechas se envuelvan */
+    display: flex;
+    align-items: center; /* Consistencia con original */
+    flex-grow: 1;
+    margin-right: 10px;
+    flex-wrap: wrap;
 }
 
 
 .card-header .nombre {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #333;
-  margin: 0;
-  margin-right: 15px; /* Espacio entre el título y las fechas */
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    margin-right: 15px;
 }
 
-/* Contenedor para las fechas */
 .dates {
-  font-size: 0.85em;
-  color: #666;
-  display: flex; /* Usa flexbox para alinear las fechas */
-  gap: 10px; /* Espacio entre las fechas de inicio y fin */
-  flex-wrap: wrap; /* Permite que las fechas se envuelvan */
-  
+    font-size: 0.85em;
+    color: #666;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .date-label {
-  font-weight: bold; /* Negrita para "Inicio:" y "Final:" */
+    font-weight: bold;
 }
 
 .date-value {
-  font-weight: normal; /* Normal para el valor de la fecha */
+    font-weight: normal;
 }
 
-
-/* Estilos para la etiqueta (tag) */
 .tag {
-  display: inline-flex;
-  align-items: center;
-  background-color: #e0e0e0;
-  border-radius: 9999px;
-  padding: 0.25rem 0.75rem;
-  font-size: 0.85rem;
-  gap: 0.4rem;
-  color: #555;
-  font-weight: normal;
-  flex-shrink: 0; /* Evita que el tag se encoja */
+    display: inline-flex;
+    align-items: center;
+    background-color: #e0e0e0;
+    border-radius: 9999px; /* Originalmente muy redondeado */
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    gap: 0.4rem;
+    color: #555;
+    font-weight: normal;
+    flex-shrink: 0;
 }
 
 .tag i {
-  color: #777;
+    color: #777; /* Color original del icono del tag */
 }
 
-
-/* Nuevo estilo para la fila del cliente/prestador y el precio */
+/* Fila del cliente/prestador y el precio/acciones */
 .client-price-row {
-  display: flex;
-  justify-content: space-between; /* Espacia el bloque de cliente y el precio */
-  align-items: center;
-  margin-bottom: 15px;
-  font-size: 0.95em;
-  color: #555;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 0.95em;
+    color: #555;
+    flex-wrap: wrap; /* Para responsividad */
 }
 
-/* Estilos para el bloque de información del cliente/prestador */
 .client-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio original */
+    flex-grow: 1; /* Para que ocupe espacio */
 }
 
 .client-info p {
-  margin: 0;
+    margin: 0;
 }
 
-/* Estilo para el nombre del cliente/prestador */
 .client-name {
-  font-weight: bold;
-  color: #333;
+    font-weight: bold;
+    color: #333;
 }
 
-/* Estilo para la imagen de perfil */
 .perfil-img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  object-fit: cover;
-  background-color: #ccc;
+    width: 30px; /* Tamaño original */
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #ccc; /* Fondo original si la imagen no carga */
 }
 
+/* Contenedor para el botón de pagar y la etiqueta de precio */
+.price-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre botón pagar y precio */
+    margin-left: auto; /* Empuja a la derecha */
+}
 
-/* Estilo para el precio como un tag/recuadro */
-.price-tag {
-  display: inline-block;
-  border: 1px solid #bbb;
-  border-radius: 8px;
-  padding: 0.3rem 0.8rem;
-  font-weight: bold;
-  background-color: #f9f9f9;
-  color: #000;
-  font-size: 0.9em;
-  /* margin-left: auto;  Eliminado, ya que justify-content en client-price-row lo espacia */
-  /* margin-right: 52%; Eliminado, no es necesario con flexbox */
+.price-tag { /* Estilo original para el precio */
+    display: inline-block;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    padding: 0.3rem 0.8rem;
+    font-weight: bold;
+    background-color: #f9f9f9;
+    color: #000;
+    font-size: 0.9em;
+    white-space: nowrap;
 }
 
 .price-tag span {
-  font-weight: bold;
+    font-weight: bold;
 }
-
 
 /* Información del contrato (descripción) */
 .info {
-  font-size: 0.95em;
-  line-height: 1.6;
-  color: #555;
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: #555;
+    /* margin-bottom: 20px; Eliminado para mantener el original, se añade si es necesario */
 }
 
 .info p {
-  margin: 0;
+    margin: 0;
 }
 
+/* --- ESTILOS AÑADIDOS/MODIFICADOS PARA DESPLEGABLE Y BOTÓN PAGAR --- */
+
+/* Botón Pagar */
+.pagar-btn {
+    background-color: #007bff; /* Azul primario, puedes ajustarlo */
+    color: white;
+    border: none;
+    padding: 6px 15px; /* Padding similar al price-tag pero un poco más grande */
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em; /* Similar al price-tag */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.pagar-btn:hover {
+    background-color: #0056b3; /* Azul más oscuro */
+}
+
+/* Botón para desplegar/ocultar el resumen de pagos */
+.resumen-pagos-btn {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    font-size: 1em; /* Un poco más grande para destacar */
+    margin-top: 15px; /* Espacio arriba del botón */
+    margin-bottom: 10px; /* Espacio debajo del botón, antes del contenido si se despliega */
+    transition: background-color 0.3s ease;
+}
+
+.resumen-pagos-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.resumen-pagos-btn .fa-chevron-down,
+.resumen-pagos-btn .fa-chevron-up {
+    transition: transform 0.3s ease;
+}
+
+/* Contenido del resumen de pagos (inicialmente oculto) */
+.resumen-pagos-contenido {
+    display: none; /* Oculto por defecto, se muestra con JS */
+    padding: 15px;
+    border: 1px solid #eee;
+    border-top: none; /* Para que no haya doble borde con el botón */
+    border-radius: 0 0 6px 6px; /* Redondear esquinas inferiores */
+    background-color: #fdfdfd; /* Fondo muy claro para el contenido */
+    animation: fadeIn 0.5s ease; /* Animación al aparecer */
+    margin-bottom: 10px; /* Espacio después del contenido desplegado */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.pago-item {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #eee; /* Separador sutil entre pagos */
+}
+.pago-item:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.pago-item h4 { /* Título de cada pago (ej: 1° Pago) */
+    font-size: 1em; /* Tamaño consistente */
+    color: #337ab7; /* Un color para destacar el título del pago */
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.pago-detalle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em; /* Tamaño de fuente para los detalles */
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.pago-detalle span {
+    color: #555;
+}
+
+.pago-detalle .label {
+    font-weight: bold;
+    color: #444;
+    min-width: 110px; /* Ancho mínimo para las etiquetas "Monto:", "Fecha:", etc. */
+}
+ .pago-detalle .value {
+    text-align: right;
+    flex-grow: 1;
+}
+/* --- FIN DE ESTILOS AÑADIDOS/MODIFICADOS --- */
 
 /* Estilos de rating (manteniendo los tuyos, aunque no se ven en la imagen de ejemplo) */
 .rating {
-  display: flex;
-  gap: 4px;
-  font-size: 1.2em;
-  cursor: pointer;
-  align-items: center;
+    display: flex;
+    gap: 4px;
+    font-size: 1.2em;
+    cursor: pointer;
+    align-items: center;
 }
 
 .rating span {
-  color: white;
-  text-shadow: 0 0 1px black, 0 0 1px black;
-  transition: color 0.2s;
+    color: white;
+    text-shadow: 0 0 1px black, 0 0 1px black;
+    transition: color 0.2s;
 }
 
 .rating span.hover,
 .rating span.selected {
-  color: gold;
+    color: gold;
 }
-
 
 /* Asegurar que el contenedor principal de la aplicación y la página ocupen la altura completa si es necesario */
 .app,
 .page {
-  min-height: 100vh;
+    min-height: 100vh;
 }
 
 
+/* Estilos responsivos (ajustes mínimos basados en la nueva estructura) */
+@media (max-width: 600px) { /* Usar un breakpoint común */
+    .fila_superior {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .card-header {
+        /* Mantener align-items: center; o cambiar a flex-start si se prefiere */
+    }
+
+    .title-dates-row {
+        /* margin-right: 0; si el tag se mueve debajo */
+        /* margin-bottom: 10px; si el tag se mueve debajo */
+    }
+
+    /* Ajuste para la fila de cliente y precio/acciones en móvil */
+    .client-price-row {
+        flex-direction: column;
+        align-items: flex-start; /* Alinear todo a la izquierda en móvil */
+        gap: 10px; /* Espacio entre client-info y price-actions */
+    }
+
+    .price-actions {
+        width: 100%; /* Ocupar todo el ancho */
+        justify-content: space-between; /* Espaciar botón y precio */
+        margin-left: 0; /* Resetear margen */
+    }
+
+    .pagar-btn {
+         /* Podrías querer que el botón Pagar ocupe más espacio o se centre */
+         /* order: -1; /* Si quieres que el botón Pagar aparezca antes que el precio */
+    }
+
+    .price-tag {
+        /* align-self: flex-start; Ya está implícito con flex-start en client-price-row */
+    }
+
+    .pago-detalle {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .pago-detalle .value {
+        text-align: left;
+    }
+}
