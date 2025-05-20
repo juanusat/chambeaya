@@ -16,6 +16,15 @@
             tabs[0].classList.remove('active');
         }
     }
+    document.getElementById('show_registro').addEventListener('click', function() {
+        mostrarFormulario('registro')
+    })
+    document.getElementById('show_ingresar').addEventListener('click', function() {
+        mostrarFormulario('ingresar')
+    })
+    if (location.search == '?i') {
+        mostrarFormulario('ingresar')
+    }
     document.getElementById('login').addEventListener('submit', async function (e) {
         e.preventDefault();
 
@@ -107,8 +116,8 @@
             if (!formType) return
 
             const url = formType === 'empresa'
-                ? '/api/auth/registro-empresa'
-                : '/api/auth/registro-persona'
+                ? '/api/auth/registrar_empresa'
+                : '/api/auth/registrar_persona'
 
             const formData = new FormData()
             formData.append('correo', correo.value.trim())
@@ -136,7 +145,7 @@
                 const data = await response.json()
                 if (response.ok) {
                     alert('Registro exitoso. Ahora puedes iniciar sesión.')
-                    window.location.href = '/login'
+                    window.location.href = '/acceder?i'
                 } else {
                     alert('Error al registrarse: ' + (data.msg || 'Intenta de nuevo'))
                 }
