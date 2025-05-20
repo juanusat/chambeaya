@@ -6,7 +6,7 @@
     // Actualizar la imagen del avatar
     const avatarElement = document.querySelector('.avatar');
     if (userData.url_picture) {
-        avatarElement.innerHTML = `<img src="/static/upload/${userData.url_picture}" alt="Avatar">`;
+        avatarElement.innerHTML = `<img src="/static/uploads/${userData.url_picture}" alt="Avatar">`;
     } else {
         avatarElement.innerHTML = '<i class="fa-solid fa-user"></i>'; // Ícono por defecto si no hay imagen
     }
