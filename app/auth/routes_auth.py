@@ -1,12 +1,19 @@
-from flask import Blueprint, request, jsonify, make_response, g, redirect, url_for
+import os
+import random
+import datetime
+from datetime import timedelta
+from flask import Blueprint, request, jsonify, make_response, g, redirect, url_for, current_app
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, set_access_cookies, unset_jwt_cookies
 from app.auth.controlador_auth import (
     verificar_credenciales, 
+    registrar_empresa,
+    registrar_persona,
     actualizar_password,
     actualizar_email,
     actualizar_descripcion,
 )
-from datetime import timedelta
+import os
+from werkzeug.utils import secure_filename
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -62,8 +69,59 @@ def update_descripcion():
     actualizar_descripcion(data.get("descripcion") , getattr(g, 'user_id', None) )
     return jsonify({'message':'Descripcion actualizada exitosamente'}), 200
 
-@auth_bp.route('/registrar_usuario',methods=['POST'])
-def registrar_usuario():
-    data=request.get_json()
-    
-    
+@auth_bp.route('/registrar_empresa', methods=['POST'])
+def registrar_empresa_route():
+    nombre = request.form.get('nombre')
+    ruc = request.form.get('ruc')
+    fecha_creacion = request.form.get('fechaCreacion')
+    correo = request.form.get('correo')
+    usuario = request.form.get('usuario')
+    contrasena = request.form.get('contrasena')
+    try:
+        registrar_empresa(
+            nombre,
+            ruc,
+            fecha_creacion,
+            correo,
+            usuario,
+            contrasena
+        )
+        return jsonify({}), 200
+    except Exception as e:
+        return jsonify({'msg': str(e)}), 400
+
+@auth_bp.route('/registrar_persona', methods=['POST'])
+def registrar_persona_route():
+    nombres = request.form.get('nombres')
+    apellidos = request.form.get('apellidos')
+    fecha_nacimiento = request.form.get('fechaNacimiento')
+    telefono = request.form.get('telefono')
+    correo = request.form.get('correo')
+    usuario = request.form.get('usuario')
+    contrasena = request.form.get('contrasena')
+    foto = request.files.get('foto')
+
+    timestamp = datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
+    random_number = random.randint(10, 99)
+    extension = secure_filename(foto.filename).rsplit('.', 1)[-1]
+    filename = f"{usuario}--{timestamp}-{random_number}.{extension}"
+
+    upload_folder = os.path.abspath(os.path.join(current_app.root_path, '..', 'static', 'uploads'))
+    os.makedirs(upload_folder, exist_ok=True)
+    foto_path = os.path.join(upload_folder, filename)
+    foto.save(foto_path)
+
+    try:
+        registrar_persona(
+            nombres,
+            apellidos,
+            telefono,
+            fecha_nacimiento,
+            correo,
+            usuario,
+            contrasena,
+            filename
+        )
+        return jsonify({}), 200
+    except Exception as e:
+        return jsonify({'msg': str(e)}), 400
