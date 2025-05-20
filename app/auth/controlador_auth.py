@@ -63,3 +63,41 @@ def actualizar_descripcion(data, usuario_id):
             conn.commit()
     finally:
         conn.close()
+
+
+def registrar_empresa(_nombre_empresa, _ruc, _fecha_creacion, _email, _username, _password,):
+    password_hash = hashlib.sha256(_password.encode('utf-8')).hexdigest()
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.callproc('registrar_empresa_usuario_sf', [
+                _nombre_empresa,
+                _ruc,
+                _email,
+                password_hash,
+                _username,
+                ''
+            ])
+        conn.commit()
+    finally:
+        conn.close()
+
+def registrar_persona(_nombre, _apellido, _telefono, _fecha_nac, _email, _username, _password, _url_picture):
+    password_hash = hashlib.sha256(_password.encode('utf-8')).hexdigest()
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.callproc('registrar_persona_usuario_cf', [
+                _nombre,
+                _apellido,
+                _telefono,
+                _fecha_nac,
+                _email,
+                password_hash,
+                _username,
+                _url_picture,
+                ''
+            ])
+        conn.commit()
+    finally:
+        conn.close()

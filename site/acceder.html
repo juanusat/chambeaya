@@ -19,50 +19,59 @@
             <div class="width-f">
                 <div class="auth-container">
                     <div class="auth-tabs">
-                        <button class="tab-btn active" onclick="mostrarFormulario('registro')">Registrarse</button>
-                        <button class="tab-btn" onclick="mostrarFormulario('login')">Iniciar Sesión</button>
+                        <button class="tab-btn active" id="show_registro">Registrarse</button>
+                        <button class="tab-btn" id="show_ingresar">Iniciar Sesión</button>
                     </div>
 
                     <div class="auth-form-box">
                         <!-- Registro -->
-                        <form id="registro" class="auth-form">
-                            <label>Dirección de correo electrónico*</label>
-                            <input type="email" required>
+                        <form id="registro" class="auth-form" enctype="multipart/form-data">
+                            <div id="common-section">
+                                <label>Dirección de correo electrónico*</label>
+                                <input type="email" id="correo" required>
 
-                            <label>Nombres*</label>
-                            <input type="email" required>
+                                <label>Usuario*</label>
+                                <input type="text" id="usuario" required>
 
-                            <label>Apellidos*</label>
-                            <input type="email" required>
-
-                            <label>Fecha de Nacimiento*</label>
-                            <input type="date" required>
-
-                            <label>Usuario*</label>
-                            <input type="password" required>
-
-                            <label>Contraseña*</label>
-                            <input type="password" required>
-
-                            <p class="auth-policy">
-                                Al hacer clic en Continuar con Google, Facebook, o Apple, aceptas las
-                                <a href="#">condiciones de uso</a> y la
-                                <a href="#">política de privacidad</a> de ChambeaYa
-                            </p>
-
-                            <button type="submit" class="auth-main-btn">Iniciar Sesión</button>
-                            <div class="auth-separator">O</div>
-
-                            <div class="auth-social-container">
-                                <button type="button" class="auth-social-btn google">
-                                    <i class="fab fa-google"></i> Registrarme con Google
-                                </button>
-                                <button type="button" class="auth-social-btn facebook">
-                                    <i class="fab fa-facebook"></i> Registrarme con Facebook
-                                </button>
+                                <label>Contraseña*</label>
+                                <input type="password" id="contrasena" required>
                             </div>
-                        </form>
 
+                            <div class="auth-common-actions">
+                                <button type="button" id="continue-empresa" disabled>Continuar como empresa</button>
+                                <button type="button" id="continue-persona" disabled>Continuar como persona</button>
+                            </div>
+
+                            <div id="empresa-section" style="display: none;">
+                                <label>Nombre de la empresa*</label>
+                                <input type="text" id="empresa-nombre">
+
+                                <label>RUC*</label>
+                                <input type="text" id="empresa-ruc">
+
+                                <label>Fecha de creación*</label>
+                                <input type="date" id="empresa-fecha">
+                            </div>
+
+                            <div id="persona-section" style="display: none;">
+                                <label>Nombres*</label>
+                                <input type="text" id="persona-nombres">
+
+                                <label>Apellidos*</label>
+                                <input type="text" id="persona-apellidos">
+
+                                <label>Fecha de Nacimiento*</label>
+                                <input type="date" id="persona-fecha">
+
+                                <label>Teléfono*</label>
+                                <input type="text" id="persona-telefono">
+
+                                <label>Foto de perfil*</label>
+                                <input type="file" id="persona-foto" accept="image/*">
+                            </div>
+
+                            <button type="submit" id="submit-btn" disabled>Registrarse</button>
+                        </form>
 
                         <!-- Login -->
                         <form id="login" class="auth-form hidden">
