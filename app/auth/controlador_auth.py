@@ -63,3 +63,23 @@ def actualizar_descripcion(data, usuario_id):
             conn.commit()
     finally:
         conn.close()
+"""
+def registrar_usuario(data): 
+    conn = get_db_connection()
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute(
+             
+                CALL registrar_persona_usuario_cf( %s, %s,%s,
+                %s, %s,
+                %s,%s,
+                'Sin descripción');
+              ,
+                (
+                    data[]
+                )
+            )
+            conn.commit()
+    finally:
+        conn.close()
+"""

@@ -61,5 +61,9 @@ def update_descripcion():
     data = request.get_json()
     actualizar_descripcion(data.get("descripcion") , getattr(g, 'user_id', None) )
     return jsonify({'message':'Descripcion actualizada exitosamente'}), 200
+
+@auth_bp.route('/registrar_usuario',methods=['POST'])
+def registrar_usuario():
+    data=request.get_json()
     
     

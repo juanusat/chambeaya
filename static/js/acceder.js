@@ -48,3 +48,40 @@ document.getElementById('login').addEventListener('submit', async function (e) {
         alert('No se pudo conectar con el servidor.');
     }
 });
+
+document.getElementById('registro').addEventListener('submit', async function (e) {
+    e.preventDefault(); // Previene que el formulario se envíe de forma tradicional (y recargue la página)
+
+    // Obtener y limpiar los valores de los inputs
+    const correo = document.getElementById('correo').value.trim();
+    const nombres = document.getElementById('nombres').value.trim();
+    const apellidos = document.getElementById('apellidos').value.trim();
+    const fechaNacimiento = document.getElementById('fechaNacimiento').value;
+    const usuario = document.getElementById('usuario').value.trim();
+    const contrasena = document.getElementById('contrasena').value;
+
+    try {
+        // Enviamos los datos al servidor usando fetch y await
+        const response = await fetch('/api/auth/registro', {
+            method: 'POST', // Tipo de solicitud HTTP
+            credentials: 'same-origin', // Envía cookies si la URL está en el mismo dominio
+            headers: { 'Content-Type': 'application/json' }, // Indicamos que el cuerpo es JSON
+            body: JSON.stringify({ correo, nombres, apellidos, fechaNacimiento, usuario, contrasena }) // Convertimos el objeto JS a JSON
+        });
+
+        const data = await response.json(); // Esperamos la respuesta del servidor y la convertimos a JSON
+
+        if (response.ok) {
+            // Si el registro fue exitoso (HTTP 200-299)
+            alert('Registro exitoso. Ahora puedes iniciar sesión.');
+            window.location.href = '/login'; // Redirige al login o a la página principal
+        } else {
+            // Si hubo un error, mostramos el mensaje del servidor
+            alert('Error al registrarse: ' + (data.msg || 'Intenta de nuevo'));
+        }
+    } catch (error) {
+        // Si falla la conexión con el servidor
+        console.error('Error al registrarse:', error);
+        alert('No se pudo conectar con el servidor.');
+    }
+});
