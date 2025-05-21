@@ -5,7 +5,7 @@ from datetime import timedelta
 from flask import Blueprint, request, jsonify, make_response, g, redirect, url_for, current_app
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, set_access_cookies, unset_jwt_cookies
 from app.auth.controlador_auth import (
-    verificar_credenciales, 
+    verificar_credenciales,
     registrar_empresa,
     registrar_persona,
     actualizar_password
