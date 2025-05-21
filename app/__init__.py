@@ -102,10 +102,8 @@ def create_app():
 
         if profile['persona_id'] is not None:
             user_type = 'persona'
-            # acá profile['persona_nombre'], profile['persona_apellido'], etc.
         elif profile['empresa_id'] is not None:
             user_type = 'empresa'
-            # acá profile['empresa_nombre'], profile['empresa_descripcion'], etc.
         else:
             user_type = 'desconocido'
 
@@ -195,10 +193,8 @@ def create_app():
 
         if profile['persona_id'] is not None:
             user_type = 'persona'
-            # acá profile['persona_nombre'], profile['persona_apellido'], etc.
         elif profile['empresa_id'] is not None:
             user_type = 'empresa'
-            # acá profile['empresa_nombre'], profile['empresa_descripcion'], etc.
         else:
             user_type = 'desconocido'
 
