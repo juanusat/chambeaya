@@ -116,7 +116,7 @@ def create_app():
         else:
             titulo = f"@{profile['username']}"
 
-        html = custom_render_html('usuario.html')
+        html = custom_render_html('perfil.html')
         html = html.replace('(USERNAME)', titulo)
         html = html.replace('["json"]', user_json)
         return Response(html, mimetype='text/html')
