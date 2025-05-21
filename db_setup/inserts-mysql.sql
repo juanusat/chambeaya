@@ -22,7 +22,7 @@ CALL registrar_persona_usuario_sf('Álvaro', 'Rojas','920928263', '1998-01-05', 
 -- Empresas
 CALL registrar_empresa_usuario_cf('TechNova', '20123456781', 'contacto@technova.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b','nova_tech.pe','TechNova_.jpg','Empresa de tecnología e innovación');
 CALL registrar_empresa_usuario_cf('AgroPerú', '10456789374', 'info@agroperu.pe', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b','agroperu.pe','AgroPeru.jpg','Empresa dedicada a soluciones agrícolas');
-CALL registrar_empresa_usuario_cf('Constructora Andina', '20567891236','const.andinap', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'admin@constructoraandina.com', 'ConstructoraAndina.png','Empresa constructora especializada en obras civiles');
+CALL registrar_empresa_usuario_cf('Constructora Andina', '20567891236','admin@constructoraandina.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'const.andinap', 'ConstructoraAndina.png','Empresa constructora especializada en obras civiles');
 CALL registrar_empresa_usuario_cf('BioVida', '10234567896', 'ventas@biovida.pe', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b','biovid.peru','BioVida.jpeg','Empresa de productos naturales y ecológicos');
 CALL registrar_empresa_usuario_sf('EduDigital', '20678912340', 'soporte@edudigital.com', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b','e.digital','Plataforma de educación virtual e innovación educativa');
 
@@ -257,8 +257,8 @@ VALUES
 	(54, 11, 7, 250.00, 'en espera', '2025-05-28', '2025-06-06'),
 	-- Prestador 1
 	(60, 20, 1, 320.00, 'finalizado', '2025-05-25', '2025-06-01'),
-	(61, 21, 1, 280.00, 'pendiente', '2025-06-05', '2025-06-14'),
-	(62, 22, 1, 300.00, 'en espera', '2025-06-15', '2025-06-25'),
+	(61, 15, 1, 280.00, 'pendiente', '2025-06-05', '2025-06-14'),
+	(62, 15, 1, 300.00, 'en espera', '2025-06-15', '2025-06-25'),
 
 
 	-- Prestador 2
