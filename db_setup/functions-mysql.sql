@@ -72,7 +72,7 @@ DELIMITER $$
 
 CREATE PROCEDURE registrar_empresa_usuario_cf(
     IN _nombre_empresa VARCHAR(255),
-    IN _descripcion_empresa VARCHAR(255),
+    IN _ruc VARCHAR(255),
     IN _email VARCHAR(255),
     IN _password_hash VARCHAR(255),
     IN _username VARCHAR(255),
@@ -83,8 +83,8 @@ BEGIN
     DECLARE nueva_empresa_id INT;
     DECLARE nuevo_usuario_id INT;
 
-    INSERT INTO empresa (nombre, descripcion, fecha_creacion)
-    VALUES (_nombre_empresa, _descripcion_empresa, CURDATE());
+    INSERT INTO empresa (nombre, ruc, fecha_creacion)
+    VALUES (_nombre_empresa, _ruc, CURDATE());
     
     SET nueva_empresa_id = LAST_INSERT_ID();
 
@@ -105,7 +105,7 @@ DELIMITER $$
 
 CREATE PROCEDURE registrar_empresa_usuario_sf(
     IN _nombre_empresa VARCHAR(255),
-    IN _descripcion_empresa VARCHAR(255),
+    IN _ruc VARCHAR(255),
     IN _email VARCHAR(255),
     IN _password_hash VARCHAR(255),
     IN _username VARCHAR(255),
@@ -116,7 +116,7 @@ BEGIN
     DECLARE nuevo_usuario_id INT;
 
     INSERT INTO empresa (nombre, descripcion, fecha_creacion)
-    VALUES (_nombre_empresa, _descripcion_empresa, CURDATE());
+    VALUES (_nombre_empresa, _ruc, CURDATE());
     
     SET nueva_empresa_id = LAST_INSERT_ID();
 

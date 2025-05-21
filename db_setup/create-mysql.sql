@@ -70,7 +70,7 @@ create table empresa (
     empresa_id int auto_increment,
     usuario_id int unique,
     nombre varchar(255) not null unique,
-    descripcion varchar(255) not null,
+    ruc varchar(255) not null,
     fecha_creacion date not null,
     primary key (empresa_id)
 );
