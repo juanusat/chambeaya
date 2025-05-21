@@ -1,5 +1,5 @@
 (function () {
-    window.siteA = location.port == '4250'
+    window.siteA = ['4250', '4251'].includes(location.port)
 
     const appElement = document.querySelector('.app');
     let headerElement = document.querySelector('.header');
