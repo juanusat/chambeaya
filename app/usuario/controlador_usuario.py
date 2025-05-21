@@ -162,4 +162,32 @@ def get_validar_username_usuario(username):
             )
             return cursor.fetchone()
     finally:
+        conn.close()    
+
+def actualizar_email(data, usuario_id): 
+    conn = get_db_connection()
+    try: 
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor: 
+            cursor.execute(
+                """
+                UPDATE usuario set email = %s where usuario_id = %s;
+                """,
+                (data,usuario_id)
+            )
+            conn.commit()
+    finally:
+        conn.close()
+
+def actualizar_descripcion(data, usuario_id): 
+    conn = get_db_connection()
+    try: 
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor: 
+            cursor.execute(
+                """
+                UPDATE usuario set descripcion = %s where usuario_id = %s;
+                """,
+                (data, usuario_id)
+            )
+            conn.commit()
+    finally:
         conn.close()

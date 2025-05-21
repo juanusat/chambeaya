@@ -9,20 +9,19 @@ document.querySelectorAll(".input-container button, .input-container-descripcion
     });
 });
 
-// Función para detectar todos los inputs habilitados y enviar los datos correspondientes
 document.querySelector(".confirmar").addEventListener("click", async function () {
     let inputsHabilitados = document.querySelectorAll("input:not([disabled]), textarea:not([disabled])");
 
     inputsHabilitados.forEach(input => {
         console.log(`Campo habilitado: ${input.name} con valor: ${input.value}`);
 
-        let datos = {}; // Inicializa el objeto de datos vacío
+        let datos = {};
 
         switch (input.name) {
             case "correo":
                 const email = input.value; 
                 datos = {email};
-                enviarDatos('/api/auth/actualizar_email', datos);
+                enviarDatos('/api/usuario/actualizar_email', datos);
                 break;
             case "clave":
                 const  password = input.value; 
@@ -32,7 +31,7 @@ document.querySelector(".confirmar").addEventListener("click", async function ()
             case "descripcion":
                 const descripcion = input.value;
                 datos = {descripcion};
-                enviarDatos("/api/auth/actualizar_descripcion", datos);
+                enviarDatos("/api/usuario/actualizar_descripcion", datos);
                 break;
             default:
                 console.log("Input no reconocido");
@@ -40,7 +39,6 @@ document.querySelector(".confirmar").addEventListener("click", async function ()
     });
 });
 
-// Función para enviar datos al servidor
 async function enviarDatos(url, datos) {
     try{
         const response = await fetch(url, {
