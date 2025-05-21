@@ -34,36 +34,7 @@ def actualizar_password(data, usuario_id):
             )
             conn.commit()
     finally:
-        conn.close() 
-
-def actualizar_email(data, usuario_id): 
-    conn = get_db_connection()
-    try: 
-        with conn.cursor(pymysql.cursors.DictCursor) as cursor: 
-            cursor.execute(
-                """
-                UPDATE usuario set email = %s where usuario_id = %s;
-                """,
-                (data,usuario_id)
-            )
-            conn.commit()
-    finally:
         conn.close()
-
-def actualizar_descripcion(data, usuario_id): 
-    conn = get_db_connection()
-    try: 
-        with conn.cursor(pymysql.cursors.DictCursor) as cursor: 
-            cursor.execute(
-                """
-                UPDATE usuario set descripcion = %s where usuario_id = %s;
-                """,
-                (data, usuario_id)
-            )
-            conn.commit()
-    finally:
-        conn.close()
-
 
 def registrar_empresa(_nombre_empresa, _ruc, _fecha_creacion, _email, _username, _password,):
     password_hash = hashlib.sha256(_password.encode('utf-8')).hexdigest()

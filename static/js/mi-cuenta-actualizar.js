@@ -9,49 +9,54 @@ document.querySelectorAll(".input-container button, .input-container-descripcion
     });
 });
 
-// Función para detectar todos los inputs habilitados y enviar los datos correspondientes
 document.querySelector(".confirmar").addEventListener("click", async function () {
     let inputsHabilitados = document.querySelectorAll("input:not([disabled]), textarea:not([disabled])");
 
+    let promesas = [];
     inputsHabilitados.forEach(input => {
         console.log(`Campo habilitado: ${input.name} con valor: ${input.value}`);
 
-        let datos = {}; // Inicializa el objeto de datos vacío
+        let datos = {};
+        let url = "";
 
         switch (input.name) {
             case "correo":
-                const email = input.value; 
-                datos = {email};
-                enviarDatos('/api/auth/actualizar_email', datos);
+                datos = { email: input.value };
+                url = "/api/usuario/actualizar_email";
                 break;
             case "clave":
-                const  password = input.value; 
-                datos = {password};
-                enviarDatos("/api/auth/actualizar_password", datos);
+                datos = { password: input.value };
+                url = "/api/auth/actualizar_password";
                 break;
             case "descripcion":
-                const descripcion = input.value;
-                datos = {descripcion};
-                enviarDatos("/api/auth/actualizar_descripcion", datos);
+                datos = { descripcion: input.value };
+                url = "/api/usuario/actualizar_descripcion";
                 break;
             default:
                 console.log("Input no reconocido");
+                return;
         }
+        promesas.push(enviarDatos(url, datos));
     });
-});
 
-// Función para enviar datos al servidor
-async function enviarDatos(url, datos) {
-    try{
-        const response = await fetch(url, {
-            method: 'POST',
-            credentials: 'same-origin', // para enviar/recibir cookies
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(datos)
-        });
-        alert("Datos actualizados")
-    }catch (error) {
+    try {
+        await Promise.all(promesas);
+        alert("Datos actualizados");
+    } catch (error) {
         console.error("Error al modificar datos:", error);
         alert("Error al modificar datos");
-    };
+    }
+});
+
+async function enviarDatos(url, datos) {
+    const response = await fetch(url, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datos)
+    });
+
+    if (!response.ok) {
+        throw new Error(`Error en la solicitud a ${url}`);
+    }
 }

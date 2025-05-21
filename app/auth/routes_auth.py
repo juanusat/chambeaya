@@ -5,12 +5,10 @@ from datetime import timedelta
 from flask import Blueprint, request, jsonify, make_response, g, redirect, url_for, current_app
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, set_access_cookies, unset_jwt_cookies
 from app.auth.controlador_auth import (
-    verificar_credenciales, 
+    verificar_credenciales,
     registrar_empresa,
     registrar_persona,
-    actualizar_password,
-    actualizar_email,
-    actualizar_descripcion,
+    actualizar_password
 )
 import os
 from werkzeug.utils import secure_filename
@@ -52,22 +50,6 @@ def update_password():
     data = request.get_json()
     actualizar_password(data.get("password") , getattr(g, 'user_id', None) )
     return jsonify({'message':'Contraseña actualizada exitosamente'}), 200
-
-@auth_bp.route('/actualizar_email',methods=['POST'])
-def update_email(): 
-    if not getattr(g, 'user_id', None):
-        return redirect(url_for('inicio'))
-    data = request.get_json()
-    actualizar_email(data.get("email") , getattr(g, 'user_id', None) )
-    return jsonify({'message':'Email actualizado exitosamente'}), 200
-
-@auth_bp.route('/actualizar_descripcion',methods=['POST'])
-def update_descripcion(): 
-    if not getattr(g, 'user_id', None):
-        return redirect(url_for('inicio'))
-    data = request.get_json()
-    actualizar_descripcion(data.get("descripcion") , getattr(g, 'user_id', None) )
-    return jsonify({'message':'Descripcion actualizada exitosamente'}), 200
 
 @auth_bp.route('/registrar_empresa', methods=['POST'])
 def registrar_empresa_route():
