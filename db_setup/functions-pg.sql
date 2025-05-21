@@ -28,9 +28,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-
-
--- Crear Persona_usuario sin foto (usa '1.jpg' como valor por defecto)
 CREATE OR REPLACE FUNCTION registrar_persona_usuario_sf(
 	_nombre varchar,
 	_apellido varchar,
