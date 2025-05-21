@@ -56,7 +56,7 @@ BEGIN
     SET nueva_persona_id = LAST_INSERT_ID();
 
     INSERT INTO usuario (username, email, password_hash, fecha_creacion, url_picture, descripcion)
-    VALUES (_username, _email, _password_hash, CURDATE(), '1.jpg', _descripcion);
+    VALUES (_username, _email, _password_hash, CURDATE(), 'default-pic-profile.jpg', _descripcion);
     
     SET nuevo_usuario_id = LAST_INSERT_ID();
 
@@ -121,7 +121,7 @@ BEGIN
     SET nueva_empresa_id = LAST_INSERT_ID();
 
     INSERT INTO usuario (username, email, password_hash, fecha_creacion, url_picture, descripcion)
-    VALUES (_username, _email, _password_hash, CURDATE(), '2.jpg', _descripcion);
+    VALUES (_username, _email, _password_hash, CURDATE(), 'default-pic-profile', _descripcion);
     
     SET nuevo_usuario_id = LAST_INSERT_ID();
 
