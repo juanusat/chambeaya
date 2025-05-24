@@ -20,11 +20,8 @@
         : `${userData.persona_nombre || 'Nombre desconocido'} ${userData.persona_apellido || ''}`.trim();
     document.querySelector('.profile-name').innerText = displayName;
 
-    // Mostrar la descripción del usuario o de la empresa
-    const description = isEmpresa
-        ? (userData.empresa_descripcion || 'Descripción no disponible')
-        : (userData.descripcion || 'Descripción no disponible');
-    document.querySelector('.details p').innerText = description;
+    // Mostrar la descripción del usuario
+    document.querySelector('.details p').innerText = userData.descripcion;
 
     // Actualizar el número de teléfono
     const phoneParagraph = Array.from(document.querySelectorAll('.details p')).find(p =>

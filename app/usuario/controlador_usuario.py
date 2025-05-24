@@ -132,7 +132,7 @@ def get_usuario_profile_by_username(username):
                   usu.username,
                   usu.email,
                   usu.url_picture,
-                usu.descripcion,
+                  usu.descripcion,
                   -- Datos de persona (si existen)
                   per.persona_id,
                   per.nombre   AS persona_nombre,
@@ -141,7 +141,7 @@ def get_usuario_profile_by_username(username):
                   per.fecha_nacimiento AS persona_fecha_nacimiento,
                   emp.empresa_id,
                   emp.nombre        AS empresa_nombre,
-                  emp.descripcion   AS empresa_descripcion,
+                  emp.ruc   AS empresa_ruc,
                   emp.fecha_creacion AS empresa_fecha_creacion
                 FROM usuario usu
                 LEFT JOIN persona per ON per.usuario_id = usu.usuario_id
