@@ -45,6 +45,10 @@ body {
   color: #888; /* Color del icono */
 }
 
+.avatar img {
+  height: inherit;
+}
+
 /* Contenedor para nombre y rating */
 .profile-info {
   display: flex;
