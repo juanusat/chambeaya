@@ -130,3 +130,23 @@ body {
 .delete-btn:hover {
   color: #e74c3c; /* Rojo suave al pasar el ratón */
 }
+
+.nuevo-contrato-container {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.nuevo-contrato-btn {
+    padding: 8px 12px;
+    background-color: #f8f8f8 ;
+    color: black;
+    border: 1px solid #c4c4c4;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nuevo-contrato-btn:hover {
+    background-color: #e6776b;
+    border: 1px solid #fd4646;
+}

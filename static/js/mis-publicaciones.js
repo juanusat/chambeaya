@@ -26,6 +26,11 @@
                     </div>
                     <div class="price">Precio: $${pub.precio}</div>
                     <p>${pub.descripcion}</p>
+                    <div class="nuevo-contrato-container">
+                        <a href="/crear-contrato" class="nuevo-contrato-btn">
+                            <span>Nuevo contrato</span>
+                        </a>
+                    </div>
                 `;
 
                 // Agregar evento al botón de eliminación
@@ -85,6 +90,11 @@
                     </div>
                     <div class="price">Precio: $${pub.precio}</div>
                     <p>${pub.descripcion}</p>
+                    <div class="nuevo-contrato-container">
+                        <a href="/crear-contrato" class="nuevo-contrato-btn">
+                            <span>Nuevo contrato</span>
+                        </a>
+                    </div>
                 `;
 
                 // Agregar evento al botón de dar de baja
@@ -116,3 +126,4 @@
             console.error("Error al cargar publicaciones:", error);
         });
 })();
+
