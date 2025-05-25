@@ -1,102 +1,5 @@
-/*CSS REGISTRARSE*/
-.auth-container {
-    background: white;
-    border-radius: 24px; /* más redondeado */
-    padding: 40px;
-    max-width: 600px;
-    margin: 60px auto;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+/* CSS REGISTRARSE Y LOGIN (combinados y ajustados) */
 
-
-.auth-tabs {
-    display: flex;
-    border-bottom: 1px solid #000000;
-}
-
-.tab-btn {
-    flex: 1;
-    padding: 12px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.tab-btn.active {
-    border: 1px solid #000;
-    border-bottom: none;
-    font-weight: bold;
-    font-size: 14px;
-    background-color: #fff;
-}
-
-.auth-form-box {
-    padding: 20px;
-}
-
-.auth-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.auth-form input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-}
-
-.auth-main-btn {
-    background-color: #ccc;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.auth-separator {
-    text-align: center;
-    margin: 10px 0;
-}
-
-.auth-social-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: #eee;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.auth-policy {
-    font-size: 0.9rem;
-    color: #333;
-}
-
-.auth-policy a {
-    color: #000;
-    text-decoration: underline;
-}
-
-.auth-social-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.auth-social-btn google{
-    width: 2000px;
-}
-
-
-/*CSS LOGIN*/
 .auth-container {
     background: white;
     border-radius: 24px;
@@ -105,6 +8,7 @@
     margin: 40px auto;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #ccc;
+    font-family: Arial, sans-serif;
 }
 
 .auth-tabs {
@@ -115,22 +19,29 @@
 .tab-btn {
     flex: 1;
     padding: 12px;
+    background-color: #f1f1f1;
     border: none;
     cursor: pointer;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    background-color: #f1f1f1;
+    font-size: 14px;
+    font-weight: normal;
+    transition: background-color 0.3s ease;
+}
+
+.tab-btn:hover {
+    background-color: #ddd;
 }
 
 .tab-btn.active {
     border: 1px solid #000;
     border-bottom: none;
-    background: white;
+    background-color: #fff;
     font-weight: bold;
 }
 
 .auth-form-box {
-    padding: 20px;
+    padding: 20px 0 0 0;
 }
 
 .auth-form {
@@ -141,25 +52,114 @@
 
 .auth-form input[type="email"],
 .auth-form input[type="text"],
-.auth-form input[type="password"] {
+.auth-form input[type="password"],
+.auth-form input[type="date"],
+.auth-form input[type="file"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 1rem;
 }
 
-.auth-main-btn {
+.auth-common-actions{
+    
+    display: flex;
+    gap: 20px; /* espacio entre botones */
+    justify-content: space-around; /* los separa a los extremos */
+    margin-top: 20px; /* opcional para separación vertical */
+
+}
+
+.auth-main-btn,
+.auth-common-actions button {
     background-color: #ccc;
     padding: 10px;
     border: none;
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
 }
+
+.auth-main-btn:hover,
+.auth-common-actions button:hover {
+    background-color: #bbb;
+}
+
+.auth-common-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.auth-common-actions button:disabled {
+    background-color: #eee;
+    cursor: not-allowed;
+    color: #888;
+}
+
+#submit-btn {
+    background-color: #ccc;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;               
+}
+#submit-btn:disabled {
+    background-color: #eee;
+    cursor: not-allowed;
+    color: #888;                
+}
+
+
+#empresa-section,
+#persona-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; 
+    margin-top: 20px;
+    text-align: left; /
+}
+
+
+#empresa-section label,
+#persona-section label {
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+
+#empresa-section input,
+#persona-section input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+#persona-section input[type="file"] {
+    padding: 6px 10px;
+}
+
+#empresa-section {
+    margin-bottom: 30px;
+}
+
+
 
 .auth-separator {
     text-align: center;
     margin: 15px 0;
+    font-weight: bold;
 }
 
 .auth-social-container {
@@ -180,11 +180,26 @@
     cursor: pointer;
     width: 100%;
     justify-content: center;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.auth-social-btn.google:hover {
+    background-color: #db4437; /* color Google rojo */
+    color: white;
+}
+
+.auth-social-btn.facebook:hover {
+    background-color: #3b5998; /* color Facebook azul */
+    color: white;
 }
 
 .auth-policy {
     font-size: 0.9rem;
     color: #333;
+    margin-top: 15px;
+    text-align: center;
 }
 
 .auth-policy a {
@@ -206,8 +221,41 @@
     margin-top: 8px;
     text-decoration: underline;
     color: #000;
+    cursor: pointer;
 }
 
 .hidden {
-    display: none;
+    display: none !important;
+}
+
+#common-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#common-section label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+#common-section input[type="email"],
+#common-section input[type="text"],
+#common-section input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+#common-section input[type="email"]:focus,
+#common-section input[type="text"]:focus,
+#common-section input[type="password"]:focus {
+    border-color: #000;
+}
+
+#circle.green {
+    border-color: green !important; 
 }

@@ -16,10 +16,10 @@
             tabs[0].classList.remove('active');
         }
     }
-    document.getElementById('show_registro').addEventListener('click', function() {
+    document.getElementById('show_registro').addEventListener('click', function () {
         mostrarFormulario('registro')
     })
-    document.getElementById('show_ingresar').addEventListener('click', function() {
+    document.getElementById('show_ingresar').addEventListener('click', function () {
         mostrarFormulario('ingresar')
     })
     if (location.search == '?i') {
@@ -156,4 +156,5 @@
         })
 
     }
-})()
+
+})();

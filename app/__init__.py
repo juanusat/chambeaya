@@ -210,5 +210,7 @@ def create_app():
         html = custom_render_html('mi_cuenta.html')
         html = html.replace('["json"]', user_json)
         return Response(html, mimetype='text/html')
+    
+    return app 
 
-    return app
+  
