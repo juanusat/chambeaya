@@ -257,7 +257,7 @@ def get_contratos_by_estado(estado_nombre):
         conn.close()
 
 
-def create_contrato(data):
+def create_contrato(user_id,data):
     conn = get_db_connection()
     try:
         with conn.cursor() as cursor:
@@ -267,7 +267,7 @@ def create_contrato(data):
                 (
                     data['servicio_id'],
                     data['cliente_id'],
-                    data['prestador_id'],
+                    user_id,
                     data['precio'],
                     data['fecha_inicio'],
                     data['fecha_finalizacion'],
