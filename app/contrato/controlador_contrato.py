@@ -302,3 +302,57 @@ def darbaja_contrato(conts_id):
     finally:
         conn.close()
 
+def obtener_comentario_del_contrato(conts_id):
+    conn= get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute("SELECT calificacion, comentario, fecha_creacion FROM comentario WHERE contrato_id=%s;", (conts_id,))
+            return cursor.fetchone()
+    finally:
+        conn.close()
+
+
+def create_comentario(data):
+    conn=get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute("INSERT INTO comentario(contrato_id,calificacion,comentario,fecha_creacion) values (%s,%s,%s,%s)",
+                           (
+                               data['contrato_id'],
+                               data['calificacion'],
+                               data['comentario'],
+                               data['fecha_creacion']
+                           ),)
+            conn.commit()
+    finally:
+        conn.close()
+
+def update_comentario(comentario_id,data):
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "UPDATE comentario SET calificacion=%s, comentario=%s,fecha_creacion=%s WHERE comentario_id=%s;",
+                (
+                    data['calificacion'],
+                    data['comentario'],
+                    data['fecha_creacion'],
+                    comentario_id
+                ),
+            )
+            conn.commit()
+    finally:
+        conn.close()
+
+def contrato_pertenece_a_cliente(conts_id, cliente_id):
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "SELECT 1 FROM contrato WHERE contrato_id = %s AND cliente_id = %s LIMIT 1;",
+                (conts_id, cliente_id)
+            )
+            result = cursor.fetchone()
+            return result is not None  # True si existe, False si no
+    finally:
+        conn.close()

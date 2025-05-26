@@ -93,6 +93,42 @@
                                     </div>
                                 </div>
                             </div>
+                            <button class="ver-comentario-btn">
+                                Comentario
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="comentario-contenido" style="display: none;">
+                                <!-- Aquí se mostrará el comentario si existe -->
+                                <div class="comentario-existente">
+                                    <p><strong>Comentario:</strong> <span class="comentario-texto">No hay comentario aún.</span></p>
+                                    <p><strong>Calificación:</strong> <span class="calificacion-estrellas-display">
+                                        <!-- Aquí se mostrarán las estrellas (rellenas o vacías) -->
+                                        <span class="estrella-display">&#9734;</span>
+                                        <span class="estrella-display">&#9734;</span>
+                                        <span class="estrella-display">&#9734;</span>
+                                        <span class="estrella-display">&#9734;</span>
+                                        <span class="estrella-display">&#9734;</span>
+                                    </span></p>
+                                    <button class="editar-comentario-btn" style="display: none;">Editar Comentario</button>
+                                </div>
+
+                                <!-- Formulario para agregar o editar comentario -->
+                                <form class="form-comentario" style="display: none;">
+                                    <textarea placeholder="Escribe tu comentario aquí..." required></textarea>
+                                    
+                                    <div class="calificacion-estrellas" data-calificacion="0">
+                                        <span class="estrella" data-value="1">&#9733;</span>
+                                        <span class="estrella" data-value="2">&#9733;</span>
+                                        <span class="estrella" data-value="3">&#9733;</span>
+                                        <span class="estrella" data-value="4">&#9733;</span>
+                                        <span class="estrella" data-value="5">&#9733;</span>
+                                    </div>
+                                    <input type="hidden" name="calificacion" value="0" required />
+                                    
+                                    <button type="submit">Guardar Comentario</button>
+                                    <button type="button" class="cancelar-edicion-btn">Cancelar</button>
+                                </form>
+                            </div>
                         </div>
 
                         <div class="card">
@@ -165,6 +201,43 @@
                                     </div>
                                 </div>
                             </div>
+                            <button class="ver-comentario-btn">
+    Comentario
+    <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="comentario-contenido" style="display: none;">
+                                <!-- Aquí se mostrará el comentario si existe -->
+                                <div class="comentario-existente">
+                                    <p><strong>Comentario:</strong> <span class="comentario-texto">No hay comentario aún.</span></p>
+                                    <p><strong>Calificación:</strong> <span class="calificacion-estrellas-display">
+                                        <!-- Aquí se mostrarán las estrellas (rellenas o vacías) -->
+                                        <span class="estrella-display">&#9734;</span>
+                                        <span class="estrella-display">&#9734;</span>
+                                        <span class="estrella-display">&#9734;</span>
+                                        <span class="estrella-display">&#9734;</span>
+                                        <span class="estrella-display">&#9734;</span>
+                                    </span></p>
+                                    <button class="editar-comentario-btn" style="display: none;">Editar Comentario</button>
+                                </div>
+
+                                <!-- Formulario para agregar o editar comentario -->
+                                <form class="form-comentario" style="display: none;">
+                                    <textarea placeholder="Escribe tu comentario aquí..." required></textarea>
+                                    
+                                    <div class="calificacion-estrellas" data-calificacion="0">
+                                        <span class="estrella" data-value="1">&#9733;</span>
+                                        <span class="estrella" data-value="2">&#9733;</span>
+                                        <span class="estrella" data-value="3">&#9733;</span>
+                                        <span class="estrella" data-value="4">&#9733;</span>
+                                        <span class="estrella" data-value="5">&#9733;</span>
+                                    </div>
+                                    <input type="hidden" name="calificacion" value="0" required />
+                                    
+                                    <button type="submit">Guardar Comentario</button>
+                                    <button type="button" class="cancelar-edicion-btn">Cancelar</button>
+                                </form>
+                            </div>
+
                         </div>
 
                         <div class="card">
@@ -227,6 +300,43 @@
                                         <span class="label">Método de Pago:</span>
                                         <span class="value">Transferencia</span>
                                     </div>
+                                </div>
+                            </div>
+                            <button class="ver-comentario-btn">
+                                Comentario
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                                <div class="comentario-contenido" style="display: none;">
+                                    <!-- Aquí se mostrará el comentario si existe -->
+                                    <div class="comentario-existente">
+                                        <p><strong>Comentario:</strong> <span class="comentario-texto">No hay comentario aún.</span></p>
+                                        <p><strong>Calificación:</strong> <span class="calificacion-estrellas-display">
+                                            <!-- Aquí se mostrarán las estrellas (rellenas o vacías) -->
+                                            <span class="estrella-display">&#9734;</span>
+                                            <span class="estrella-display">&#9734;</span>
+                                            <span class="estrella-display">&#9734;</span>
+                                            <span class="estrella-display">&#9734;</span>
+                                            <span class="estrella-display">&#9734;</span>
+                                        </span></p>
+                                        <button class="editar-comentario-btn" style="display: none;">Editar Comentario</button>
+                                    </div>
+
+                                    <!-- Formulario para agregar o editar comentario -->
+                                    <form class="form-comentario" style="display: none;">
+                                        <textarea placeholder="Escribe tu comentario aquí..." required></textarea>
+                                        
+                                        <div class="calificacion-estrellas" data-calificacion="0">
+                                            <span class="estrella" data-value="1">&#9733;</span>
+                                            <span class="estrella" data-value="2">&#9733;</span>
+                                            <span class="estrella" data-value="3">&#9733;</span>
+                                            <span class="estrella" data-value="4">&#9733;</span>
+                                            <span class="estrella" data-value="5">&#9733;</span>
+                                        </div>
+                                        <input type="hidden" name="calificacion" value="0" required />
+                                        
+                                        <button type="submit">Guardar Comentario</button>
+                                        <button type="button" class="cancelar-edicion-btn">Cancelar</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

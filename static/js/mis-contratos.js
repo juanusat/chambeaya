@@ -67,13 +67,57 @@
                         <!-- Aquí se cargarán los comprobantes -->
                     </div>
                 `;
-                container.appendChild(card);
+                    card.innerHTML += `
+                        <div class="comentarios-contenedor" id="comentarios-${contrato.contrato_id}">
+                            <h4>Comentarios:</h4>
+                            
+                            <button class="ver-comentario-btn">
+                                Comentario
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            
+                            <div class="comentario-contenido" style="display: none;">
+                                <div class="comentario-existente">
+                                    <p><strong>Comentario:</strong> <span class="comentario-texto">No hay comentario aún.</span></p>
+                                    <p><strong>Calificación:</strong> 
+                                        <span class="calificacion-estrellas-display">
+                                            <span class="estrella-display">&#9734;</span>
+                                            <span class="estrella-display">&#9734;</span>
+                                            <span class="estrella-display">&#9734;</span>
+                                            <span class="estrella-display">&#9734;</span>
+                                            <span class="estrella-display">&#9734;</span>
+                                        </span>
+                                    </p>
+                                    <button class="editar-comentario-btn" style="display: none;">Editar Comentario</button>
+                                </div>
+
+                                ${isCliente ? `
+                                <form class="form-comentario" style="display: none;" data-contrato-id="${contrato.contrato_id}">
+                                    <textarea placeholder="Escribe tu comentario aquí..." required></textarea>
+                                    <div class="calificacion-estrellas" data-calificacion="0">
+                                        <span class="estrella" data-value="1">&#9733;</span>
+                                        <span class="estrella" data-value="2">&#9733;</span>
+                                        <span class="estrella" data-value="3">&#9733;</span>
+                                        <span class="estrella" data-value="4">&#9733;</span>
+                                        <span class="estrella" data-value="5">&#9733;</span>
+                                    </div>
+                                    <input type="hidden" name="calificacion" value="0" required />
+                                    <button type="submit">Guardar Comentario</button>
+                                    <button type="button" class="cancelar-edicion-btn">Cancelar</button>
+                                </form>` : ''}
+                            </div>
+                        </div>
+                    `;
+
+                container.appendChild(card); 
             });
+
 
             // Agregar evento a los botones de "Resumen de Pago(s)"
             container.addEventListener('click', event => {
                 if (event.target.classList.contains('resumen-pagos-btn')) {
                     const contratoId = event.target.getAttribute('data-contrato-id');
+           
                     const comprobantesContainer = document.getElementById(`comprobantes-${contratoId}`);
                     const icon = event.target.querySelector('i');
 
@@ -138,6 +182,56 @@
                         });
                 }
             });
+
+            container.addEventListener('click', async function(event) {
+                if (event.target.classList.contains('ver-comentario-btn')) {
+                    const btn = event.target;
+                    const comentarioContenido = btn.nextElementSibling;
+
+                    // Alternar visibilidad
+                    if (comentarioContenido.style.display === 'block') {
+                        comentarioContenido.style.display = 'none';
+                        return;
+                    }
+
+                    // Mostrar contenido
+                    comentarioContenido.style.display = 'block';
+
+                    // Obtener id del contrato, que está en un contenedor padre
+                    const card = btn.closest('.card');
+                    const contratoId = card.querySelector('.resumen-pagos-btn')?.getAttribute('data-contrato-id');
+
+                    if (!contratoId) {
+                        console.error('No se pudo obtener el contrato ID');
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(`/api/contratos/comentario/${contratoId}`);
+                        if (!response.ok) throw new Error('Error en la respuesta de la API');
+                        const data = await response.json();
+
+                        const textoComentario = comentarioContenido.querySelector('.comentario-texto');
+                        const estrellasDisplay = comentarioContenido.querySelectorAll('.estrella-display');
+
+                        if (data.comentario && data.comentario.trim() !== '') {
+                            textoComentario.textContent = data.comentario;
+                        } else {
+                            textoComentario.textContent = 'No hay comentario aún.';
+                        }
+
+                        // Mostrar estrellas según calificación
+                        estrellasDisplay.forEach((estrella, i) => {
+                            estrella.textContent = i < data.calificacion ? '★' : '☆';
+                        });
+
+                    } catch (error) {
+                        console.error('Error al cargar comentario:', error);
+                        comentarioContenido.querySelector('.comentario-texto').textContent = 'Error al cargar comentario.';
+                    }
+                }
+            });
+
 
             console.log('Contratos agregados:', container.querySelectorAll('.card').length);
         })
