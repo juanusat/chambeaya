@@ -227,7 +227,7 @@ body {
 }
 
 /* Botón para desplegar/ocultar el resumen de pagos */
-.resumen-pagos-btn {
+.resumen-pagos-btn{
     background-color: #f0f0f0;
     color: #333;
     padding: 10px 15px;
@@ -245,7 +245,7 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.resumen-pagos-btn:hover {
+.resumen-pagos-btn:hover{
     background-color: #e0e0e0;
 }
 
@@ -265,6 +265,153 @@ body {
     animation: fadeIn 0.5s ease; /* Animación al aparecer */
     margin-bottom: 10px; /* Espacio después del contenido desplegado */
 }
+
+/* Botón para mostrar/ocultar comentario */
+.ver-comentario-btn {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.ver-comentario-btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* Contenedor del contenido del comentario (inicialmente oculto) */
+.comentario-contenido {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 12px;
+    font-size: 0.95em;
+    color: #333;
+}
+
+/* Contenedor del comentario existente */
+.comentario-existente p {
+    margin: 8px 0;
+}
+
+/* Botón para editar comentario */
+.editar-comentario-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9em;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.editar-comentario-btn:hover {
+    background-color: #1e7e34;
+}
+
+/* Formulario de comentario */
+.form-comentario {
+    margin-top: 12px;
+}
+
+.form-comentario textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+/* Contenedor de estrellas para seleccionar calificación */
+.calificacion-estrellas {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+    font-size: 1.6em;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Estrella para calificación (rellena o vacía) */
+.calificacion-estrellas .estrella {
+    color: #ccc;
+    transition: color 0.25s ease;
+}
+
+.calificacion-estrellas .estrella:hover,
+.calificacion-estrellas .estrella:hover ~ .estrella {
+    color: gold;
+}
+
+.calificacion-estrellas .estrella.activa {
+    color: gold;
+}
+
+/* Botones dentro del formulario */
+.form-comentario button[type="submit"],
+.form-comentario .cancelar-edicion-btn {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    margin-right: 8px;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.form-comentario button[type="submit"] {
+    background-color: #007bff;
+}
+
+.form-comentario button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.form-comentario .cancelar-edicion-btn {
+    background-color: #dc3545;
+}
+
+.form-comentario .cancelar-edicion-btn:hover {
+    background-color: #b02a37;
+}
+
+/* Estrellas para mostrar la calificación (solo lectura) */
+.calificacion-estrellas-display {
+    font-size: 1.4em;
+    color: gold;
+    display: inline-flex;
+    gap: 4px;
+    user-select: none;
+}
+
+.estrella-display {
+    color: #ddd; /* Estrella vacía */
+}
+
+.estrella-display.activa {
+    color: gold;
+}
+
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
