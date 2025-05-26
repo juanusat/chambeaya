@@ -191,3 +191,22 @@ def actualizar_descripcion(data, usuario_id):
             conn.commit()
     finally:
         conn.close()
+
+def buscar_usuarios_para_autocompletar_db(query_str):
+    conn = get_db_connection()
+    usuarios = []
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            sql = "SELECT usuario_id, username FROM usuario WHERE username LIKE CONCAT('%%', %s, '%%') LIMIT 10"
+            cursor.execute(sql, (query_str,))
+            result = cursor.fetchall()
+            for row in result:
+                usuarios.append({
+                    'id': row['usuario_id'],
+                    'nombre': row['username']
+                })
+    except Exception as e:
+        print(f"Error al buscar usuarios para autocompletado en DB: {e}")
+    finally:
+        conn.close()
+    return usuarios
