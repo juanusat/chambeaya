@@ -10,6 +10,10 @@ from app.contrato.controlador_contrato import (
   create_contrato,
   update_contrato,
   darbaja_contrato,
+  obtener_comentario_del_contrato,
+  create_comentario,
+  update_comentario,
+  contrato_pertenece_a_cliente
 )
 
 contratos_bp = Blueprint('contratos', __name__)
@@ -62,3 +66,47 @@ def editar_publicacion(conts_id):
 def darbaja_publicacion(conts_id):
     darbaja_contrato(conts_id)
     return jsonify({'message': 'Actualizado exitosamente'}), 200
+
+@contratos_bp.route('/comentario/<int:conts_id>', methods=['GET'])
+def comentario_por_contrato(conts_id):
+    comentario = obtener_comentario_del_contrato(conts_id)
+    if comentario:
+        calificacion, texto, fecha_creacion = comentario
+        resultado = {
+            "calificacion": calificacion,
+            "comentario": texto,
+            "fecha_creacion": fecha_creacion.isoformat() if fecha_creacion else None
+        }
+        return jsonify(resultado), 200
+    else:
+        return jsonify({"mensaje": "No se encontró comentario para el contrato"}), 404
+
+@contratos_bp.route('/nuevo_comentario/<int:conts_id>', methods=['POST'])
+def crear_comentario_contrato(conts_id):
+    user_id = getattr(g, 'user_id', None)
+    if not user_id:
+        abort(401, 'No autorizado')
+
+    if not contrato_pertenece_a_cliente(conts_id, user_id):
+        abort(403, 'Solo el cliente puede comentar')
+
+    data = request.get_json()
+    data['contrato_id'] = conts_id
+    create_comentario(data)
+    return jsonify({'message': 'Comentario creado exitosamente'}), 201
+
+
+@contratos_bp.route('/editar_comentario/<int:comentario_id>', methods=['PUT'])
+def editar_comentario_contrato(comentario_id):
+    user_id = getattr(g, 'user_id', None)
+    if not user_id:
+        abort(401, 'No autorizado')
+
+    data = request.get_json()
+    contrato_id = data.get('contrato_id')
+
+    if not contrato_pertenece_a_cliente(contrato_id, user_id):
+        abort(403, 'Solo el cliente puede modificar el comentario')
+
+    update_comentario(comentario_id, data)
+    return jsonify({'message': 'Comentario actualizado exitosamente'}), 200
