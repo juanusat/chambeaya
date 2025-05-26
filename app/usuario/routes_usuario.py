@@ -4,7 +4,9 @@ from app.usuario.controlador_usuario import (
     get_usuario_by_id,
     actualizar_email,
     actualizar_descripcion,
-    get_validar_username_usuario
+    get_validar_username_usuario,
+    get_usuario_by_username,
+    buscar_usuarios_para_autocompletar_db,
 )
 
 usuarios_bp = Blueprint('usuarios', __name__)
@@ -38,3 +40,21 @@ def update_descripcion():
     data = request.get_json()
     actualizar_descripcion(data.get("descripcion") , getattr(g, 'user_id', None) )
     return jsonify({'message':'Descripcion actualizada exitosamente'}), 200
+
+@usuarios_bp.route('/<username>',methods=['GET'])
+def buscar_usuario_by_username(username):
+    resultado = get_usuario_by_username(username)
+    if not resultado:
+        abort(404, description="Publicación no encontrada")
+    return jsonify(resultado), 200  
+
+@usuarios_bp.route('/buscar_autocompletar', methods=['GET'])
+def api_buscar_usuarios_autocompletar():
+    if not getattr(g, 'user_id', None):
+        return jsonify({"error": "No autorizado"}), 401
+
+    query = request.args.get('q', '').strip()
+    if not query:
+        return jsonify([])
+    usuarios_encontrados = buscar_usuarios_para_autocompletar_db(query)
+    return jsonify(usuarios_encontrados), 200
