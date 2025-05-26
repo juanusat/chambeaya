@@ -1,0 +1,112 @@
+/* crear_contrato.css */
+
+.page {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background-color: #f9f9f9;
+    /* Eliminar min-height para evitar espacio extra */
+}
+
+.width-m {
+    max-width: 600px;
+    width: 100%;
+}
+
+.job-post-container {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem; /* Espacio entre contenido y footer */
+}
+
+.job-post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #eea3a1;
+    color: #ffffff;
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-button:hover {
+    color: #e0e0e0;
+}
+
+.job-post-body {
+    padding: 1.5rem;
+}
+
+.crear-contrato-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.job-post-details label {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    display: block;
+    color: #333333;
+}
+
+.input-field,
+.input-field-display,
+.price-input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #cccccc;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-field:focus,
+.input-field-display:focus,
+.price-input:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+    outline: none;
+}
+
+.input-field-display {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.price-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.submit-button {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background-color:  #fa9b98;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #fa8686;
+}

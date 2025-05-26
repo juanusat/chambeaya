@@ -52,7 +52,6 @@ def get_publicacion_by_palabra(palabra):
     finally:    
         conn.close()
 
-
 def get_publicacion_by_id(pub_id):
     conn = get_db_connection()
     try:
@@ -135,7 +134,6 @@ def get_publicacion_by_categoria_nombre(nombre_cat):
     finally:
         conn.close()
 
-
 def create_publicacion(data):
     conn = get_db_connection()
     try:
@@ -157,7 +155,6 @@ def create_publicacion(data):
     finally:
         conn.close()
 
-
 def update_publicacion(pub_id, data):
     conn = get_db_connection()
     try:
@@ -169,7 +166,6 @@ def update_publicacion(pub_id, data):
             conn.commit()
     finally:
         conn.close()
-
 
 def delete_publicacion(pub_id):
     conn = get_db_connection()
@@ -191,3 +187,4 @@ def darbaja_publicacion(pub_id):
             conn.commit()  # Confirma los cambios en la base de datos
     finally:
         conn.close()
+

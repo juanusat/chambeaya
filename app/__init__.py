@@ -86,6 +86,7 @@ def create_app():
     app.register_blueprint(contratos_bp, url_prefix='/api/contratos')
     app.register_blueprint(comprobante_pago_bp, url_prefix='/api/comprobante_pago')
     app.register_blueprint(categoria_bp, url_prefix='/api/categoria')
+    
     @app.route('/')
     def inicio():
         html = custom_render_html('inicio.html')
@@ -120,6 +121,7 @@ def create_app():
         html = html.replace('(USERNAME)', titulo)
         html = html.replace('["json"]', user_json)
         return Response(html, mimetype='text/html')
+    
     @app.route('/acceder')
     def acceder():
         html = custom_render_html('acceder.html')
@@ -179,6 +181,11 @@ def create_app():
         html = custom_render_html('crear_publicacion.html')
         return Response(html, mimetype='text/html')
     
+    @app.route('/crear-contrato')   
+    def crear_contratos():
+        html = custom_render_html('crear_contrato.html')
+        return Response(html, mimetype='text/html')
+
     @app.route('/mi-cuenta')   
     def configurar_cuenta():
         if not getattr(g, 'user_id', None):

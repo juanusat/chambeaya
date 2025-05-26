@@ -46,11 +46,24 @@ def obtener_contratos_por_estado_nombre(estado_nombre):
     conts= get_contratos_by_estado(estado_nombre)
     return jsonify(conts), 200 
 
-@contratos_bp.route('/nuevo_contrato', methods=['POST']) # VALIDAR G
+
+
+#-----------------------------------------------------------------
+@contratos_bp.route('/nuevo_contrato', methods=['POST'])
 def nuevo_contrato():
+    if not getattr(g, 'user_id', None):
+        return redirect(url_for('inicio')) 
     data = request.get_json()
-    new_id = create_contrato(data)
-    return jsonify({'contrato_id': new_id}), 200 
+    required_fields = ['servicio_id', 'cliente_id', 'precio', 'fecha_inicio', 'fecha_finalizacion']
+    if not all(field in data and data[field] is not None for field in required_fields):
+        return jsonify({'error': 'Faltan campos requeridos o son nulos'}), 400
+    try:
+        new_id = create_contrato(getattr(g, 'user_id', None), data)
+        return jsonify({'contrato_id': new_id}), 200
+    except Exception as e:
+        return jsonify({'error': 'Error al crear el contrato', 'details': str(e)}), 500
+#-----------------------------------------------------------------
+
 
 @contratos_bp.route('/editar_contrato/<int:conts_id>', methods=['PUT']) # VALIDAR G
 def editar_publicacion(conts_id):
