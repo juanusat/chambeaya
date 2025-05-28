@@ -51,8 +51,6 @@ def obtener_contratos_por_estado_nombre(estado_nombre):
     return jsonify(conts), 200 
 
 
-
-#-----------------------------------------------------------------
 @contratos_bp.route('/nuevo_contrato', methods=['POST'])
 def nuevo_contrato():
     if not getattr(g, 'user_id', None):
@@ -66,8 +64,6 @@ def nuevo_contrato():
         return jsonify({'contrato_id': new_id}), 200
     except Exception as e:
         return jsonify({'error': 'Error al crear el contrato', 'details': str(e)}), 500
-#-----------------------------------------------------------------
-
 
 @contratos_bp.route('/editar_contrato/<int:conts_id>', methods=['PUT']) # VALIDAR G
 def editar_publicacion(conts_id):

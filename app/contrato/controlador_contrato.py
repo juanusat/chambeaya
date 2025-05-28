@@ -23,6 +23,7 @@ def get_mis_contratos(user_id):
                         ELSE 'Desconocido'
                     END AS cliente, -- Nombre del cliente
                     u_cli.username AS username_cliente, -- Username del cliente
+                    u_cli.url_picture AS imagen,
                     c.precio,
                     c.estado,
                     c.fecha_inicio,
@@ -35,7 +36,8 @@ def get_mis_contratos(user_id):
                 JOIN usuario u_pres ON c.prestador_id = u_pres.usuario_id
                 LEFT JOIN persona per_pres ON per_pres.usuario_id = u_pres.usuario_id
                 LEFT JOIN empresa emp_pres ON emp_pres.usuario_id = u_pres.usuario_id
-                WHERE c.prestador_id = %s OR c.cliente_id = %s;
+                WHERE c.prestador_id = %s OR c.cliente_id = %s
+                ORDER BY c.fecha_inicio DESC;
             """, (user_id, user_id))
             return cursor.fetchall()
     finally:

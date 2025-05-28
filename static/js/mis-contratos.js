@@ -35,6 +35,8 @@
                             <div class="dates">
                                 <span class="date-label">Inicio:</span>
                                 <span class="date-value">${new Date(contrato.fecha_inicio).toLocaleDateString()}</span>
+                                <span class="date-label">Fin:</span>
+                                <span class="date-value">${new Date(contrato.fecha_finalizacion).toLocaleDateString()}</span>
                             </div>
                         </div>
                         <div class="tag">
@@ -45,7 +47,7 @@
                     <div class="client-price-row">
                         <div class="client-info">
                             <p>${role}: <span class="client-name">${name}</span></p>
-                            <img src="https://placehold.co/30x30/ccc/333?text=Perfil"
+                            <img src="/static/uploads/${contrato.imagen}" 
                                  alt="Perfil" class="perfil-img">
                         </div>
                         <div class="price-actions">
@@ -56,7 +58,6 @@
 
                     <div class="info">
                         <p>${contrato.descripcion_servicio}</p>
-                        <p>Fecha de finalización: <strong>${new Date(contrato.fecha_finalizacion).toLocaleDateString()}</strong></p>
                     </div>
 
                     <button class="resumen-pagos-btn" data-contrato-id="${contrato.contrato_id}">
@@ -64,8 +65,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="resumen-pagos-contenido" id="comprobantes-${contrato.contrato_id}">
-                        <!-- Aquí se cargarán los comprobantes -->
-                    </div>
+                        </div>
                 `;
                     card.innerHTML += `
                         <div class="comentarios-contenedor" id="comentarios-${contrato.contrato_id}">

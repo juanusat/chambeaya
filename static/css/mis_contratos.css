@@ -1,117 +1,157 @@
-
+/* --- Estilos Generales y Reseteos Ligeros --- */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif; /* Fuente moderna y legible */
     line-height: 1.6;
-    color: #333;
-    background-color: #f8f8f8;
+    color: hsl(10, 15%, 20%); /* Casi negro, con un matiz cálido */
+    background-color: hsl(11, 69%, 97%); /* Fondo general muy claro, casi blanco, de tu paleta */
     margin: 0;
     padding: 0;
 }
 
-.contratos-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 0 20px;
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que la aplicación ocupe toda la altura de la vista */
 }
 
-/* Encabezado superior */
+.page {
+    flex-grow: 1; /* Permite que el contenido de la página ocupe el espacio disponible */
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: flex-start; /* Alinea el contenido al inicio verticalmente */
+}
+
+.contratos-container {
+    max-width: 1200px; /* Ancho máximo para el contenedor principal */
+    width: 100%; /* Ocupa todo el ancho disponible hasta el max-width */
+    margin: 30px 0; /* Espacio vertical para el contenedor */
+    padding: 25px;
+    background-color: #ffffff; /* Blanco puro para las tarjetas */
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); /* Sombra suave para profundidad */
+    box-sizing: border-box;
+}
+
+/* --- Fila Superior: Título y Ordenar --- */
 .fila_superior {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid hsl(10, 10%, 90%); /* Borde muy claro */
 }
 
 .fila_superior h1 {
     margin: 0;
-    font-size: 1.8em;
-    color: #333;
+    font-size: 2.2em;
+    color: hsl(10, 15%, 20%); /* Color oscuro para el título */
+    font-weight: 700;
+    flex-shrink: 0;
 }
 
-.fila_superior .ordenar-container { /* Contenedor para el texto y el botón */
+.fila_superior .ordenar-container {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .fila_superior .ordenar-container p {
-     margin: 0;
-     font-size: 0.9em;
-     color: #555;
+    margin: 0;
+    font-size: 1em;
+    color: hsl(10, 10%, 40%); /* Gris medio cálido */
 }
 
-.fila_superior button { /* Botón "Más reciente" */
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    background-color: white;
-    border-radius: 5px;
+.fila_superior button {
+    background-color: hsl(15, 75%, 55%); /* Un naranja coral vibrante */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
     cursor: pointer;
-    font-size: 0.9em;
-    display: inline-flex;
+    font-size: 0.95em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
+    box-shadow: 0 2px 5px hsla(15, 75%, 55%, 0.3); /* Sombra basada en el color primario */
 }
 
+.fila_superior button:hover {
+    background-color: hsl(15, 75%, 40%); /* Naranja coral más oscuro al pasar el mouse */
+    transform: translateY(-2px);
+}
 
-/* Contenedor de las tarjetas */
+.fila_superior button i {
+    font-size: 0.9em;
+}
+
+/* --- Contenedor de las Tarjetas (Grid) --- */
 .lista-contratos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    justify-content: center;
+}
+
+/* --- Tarjeta Individual --- */
+.card {
+    background-color: #ffffff; /* Blanco puro para las tarjetas */
+    border: 1px solid hsl(10, 10%, 90%); /* Borde muy claro */
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-}
-
-/* Tarjeta individual */
-.card {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-    transition: box-shadow 0.3s ease;
 }
 
 .card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    transform: translateY(-7px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Cabecera de la tarjeta (Título, Fechas y Tag) */
+/* --- Cabecera de la Tarjeta (Título, Fechas, Tag y la imagen) --- */
 .card-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center; /* Cambiado de flex-start para mantener consistencia con original */
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
     flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px dashed hsl(10, 10%, 90%); /* Borde muy claro */
+    padding-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 .title-dates-row {
     display: flex;
-    align-items: center; /* Consistencia con original */
+    flex-direction: column;
     flex-grow: 1;
-    margin-right: 10px;
-    flex-wrap: wrap;
+    gap: 8px;
 }
 
-
 .card-header .nombre {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #333;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: hsl(10, 15%, 20%); /* Color oscuro para el nombre del servicio */
     margin: 0;
-    margin-right: 15px;
+    line-height: 1.3;
 }
 
 .dates {
-    font-size: 0.85em;
-    color: #666;
+    font-size: 0.9em;
+    color: hsl(10, 5%, 60%); /* Gris claro cálido */
     display: flex;
-    gap: 10px;
+    gap: 15px;
     flex-wrap: wrap;
 }
 
 .date-label {
-    font-weight: bold;
+    font-weight: 600;
+    color: hsl(10, 10%, 40%); /* Gris medio cálido */
 }
 
 .date-value {
@@ -121,182 +161,300 @@ body {
 .tag {
     display: inline-flex;
     align-items: center;
-    background-color: #e0e0e0;
-    border-radius: 9999px; /* Originalmente muy redondeado */
-    padding: 0.25rem 0.75rem;
-    font-size: 0.85rem;
-    gap: 0.4rem;
-    color: #555;
-    font-weight: normal;
+    background-color: hsl(10, 10%, 90%); /* Fondo gris claro con matiz cálido para el estado */
+    color: hsl(10, 10%, 40%);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+    text-transform: capitalize;
     flex-shrink: 0;
+    margin-left: auto;
 }
 
-.tag i {
-    color: #777; /* Color original del icono del tag */
+/* Estilos de tags por estado (ejemplos) */
+.tag.activo {
+    background-color: hsl(120, 60%, 90%); /* Verde claro */
+    color: hsl(120, 60%, 45%); /* Verde oscuro */
+}
+.tag.pendiente {
+    background-color: hsl(45, 90%, 90%); /* Amarillo claro */
+    color: hsl(45, 90%, 55%); /* Amarillo oscuro */
+}
+.tag.finalizado {
+    background-color: hsl(0, 75%, 90%); /* Rojo claro */
+    color: hsl(0, 75%, 55%); /* Rojo oscuro */
+}
+.tag.cancelado {
+    background-color: hsl(190, 60%, 90%); /* Azul verdoso claro */
+    color: hsl(190, 60%, 65%); /* Azul verdoso oscuro */
 }
 
-/* Fila del cliente/prestador y el precio/acciones */
+
+/* --- Estilos para la Imagen del Contrato (si se agrega) --- */
+.contract-image-container {
+    flex: 0 0 100px;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: hsl(10, 10%, 90%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contrato-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+}
+
+
+/* --- Fila del cliente/prestador y el precio/acciones --- */
 .client-price-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
-    font-size: 0.95em;
-    color: #555;
-    flex-wrap: wrap; /* Para responsividad */
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid hsl(10, 5%, 80%); /* Borde ligeramente más oscuro */
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .client-info {
     display: flex;
     align-items: center;
-    gap: 10px; /* Espacio original */
-    flex-grow: 1; /* Para que ocupe espacio */
+    gap: 15px;
+    flex-grow: 1;
 }
 
 .client-info p {
     margin: 0;
+    font-size: 1em;
+    color: hsl(10, 10%, 40%);
 }
 
 .client-name {
-    font-weight: bold;
-    color: #333;
+    font-weight: 600;
+    color: hsl(10, 15%, 20%);
 }
 
 .perfil-img {
-    width: 30px; /* Tamaño original */
-    height: 30px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
-    background-color: #ccc; /* Fondo original si la imagen no carga */
+    border: 2px solid hsl(15, 75%, 55%); /* Borde basado en tu color principal */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Contenedor para el botón de pagar y la etiqueta de precio */
 .price-actions {
     display: flex;
-    align-items: center;
-    gap: 10px; /* Espacio entre botón pagar y precio */
-    margin-left: auto; /* Empuja a la derecha */
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    margin-left: auto;
 }
 
-.price-tag { /* Estilo original para el precio */
-    display: inline-block;
-    border: 1px solid #bbb;
-    border-radius: 8px;
+.price-tag {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: hsl(15, 75%, 55%); /* Color principal para el precio */
     padding: 0.3rem 0.8rem;
-    font-weight: bold;
-    background-color: #f9f9f9;
-    color: #000;
-    font-size: 0.9em;
     white-space: nowrap;
 }
 
 .price-tag span {
-    font-weight: bold;
+    font-size: 1.3em;
+    font-weight: 800;
 }
 
-/* Información del contrato (descripción) */
+/* --- Información del contrato (descripción) --- */
 .info {
-    font-size: 0.95em;
-    line-height: 1.6;
-    color: #555;
-    /* margin-bottom: 20px; Eliminado para mantener el original, se añade si es necesario */
+    margin-bottom: 20px;
 }
 
 .info p {
     margin: 0;
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: hsl(10, 10%, 40%);
+    text-align: justify;
 }
 
-/* --- ESTILOS AÑADIDOS/MODIFICADOS PARA DESPLEGABLE Y BOTÓN PAGAR --- */
+/* --- ESTILOS ADICIONALES --- */
 
 /* Botón Pagar */
 .pagar-btn {
-    background-color: #007bff; /* Azul primario, puedes ajustarlo */
+    background-color: hsl(120, 60%, 45%); /* Verde para el botón de pagar */
     color: white;
     border: none;
-    padding: 6px 15px; /* Padding similar al price-tag pero un poco más grande */
-    border-radius: 6px;
+    padding: 8px 15px;
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 0.9em; /* Similar al price-tag */
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     white-space: nowrap;
+    box-shadow: 0 2px 5px hsla(120, 60%, 45%, 0.3);
 }
 
 .pagar-btn:hover {
-    background-color: #0056b3; /* Azul más oscuro */
+    background-color: hsl(120, 60%, 35%); /* Verde más oscuro al pasar el mouse */
+    transform: translateY(-2px);
 }
 
 /* Botón para desplegar/ocultar el resumen de pagos */
-.resumen-pagos-btn{
-    background-color: #f0f0f0;
-    color: #333;
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+.resumen-pagos-btn {
+    background-color: hsl(10, 10%, 90%); /* Gris claro para los botones de expansión */
+    color: hsl(10, 15%, 20%);
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     text-align: left;
-    font-size: 1em; /* Un poco más grande para destacar */
-    margin-top: 15px; /* Espacio arriba del botón */
-    margin-bottom: 10px; /* Espacio debajo del botón, antes del contenido si se despliega */
-    transition: background-color 0.3s ease;
+    font-size: 1em;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.resumen-pagos-btn:hover{
-    background-color: #e0e0e0;
+.resumen-pagos-btn:hover {
+    background-color: hsl(10, 5%, 80%); /* Gris ligeramente más oscuro al pasar el mouse */
+    transform: translateY(-2px);
 }
 
-.resumen-pagos-btn .fa-chevron-down,
-.resumen-pagos-btn .fa-chevron-up {
+.resumen-pagos-btn i {
     transition: transform 0.3s ease;
+}
+
+/* Rotación del icono al expandir */
+.resumen-pagos-btn i.fa-chevron-up {
+    transform: rotate(180deg);
 }
 
 /* Contenido del resumen de pagos (inicialmente oculto) */
 .resumen-pagos-contenido {
-    display: none; /* Oculto por defecto, se muestra con JS */
+    display: none;
     padding: 15px;
-    border: 1px solid #eee;
-    border-top: none; /* Para que no haya doble borde con el botón */
-    border-radius: 0 0 6px 6px; /* Redondear esquinas inferiores */
-    background-color: #fdfdfd; /* Fondo muy claro para el contenido */
-    animation: fadeIn 0.5s ease; /* Animación al aparecer */
-    margin-bottom: 10px; /* Espacio después del contenido desplegado */
+    border: 1px dashed hsl(10, 5%, 80%);
+    border-radius: 8px;
+    background-color: #ffffff; /* Fondo blanco para el contenido */
+    animation: fadeIn 0.3s ease-out;
+    margin-top: 10px;
+}
+
+.pago-item {
+    padding: 10px 0;
+    border-bottom: 1px dotted hsl(10, 10%, 90%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+.pago-item:last-child {
+    border-bottom: none;
+}
+
+.pago-item h4 {
+    font-size: 1.1em;
+    color: hsl(15, 75%, 40%); /* Color oscuro del coral para el título del pago */
+    margin: 0;
+    flex-basis: 100%;
+    margin-bottom: 5px;
+}
+
+.pago-detalle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em;
+    color: hsl(10, 10%, 40%);
+    flex-grow: 1;
+}
+
+.pago-detalle .label {
+    font-weight: 600;
+    color: hsl(10, 15%, 20%);
+    min-width: 120px;
+}
+.pago-detalle .value {
+    text-align: right;
+    flex-grow: 1;
+    color: hsl(15, 75%, 55%); /* Color principal para los valores de pago */
+    font-weight: 500;
+}
+
+
+/* --- Contenedor de Comentarios --- */
+.comentarios-contenedor {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed hsl(10, 5%, 80%);
+}
+
+.comentarios-contenedor h4 {
+    font-size: 1.2em;
+    color: hsl(10, 15%, 20%);
+    margin-bottom: 15px;
 }
 
 /* Botón para mostrar/ocultar comentario */
 .ver-comentario-btn {
-    background-color: #f0f0f0;
-    color: #333;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 8px 16px;
-    border-radius: 6px;
+    background-color: hsl(10, 10%, 90%);
+    color: hsl(10, 15%, 20%);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
     font-size: 1em;
     cursor: pointer;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 8px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     width: 100%;
     justify-content: space-between;
+    margin-top: 15px;
 }
 
 .ver-comentario-btn:hover {
-    background-color: #e0e0e0;
+    background-color: hsl(10, 5%, 80%);
+    transform: translateY(-2px);
+}
+
+.ver-comentario-btn i {
+    transition: transform 0.3s ease;
+}
+
+.ver-comentario-btn i.fa-chevron-up {
+    transform: rotate(180deg);
 }
 
 /* Contenedor del contenido del comentario (inicialmente oculto) */
 .comentario-contenido {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
+    background-color: #ffffff;
+    border: 1px dashed hsl(10, 5%, 80%);
     border-radius: 8px;
     padding: 15px;
-    margin-top: 12px;
+    margin-top: 10px;
     font-size: 0.95em;
-    color: #333;
+    color: hsl(10, 15%, 20%);
+    animation: fadeIn 0.3s ease-out;
+    display: none;
 }
 
 /* Contenedor del comentario existente */
@@ -304,27 +462,44 @@ body {
     margin: 8px 0;
 }
 
+.calificacion-estrellas-display {
+    color: hsl(45, 90%, 55%); /* Color dorado para estrellas llenas */
+    font-size: 1.3em;
+    display: inline-flex;
+    gap: 4px;
+    user-select: none;
+}
+
+.estrella-display {
+    color: hsl(10, 5%, 80%); /* Color gris para estrellas vacías */
+}
+
 /* Botón para editar comentario */
 .editar-comentario-btn {
-    background-color: #28a745;
-    color: white;
+    background-color: hsl(35, 80%, 70%); /* Durazno suave para editar */
+    color: hsl(10, 15%, 20%); /* Texto oscuro para que contraste */
     border: none;
-    padding: 6px 14px;
-    border-radius: 5px;
+    padding: 8px 15px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
     font-size: 0.9em;
-    margin-top: 10px;
+    margin-top: 15px;
     transition: background-color 0.3s ease;
 }
 
 .editar-comentario-btn:hover {
-    background-color: #1e7e34;
+    background-color: hsl(35, 80%, 60%); /* Durazno un poco más oscuro */
 }
 
 /* Formulario de comentario */
 .form-comentario {
-    margin-top: 12px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid hsl(10, 5%, 80%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .form-comentario textarea {
@@ -332,202 +507,206 @@ body {
     min-height: 80px;
     padding: 10px;
     border-radius: 6px;
-    border: 1px solid #ccc;
+    border: 1px solid hsl(10, 5%, 80%);
     font-size: 1em;
     resize: vertical;
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
-    margin-bottom: 10px;
+}
+
+.form-comentario textarea:focus {
+    border-color: hsl(15, 75%, 55%);
+    box-shadow: 0 0 0 0.2rem hsla(15, 75%, 55%, 0.25);
+    outline: none;
 }
 
 /* Contenedor de estrellas para seleccionar calificación */
 .calificacion-estrellas {
     display: flex;
-    gap: 6px;
-    margin-bottom: 12px;
-    font-size: 1.6em;
+    gap: 5px;
+    font-size: 1.8em;
     cursor: pointer;
     user-select: none;
 }
 
 /* Estrella para calificación (rellena o vacía) */
 .calificacion-estrellas .estrella {
-    color: #ccc;
+    color: hsl(10, 5%, 80%);
     transition: color 0.25s ease;
 }
 
 .calificacion-estrellas .estrella:hover,
 .calificacion-estrellas .estrella:hover ~ .estrella {
-    color: gold;
+    color: hsl(45, 90%, 55%); /* Dorado al pasar el mouse */
 }
 
+/* La clase 'activa' debe ser añadida por JS para las estrellas seleccionadas */
 .calificacion-estrellas .estrella.activa {
-    color: gold;
+    color: hsl(45, 90%, 55%);
 }
 
 /* Botones dentro del formulario */
 .form-comentario button[type="submit"],
 .form-comentario .cancelar-edicion-btn {
-    padding: 8px 15px;
-    font-size: 0.9em;
-    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 8px;
     border: none;
     cursor: pointer;
     font-weight: 600;
-    margin-right: 8px;
+    margin-right: 10px;
     color: white;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .form-comentario button[type="submit"] {
-    background-color: #007bff;
+    background-color: hsl(15, 75%, 55%);
 }
 
 .form-comentario button[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: hsl(15, 75%, 40%);
+    transform: translateY(-2px);
 }
 
 .form-comentario .cancelar-edicion-btn {
-    background-color: #dc3545;
+    background-color: hsl(10, 5%, 60%); /* Gris más claro para cancelar */
+    color: white; /* Color blanco para el texto del botón cancelar */
 }
 
 .form-comentario .cancelar-edicion-btn:hover {
-    background-color: #b02a37;
+    background-color: hsl(10, 5%, 50%); /* Gris más oscuro al pasar el mouse */
+    transform: translateY(-2px);
 }
 
-/* Estrellas para mostrar la calificación (solo lectura) */
-.calificacion-estrellas-display {
-    font-size: 1.4em;
-    color: gold;
-    display: inline-flex;
-    gap: 4px;
-    user-select: none;
-}
-
-.estrella-display {
-    color: #ddd; /* Estrella vacía */
-}
-
-.estrella-display.activa {
-    color: gold;
-}
-
-
+/* Animación de aparición */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-.pago-item {
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed #eee; /* Separador sutil entre pagos */
-}
-.pago-item:last-child {
-    margin-bottom: 0;
-    border-bottom: none;
-}
+/* --- Media Queries para Responsividad --- */
+@media (max-width: 992px) {
+    .contratos-container {
+        padding: 20px;
+        margin: 20px auto;
+    }
 
-.pago-item h4 { /* Título de cada pago (ej: 1° Pago) */
-    font-size: 1em; /* Tamaño consistente */
-    color: #337ab7; /* Un color para destacar el título del pago */
-    margin-top: 0;
-    margin-bottom: 8px;
-}
-
-.pago-detalle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.9em; /* Tamaño de fuente para los detalles */
-    margin-bottom: 6px;
-    flex-wrap: wrap;
-}
-
-.pago-detalle span {
-    color: #555;
-}
-
-.pago-detalle .label {
-    font-weight: bold;
-    color: #444;
-    min-width: 110px; /* Ancho mínimo para las etiquetas "Monto:", "Fecha:", etc. */
-}
- .pago-detalle .value {
-    text-align: right;
-    flex-grow: 1;
-}
-/* --- FIN DE ESTILOS AÑADIDOS/MODIFICADOS --- */
-
-/* Estilos de rating (manteniendo los tuyos, aunque no se ven en la imagen de ejemplo) */
-.rating {
-    display: flex;
-    gap: 4px;
-    font-size: 1.2em;
-    cursor: pointer;
-    align-items: center;
-}
-
-.rating span {
-    color: white;
-    text-shadow: 0 0 1px black, 0 0 1px black;
-    transition: color 0.2s;
-}
-
-.rating span.hover,
-.rating span.selected {
-    color: gold;
-}
-
-/* Asegurar que el contenedor principal de la aplicación y la página ocupen la altura completa si es necesario */
-.app,
-.page {
-    min-height: 100vh;
-}
-
-
-/* Estilos responsivos (ajustes mínimos basados en la nueva estructura) */
-@media (max-width: 600px) { /* Usar un breakpoint común */
     .fila_superior {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .fila_superior h1 {
+        font-size: 2em;
+    }
+
+    .fila_superior .ordenar-container {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .card-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
 
-    .card-header {
-        /* Mantener align-items: center; o cambiar a flex-start si se prefiere */
-    }
-
     .title-dates-row {
-        /* margin-right: 0; si el tag se mueve debajo */
-        /* margin-bottom: 10px; si el tag se mueve debajo */
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
     }
 
-    /* Ajuste para la fila de cliente y precio/acciones en móvil */
+    .contract-image-container {
+        width: 100%;
+        height: 180px;
+        margin-bottom: 10px;
+    }
+
+    .tag {
+        margin-left: 0;
+        width: fit-content;
+        align-self: flex-start;
+    }
+
     .client-price-row {
         flex-direction: column;
-        align-items: flex-start; /* Alinear todo a la izquierda en móvil */
-        gap: 10px; /* Espacio entre client-info y price-actions */
+        align-items: flex-start;
+        gap: 15px;
     }
 
     .price-actions {
-        width: 100%; /* Ocupar todo el ancho */
-        justify-content: space-between; /* Espaciar botón y precio */
-        margin-left: 0; /* Resetear margen */
+        width: 100%;
+        align-items: flex-start;
+        margin-left: 0;
     }
 
     .pagar-btn {
-         /* Podrías querer que el botón Pagar ocupe más espacio o se centre */
-         /* order: -1; /* Si quieres que el botón Pagar aparezca antes que el precio */
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .contratos-container {
+        padding: 15px;
+        margin: 15px auto;
+        border-radius: 8px;
+    }
+
+    .fila_superior h1 {
+        font-size: 1.8em;
+    }
+
+    .fila_superior .ordenar-container button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .card {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .card-header .nombre {
+        font-size: 1.2em;
+    }
+
+    .perfil-img {
+        width: 40px;
+        height: 40px;
     }
 
     .price-tag {
-        /* align-self: flex-start; Ya está implícito con flex-start en client-price-row */
+        font-size: 1.1em;
+    }
+
+    .price-tag span {
+        font-size: 1.2em;
+    }
+
+    .resumen-pagos-btn,
+    .ver-comentario-btn {
+        padding: 10px 15px;
+        font-size: 0.95em;
+    }
+
+    .comentarios-contenedor h4 {
+        font-size: 1.1em;
+    }
+
+    .form-comentario textarea {
+        min-height: 60px;
     }
 
     .pago-detalle {
         flex-direction: column;
         align-items: flex-start;
+        gap: 2px;
     }
     .pago-detalle .value {
         text-align: left;
