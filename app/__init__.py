@@ -9,6 +9,7 @@ from app.usuario.routes_usuario import usuarios_bp
 from app.usuario.controlador_usuario import get_usuario_by_username, get_usuario_profile_by_username, get_usuario_profile_by_id
 from app.auth.routes_auth import auth_bp
 from app.categoria.routes_categoria import categoria_bp
+from app.notificaciones.routes_notificaciones import notificaciones_bp
 
 from flask_jwt_extended import (
     JWTManager,
@@ -86,6 +87,7 @@ def create_app():
     app.register_blueprint(contratos_bp, url_prefix='/api/contratos')
     app.register_blueprint(comprobante_pago_bp, url_prefix='/api/comprobante_pago')
     app.register_blueprint(categoria_bp, url_prefix='/api/categoria')
+    app.register_blueprint(notificaciones_bp, url_prefix='/api/notificaciones')
     
     @app.route('/')
     def inicio():
@@ -184,6 +186,11 @@ def create_app():
     @app.route('/crear-contrato')   
     def crear_contratos():
         html = custom_render_html('crear_contrato.html')
+        return Response(html, mimetype='text/html')
+    
+    @app.route('/ver_notificaciones')   
+    def ver_notificaciones():
+        html = custom_render_html('notificaciones.html')
         return Response(html, mimetype='text/html')
 
     @app.route('/mi-cuenta')   

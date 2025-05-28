@@ -38,17 +38,20 @@
     gap: 8px;
 }
 
-.header-user>a {
+.header-user > a {
     background-color: var(--colorE-100);
-    font-size: 20px;
+    font-size: 20px; /* Tamaño del icono */
     height: 38px;
     width: 38px;
     display: grid;
     place-items: center;
     border-radius: 50%;
+    /* Añade o confirma que tenga position: relative; */
+    position: relative; /* ESTO ES CLAVE para posicionar el badge */
+    /* Asegúrate de que no haya otro 'position' que lo sobreescriba */
 }
 
-.header-user>a:hover {
+.header-user > a:hover {
     background-color: var(--colorE-900);
     color: white;
 }
@@ -185,4 +188,31 @@ div#dropdownMenu li a span {
 div#dropdownMenu li a:hover {
     background-color: #dbdbdb;
     color: black;
+}
+
+
+/* Estilo base para el contenedor del enlace de la campana si no lo tienes */
+
+.notification-badge {
+    position: absolute;
+    top: -5px; /* Ajusta la posición vertical según tu diseño */
+    right: -5px; /* Ajusta la posición horizontal según tu diseño */
+    width: 10px;
+    height: 10px;
+    background-color: red; /* Color del punto rojo */
+    border-radius: 50%;
+    display: none; /* Por defecto no se muestra */
+    z-index: 10; /* Asegura que esté por encima de la campana */
+    pointer-events: none; /* No interactuable */
+}
+
+/* Cuando el enlace padre (el 'a') tiene la clase 'has-notifications' */
+/* Haz que el punto rojo se muestre */
+#notification-bell-link.has-notifications .notification-badge {
+    display: block; /* Muestra el punto rojo */
+}
+
+/* Opcional: Cambiar el color del icono de la campana */
+#notification-bell-link.has-notifications #notification-bell-icon {
+    color: orange; /* O el color que quieras, ej: var(--color-accent) */
 }

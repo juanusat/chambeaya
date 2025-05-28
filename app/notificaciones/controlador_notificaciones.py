@@ -2,7 +2,7 @@ import pymysql
 import pymysql.cursors
 from app.bd_conn import get_db_connection
 
-def consultarNotificaciones(user_id,contrato_id):
+def consultarNotificaciones(user_id):
     conn = get_db_connection()
     try:
         with conn.cursor(pymysql.cursors.DictCursor) as cursor:
@@ -23,7 +23,7 @@ def consultarNotificaciones(user_id,contrato_id):
                         ELSE 'Desconocido'
                     END AS cliente, -- Nombre del cliente
                     u_cli.username AS username_cliente, -- Username del cliente
-                    u_cli.url_picture AS imagen,
+                    u_pres.url_picture AS imagen,
                     c.precio,
                     c.estado,
                     c.fecha_inicio,
@@ -36,7 +36,9 @@ def consultarNotificaciones(user_id,contrato_id):
                 JOIN usuario u_pres ON c.prestador_id = u_pres.usuario_id
                 LEFT JOIN persona per_pres ON per_pres.usuario_id = u_pres.usuario_id
                 LEFT JOIN empresa emp_pres ON emp_pres.usuario_id = u_pres.usuario_id
-                WHERE c.cliente_id = %s AND c.contrato_id=%s ;
-            """, (user_id,contrato_id,))
+                WHERE c.cliente_id = %s AND c.estado='pendiente' 
+                ORDER BY c.fecha_inicio DESC;
+            """, (user_id,))
+            return cursor.fetchall()
     finally:
         conn.close()
