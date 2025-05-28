@@ -9,7 +9,7 @@ from app.contrato.controlador_contrato import (
   get_contratos_by_estado,
   create_contrato,
   update_contrato,
-  darbaja_contrato,
+  modificar_contrato,
   obtener_comentario_del_contrato,
   create_comentario,
   update_comentario,
@@ -66,14 +66,16 @@ def nuevo_contrato():
         return jsonify({'error': 'Error al crear el contrato', 'details': str(e)}), 500
 
 @contratos_bp.route('/editar_contrato/<int:conts_id>', methods=['PUT']) # VALIDAR G
-def editar_publicacion(conts_id):
+def update_contrato(conts_id):
     data = request.get_json()
     update_contrato(conts_id, data)
     return jsonify({'message': 'Actualizado exitosamente'}), 200
 
-@contratos_bp.route('/editar_contrato/cancelar/<int:conts_id>', methods=['PUT']) # VALIDAR G
-def darbaja_publicacion(conts_id):
-    darbaja_contrato(conts_id)
+@contratos_bp.route('/editar_contrato/<int:conts_id>/<nom_estado>', methods=['PUT']) # VALIDAR G
+def modificar_contrato_notificacion(conts_id,nom_estado):
+    if not getattr(g, 'user_id', None):
+        return redirect(url_for('inicio'))
+    modificar_contrato(conts_id,nom_estado)
     return jsonify({'message': 'Actualizado exitosamente'}), 200
 
 @contratos_bp.route('/comentario/<int:conts_id>', methods=['GET'])

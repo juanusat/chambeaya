@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => {
             if (!response.ok) {
                 if (response.status === 401 || response.status === 403) {
+                    console.error('No autorizado. Puede que la sesión haya expirado.');
                     throw new Error('No autorizado o sesión expirada.');
                 }
                 throw new Error(`Error HTTP! status: ${response.status}`);
@@ -50,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const fechaFin = new Date(contrato.fecha_finalizacion).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
                 const formattedPrice = parseFloat(contrato.precio || 0).toFixed(2);
                 const prestadorName = contrato.empleador || 'N/A';
-                const prestadorImagen = contrato.imagen || 'http://googleusercontent.com/image_collection/image_retrieval/14339926970324303939';
+                const prestadorImagen = contrato.imagen ? `/static/uploads/${contrato.imagen}` : '/static/img/default-profile.png';
 
                 card.innerHTML = `
                     <div class="card-title-row">
@@ -71,15 +72,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="card-client-info">
                         <span class="client-label">Prestador:</span>
                         <span class="client-name-value">${prestadorName}</span>
-                        <img src="/static/uploads/${prestadorImagen}" alt="Imagen del prestador" class="prestador-imagen">
+                        <img src="${prestadorImagen}" alt="Imagen del prestador" class="prestador-imagen">
                     </div>
                     <div class="card-price-row">
                         <span class="price-label">Precio:</span>
                         <span class="price-value">$${formattedPrice}</span>
                     </div>
                     <div class="card-actions-buttons">
-                        <button class="accept-btn" data-contrato-id="${contrato.id}">Aceptar</button>
-                        <button class="reject-btn" data-contrato-id="${contrato.id}">Rechazar</button>
+                        <button class="accept-btn" data-contrato-id="${contrato.contrato_id}">Aceptar</button>
+                        <button class="reject-btn" data-contrato-id="${contrato.contrato_id}">Rechazar</button>
                     </div>
                 `;
                 container.appendChild(card);
@@ -88,14 +89,14 @@ document.addEventListener('DOMContentLoaded', function () {
             container.querySelectorAll('.accept-btn').forEach(button => {
                 button.addEventListener('click', function() {
                     const contratoId = this.dataset.contratoId;
-                    console.log(`Aceptar contrato con ID: ${contratoId}`);
+                    handleContractAction(contratoId, 'en espera', this.closest('.notification-display-card'));
                 });
             });
 
             container.querySelectorAll('.reject-btn').forEach(button => {
                 button.addEventListener('click', function() {
                     const contratoId = this.dataset.contratoId;
-                    console.log(`Rechazar contrato con ID: ${contratoId}`);
+                    handleContractAction(contratoId, 'rechazado', this.closest('.notification-display-card'));
                 });
             });
 
@@ -104,4 +105,37 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('❌ Error al cargar notificaciones:', error);
             container.innerHTML = `<p>Error al cargar tus notificaciones: ${error.message}</p>`;
         });
+
+    function handleContractAction(contratoId, estado, cardElement) {
+        console.log(`Intentando cambiar estado de contrato ${contratoId} a: ${estado}`);
+
+        const url = `/api/contratos/editar_contrato/${contratoId}/${estado}`;
+
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => { 
+                    throw new Error(err.error || `Error en la solicitud: ${response.status}`); 
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(`Contrato ${contratoId} ${estado}ado con éxito:`, data);
+            alert(data.message || `Contrato ${estado}ado exitosamente.`);
+            
+            if (cardElement) {
+                cardElement.remove(); 
+            }
+        })
+        .catch(error => {
+            console.error(`Error al ${estado} el contrato ${contratoId}:`, error);
+            alert(`Hubo un error al ${estado} el contrato: ${error.message}`);
+        });
+    }
 });

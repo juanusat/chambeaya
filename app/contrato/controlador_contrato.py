@@ -292,13 +292,13 @@ def update_contrato(conts_id, data):
     finally:
         conn.close()
 
-def darbaja_contrato(conts_id):
+def modificar_contrato(conts_id,nom_estado):
     conn = get_db_connection()
     try:
         with conn.cursor() as cursor:
             cursor.execute(
-                "UPDATE contrato SET  estado='cancelado'  WHERE contrato_id=%s;",
-                (conts_id,),
+                "UPDATE contrato SET  estado=%s  WHERE contrato_id=%s;",
+                (nom_estado,conts_id,),
             )
             conn.commit()
     finally:
