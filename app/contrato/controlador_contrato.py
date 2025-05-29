@@ -23,7 +23,8 @@ def get_mis_contratos(user_id):
                         ELSE 'Desconocido'
                     END AS cliente, -- Nombre del cliente
                     u_cli.username AS username_cliente, -- Username del cliente
-                    u_cli.url_picture AS imagen,
+                    u_pres.url_picture AS imagenP,
+                    u_cli.url_picture AS imagenC,
                     c.precio,
                     c.estado,
                     c.fecha_inicio,
