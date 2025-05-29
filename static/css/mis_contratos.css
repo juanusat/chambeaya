@@ -1,381 +1,403 @@
-/* --- General Layout --- */
-.contratos-listado-principal {
-    padding: 20px;
-    max-width: 1200px; /* Ancho máximo del área de contratos */
-    margin: 40px auto; /* Centra el contenido principal */
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* --- Contenedor Principal de la Página --- */
+/* Estilos generales para el wrapper de la página si es necesario */
+.page {
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    padding: 20px; /* Espaciado general alrededor de la página */
+    box-sizing: border-box; /* Incluye padding en el ancho/alto total */
+    min-height: calc(100vh - var(--header-height, 60px) - var(--footer-height, 40px)); /* Altura mínima restando header/footer */
+    background-color: #f8f9fa; /* Un fondo suave para la página */
 }
 
+/* --- Sección de Listado Principal de Contratos --- */
+.contratos-listado-principal {
+    width: 100%;
+    max-width: 1300px; /* Ancho máximo para el contenido principal */
+    margin: 0 auto; /* Centra el listado */
+    padding: 20px; /* Espaciado interno */
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra más profunda */
+}
+
+/* --- Fila Superior (Título y Filtros) --- */
 .fila_superior {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
     flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
-    gap: 20px; /* Espacio entre los elementos de la fila superior */
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
 }
 
 .fila_superior h1 {
-    font-size: 2.5em;
-    color: #333;
+    font-size: 2.2em;
+    color: #343a40;
     margin: 0;
+    flex-grow: 1; /* Permite que el título ocupe espacio */
 }
 
 .filter-container {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-top: 10px; /* Espacio para envolver en móviles */
 }
 
 .filter-container label {
-    font-size: 1.1em;
+    font-size: 1em;
     color: #555;
     font-weight: 600;
 }
 
-#filter-type {
+.filter-container select {
     padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-    font-size: 1em;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    font-size: 0.95em;
+    color: #495057;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-#filter-type:hover {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+.filter-container select:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-.contenedor {
-    width: 100%;
-}
-
-/* --- Lista de Contratos (Grid de 4 columnas) --- */
-.lista-contratos {
+/* --- Contenedor de las Tarjetas (Grid) --- */
+/* Apunta directamente a #contratos-container que es donde el JS renderiza */
+#contratos-container {
     display: grid;
-    /* Por defecto, 4 columnas de tamaño flexible */
+    /* 4 columnas para pantallas grandes */
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-    gap: 25px; /* Espacio entre los cards */
-    padding: 10px;
+    gap: 25px; /* Espacio entre las tarjetas */
+    padding: 10px 0; /* Espaciado dentro del contenedor de tarjetas */
 }
 
-/* --- Estilo de los Cards Individuales --- */
+/* Mensajes de No Contratos / Error */
+/* Estos estilos son para los <p> que el JS inserta cuando no hay contratos */
+.no-contracts-message,
+.error-message {
+    grid-column: 1 / -1; /* Ocupa todas las columnas en la grilla */
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 1.2em;
+    color: #666;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin: 20px auto; /* Centra el mensaje */
+    max-width: 600px;
+}
+
+.error-message {
+    color: #d9534f; /* Rojo para errores */
+    background-color: #fdd;
+    border: 1px solid #d9534f;
+}
+
+/* --- Estilo Base de la Tarjeta de Contrato --- */
 .contract-card {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-    overflow: hidden; /* Asegura que las esquinas redondeadas se apliquen bien */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Sombra más pronunciada para efecto "flotante" */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    min-height: 380px; /* Altura mínima para que los cards se vean consistentes */
+    min-height: 280px; /* Altura mínima para que las tarjetas se vean uniformes */
+    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
 }
 
 .contract-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px); /* Pequeño levantamiento al pasar el mouse */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Sombra más grande al pasar el mouse */
 }
 
-/* --- Encabezado del Card --- */
-.card-header {
-    background-color: #f0f0f0;
-    padding: 15px;
+/* Encabezado de la tarjeta */
+.contract-card .card-header {
+    background-color: #f2f2f2;
+    padding: 15px 20px;
     border-bottom: 1px solid #e0e0e0;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    position: relative; /* Para posicionar el tag de estado */
-}
-
-.card-header .title-dates-row {
-    display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Alinea el título y las fechas arriba */
-    flex-wrap: wrap; /* Permite que el título y fechas se envuelvan */
-    gap: 10px;
+    align-items: flex-start; /* Alinea los ítems arriba */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan */
 }
 
-.card-header .nombre {
+.contract-card .card-header .title-dates-row {
+    flex-grow: 1;
+    margin-right: 15px;
+}
+
+.contract-card .card-header .nombre {
     font-size: 1.4em;
-    font-weight: 700;
-    color: #2a2a2a;
-    flex-grow: 1; /* Permite que el nombre ocupe el espacio disponible */
-    margin-right: 10px;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
 }
 
-.card-header .dates {
+.contract-card .card-header .dates {
     font-size: 0.9em;
-    color: #666;
-    text-align: right;
-    white-space: nowrap; /* Evita que las fechas se rompan en varias líneas */
-}
-
-.card-header .date-label {
-    font-weight: 600;
-    color: #444;
-}
-
-/* --- Tag de Estado (posición superior derecha del header) --- */
-.contract-card .tag {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    background-color: #888; /* Color por defecto */
-    color: white;
-    padding: 5px 12px;
-    font-size: 0.85em;
-    font-weight: 700;
-    border-bottom-left-radius: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-/* Colores para cada estado */
-.contract-card.tag-en-espera .tag { background-color: #ffc107; color: #333; } /* Amarillo */
-.contract-card.tag-en-progreso .tag { background-color: #17a2b8; } /* Azul claro */
-.contract-card.tag-finalizado .tag { background-color: #28a745; } /* Verde */
-.contract-card.tag-completado .tag { background-color: #6f42c1; } /* Púrpura */
-.contract-card.tag-cancelado .tag { background-color: #dc3545; } /* Rojo */
-.contract-card.tag-rechazado .tag { background-color: #6c757d; } /* Gris */
-
-
-/* --- Información del Servicio --- */
-.contract-card .info {
-    padding: 15px;
-    font-size: 0.95em;
-    color: #4a4a4a;
-    flex-grow: 1; /* Permite que esta sección ocupe el espacio restante */
+    color: #777;
     display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centra el texto verticalmente si hay espacio */
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
-/* --- Precio y Acciones --- */
+.contract-card .card-header .date-label {
+    font-weight: 600;
+}
+
+/* Etiqueta de estado (tag) */
+.contract-card .tag {
+    background-color: #5cb85c; /* Verde por defecto */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+    text-transform: uppercase;
+    white-space: nowrap; /* Evita que el texto se rompa */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Colores de las etiquetas de estado */
+.contract-card.tag-en-espera .tag { background-color: #f0ad4e; } /* Naranja */
+.contract-card.tag-en-progreso .tag { background-color: #5bc0de; } /* Azul claro */
+.contract-card.tag-finalizado .tag { background-color: #5cb85c; } /* Verde */
+.contract-card.tag-rechazado .tag { background-color: #d9534f; } /* Rojo */
+.contract-card.tag-cancelado .tag { background-color: #777; } /* Gris */
+.contract-card.tag-pagado .tag { background-color: #28a745; } /* Verde oscuro */
+
+
+/* Sección de información (descripción) */
+.contract-card .info {
+    padding: 20px;
+    flex-grow: 1; /* Permite que la descripción ocupe el espacio restante */
+    color: #555;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.contract-card .info p {
+    margin: 0;
+}
+
+/* Sección de precio y acciones */
 .contract-card .price-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    border-top: 1px solid #eee;
-    background-color: #fdfdfd;
+    padding: 0 20px 15px; /* Quita el padding superior, lo tiene el .info */
 }
 
 .contract-card .price-tag {
-    font-size: 1.3em;
-    font-weight: 700;
-    color: #007bff; /* Color principal de la marca */
-}
-
-.contract-card .price-tag span {
-    color: #28a745; /* Color más distintivo para el valor */
-}
-
-/* --- Información del Cliente/Prestador y Botón de Pago --- */
-.client-price-row {
-    display: flex;
-    flex-direction: column; /* Columna para que la info y la imagen estén una sobre otra */
-    padding: 15px;
-    border-top: 1px solid #eee;
-    align-items: flex-start; /* Alinea los elementos a la izquierda */
-    gap: 10px;
-}
-
-.client-info p {
-    margin: 0;
-    font-size: 0.9em;
-    color: #555;
-    font-weight: 500;
-}
-
-.client-info .client-name {
-    font-weight: 700;
+    font-size: 1.1em;
+    font-weight: bold;
     color: #333;
 }
 
-.other-user-display {
+.contract-card .price-tag span {
+    color: #007bff; /* Azul para el precio */
+    font-size: 1.2em;
+}
+
+.contract-card .pagar-btn {
+    background-color: #28a745; /* Verde para Pagar */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.contract-card .pagar-btn:hover {
+    background-color: #218838;
+}
+
+/* Sección de información del cliente/prestador */
+.contract-card .client-price-row {
+    padding: 10px 20px 20px;
+    border-top: 1px solid #eee;
+    background-color: #f9f9f9;
+}
+
+.contract-card .client-info p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 0.95em;
+}
+
+.contract-card .client-name {
+    font-weight: bold;
+    color: #444;
+}
+
+.contract-card .other-user-display {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-top: 10px; /* Espacio con la información de cliente/prestador */
+    margin-top: 10px;
 }
 
-.perfil-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #007bff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+.contract-card .perfil-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Circular */
+    object-fit: cover; /* Asegura que la imagen no se distorsione */
+    margin-right: 10px;
+    border: 2px solid #007bff; /* Pequeño borde para destacar */
 }
 
-.other-user-name {
-    font-size: 1em;
-    color: #007bff;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    transition: color 0.3s ease;
+.contract-card .other-user-name {
+    font-weight: bold;
+    color: #007bff; /* Color similar al precio */
+    font-size: 1.1em;
 }
 
-.other-user-name:hover {
-    color: #0056b3;
-    text-decoration: underline;
-}
-
-/* --- Botones de Acción --- */
+/* Botones de acción (Comenzar/Rechazar) */
 .card-actions-buttons {
     display: flex;
     justify-content: flex-end; /* Alinea los botones a la derecha */
     gap: 10px;
-    padding: 15px;
-    border-top: 1px solid #eee;
-    background-color: #fdfdfd;
-    flex-wrap: wrap; /* Asegura que los botones se envuelvan si no hay espacio */
+    padding: 0 20px 20px;
+    margin-top: auto; /* Empuja los botones al final de la tarjeta */
 }
 
-.action-btn, .pagar-btn {
+.action-btn {
     padding: 10px 18px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 0.95em;
+    font-size: 1em;
     font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.action-btn:active {
+    transform: translateY(1px); /* Efecto de "presión" al clickear */
 }
 
 .begin-btn {
-    background-color: #007bff; /* Azul primario */
+    background-color: #007bff; /* Azul */
     color: white;
 }
 
 .begin-btn:hover {
     background-color: #0056b3;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
 }
 
 .reject-btn {
-    background-color: #dc3545; /* Rojo de peligro */
+    background-color: #dc3545; /* Rojo */
     color: white;
 }
 
 .reject-btn:hover {
     background-color: #c82333;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
-}
-
-.pagar-btn {
-    background-color: #28a745; /* Verde de éxito */
-    color: white;
-    margin-left: auto; /* Empuja el botón "Pagar" a la derecha si es necesario */
-}
-
-.pagar-btn:hover {
-    background-color: #218838;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
-}
-
-/* --- Mensaje de "No hay contratos" --- */
-.no-contracts-message {
-    text-align: center;
-    font-size: 1.2em;
-    color: #777;
-    padding: 50px 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    margin-top: 20px;
-}
-
-.error-message {
-    text-align: center;
-    font-size: 1.2em;
-    color: #dc3545;
-    padding: 50px 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    margin-top: 20px;
-    border: 1px solid #dc3545;
 }
 
 /* --- Media Queries para Responsividad --- */
-@media (max-width: 1024px) {
-    .lista-contratos {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 3 columnas en pantallas medianas */
-    }
-    .contratos-listado-principal {
-        margin: 30px 20px;
+
+/* Para tabletas grandes y pantallas más pequeñas (máx. 1200px) */
+@media (max-width: 1200px) {
+    #contratos-container {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* Más flexible, quizás 3-4 columnas */
     }
 }
 
-@media (max-width: 768px) {
-    .lista-contratos {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 2 columnas en tablets */
-        justify-content: center; /* Centra los cards cuando son 2 */
+/* Para tabletas pequeñas (máx. 992px) */
+@media (max-width: 992px) {
+    #contratos-container {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 3 columnas */
+        gap: 20px;
     }
+    .contratos-listado-principal {
+        padding: 15px;
+    }
+}
 
+/* Para tabletas en modo retrato y móviles grandes (máx. 768px) */
+@media (max-width: 768px) {
     .fila_superior {
         flex-direction: column;
         align-items: flex-start;
+        gap: 15px;
     }
-
     .fila_superior h1 {
         font-size: 2em;
     }
-
     .filter-container {
         width: 100%;
-        justify-content: flex-start;
+        justify-content: space-between; /* Espacia label y select */
     }
-
-    #filter-type {
-        width: 100%;
+    .filter-container select {
+        flex-grow: 1; /* El select ocupa el espacio restante */
+    }
+    
+    #contratos-container {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* 2 columnas */
+        gap: 15px;
+    }
+    .contract-card .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .contract-card .card-header .dates {
+        margin-top: 10px;
     }
 }
 
-@media (max-width: 480px) {
-    .lista-contratos {
-        grid-template-columns: 1fr; /* 1 columna en móviles */
-        padding: 0;
-    }
-
+/* Para móviles pequeños (máx. 576px) */
+@media (max-width: 576px) {
     .contratos-listado-principal {
-        padding: 15px;
-        margin: 20px 10px;
+        padding: 10px;
+        box-shadow: none; /* Menos sombra en pantallas muy pequeñas */
+        border-radius: 0;
     }
-
-    .card-header .nombre {
-        font-size: 1.2em;
-    }
-
-    .card-header .dates {
-        font-size: 0.8em;
-    }
-
-    .action-btn, .pagar-btn {
-        width: 100%; /* Botones ocupan todo el ancho */
+    .fila_superior h1 {
+        font-size: 1.8em;
         text-align: center;
-        margin-left: 0 !important; /* Anula margin-left para pagar-btn */
+        width: 100%;
+    }
+    .filter-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filter-container label {
+        text-align: center;
+        margin-bottom: 5px;
     }
 
+    #contratos-container {
+        grid-template-columns: 1fr; /* Una sola columna para móviles */
+        gap: 15px;
+    }
+    .contract-card {
+        min-height: auto; /* Altura auto para móviles */
+        padding-bottom: 15px; /* Espacio extra en la parte inferior de la tarjeta */
+    }
+
+    .contract-card .price-actions,
     .card-actions-buttons {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch; /* Estira los elementos al ancho completo */
+        gap: 10px;
     }
 
-    .price-actions {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+    .contract-card .pagar-btn,
+    .action-btn {
+        width: 100%; /* Botones de ancho completo */
+        text-align: center;
     }
 }
