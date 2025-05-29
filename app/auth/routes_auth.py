@@ -107,3 +107,13 @@ def registrar_persona_route():
         return jsonify({}), 200
     except Exception as e:
         return jsonify({'msg': str(e)}), 400
+    
+@auth_bp.route('/username', methods=['GET'])
+def get_current_username():
+    if not getattr(g, 'user_id', None):
+        return jsonify({"error": "No autenticado. Por favor, inicia sesión."}), 401
+    current_username = getattr(g, 'username', None)
+    if current_username:
+        return jsonify({"username": current_username}), 200
+    else:
+        return jsonify({"error": "No se pudo obtener el nombre de usuario."}), 500

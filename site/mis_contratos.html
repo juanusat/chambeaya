@@ -1,354 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis contratos</title>
+    <title>Mis Contratos - ChambeaYa</title>
     <script src="/static/js/validar-sesion.js"></script>
     <link rel="stylesheet" href="/static/css/main.css">
     <link rel="shortcut icon" href="/static/brand/favicon-chambeaya.png" type="image/png">
     <link rel="stylesheet" href="/static/css/mis_contratos.css">
-    <script type="application/json" id="user-data">["json"]</script>
 </head>
-
-<body >
+<body>
     <div class="app">
         <div class="header"></div> <div class="page">
-            <div class="contratos-container">
+            <div class="contratos-listado-principal"> 
                 <div class="fila_superior">
-                    <h1>Mis contratos</h1>
-                    <div class="ordenar-container">
-                        <p>Ordenar por:</p>
-                        <button type="button">Más reciente <i class="fa-solid fa-caret-down"></i></button>
+                    <h1>Mis Contratos</h1>
+                    <div class="filter-container">
+                        <label for="filter-type">Mostrar como:</label>
+                        <select id="filter-type">
+                            <option value="todos">Todos</option>
+                            <option value="cliente">Cliente</option>
+                            <option value="prestador">Prestador</option>
+                        </select>
                     </div>
                 </div>
-                <div class="contenedor">
-                    <div class="lista-contratos" id="lista-contratos">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="title-dates-row">
-                                    <span class="nombre">Pintor de casas a Domicilio</span>
-                                    <div class="dates">
-                                        <span class="date-label">Inicio:</span>
-                                        <span class="date-value">4/05/2025</span>
-                                    </div>
-                                </div>
-                                <div class="tag">
-                                    <i class="fa-solid fa-tag"></i> Pintura
-                                </div>
-                            </div>
-
-                            <div class="client-price-row">
-                                <div class="client-info">
-                                    <p>Cliente: <span class="client-name">Marcos Pluto</span></p>
-                                    <img src="https://placehold.co/35x35/2c3e50/ffffff?text=MP" alt="Perfil Marcos Pluto" class="perfil-img">
-                                </div>
-                                <div class="price-actions">
-                                    <div class="price-tag">Precio: <span>$500</span></div>
-                                </div>
-                            </div>
-                            <div class="info">
-                                <p>¿Quieres renovar el aspecto de tu hogar sin complicaciones? Ofrezco un servicio de
-                                    pintura a domicilio enfocado en la rapidez, eficiencia y atención al detalle. Me
-                                    encargo de cada etapa del trabajo, desde la preparación de superficies hasta la
-                                    limpieza final, para que no tengas que preocuparte por nada. Utilizo pinturas de
-                                    excelente calidad que garantizan durabilidad y un acabado profesional. Ideal para
-                                    quienes necesitan resultados inmediatos sin sacrificar calidad.</p>
-                            </div>
-
-                            <button class="resumen-pagos-btn">
-                                Resumen de Pago(s)
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="resumen-pagos-contenido">
-                                <div class="pago-item">
-                                    <h4>1° Pago:</h4>
-                                    <div class="pago-detalle">
-                                        <span class="label">Monto:</span>
-                                        <span class="value">150$</span>
-                                    </div>
-                                    <div class="pago-detalle">
-                                        <span class="label">Fecha de Pago:</span>
-                                        <span class="value">4/05/2025</span>
-                                    </div>
-                                    <div class="pago-detalle">
-                                        <span class="label">Método de Pago:</span>
-                                        <span class="value">Crédito</span>
-                                    </div>
-                                </div>
-                                <div class="pago-item">
-                                    <h4>2° Pago:</h4>
-                                     <div class="pago-detalle">
-                                        <span class="label">Monto:</span>
-                                        <span class="value">150$</span>
-                                    </div>
-                                    <div class="pago-detalle">
-                                        <span class="label">Fecha de Pago:</span>
-                                        <span class="value">4/05/2025</span>
-                                    </div>
-                                    <div class="pago-detalle">
-                                        <span class="label">Método de Pago:</span>
-                                        <span class="value">Crédito</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="ver-comentario-btn">
-                                Comentario
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="comentario-contenido" style="display: none;">
-                                <!-- Aquí se mostrará el comentario si existe -->
-                                <div class="comentario-existente">
-                                    <p><strong>Comentario:</strong> <span class="comentario-texto">No hay comentario aún.</span></p>
-                                    <p><strong>Calificación:</strong> <span class="calificacion-estrellas-display">
-                                        <!-- Aquí se mostrarán las estrellas (rellenas o vacías) -->
-                                        <span class="estrella-display">&#9734;</span>
-                                        <span class="estrella-display">&#9734;</span>
-                                        <span class="estrella-display">&#9734;</span>
-                                        <span class="estrella-display">&#9734;</span>
-                                        <span class="estrella-display">&#9734;</span>
-                                    </span></p>
-                                    <button class="editar-comentario-btn" style="display: none;">Editar Comentario</button>
-                                </div>
-
-                                <!-- Formulario para agregar o editar comentario -->
-                                <form class="form-comentario" style="display: none;">
-                                    <textarea placeholder="Escribe tu comentario aquí..." required></textarea>
-                                    
-                                    <div class="calificacion-estrellas" data-calificacion="0">
-                                        <span class="estrella" data-value="1">&#9733;</span>
-                                        <span class="estrella" data-value="2">&#9733;</span>
-                                        <span class="estrella" data-value="3">&#9733;</span>
-                                        <span class="estrella" data-value="4">&#9733;</span>
-                                        <span class="estrella" data-value="5">&#9733;</span>
-                                    </div>
-                                    <input type="hidden" name="calificacion" value="0" required />
-                                    
-                                    <button type="submit">Guardar Comentario</button>
-                                    <button type="button" class="cancelar-edicion-btn">Cancelar</button>
-                                </form>
-                            </div>
+                <div class="contenedor"> 
+                    <div class="lista-contratos" id="contratos-container">
                         </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                 <div class="title-dates-row">
-                                    <span class="nombre">Pintor de casas a Domicilio</span>
-                                    <div class="dates">
-                                        <span class="date-label">Inicio:</span>
-                                        <span class="date-value">4/05/2025</span>
-                                    </div>
-                                </div>
-                                <div class="tag">
-                                    <i class="fa-solid fa-tag"></i> Pintura
-                                </div>
-                            </div>
-
-                            <div class="client-price-row">
-                                <div class="client-info">
-                                    <p>Empleador: <span class="client-name">Marcos Pluto</span></p>
-                                    <img src="https://placehold.co/35x35/e74c3c/ffffff?text=MP" alt="Perfil Marcos Pluto" class="perfil-img">
-                                </div>
-                                <div class="price-actions">
-                                    <button class="pagar-btn">Pagar</button>
-                                    <div class="price-tag">Precio: <span>$500</span></div>
-                                </div>
-                            </div>
-                            <div class="info">
-                                <p>¿Busco renovar el aspecto de mi hogar de manera rápida y sin complicaciones? Estoy en
-                                    búsqueda de un pintor a domicilio que ofrezca un servicio eficiente, detallista y
-                                    profesional. Valoro a quienes se encargan de todo el proceso: desde la preparación
-                                    de superficies hasta la limpieza final, y que trabajen con materiales de calidad
-                                    para garantizar un acabado duradero. Necesito a alguien que respete los tiempos
-                                    acordados y pueda ofrecer resultados impecables sin sacrificar la rapidez del
-                                    trabajo.</p>
-                            </div>
-
-                            <button class="resumen-pagos-btn">
-                                Resumen de Pago(s)
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="resumen-pagos-contenido">
-                               <div class="pago-item">
-                                    <h4>1° Pago:</h4>
-                                    <div class="pago-detalle">
-                                        <span class="label">Monto:</span>
-                                        <span class="value">150$</span>
-                                    </div>
-                                    <div class="pago-detalle">
-                                        <span class="label">Fecha de Pago:</span>
-                                        <span class="value">4/05/2025</span>
-                                    </div>
-                                    <div class="pago-detalle">
-                                        <span class="label">Método de Pago:</span>
-                                        <span class="value">Crédito</span>
-                                    </div>
-                                </div>
-                                <div class="pago-item">
-                                    <h4>2° Pago:</h4>
-                                     <div class="pago-detalle">
-                                        <span class="label">Monto:</span>
-                                        <span class="value">150$</span>
-                                    </div>
-                                    <div class="pago-detalle">
-                                        <span class="label">Fecha de Pago:</span>
-                                        <span class="value">4/05/2025</span>
-                                    </div>
-                                    <div class="pago-detalle">
-                                        <span class="label">Método de Pago:</span>
-                                        <span class="value">Crédito</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="ver-comentario-btn">
-    Comentario
-    <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="comentario-contenido" style="display: none;">
-                                <!-- Aquí se mostrará el comentario si existe -->
-                                <div class="comentario-existente">
-                                    <p><strong>Comentario:</strong> <span class="comentario-texto">No hay comentario aún.</span></p>
-                                    <p><strong>Calificación:</strong> <span class="calificacion-estrellas-display">
-                                        <!-- Aquí se mostrarán las estrellas (rellenas o vacías) -->
-                                        <span class="estrella-display">&#9734;</span>
-                                        <span class="estrella-display">&#9734;</span>
-                                        <span class="estrella-display">&#9734;</span>
-                                        <span class="estrella-display">&#9734;</span>
-                                        <span class="estrella-display">&#9734;</span>
-                                    </span></p>
-                                    <button class="editar-comentario-btn" style="display: none;">Editar Comentario</button>
-                                </div>
-
-                                <!-- Formulario para agregar o editar comentario -->
-                                <form class="form-comentario" style="display: none;">
-                                    <textarea placeholder="Escribe tu comentario aquí..." required></textarea>
-                                    
-                                    <div class="calificacion-estrellas" data-calificacion="0">
-                                        <span class="estrella" data-value="1">&#9733;</span>
-                                        <span class="estrella" data-value="2">&#9733;</span>
-                                        <span class="estrella" data-value="3">&#9733;</span>
-                                        <span class="estrella" data-value="4">&#9733;</span>
-                                        <span class="estrella" data-value="5">&#9733;</span>
-                                    </div>
-                                    <input type="hidden" name="calificacion" value="0" required />
-                                    
-                                    <button type="submit">Guardar Comentario</button>
-                                    <button type="button" class="cancelar-edicion-btn">Cancelar</button>
-                                </form>
-                            </div>
-
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="title-dates-row">
-                                    <span class="nombre">Servicio de Jardinería Semanal</span>
-                                     <div class="dates">
-                                        <span class="date-label">Inicio:</span>
-                                        <span class="date-value">10/05/2025</span>
-                                    </div>
-                                </div>
-                                <div class="tag">
-                                    <i class="fa-solid fa-leaf"></i> Jardinería
-                                </div>
-                            </div>
-
-                            <div class="client-price-row">
-                                <div class="client-info">
-                                    <p>Cliente: <span class="client-name">Ana Torres</span></p>
-                                    <img src="https://placehold.co/35x35/3498db/ffffff?text=AT" alt="Perfil Ana Torres" class="perfil-img">
-                                </div>
-                                <div class="price-actions">
-                                    <div class="price-tag">Precio: <span>$120</span></div>
-                                </div>
-                            </div>
-                            <div class="info">
-                                <p>Mantenimiento semanal de jardín, incluye corte de césped, poda de arbustos y control de malezas. Servicio confiable y profesional para mantener tu jardín siempre hermoso.</p>
-                            </div>
-                            <button class="resumen-pagos-btn">
-                                Resumen de Pago(s)
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="resumen-pagos-contenido">
-                               <div class="pago-item">
-                                    <h4>1° Pago:</h4>
-                                    <div class="pago-detalle">
-                                        <span class="label">Monto:</span>
-                                        <span class="value">60$</span>
-                                    </div>
-                                    <div class="pago-detalle">
-                                        <span class="label">Fecha de Pago:</span>
-                                        <span class="value">10/05/2025</span>
-                                    </div>
-                                    <div class="pago-detalle">
-                                        <span class="label">Método de Pago:</span>
-                                        <span class="value">Transferencia</span>
-                                    </div>
-                                </div>
-                                 <div class="pago-item">
-                                    <h4>2° Pago:</h4>
-                                     <div class="pago-detalle">
-                                        <span class="label">Monto:</span>
-                                        <span class="value">60$</span>
-                                    </div>
-                                    <div class="pago-detalle">
-                                        <span class="label">Fecha de Pago:</span>
-                                        <span class="value">17/05/2025</span>
-                                    </div>
-                                    <div class="pago-detalle">
-                                        <span class="label">Método de Pago:</span>
-                                        <span class="value">Transferencia</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="ver-comentario-btn">
-                                Comentario
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
-                                <div class="comentario-contenido" style="display: none;">
-                                    <!-- Aquí se mostrará el comentario si existe -->
-                                    <div class="comentario-existente">
-                                        <p><strong>Comentario:</strong> <span class="comentario-texto">No hay comentario aún.</span></p>
-                                        <p><strong>Calificación:</strong> <span class="calificacion-estrellas-display">
-                                            <!-- Aquí se mostrarán las estrellas (rellenas o vacías) -->
-                                            <span class="estrella-display">&#9734;</span>
-                                            <span class="estrella-display">&#9734;</span>
-                                            <span class="estrella-display">&#9734;</span>
-                                            <span class="estrella-display">&#9734;</span>
-                                            <span class="estrella-display">&#9734;</span>
-                                        </span></p>
-                                        <button class="editar-comentario-btn" style="display: none;">Editar Comentario</button>
-                                    </div>
-
-                                    <!-- Formulario para agregar o editar comentario -->
-                                    <form class="form-comentario" style="display: none;">
-                                        <textarea placeholder="Escribe tu comentario aquí..." required></textarea>
-                                        
-                                        <div class="calificacion-estrellas" data-calificacion="0">
-                                            <span class="estrella" data-value="1">&#9733;</span>
-                                            <span class="estrella" data-value="2">&#9733;</span>
-                                            <span class="estrella" data-value="3">&#9733;</span>
-                                            <span class="estrella" data-value="4">&#9733;</span>
-                                            <span class="estrella" data-value="5">&#9733;</span>
-                                        </div>
-                                        <input type="hidden" name="calificacion" value="0" required />
-                                        
-                                        <button type="submit">Guardar Comentario</button>
-                                        <button type="button" class="cancelar-edicion-btn">Cancelar</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
         <div class="footer"></div> </div>
     <div class="js">
         <script src="/static/js/main.js"></script>
-        <script src="/static/js/mis-contratos.js"></script>
+        <script src="/static/js/mis-contratos.js"></script> 
     </div>
 </body>
-
 </html>

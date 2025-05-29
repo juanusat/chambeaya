@@ -1,0 +1,200 @@
+/* Estilos generales del body */
+.page {
+    background-color: #f4f6f8;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.width-m {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Encabezado */
+.job-post-header {
+    background-color: #ffffff;
+    padding: 1.2rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    border-bottom: 2px solid #e0e0e0;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    color: #333333;
+}
+
+/* Contenedor de notificaciones */
+.lista-contratos-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+/* Tarjeta individual */
+.notification-display-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Ajustado el gap para las secciones principales */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.notification-display-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Título del servicio */
+.card-title-row .service-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Fechas y estado */
+.card-dates-and-tag-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.card-dates-info {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.date-label {
+    font-weight: 600;
+    color: #666;
+}
+
+.date-value {
+    color: #333;
+}
+
+/* Etiqueta de estado */
+.status-tag {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: white;
+}
+
+.status-tag.pendiente {
+    background-color: #f39c12;
+}
+
+.status-tag.aceptado {
+    background-color: #27ae60;
+}
+
+.status-tag.rechazado {
+    background-color: #c0392b;
+}
+
+.status-tag.desconocido {
+    background-color: #7f8c8d;
+}
+
+/* Info del prestador */
+.card-client-info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    color: #444;
+}
+
+.client-label {
+    font-weight: 600;
+}
+
+.client-name-value {
+    color: #2c3e50;
+}
+
+/* Imagen del prestador */
+.prestador-imagen {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+/* Precio */
+.card-price-row {
+    font-size: 1rem;
+    color: #2d3436;
+}
+
+.price-label {
+    font-weight: 600;
+}
+
+.price-value {
+    font-size: 1.1rem;
+    color: #16a085;
+    font-weight: bold;
+}
+
+/* Descripción */
+.card-description {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+    border-top: 1px solid #eee;
+    padding-top: 0.8rem;
+    margin-bottom: 0; /* Asegura que no haya margen extra antes de los botones */
+}
+
+/* --- NUEVO: Estilos para los botones de acción --- */
+.card-actions-buttons {
+    display: flex;
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 1rem; /* Espacio superior para separarlos del contenido */
+    padding-top: 1rem; /* Padding superior para la línea de separación */
+    border-top: 1px solid #eee; /* Línea separadora sutil */
+}
+
+.card-actions-buttons button {
+    padding: 0.7rem 1.2rem; /* Ajusta el padding para un buen tamaño */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9rem;
+    font-weight: 600; /* Coincide con otros textos de la tarjeta */
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap; /* Evita que el texto del botón se rompa */
+}
+
+.card-actions-buttons .accept-btn {
+    background-color: #27ae60; /* Verde más acorde a tu estilo */
+    color: white;
+    border: 1px solid #27ae60;
+}
+
+.card-actions-buttons .accept-btn:hover {
+    background-color: #229954;
+    border-color: #229954;
+}
+
+.card-actions-buttons .reject-btn {
+    background-color: #c0392b; /* Rojo más acorde a tu estilo */
+    color: white;
+    border: 1px solid #c0392b;
+}
+
+.card-actions-buttons .reject-btn:hover {
+    background-color: #a93226;
+    border-color: #a93226;
+}

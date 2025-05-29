@@ -1,535 +1,403 @@
-
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f8f8f8;
-    margin: 0;
-    padding: 0;
+/* --- Contenedor Principal de la Página --- */
+/* Estilos generales para el wrapper de la página si es necesario */
+.page {
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    padding: 20px; /* Espaciado general alrededor de la página */
+    box-sizing: border-box; /* Incluye padding en el ancho/alto total */
+    min-height: calc(100vh - var(--header-height, 60px) - var(--footer-height, 40px)); /* Altura mínima restando header/footer */
+    background-color: #f8f9fa; /* Un fondo suave para la página */
 }
 
-.contratos-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 0 20px;
+/* --- Sección de Listado Principal de Contratos --- */
+.contratos-listado-principal {
+    width: 100%;
+    max-width: 1300px; /* Ancho máximo para el contenido principal */
+    margin: 0 auto; /* Centra el listado */
+    padding: 20px; /* Espaciado interno */
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra más profunda */
 }
 
-/* Encabezado superior */
+/* --- Fila Superior (Título y Filtros) --- */
 .fila_superior {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
 }
 
 .fila_superior h1 {
+    font-size: 2.2em;
+    color: #343a40;
     margin: 0;
-    font-size: 1.8em;
-    color: #333;
+    flex-grow: 1; /* Permite que el título ocupe espacio */
 }
 
-.fila_superior .ordenar-container { /* Contenedor para el texto y el botón */
+.filter-container {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    margin-top: 10px; /* Espacio para envolver en móviles */
 }
 
-.fila_superior .ordenar-container p {
-     margin: 0;
-     font-size: 0.9em;
-     color: #555;
+.filter-container label {
+    font-size: 1em;
+    color: #555;
+    font-weight: 600;
 }
 
-.fila_superior button { /* Botón "Más reciente" */
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    background-color: white;
-    border-radius: 5px;
+.filter-container select {
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    font-size: 0.95em;
+    color: #495057;
     cursor: pointer;
-    font-size: 0.9em;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.filter-container select:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
 
-/* Contenedor de las tarjetas */
-.lista-contratos {
+/* --- Contenedor de las Tarjetas (Grid) --- */
+/* Apunta directamente a #contratos-container que es donde el JS renderiza */
+#contratos-container {
+    display: grid;
+    /* 4 columnas para pantallas grandes */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 25px; /* Espacio entre las tarjetas */
+    padding: 10px 0; /* Espaciado dentro del contenedor de tarjetas */
+}
+
+/* Mensajes de No Contratos / Error */
+/* Estos estilos son para los <p> que el JS inserta cuando no hay contratos */
+.no-contracts-message,
+.error-message {
+    grid-column: 1 / -1; /* Ocupa todas las columnas en la grilla */
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 1.2em;
+    color: #666;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin: 20px auto; /* Centra el mensaje */
+    max-width: 600px;
+}
+
+.error-message {
+    color: #d9534f; /* Rojo para errores */
+    background-color: #fdd;
+    border: 1px solid #d9534f;
+}
+
+/* --- Estilo Base de la Tarjeta de Contrato --- */
+.contract-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Sombra más pronunciada para efecto "flotante" */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 280px; /* Altura mínima para que las tarjetas se vean uniformes */
+    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
 }
 
-/* Tarjeta individual */
-.card {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-    transition: box-shadow 0.3s ease;
+.contract-card:hover {
+    transform: translateY(-5px); /* Pequeño levantamiento al pasar el mouse */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Sombra más grande al pasar el mouse */
 }
 
-.card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
-}
-
-/* Cabecera de la tarjeta (Título, Fechas y Tag) */
-.card-header {
+/* Encabezado de la tarjeta */
+.contract-card .card-header {
+    background-color: #f2f2f2;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Cambiado de flex-start para mantener consistencia con original */
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
+    align-items: flex-start; /* Alinea los ítems arriba */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan */
 }
 
-.title-dates-row {
-    display: flex;
-    align-items: center; /* Consistencia con original */
+.contract-card .card-header .title-dates-row {
     flex-grow: 1;
-    margin-right: 10px;
-    flex-wrap: wrap;
-}
-
-
-.card-header .nombre {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #333;
-    margin: 0;
     margin-right: 15px;
 }
 
-.dates {
-    font-size: 0.85em;
-    color: #666;
+.contract-card .card-header .nombre {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.contract-card .card-header .dates {
+    font-size: 0.9em;
+    color: #777;
     display: flex;
-    gap: 10px;
     flex-wrap: wrap;
-}
-
-.date-label {
-    font-weight: bold;
-}
-
-.date-value {
-    font-weight: normal;
-}
-
-.tag {
-    display: inline-flex;
-    align-items: center;
-    background-color: #e0e0e0;
-    border-radius: 9999px; /* Originalmente muy redondeado */
-    padding: 0.25rem 0.75rem;
-    font-size: 0.85rem;
-    gap: 0.4rem;
-    color: #555;
-    font-weight: normal;
-    flex-shrink: 0;
-}
-
-.tag i {
-    color: #777; /* Color original del icono del tag */
-}
-
-/* Fila del cliente/prestador y el precio/acciones */
-.client-price-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    font-size: 0.95em;
-    color: #555;
-    flex-wrap: wrap; /* Para responsividad */
-}
-
-.client-info {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Espacio original */
-    flex-grow: 1; /* Para que ocupe espacio */
-}
-
-.client-info p {
-    margin: 0;
-}
-
-.client-name {
-    font-weight: bold;
-    color: #333;
-}
-
-.perfil-img {
-    width: 30px; /* Tamaño original */
-    height: 30px;
-    border-radius: 50%;
-    object-fit: cover;
-    background-color: #ccc; /* Fondo original si la imagen no carga */
-}
-
-/* Contenedor para el botón de pagar y la etiqueta de precio */
-.price-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Espacio entre botón pagar y precio */
-    margin-left: auto; /* Empuja a la derecha */
-}
-
-.price-tag { /* Estilo original para el precio */
-    display: inline-block;
-    border: 1px solid #bbb;
-    border-radius: 8px;
-    padding: 0.3rem 0.8rem;
-    font-weight: bold;
-    background-color: #f9f9f9;
-    color: #000;
-    font-size: 0.9em;
-    white-space: nowrap;
-}
-
-.price-tag span {
-    font-weight: bold;
-}
-
-/* Información del contrato (descripción) */
-.info {
-    font-size: 0.95em;
-    line-height: 1.6;
-    color: #555;
-    /* margin-bottom: 20px; Eliminado para mantener el original, se añade si es necesario */
-}
-
-.info p {
-    margin: 0;
-}
-
-/* --- ESTILOS AÑADIDOS/MODIFICADOS PARA DESPLEGABLE Y BOTÓN PAGAR --- */
-
-/* Botón Pagar */
-.pagar-btn {
-    background-color: #007bff; /* Azul primario, puedes ajustarlo */
-    color: white;
-    border: none;
-    padding: 6px 15px; /* Padding similar al price-tag pero un poco más grande */
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.9em; /* Similar al price-tag */
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    white-space: nowrap;
-}
-
-.pagar-btn:hover {
-    background-color: #0056b3; /* Azul más oscuro */
-}
-
-/* Botón para desplegar/ocultar el resumen de pagos */
-.resumen-pagos-btn{
-    background-color: #f0f0f0;
-    color: #333;
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    text-align: left;
-    font-size: 1em; /* Un poco más grande para destacar */
-    margin-top: 15px; /* Espacio arriba del botón */
-    margin-bottom: 10px; /* Espacio debajo del botón, antes del contenido si se despliega */
-    transition: background-color 0.3s ease;
-}
-
-.resumen-pagos-btn:hover{
-    background-color: #e0e0e0;
-}
-
-.resumen-pagos-btn .fa-chevron-down,
-.resumen-pagos-btn .fa-chevron-up {
-    transition: transform 0.3s ease;
-}
-
-/* Contenido del resumen de pagos (inicialmente oculto) */
-.resumen-pagos-contenido {
-    display: none; /* Oculto por defecto, se muestra con JS */
-    padding: 15px;
-    border: 1px solid #eee;
-    border-top: none; /* Para que no haya doble borde con el botón */
-    border-radius: 0 0 6px 6px; /* Redondear esquinas inferiores */
-    background-color: #fdfdfd; /* Fondo muy claro para el contenido */
-    animation: fadeIn 0.5s ease; /* Animación al aparecer */
-    margin-bottom: 10px; /* Espacio después del contenido desplegado */
-}
-
-/* Botón para mostrar/ocultar comentario */
-.ver-comentario-btn {
-    background-color: #f0f0f0;
-    color: #333;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 1em;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
     gap: 8px;
-    transition: background-color 0.3s ease;
-    width: 100%;
+}
+
+.contract-card .card-header .date-label {
+    font-weight: 600;
+}
+
+/* Etiqueta de estado (tag) */
+.contract-card .tag {
+    background-color: #5cb85c; /* Verde por defecto */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+    text-transform: uppercase;
+    white-space: nowrap; /* Evita que el texto se rompa */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Colores de las etiquetas de estado */
+.contract-card.tag-en-espera .tag { background-color: #f0ad4e; } /* Naranja */
+.contract-card.tag-en-progreso .tag { background-color: #5bc0de; } /* Azul claro */
+.contract-card.tag-finalizado .tag { background-color: #5cb85c; } /* Verde */
+.contract-card.tag-rechazado .tag { background-color: #d9534f; } /* Rojo */
+.contract-card.tag-cancelado .tag { background-color: #777; } /* Gris */
+.contract-card.tag-pagado .tag { background-color: #28a745; } /* Verde oscuro */
+
+
+/* Sección de información (descripción) */
+.contract-card .info {
+    padding: 20px;
+    flex-grow: 1; /* Permite que la descripción ocupe el espacio restante */
+    color: #555;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.contract-card .info p {
+    margin: 0;
+}
+
+/* Sección de precio y acciones */
+.contract-card .price-actions {
+    display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 15px; /* Quita el padding superior, lo tiene el .info */
 }
 
-.ver-comentario-btn:hover {
-    background-color: #e0e0e0;
-}
-
-/* Contenedor del contenido del comentario (inicialmente oculto) */
-.comentario-contenido {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    margin-top: 12px;
-    font-size: 0.95em;
+.contract-card .price-tag {
+    font-size: 1.1em;
+    font-weight: bold;
     color: #333;
 }
 
-/* Contenedor del comentario existente */
-.comentario-existente p {
-    margin: 8px 0;
+.contract-card .price-tag span {
+    color: #007bff; /* Azul para el precio */
+    font-size: 1.2em;
 }
 
-/* Botón para editar comentario */
-.editar-comentario-btn {
-    background-color: #28a745;
+.contract-card .pagar-btn {
+    background-color: #28a745; /* Verde para Pagar */
     color: white;
     border: none;
-    padding: 6px 14px;
     border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.9em;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-}
-
-.editar-comentario-btn:hover {
-    background-color: #1e7e34;
-}
-
-/* Formulario de comentario */
-.form-comentario {
-    margin-top: 12px;
-}
-
-.form-comentario textarea {
-    width: 100%;
-    min-height: 80px;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 1em;
-    resize: vertical;
-    font-family: Arial, sans-serif;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-}
-
-/* Contenedor de estrellas para seleccionar calificación */
-.calificacion-estrellas {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 12px;
-    font-size: 1.6em;
-    cursor: pointer;
-    user-select: none;
-}
-
-/* Estrella para calificación (rellena o vacía) */
-.calificacion-estrellas .estrella {
-    color: #ccc;
-    transition: color 0.25s ease;
-}
-
-.calificacion-estrellas .estrella:hover,
-.calificacion-estrellas .estrella:hover ~ .estrella {
-    color: gold;
-}
-
-.calificacion-estrellas .estrella.activa {
-    color: gold;
-}
-
-/* Botones dentro del formulario */
-.form-comentario button[type="submit"],
-.form-comentario .cancelar-edicion-btn {
     padding: 8px 15px;
-    font-size: 0.9em;
-    border-radius: 6px;
-    border: none;
     cursor: pointer;
+    font-size: 0.95em;
     font-weight: 600;
-    margin-right: 8px;
-    color: white;
     transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.form-comentario button[type="submit"] {
-    background-color: #007bff;
+.contract-card .pagar-btn:hover {
+    background-color: #218838;
 }
 
-.form-comentario button[type="submit"]:hover {
+/* Sección de información del cliente/prestador */
+.contract-card .client-price-row {
+    padding: 10px 20px 20px;
+    border-top: 1px solid #eee;
+    background-color: #f9f9f9;
+}
+
+.contract-card .client-info p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 0.95em;
+}
+
+.contract-card .client-name {
+    font-weight: bold;
+    color: #444;
+}
+
+.contract-card .other-user-display {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.contract-card .perfil-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Circular */
+    object-fit: cover; /* Asegura que la imagen no se distorsione */
+    margin-right: 10px;
+    border: 2px solid #007bff; /* Pequeño borde para destacar */
+}
+
+.contract-card .other-user-name {
+    font-weight: bold;
+    color: #007bff; /* Color similar al precio */
+    font-size: 1.1em;
+}
+
+/* Botones de acción (Comenzar/Rechazar) */
+.card-actions-buttons {
+    display: flex;
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+    gap: 10px;
+    padding: 0 20px 20px;
+    margin-top: auto; /* Empuja los botones al final de la tarjeta */
+}
+
+.action-btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.action-btn:active {
+    transform: translateY(1px); /* Efecto de "presión" al clickear */
+}
+
+.begin-btn {
+    background-color: #007bff; /* Azul */
+    color: white;
+}
+
+.begin-btn:hover {
     background-color: #0056b3;
 }
 
-.form-comentario .cancelar-edicion-btn {
-    background-color: #dc3545;
-}
-
-.form-comentario .cancelar-edicion-btn:hover {
-    background-color: #b02a37;
-}
-
-/* Estrellas para mostrar la calificación (solo lectura) */
-.calificacion-estrellas-display {
-    font-size: 1.4em;
-    color: gold;
-    display: inline-flex;
-    gap: 4px;
-    user-select: none;
-}
-
-.estrella-display {
-    color: #ddd; /* Estrella vacía */
-}
-
-.estrella-display.activa {
-    color: gold;
-}
-
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.pago-item {
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed #eee; /* Separador sutil entre pagos */
-}
-.pago-item:last-child {
-    margin-bottom: 0;
-    border-bottom: none;
-}
-
-.pago-item h4 { /* Título de cada pago (ej: 1° Pago) */
-    font-size: 1em; /* Tamaño consistente */
-    color: #337ab7; /* Un color para destacar el título del pago */
-    margin-top: 0;
-    margin-bottom: 8px;
-}
-
-.pago-detalle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.9em; /* Tamaño de fuente para los detalles */
-    margin-bottom: 6px;
-    flex-wrap: wrap;
-}
-
-.pago-detalle span {
-    color: #555;
-}
-
-.pago-detalle .label {
-    font-weight: bold;
-    color: #444;
-    min-width: 110px; /* Ancho mínimo para las etiquetas "Monto:", "Fecha:", etc. */
-}
- .pago-detalle .value {
-    text-align: right;
-    flex-grow: 1;
-}
-/* --- FIN DE ESTILOS AÑADIDOS/MODIFICADOS --- */
-
-/* Estilos de rating (manteniendo los tuyos, aunque no se ven en la imagen de ejemplo) */
-.rating {
-    display: flex;
-    gap: 4px;
-    font-size: 1.2em;
-    cursor: pointer;
-    align-items: center;
-}
-
-.rating span {
+.reject-btn {
+    background-color: #dc3545; /* Rojo */
     color: white;
-    text-shadow: 0 0 1px black, 0 0 1px black;
-    transition: color 0.2s;
 }
 
-.rating span.hover,
-.rating span.selected {
-    color: gold;
+.reject-btn:hover {
+    background-color: #c82333;
 }
 
-/* Asegurar que el contenedor principal de la aplicación y la página ocupen la altura completa si es necesario */
-.app,
-.page {
-    min-height: 100vh;
+/* --- Media Queries para Responsividad --- */
+
+/* Para tabletas grandes y pantallas más pequeñas (máx. 1200px) */
+@media (max-width: 1200px) {
+    #contratos-container {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* Más flexible, quizás 3-4 columnas */
+    }
 }
 
+/* Para tabletas pequeñas (máx. 992px) */
+@media (max-width: 992px) {
+    #contratos-container {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 3 columnas */
+        gap: 20px;
+    }
+    .contratos-listado-principal {
+        padding: 15px;
+    }
+}
 
-/* Estilos responsivos (ajustes mínimos basados en la nueva estructura) */
-@media (max-width: 600px) { /* Usar un breakpoint común */
+/* Para tabletas en modo retrato y móviles grandes (máx. 768px) */
+@media (max-width: 768px) {
     .fila_superior {
         flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
+        gap: 15px;
     }
-
-    .card-header {
-        /* Mantener align-items: center; o cambiar a flex-start si se prefiere */
+    .fila_superior h1 {
+        font-size: 2em;
     }
-
-    .title-dates-row {
-        /* margin-right: 0; si el tag se mueve debajo */
-        /* margin-bottom: 10px; si el tag se mueve debajo */
+    .filter-container {
+        width: 100%;
+        justify-content: space-between; /* Espacia label y select */
     }
-
-    /* Ajuste para la fila de cliente y precio/acciones en móvil */
-    .client-price-row {
-        flex-direction: column;
-        align-items: flex-start; /* Alinear todo a la izquierda en móvil */
-        gap: 10px; /* Espacio entre client-info y price-actions */
+    .filter-container select {
+        flex-grow: 1; /* El select ocupa el espacio restante */
     }
-
-    .price-actions {
-        width: 100%; /* Ocupar todo el ancho */
-        justify-content: space-between; /* Espaciar botón y precio */
-        margin-left: 0; /* Resetear margen */
+    
+    #contratos-container {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* 2 columnas */
+        gap: 15px;
     }
-
-    .pagar-btn {
-         /* Podrías querer que el botón Pagar ocupe más espacio o se centre */
-         /* order: -1; /* Si quieres que el botón Pagar aparezca antes que el precio */
-    }
-
-    .price-tag {
-        /* align-self: flex-start; Ya está implícito con flex-start en client-price-row */
-    }
-
-    .pago-detalle {
+    .contract-card .card-header {
         flex-direction: column;
         align-items: flex-start;
     }
-    .pago-detalle .value {
-        text-align: left;
+    .contract-card .card-header .dates {
+        margin-top: 10px;
+    }
+}
+
+/* Para móviles pequeños (máx. 576px) */
+@media (max-width: 576px) {
+    .contratos-listado-principal {
+        padding: 10px;
+        box-shadow: none; /* Menos sombra en pantallas muy pequeñas */
+        border-radius: 0;
+    }
+    .fila_superior h1 {
+        font-size: 1.8em;
+        text-align: center;
+        width: 100%;
+    }
+    .filter-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filter-container label {
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    #contratos-container {
+        grid-template-columns: 1fr; /* Una sola columna para móviles */
+        gap: 15px;
+    }
+    .contract-card {
+        min-height: auto; /* Altura auto para móviles */
+        padding-bottom: 15px; /* Espacio extra en la parte inferior de la tarjeta */
+    }
+
+    .contract-card .price-actions,
+    .card-actions-buttons {
+        flex-direction: column;
+        align-items: stretch; /* Estira los elementos al ancho completo */
+        gap: 10px;
+    }
+
+    .contract-card .pagar-btn,
+    .action-btn {
+        width: 100%; /* Botones de ancho completo */
+        text-align: center;
     }
 }
