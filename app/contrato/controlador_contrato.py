@@ -306,46 +306,91 @@ def modificar_contrato(conts_id,nom_estado):
         conn.close()
 
 def obtener_comentario_del_contrato(conts_id):
-    conn= get_db_connection()
+    conn = get_db_connection()
     try:
         with conn.cursor() as cursor:
-            cursor.execute("SELECT calificacion, comentario, fecha_creacion FROM comentario WHERE contrato_id=%s;", (conts_id,))
+            cursor.execute("""
+                SELECT 
+                    c.calificacion, 
+                    c.comentario, 
+                    c.fecha_creacion,
+
+                    CASE 
+                        WHEN ec.usuario_id IS NOT NULL THEN ec.nombre
+                        WHEN pc.usuario_id IS NOT NULL THEN CONCAT(pc.nombre, ' ', pc.apellido)
+                        ELSE 'Desconocido'
+                    END AS nombre_cliente,
+
+                    CASE 
+                        WHEN ep.usuario_id IS NOT NULL THEN ep.nombre
+                        WHEN pp.usuario_id IS NOT NULL THEN CONCAT(pp.nombre, ' ', pp.apellido)
+                        ELSE 'Desconocido'
+                    END AS nombre_prestador
+
+                FROM comentario c
+                JOIN contrato co ON c.contrato_id = co.contrato_id
+
+                LEFT JOIN persona pc ON pc.usuario_id = co.cliente_id
+                LEFT JOIN empresa ec ON ec.usuario_id = co.cliente_id
+                LEFT JOIN persona pp ON pp.usuario_id = co.prestador_id
+                LEFT JOIN empresa ep ON ep.usuario_id = co.prestador_id
+
+                WHERE co.contrato_id = %s AND co.estado = 'finalizado';
+            """, (conts_id,))
             return cursor.fetchone()
     finally:
         conn.close()
 
 
 def create_comentario(data):
-    conn=get_db_connection()
-    try:
-        with conn.cursor() as cursor:
-            cursor.execute("INSERT INTO comentario(contrato_id,calificacion,comentario,fecha_creacion) values (%s,%s,%s,%s)",
-                           (
-                               data['contrato_id'],
-                               data['calificacion'],
-                               data['comentario'],
-                               data['fecha_creacion']
-                           ),)
-            conn.commit()
-    finally:
-        conn.close()
-
-def update_comentario(comentario_id,data):
     conn = get_db_connection()
     try:
         with conn.cursor() as cursor:
             cursor.execute(
-                "UPDATE comentario SET calificacion=%s, comentario=%s,fecha_creacion=%s WHERE comentario_id=%s;",
+                """
+                INSERT INTO comentario (contrato_id, calificacion, comentario, fecha_creacion)
+                VALUES (%s, %s, %s, CURRENT_DATE)
+                """,
+                (
+                    data['contrato_id'],
+                    data['calificacion'],
+                    data['comentario']
+                )
+            )
+            conn.commit()
+    finally:
+        conn.close()
+
+        conn.close()
+
+def update_comentario(conts_id,data):
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "UPDATE comentario SET calificacion=%s, comentario=%s,fecha_creacion=%s WHERE contrato_id=%s;",
                 (
                     data['calificacion'],
                     data['comentario'],
                     data['fecha_creacion'],
-                    comentario_id
+                    conts_id
                 ),
             )
             conn.commit()
     finally:
         conn.close()
+
+def delete_comentario(conts_id):
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "DELETE FROM comentario WHERE contrato_id = %s;", (conts_id,)
+            )
+            conn.commit()  # Asegura que los cambios se guarden
+            return cursor.rowcount > 0  # True si se eliminaron filas
+    finally:
+        conn.close() 
 
 def contrato_pertenece_a_cliente(conts_id, cliente_id):
     conn = get_db_connection()
@@ -359,3 +404,17 @@ def contrato_pertenece_a_cliente(conts_id, cliente_id):
             return result is not None  # True si existe, False si no
     finally:
         conn.close()
+
+def estado_del_contrato(conts_id):
+    conn = get_db_connection()
+    with conn.cursor() as cursor:
+            cursor.execute(
+                "SELECT estado FROM contrato WHERE contrato_id = %s",
+                (conts_id,)
+            )
+            result = cursor.fetchone()
+            if result and result[0]:
+                return result[0].strip().lower()
+            else:
+                return None
+
