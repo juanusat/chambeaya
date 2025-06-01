@@ -1,5 +1,7 @@
 import pymysql
 from app.bd_conn import get_db_connection
+#Añadido por Luis
+from flask import g
 
 
 def get_all_usuarios():
@@ -210,3 +212,22 @@ def buscar_usuarios_para_autocompletar_db(query_str):
     finally:
         conn.close()
     return usuarios
+
+
+#Añadido por Luis
+def es_admin():
+    if not getattr(g, 'user_id', None):
+        return False
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute("SELECT admin FROM usuario WHERE usuario_id = %s", (g.user_id,))
+            res = cursor.fetchone()
+            if res and res[0] == 1:
+                print(f"Usuario admin?: {res[0]}")  # Debería imprimir 1 para admin y 0 para no admin
+                return True
+            return False
+    finally:
+        conn.close()
+
+#---

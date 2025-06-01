@@ -21,6 +21,7 @@ from flask_jwt_extended import (
 from flask_jwt_extended.exceptions import NoAuthorizationError
 from jwt.exceptions import ExpiredSignatureError
 from flask import g
+from app.usuario.controlador_usuario import es_admin
 from app.config import JWT_CONFIG, SECRET_KEY
 import jwt
 
@@ -44,6 +45,9 @@ def custom_render_html(template_path):
             header = header.replace('USERNAME', display_name)
             header = header.replace('USERNICK', user['username'])
             header = header.replace('default-pic-profile.jpg', user['url_picture'] or 'default-pic-profile.jpg')
+            if es_admin():
+                with open('static/templates/options_admin.html', 'r', encoding='utf-8') as f:
+                    header = header.replace('</ul>', f.read() + '</ul>')
     else:
         with open('static/templates/header.html', 'r', encoding='utf-8') as f:
             header = f.read()
@@ -224,7 +228,17 @@ def create_app():
         html = custom_render_html('mi_cuenta.html')
         html = html.replace('["json"]', user_json)
         return Response(html, mimetype='text/html')
-    
+    #Añadido por Luis
+    @app.route('/editar-categoria')
+    def editar_categoria_page():
+        if not getattr(g, 'user_id', None):
+            return redirect(url_for('inicio'))
+        from app.categoria.controlador_categoria import es_admin
+        if not es_admin():
+            abort(403, "No autorizado")
+        html = custom_render_html('editar-categoria.html')
+        return Response(html, mimetype='text/html')
+
     return app 
 
   
