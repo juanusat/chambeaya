@@ -1,0 +1,229 @@
+
+.review-container-card {
+    
+    margin-top: auto; 
+    padding: 15px 20px 20px; 
+    background-color: #f8f9fa;
+    border-radius: 0 0 12px 12px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.02); 
+}
+
+.ver-comentario-btn {
+    background-color: #6c757d; 
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Eliminar margin-top si está duplicado de review-container-card */
+}
+
+.ver-comentario-btn:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+.ver-comentario-btn:active {
+    transform: translateY(1px);
+}
+
+.ver-comentario-btn .fas {
+    transition: transform 0.3s ease;
+}
+
+.ver-comentario-btn.active .fas {
+    transform: rotate(180deg);
+}
+
+/* Contenido del comentario (visible/oculto) */
+.comentario-contenido {
+    margin-top: 15px; /* Espacio entre el botón y el contenido */
+    padding: 15px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    background-color: #ffffff; /* Fondo blanco para el contenido del comentario */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra suave para que destaque un poco */
+    line-height: 1.6;
+}
+
+/* Estilos para el comentario existente */
+.comentario-existente {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #e0e0e0;
+}
+
+.comentario-existente p {
+    margin: 8px 0;
+    color: #495057;
+}
+
+.comentario-existente strong {
+    color: #343a40;
+}
+
+/* Estrellas de visualización (comentario existente) */
+.calificacion-estrellas-display {
+    display: flex;
+    gap: 2px;
+    margin-top: 5px;
+}
+
+.calificacion-estrellas-display .estrella-display {
+    color: #ccc;
+    font-size: 22px;
+}
+
+.calificacion-estrellas-display .estrella-display.filled {
+    color: #ffc107;
+}
+
+/* Botones de acción para el comentario existente */
+.editar-comentario-btn,
+.eliminar-comentario-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    margin-right: 8px;
+}
+
+.editar-comentario-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.editar-comentario-btn:hover {
+    background-color: #0056b3;
+}
+
+.eliminar-comentario-btn.delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.eliminar-comentario-btn.delete:hover {
+    background-color: #c82333;
+}
+
+
+/* --- Formulario de Comentario (form-comentario) --- */
+.form-comentario {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-comentario textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    min-height: 100px;
+    resize: vertical;
+    font-size: 0.95em;
+    box-sizing: border-box;
+}
+
+.form-comentario textarea:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Estrellas para calificar (input) */
+.calificacion-estrellas {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 5px;
+}
+
+.calificacion-estrellas .estrella {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 28px;
+    color: #ccc;
+    transition: color 0.2s ease, transform 0.1s ease;
+}
+
+.calificacion-estrellas .estrella:hover,
+.calificacion-estrellas .estrella:hover ~ .estrella {
+    color: #ffc107;
+}
+
+.calificacion-estrellas .estrella.filled {
+    color: #ffc107;
+}
+
+/* Botones del formulario */
+.form-comentario button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.form-comentario button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+}
+
+.form-comentario button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.form-comentario .cancelar-edicion-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.form-comentario .cancelar-edicion-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Media queries para responsividad en la sección de comentarios */
+@media (max-width: 576px) {
+    .review-container-card {
+        padding: 15px; /* Ajusta el padding para móviles */
+    }
+
+    .ver-comentario-btn {
+        padding: 10px 15px;
+        font-size: 0.95em;
+    }
+
+    .comentario-contenido {
+        padding: 10px;
+    }
+
+    .calificacion-estrellas .estrella {
+        font-size: 24px;
+    }
+
+    .editar-comentario-btn,
+    .eliminar-comentario-btn,
+    .form-comentario button {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
