@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             // Redirigir a mis-contratos.html tras éxito
-            window.location.href = '/mis-contratos.html';
+            window.location.href = '/mis-contratos';
         } catch (error) {
             console.error('Error al procesar el pago:', error);
             alert('Error al procesar el pago: ' + error.message);
