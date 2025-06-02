@@ -10,6 +10,7 @@ from app.usuario.controlador_usuario import get_usuario_by_username, get_usuario
 from app.auth.routes_auth import auth_bp
 from app.categoria.routes_categoria import categoria_bp
 from app.notificaciones.routes_notificaciones import notificaciones_bp
+import os
 
 from flask_jwt_extended import (
     JWTManager,
