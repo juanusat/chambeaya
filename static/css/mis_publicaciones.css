@@ -1,126 +1,202 @@
-/* Estilos generales para el cuerpo */
+/* --- Estilos Generales --- */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f8f8; /* Fondo ligeramente gris como en la imagen */
-  margin: 0;
-  padding: 0;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+    color: #333d4a;
+    line-height: 1.5;
 }
 
-/* Contenedor principal para centrar el contenido */
+/* Contenedor principal */
 .container {
-  padding: 2rem;
-  max-width: 800px; /* Ancho máximo similar al de la imagen */
-  margin: auto; /* Centra el contenedor */
+    padding: 1.5rem 1rem;
+    max-width: 680px; /* Más angosto */
+    margin: 2rem auto; /* Separación vertical visual */
+    box-sizing: border-box;
 }
 
-/* Título */
+/* Título principal */
 .section-title {
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #2c3e50;
+    text-align: left;
     margin-bottom: 1.5rem;
-    color: #333;
-    text-align: center;
+    letter-spacing: -0.01em;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2.5px;
+    background-color: #007bff;
+    border-radius: 3px;
+    margin-top: 0.4rem;
 }
 
 /* Lista de publicaciones */
 .publicaciones {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-bottom: 2rem; /* suficiente espacio pero sin empujar el footer */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
-/* Tarjeta de publicación */
+/* Tarjeta */
 .card {
-    max-width: 650px;
-    width: 600px;
     background-color: #ffffff;
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    padding: 1.5rem;
+    border-radius: 0.6rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    padding: 1.2rem;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.9rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e0e0e0;
 }
 
-/* Encabezado de la tarjeta */
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
 .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
     flex-wrap: wrap;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .job-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #4a90e2;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #007bff;
     margin: 0;
     flex: 1;
 }
 
-/* Etiqueta de categoría */
+/* Etiqueta */
 .tag {
-    background-color: #4a90e2;
-    color: #ffffff;
-    padding: 0.3rem 0.6rem;
-    border-radius: 0.5rem;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.7em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
 /* Precio */
 .price {
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: #333;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1a1a1a;
+    margin-top: 0.3rem;
 }
 
-
-/* Contenedor botón "Nuevo contrato" */
+/* Contenedor botón */
 .nuevo-contrato-container {
     display: flex;
     justify-content: flex-end;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
+    width: 100%;
 }
 
-/* Botón "Nuevo contrato" */
+/* Botón */
 .nuevo-contrato-btn {
-    padding: 0.5rem 1rem;
-    background-color: #4a90e2;
-    color: #ffffff;
+    padding: 0.5rem 1.2rem;
+    background-color: #007bff;
+    color: #fff;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 999px; /* Totalmente redondeado */
     font-weight: 600;
-    text-decoration: none;
-    transition: background-color 0.3s;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 3px 10px rgba(0, 123, 255, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    max-width: 100%;
 }
 
 .nuevo-contrato-btn:hover {
-    background-color: #3a7bd5;
+    background-color: #0056b3;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px rgba(0, 123, 255, 0.3);
 }
 
 /* Botón eliminar */
 .delete-btn {
     background: none;
     border: none;
-    color: #e74c3c;
-    font-size: 1.1rem;
+    color: #dc3545;
+    font-size: 1.05rem;
     cursor: pointer;
-    transition: color 0.3s;
+    transition: color 0.3s ease, transform 0.2s ease;
     margin-left: auto;
+    padding: 0.2rem;
 }
 
 .delete-btn:hover {
-    color: #c0392b;
+    color: #c82333;
+    transform: translateY(-1px);
 }
 
-/* Mensaje cuando no hay publicaciones */
-.publicaciones p {
-    text-align: justify;
+/* Sin publicaciones */
+.publicaciones > p {
+    text-align: center;
     font-style: italic;
-    color: #666;
+    color: #777;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 0.6rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    margin: 1rem 0;
+    font-size: 0.95em;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .container {
+        padding: 1rem 0.7rem;
+    }
+    .section-title {
+        font-size: 1.6rem;
+        text-align: center;
+        margin-bottom: 1.2rem;
+    }
+    .section-title::after {
+        width: 40px;
+        height: 2px;
+        margin: 0.3rem auto 0;
+    }
+    .card {
+        padding: 1rem;
+        gap: 0.7rem;
+    }
+    .job-title {
+        font-size: 1rem;
+    }
+    .tag {
+        font-size: 0.65em;
+        padding: 0.2rem 0.6rem;
+    }
+    .price {
+        font-size: 0.95rem;
+    }
+    .nuevo-contrato-btn {
+        padding: 0.45rem 1rem;
+        font-size: 0.8rem;
+        width: 100%;
+        justify-content: center;
+    }
+    .nuevo-contrato-container {
+        justify-content: center;
+    }
 }

@@ -1,158 +1,114 @@
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('🚀 [Mis Contratos Page JS] Script de mis_contratos.html cargado.');
+    console.log('🚀 [Mis Notificaciones JS] Script de mis-notificaciones.html cargado.');
 
-    let userData = {};
-    const userDataElement = document.getElementById('user-data');
-    if (userDataElement) {
-        try {
-            userData = JSON.parse(userDataElement.textContent);
-            console.log('User Data:', userData);
-        } catch (e) {
-            console.error('Error parsing user data:', e);
-        }
-    } else {
-        console.warn('⚠️ [Mis Contratos Page JS] Elemento #user-data no encontrado.');
-    }
+    const notificationsContainer = document.getElementById('lista-notificaciones');
 
-    const contratosContainer = document.querySelector('#contratos-container');
-    const filterTypeSelect = document.getElementById('filter-type');
-
-    if (!contratosContainer) {
-        console.warn('⚠️ [Mis Contratos Page JS] No se encontró el contenedor #contratos-container. Las tarjetas no se mostrarán.');
+    if (!notificationsContainer) {
+        console.error('❌ [Mis Notificaciones JS] No se encontró el contenedor #lista-notificaciones. Las notificaciones no se mostrarán.');
         return;
     }
 
-    // Función para renderizar los contratos
-    function renderContratos(contratos, currentFilterType) {
-        contratosContainer.innerHTML = ''; // Limpiar el contenedor antes de añadir nuevos contratos
+    function renderContratoNotifications(contratos) {
+        notificationsContainer.innerHTML = '';
 
-        if (contratos.length === 0) {
-            contratosContainer.innerHTML = '<p>No tienes contratos para mostrar en esta categoría.</p>';
+        if (!contratos || contratos.length === 0) {
+            notificationsContainer.innerHTML = '<p class="no-notifications-message">No tienes contratos pendientes para revisar.</p>';
             return;
         }
 
         contratos.forEach(contrato => {
-            // Asume que userData.user_id existe y contrato.empleador_id/cliente_id identifican el rol
-            const esPrestador = (userData.user_id === contrato.empleador_id);
-            const esCliente = (userData.user_id === contrato.cliente_id);
-
-            // Filtrar contratos según la opción seleccionada en el dropdown
-            if (currentFilterType === 'cliente' && !esCliente) {
-                return;
-            }
-            if (currentFilterType === 'prestador' && !esPrestador) {
-                return;
-            }
-
             const card = document.createElement('div');
-            card.className = 'notification-display-card';
+            card.className = 'notification-card';
 
-            const fechaInicio = new Date(contrato.fecha_inicio).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-            const fechaFin = new Date(contrato.fecha_finalizacion).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-            const formattedPrice = parseFloat(contrato.precio || 0).toFixed(2);
-            const prestadorName = contrato.empleador_nombre || 'N/A';
-            const clienteName = contrato.cliente_nombre || 'N/A';
-            const prestadorImagen = contrato.imagen_prestador ? `/static/uploads/${contrato.imagen_prestador}` : '/static/img/default-profile.png';
-            const clienteImagen = contrato.imagen_cliente ? `/static/uploads/${contrato.imagen_cliente}` : '/static/img/default-profile.png';
-
-            let buttonsHtml = '';
-
-            // Lógica para mostrar botones "Comenzar" y "Rechazar"
-            // Estos botones aparecen si el usuario es el prestador Y el contrato está "en espera".
-            if (esPrestador && contrato.estado === 'en espera') {
-                buttonsHtml = `
-                    <button class="action-btn begin-btn" data-contrato-id="${contrato.contrato_id}">Comenzar</button>
-                    <button class="action-btn reject-btn" data-contrato-id="${contrato.contrato_id}">Rechazar</button>
-                `;
-            } else if (esCliente && contrato.estado === 'en espera') {
-                 // Si es cliente y el contrato está en espera, puede cancelar la solicitud
-                 buttonsHtml = `
-                    <button class="action-btn cancel-btn" data-contrato-id="${contrato.contrato_id}">Cancelar Solicitud</button>
-                `;
+            const rawFechaInicio = contrato.fecha_inicio;
+            let fechaInicioFormatted = 'Fecha de inicio desconocida';
+            if (rawFechaInicio) {
+                const dateObj = new Date(rawFechaInicio);
+                if (!isNaN(dateObj)) {
+                    fechaInicioFormatted = dateObj.toLocaleDateString('es-ES', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    });
+                }
             }
-
+            
+            const currentUserId = document.body.dataset.userId; 
+            const esPrestador = currentUserId && (contrato.prestador_id == currentUserId);
+            // La lógica para 'isRead' se mantiene si 'pendiente' es el estado que indica 'no leído'
+            const isRead = (contrato.estado !== 'pendiente'); 
+            const isReadClass = isRead ? 'notification-read' : 'notification-unread';
 
             card.innerHTML = `
-                <div class="card-title-row">
-                    <span class="service-name">${contrato.servicio || 'Servicio Desconocido'}</span>
-                </div>
-                <div class="card-description">
-                    <p>${contrato.descripcion_servicio || 'No hay descripción disponible.'}</p>
-                </div>
-                <div class="card-dates-and-tag-row">
-                    <div class="card-dates-info">
-                        <span class="date-label">Inicio:</span> <span class="date-value">${fechaInicio}</span>
-                        <span class="date-label">Fin:</span> <span class="date-value">${fechaFin}</span>
+                <div class="notification-card-content">
+                    <div class="notification-info">
+                        <div class="notification-header-flex">
+                            <h3 class="notification-title">Solicitud de Contrato</h3>
+                            <span class="notification-date">${fechaInicioFormatted}</span>
+                        </div>
+                        <p class="notification-description">
+                            Tienes una nueva solicitud para el servicio <strong>"${contrato.servicio || 'Servicio Desconocido'}"</strong>.
+                        </p>
+                        <div class="notification-details">
+                            <p><strong>Fecha de Inicio:</strong> ${fechaInicioFormatted}</p>
+                            <p><strong>Precio:</strong> $${parseFloat(contrato.precio || 0).toFixed(2)}</p>
+                            <p><strong>${esPrestador ? 'Cliente' : 'Prestador'}:</strong> 
+                                ${esPrestador ? (contrato.cliente || 'Desconocido') : (contrato.empleador || 'Desconocido')}
+                            </p>
+                        </div>
                     </div>
-                    <div class="status-tag ${contrato.estado ? contrato.estado.toLowerCase().replace(/\s/g, '-') : 'desconocido'}">
-                        ${(contrato.estado || 'Desconocido').toUpperCase()}
-                    </div>
                 </div>
-                <div class="card-client-info">
-                    <span class="client-label">${esPrestador ? 'Cliente:' : 'Prestador:'}</span>
-                    <span class="client-name-value">${esPrestador ? clienteName : prestadorName}</span>
-                    <img src="${esPrestador ? clienteImagen : prestadorImagen}" alt="Imagen del ${esPrestador ? 'cliente' : 'prestador'}" class="profile-imagen">
-                </div>
-                <div class="card-price-row">
-                    <span class="price-label">Precio:</span>
-                    <span class="price-value">$${formattedPrice}</span>
-                </div>
-                <div class="card-actions-buttons">
-                    ${buttonsHtml}
+                <div class="notification-actions-buttons">
+                    ${!isRead ? `
+                        <button class="action-btn accept-contract-btn" data-contrato-id="${contrato.contrato_id}">
+                            <i class="fas fa-check"></i> Aceptar
+                        </button>
+                        <button class="action-btn reject-contract-btn" data-contrato-id="${contrato.contrato_id}">
+                            <i class="fas fa-times"></i> Rechazar
+                        </button>
+                    ` : `
+                        <span class="notification-status-display ${isReadClass}">${isRead ? 'REVISADO' : 'PENDIENTE'}</span>
+                    `}
                 </div>
             `;
-            contratosContainer.appendChild(card);
+            notificationsContainer.appendChild(card);
         });
 
-        // Adjuntar eventos a los nuevos botones (solo si existen en el DOM)
-        contratosContainer.querySelectorAll('.begin-btn').forEach(button => {
+        notificationsContainer.querySelectorAll('.accept-contract-btn').forEach(button => {
             button.addEventListener('click', function() {
                 const contratoId = this.dataset.contratoId;
-                handleContractAction(contratoId, 'en progreso', this.closest('.notification-display-card'));
+                handleContractAction(contratoId, 'en progreso', this.closest('.notification-card')); 
             });
         });
 
-        contratosContainer.querySelectorAll('.reject-btn').forEach(button => {
+        notificationsContainer.querySelectorAll('.reject-contract-btn').forEach(button => {
             button.addEventListener('click', function() {
                 const contratoId = this.dataset.contratoId;
-                handleContractAction(contratoId, 'rechazado', this.closest('.notification-display-card'));
-            });
-        });
-
-        contratosContainer.querySelectorAll('.cancel-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const contratoId = this.dataset.contratoId;
-                handleContractAction(contratoId, 'cancelado', this.closest('.notification-display-card'));
+                handleContractAction(contratoId, 'rechazado', this.closest('.notification-card'));
             });
         });
     }
 
-    // Cargar contratos inicialmente
-    fetch('/api/contratos/')
+    fetch('/api/notificaciones/')
         .then(response => {
             if (!response.ok) {
                 if (response.status === 401 || response.status === 403) {
-                    console.error('No autorizado. Puede que la sesión haya expirado.');
+                    console.error('🚫 No autorizado. Puede que la sesión haya expirado o no tengas permiso para ver notificaciones de contrato.');
                     throw new Error('No autorizado o sesión expirada.');
                 }
-                throw new Error(`Error HTTP! status: ${response.status}`);
+                throw new Error(`🚫 Error HTTP! Estado: ${response.status}`);
             }
             return response.json();
         })
         .then(data => {
-            console.log('Datos de contratos recibidos:', data);
-            let allContratos = data; // Guardar todos los contratos para el filtrado
-            renderContratos(allContratos, filterTypeSelect.value); // Renderizar con el filtro inicial
-
-            // Añadir listener al select de filtro
-            filterTypeSelect.addEventListener('change', (event) => {
-                renderContratos(allContratos, event.target.value);
-            });
+            console.log('🔍 Datos de contratos pendientes recibidos (como notificaciones):', data);
+            renderContratoNotifications(data);
         })
         .catch(error => {
-            console.error('❌ Error al cargar contratos:', error);
-            contratosContainer.innerHTML = `<p>Error al cargar tus contratos: ${error.message}</p>`;
+            console.error('❌ Error al cargar contratos pendientes:', error);
+            notificationsContainer.innerHTML = `<p class="error-message">Error al cargar tus contratos pendientes: ${error.message}</p>`;
         });
+
 
     function handleContractAction(contratoId, estado, cardElement) {
         console.log(`Intentando cambiar estado de contrato ${contratoId} a: ${estado}`);
@@ -163,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-            }
+            },
         })
         .then(response => {
             if (!response.ok) {
@@ -177,20 +133,25 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(`Contrato ${contratoId} ${estado}ado con éxito:`, data);
             alert(data.message || `Contrato ${estado}ado exitosamente.`);
 
-            // Recargar los contratos para reflejar el cambio en la vista actual
-            // Esto es crucial para que los botones desaparezcan si el estado ya no es "en espera"
-            fetch('/api/contratos/')
+            if (cardElement) {
+                const actionButtonsDiv = cardElement.querySelector('.notification-actions-buttons');
+                if (actionButtonsDiv) {
+                    actionButtonsDiv.innerHTML = `<span class="notification-status-display action-done">Acción: ${estado.toUpperCase()}</span>`;
+                }
+                cardElement.classList.add('notification-processed');
+            }
+
+            fetch('/api/notificaciones/')
                 .then(response => response.json())
                 .then(updatedData => {
-                    allContratos = updatedData; // Actualizar la lista global de contratos
-                    renderContratos(allContratos, filterTypeSelect.value); // Volver a renderizar
+                    renderContratoNotifications(updatedData);
                 })
                 .catch(error => {
-                    console.error('Error al recargar contratos después de la acción:', error);
+                    console.error('Error al recargar notificaciones después de la acción:', error);
                 });
         })
         .catch(error => {
-            console.error(`Error al ${estado} el contrato ${contratoId}:`, error);
+            console.error(`❌ Error al ${estado} el contrato ${contratoId}:`, error);
             alert(`Hubo un error al ${estado} el contrato: ${error.message}`);
         });
     }

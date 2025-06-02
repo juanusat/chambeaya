@@ -1,200 +1,190 @@
-/* Estilos generales del body */
+/* --- Estilos Generales de la Página de Notificaciones --- */
 .page {
-    background-color: #f4f6f8;
-    padding: 2rem 1rem;
-    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 24px;
     box-sizing: border-box;
+    min-height: calc(100vh - var(--header-height, 60px) - var(--footer-height, 40px));
+    background-color: #f4f6f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .width-m {
-    max-width: 800px;
+    width: 100%;
+    max-width: 640px;
     margin: 0 auto;
 }
 
-/* Encabezado */
+.job-post-container {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 32px;
+    box-sizing: border-box;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
 .job-post-header {
-    background-color: #ffffff;
-    padding: 1.2rem;
-    font-size: 1.4rem;
-    font-weight: 600;
-    border-bottom: 2px solid #e0e0e0;
-    border-radius: 8px 8px 0 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    color: #333333;
+    text-align: center;
+    margin-bottom: 28px;
 }
 
-/* Contenedor de notificaciones */
-.lista-contratos-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-/* Tarjeta individual */
-.notification-display-card {
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem; /* Ajustado el gap para las secciones principales */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.notification-display-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-}
-
-/* Título del servicio */
-.card-title-row .service-name {
-    font-size: 1.3rem;
-    font-weight: 600;
+.job-post-header span {
+    font-size: 2.4em;
+    font-weight: 700;
     color: #2c3e50;
+    position: relative;
+    padding-bottom: 12px;
+    display: inline-block;
 }
 
-/* Fechas y estado */
-.card-dates-and-tag-row {
+.job-post-header span::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 4px;
+    background-color: #007bff;
+    border-radius: 2px;
+}
+
+#lista-notificaciones {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+/* Tarjeta de notificación */
+.notification-card {
+    background-color: #ffffff;
+    border: 1px solid #e1e7ec;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.notification-card:hover {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+}
+
+.notification-card-content {
+    margin-bottom: 16px;
+}
+
+.notification-header-flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    margin-bottom: 12px;
 }
 
-.card-dates-info {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.date-label {
+.notification-title {
+    font-size: 1.2em;
     font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.notification-date {
+    font-size: 0.95em;
     color: #666;
 }
 
-.date-value {
-    color: #333;
-}
-
-/* Etiqueta de estado */
-.status-tag {
-    padding: 0.4rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: white;
-}
-
-.status-tag.pendiente {
-    background-color: #f39c12;
-}
-
-.status-tag.aceptado {
-    background-color: #27ae60;
-}
-
-.status-tag.rechazado {
-    background-color: #c0392b;
-}
-
-.status-tag.desconocido {
-    background-color: #7f8c8d;
-}
-
-/* Info del prestador */
-.card-client-info {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.7rem;
-    color: #444;
-}
-
-.client-label {
-    font-weight: 600;
-}
-
-.client-name-value {
-    color: #2c3e50;
-}
-
-/* Imagen del prestador */
-.prestador-imagen {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #ddd;
-}
-
-/* Precio */
-.card-price-row {
-    font-size: 1rem;
-    color: #2d3436;
-}
-
-.price-label {
-    font-weight: 600;
-}
-
-.price-value {
-    font-size: 1.1rem;
-    color: #16a085;
-    font-weight: bold;
-}
-
-/* Descripción */
-.card-description {
-    font-size: 0.95rem;
+.notification-description {
+    font-size: 1em;
     color: #555;
-    line-height: 1.5;
-    border-top: 1px solid #eee;
-    padding-top: 0.8rem;
-    margin-bottom: 0; /* Asegura que no haya margen extra antes de los botones */
+    margin-bottom: 12px;
 }
 
-/* --- NUEVO: Estilos para los botones de acción --- */
-.card-actions-buttons {
+.notification-details p {
+    margin: 4px 0;
+    color: #444;
+    font-size: 0.95em;
+}
+
+/* Botones */
+.notification-actions-buttons {
     display: flex;
-    justify-content: flex-end; /* Alinea los botones a la derecha */
-    gap: 10px; /* Espacio entre los botones */
-    margin-top: 1rem; /* Espacio superior para separarlos del contenido */
-    padding-top: 1rem; /* Padding superior para la línea de separación */
-    border-top: 1px solid #eee; /* Línea separadora sutil */
+    gap: 12px;
+    justify-content: flex-end;
 }
 
-.card-actions-buttons button {
-    padding: 0.7rem 1.2rem; /* Ajusta el padding para un buen tamaño */
-    border-radius: 8px; /* Bordes redondeados */
-    font-size: 0.9rem;
-    font-weight: 600; /* Coincide con otros textos de la tarjeta */
+.action-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95em;
     cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-    white-space: nowrap; /* Evita que el texto del botón se rompa */
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.card-actions-buttons .accept-btn {
-    background-color: #27ae60; /* Verde más acorde a tu estilo */
+.accept-contract-btn {
+    background-color: #28a745;
     color: white;
-    border: 1px solid #27ae60;
 }
 
-.card-actions-buttons .accept-btn:hover {
-    background-color: #229954;
-    border-color: #229954;
-}
-
-.card-actions-buttons .reject-btn {
-    background-color: #c0392b; /* Rojo más acorde a tu estilo */
+.reject-contract-btn {
+    background-color: #dc3545;
     color: white;
-    border: 1px solid #c0392b;
 }
 
-.card-actions-buttons .reject-btn:hover {
-    background-color: #a93226;
-    border-color: #a93226;
+.action-btn:hover {
+    transform: scale(1.05);
+}
+
+.accept-contract-btn:hover {
+    background-color: #218838;
+}
+
+.reject-contract-btn:hover {
+    background-color: #c82333;
+}
+
+/* Estado de notificación */
+.notification-unread {
+    border-left: 5px solid #007bff;
+    background-color: #f0f8ff;
+}
+
+.notification-read {
+    opacity: 0.85;
+}
+
+/* Mensajes vacíos o error */
+.no-notifications-message,
+.error-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 1.15em;
+    color: #666;
+    background-color: #fafafa;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.error-message {
+    color: #c0392b;
+    background-color: #ffecec;
+    border: 1px solid #e74c3c;
+}
+
+/* Animación suave */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
