@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort, Response, request
+from flask import Flask, render_template, abort, Response, request, jsonify
 from flask import redirect, url_for, make_response
 import json
 from datetime import date
