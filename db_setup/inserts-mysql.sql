@@ -1,3 +1,19 @@
+INSERT INTO usuario (
+    username,
+    descripcion,
+    email,
+    password_hash,
+    fecha_creacion,
+    admin,
+    url_picture) VALUES (
+    'adminuser',
+    'Administrador del sistema',
+    'admin@example.com',
+    '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', -- hash ejemplo (password: "password")
+    current_date,
+    true,
+    'zzuma--20250524-222728-47.png'
+);
 -- Necesito 20 usuarios 
 -- De esos 20 usuarios (5 empresas , 15 personas) 
 -- Mujeres
@@ -95,8 +111,8 @@ VALUES
 (19, 7, 'Vigilancia para eventos', 'Seguridad privada con cámaras y personal capacitado.', 200.00, TRUE, '2025-05-17'),
 (21, 8, 'Cuidado de niños por horas', 'Niñera con primeros auxilios y referencias.', 30.00, TRUE, '2025-05-05'),
 (22, 9, 'Diseño de jardines verticales', 'Instalación de sistemas de riego automatizado.', 350.00, TRUE, '2025-05-11'),
-(25, 10, 'Afeitado clásico con navaja', 'Barbería tradicional con productos orgánicos.', 35.00, TRUE, '2025-05-03'),
-(27, 11, 'Costura y reparación de ropa', 'Arreglo de cremalleras y ajustes de talla.', 20.00, TRUE, '2025-05-12'),
+(25, 4, 'Afeitado clásico con navaja', 'Barbería tradicional con productos orgánicos.', 35.00, TRUE, '2025-05-03'),
+(27, 6, 'Costura y reparación de ropa', 'Arreglo de cremalleras y ajustes de talla.', 20.00, TRUE, '2025-05-12'),
 (16, 12, 'Cambio de aceite y filtros', 'Mantenimiento preventivo para autos.', 100.00, TRUE, '2025-05-06'),
 (13, 13, 'Instalación de paneles solares', 'Energía renovable para hogares.', 1200.00, TRUE, '2025-05-16'),
 (18, 14, 'Servicio de meseros para fiestas', 'Personal capacitado para eventos sociales.', 150.00, TRUE, '2025-05-09'),
@@ -112,7 +128,7 @@ VALUES
 (2, 19, 'Terapia de relajación', 'Sesiones para reducir ansiedad y estrés.', 90.00, TRUE, '2025-05-06'),
 (26, 4, 'Coloración profesional', 'Tintes veganos y tratamientos capilares.', 110.00, TRUE, '2025-05-17'),
 (13, 6, 'Reparación de circuitos eléctricos', 'Hogares y locales comerciales.', 150.00, TRUE, '2025-05-05'),
-(29, 8, 'Limpieza de tuberías', 'Destape con máquina de alta presión.', 100.00, TRUE, '2025-05-02'),
+(29, 10, 'Limpieza de tuberías', 'Destape con máquina de alta presión.', 100.00, TRUE, '2025-05-02'),
 (28, 10, 'Estructuras metálicas para techos', 'Fabricación e instalación.', 950.00, TRUE, '2025-05-15'),
 (3, 7, 'Clases de programación para niños', 'Scratch y Python básico.', 45.00, TRUE, '2025-05-11'),
 (3, 18, 'Curso rápido de Excel avanzado', 'Funciones y tablas dinámicas.', 70.00, TRUE, '2025-05-16'),
@@ -189,7 +205,7 @@ VALUES
 	(7, 2, 6, 2000.00,'finalizado', '2025-03-04', '2025-03-30'),
 
 	-- Usuario 3 
-	(11, 3, 15, 500.00, 'finalizado', '2025-05-21', '2025-05-30'),
+	(11, 3, 2, 500.00, 'finalizado', '2025-05-21', '2025-05-30'),
 	(12, 3, 13, 350.00, 'finalizado', '2025-05-22', '2025-05-31'),
 	(13, 3, 8, 120.00, 'finalizado', '2025-05-23', '2025-06-01'),
 	(14, 3, 14, 200.00, 'finalizado', '2025-05-24', '2025-06-02'),
@@ -197,74 +213,74 @@ VALUES
 	(16, 3, 16, 800.00, 'finalizado', '2025-05-26', '2025-06-04'),
 
 	-- Usuario 4 (Sebastián Castillo)
-	(17, 4, 17, 600.00, 'finalizado', '2025-05-21', '2025-05-30'),
-	(18, 4, 7, 50.00, 'finalizado', '2025-05-22', '2025-05-31'),
-	(19, 4, 19, 120.00, 'finalizado', '2025-05-23', '2025-06-01'),
+	(17, 4, 5, 600.00, 'finalizado', '2025-05-21', '2025-05-30'),
+	(18, 4, 17, 50.00, 'finalizado', '2025-05-22', '2025-05-31'),
+	(19, 4, 7, 120.00, 'finalizado', '2025-05-23', '2025-06-01'),
 
 	-- Usuario 6 (Camila Torres)
-	(20, 6, 20, 300.00, 'finalizado', '2025-05-21', '2025-05-29'),
-	(21, 6, 8, 30.00, 'finalizado', '2025-05-22', '2025-05-30'),
-	(22, 6, 9, 350.00, 'finalizado', '2025-05-23', '2025-06-02'),
+	(20, 6, 18, 300.00, 'finalizado', '2025-05-21', '2025-05-29'),
+	(21, 6, 1, 30.00, 'finalizado', '2025-05-22', '2025-05-30'),
+	(22, 6, 19, 350.00, 'finalizado', '2025-05-23', '2025-06-02'),
 
 	-- Usuario 7 (Diana Rivas)
-	(23, 7, 12, 25.00, 'finalizado', '2025-05-21', '2025-05-27'),
-	(24, 7, 3, 70.00, 'finalizado', '2025-05-22', '2025-05-28'),
-	(25, 7, 9, 250.00, 'finalizado', '2025-05-23', '2025-05-29'),
+	(23, 7, 20, 25.00, 'finalizado', '2025-05-21', '2025-05-27'),
+	(24, 7, 12, 70.00, 'finalizado', '2025-05-22', '2025-05-28'),
+	(25, 7, 3, 250.00, 'finalizado', '2025-05-23', '2025-05-29'),
 
 	-- Usuario 8 (Andrea Martínez)
-	(26, 8, 4, 50.00, 'finalizado', '2025-05-21', '2025-05-27'),
+	(26, 8, 9, 50.00, 'finalizado', '2025-05-21', '2025-05-27'),
 	(27, 8, 11, 20.00, 'finalizado', '2025-05-22', '2025-05-28'),
-	(28, 8, 10, 400.00, 'finalizado', '2025-05-23', '2025-05-29'),
+	(28, 8, 4, 400.00, 'finalizado', '2025-05-23', '2025-05-29'),
 
 	-- Usuario 9 (Sofía Guzmán)
-	(29, 9, 6, 180.00, 'finalizado', '2025-05-21', '2025-05-26'),
-	(30, 9, 8, 800.00, 'finalizado', '2025-05-22', '2025-05-27'),
-	(31, 9, 5, 250.00, 'finalizado', '2025-05-23', '2025-05-28'),
+	(29, 9, 10, 180.00, 'finalizado', '2025-05-21', '2025-05-26'),
+	(30, 9, 6, 800.00, 'finalizado', '2025-05-22', '2025-05-27'),
+	(31, 9, 7, 250.00, 'finalizado', '2025-05-23', '2025-05-28'),
 
 	-- Usuario 10 (Paula Herrera)
-	(32, 10, 16, 1500.00, 'finalizado', '2025-05-21', '2025-05-30'),
-	(33, 10, 19, 90.00, 'finalizado', '2025-05-22', '2025-05-31'),
+	(32, 10, 8, 1500.00, 'finalizado', '2025-05-21', '2025-05-30'),
+	(33, 10, 9, 90.00, 'finalizado', '2025-05-22', '2025-05-31'),
 	(34, 10, 4, 110.00, 'finalizado', '2025-05-23', '2025-06-01'),
 
 	-- Usuario 11 (Diego Ramírez)
 	(35, 11, 6, 150.00, 'finalizado', '2025-05-21', '2025-05-29'),
-	(36, 11, 8, 100.00, 'finalizado', '2025-05-22', '2025-05-30'),
-	(37, 11, 10, 950.00, 'finalizado', '2025-05-23', '2025-06-01'),
+	(36, 11, 12, 100.00, 'finalizado', '2025-05-22', '2025-05-30'),
+	(37, 11, 13, 950.00, 'finalizado', '2025-05-23', '2025-06-01'),
 
 	-- Usuario 12 (Lucas Sánchez)
-	(38, 12, 7, 45.00, 'finalizado', '2025-05-21', '2025-05-29'),
-	(39, 12, 18, 70.00, 'finalizado', '2025-05-22', '2025-05-30'),
-	(40, 12, 3, 600.00, 'finalizado', '2025-05-23', '2025-06-01'),
+	(38, 12, 14, 45.00, 'finalizado', '2025-05-21', '2025-05-29'),
+	(39, 12, 15, 70.00, 'finalizado', '2025-05-22', '2025-05-30'),
+	(40, 12, 16, 600.00, 'finalizado', '2025-05-23', '2025-06-01'),
 
 	-- Usuario 13 (Gabriel Vargas)
-	(41, 13, 9, 350.00, 'finalizado', '2025-05-21', '2025-05-30'),
-	(42, 13, 11, 130.00, 'finalizado', '2025-05-22', '2025-05-31'),
-	(43, 13, 15, 180.00, 'finalizado', '2025-05-23', '2025-06-02'),
+	(41, 13, 17, 350.00, 'finalizado', '2025-05-21', '2025-05-30'),
+	(42, 13, 18, 130.00, 'finalizado', '2025-05-22', '2025-05-31'),
+	(43, 13, 19, 180.00, 'finalizado', '2025-05-23', '2025-06-02'),
 
 	-- Usuario 14 (Tomás Navarro)
-	(44, 14, 13, 400.00, 'finalizado', '2025-05-21', '2025-05-30'),
-	(45, 14, 14, 550.00, 'finalizado', '2025-05-22', '2025-05-31'),
-	(46, 14, 20, 700.00, 'finalizado', '2025-05-23', '2025-06-02'),
+	(44, 14, 20, 400.00, 'finalizado', '2025-05-21', '2025-05-30'),
+	(45, 14, 1, 550.00, 'finalizado', '2025-05-22', '2025-05-31'),
+	(46, 14, 5, 700.00, 'finalizado', '2025-05-23', '2025-06-02'),
 
 	-- Contratos pendientes o en progreso (10 contratos)
-	(47, 3, 12, 15.00, 'pendiente', '2025-05-21', '2025-05-30'),
-	(48, 4, 16, 300.00, 'en espera', '2025-05-22', '2025-05-31'),
-	(49, 6, 9, 200.00, 'pendiente', '2025-05-23', '2025-06-01'),
-	(50, 7, 16, 450.00, 'en espera', '2025-05-24', '2025-06-02'),
+	(47, 3, 16, 15.00, 'pendiente', '2025-05-21', '2025-05-30'),
+	(48, 4, 19, 300.00, 'en espera', '2025-05-22', '2025-05-31'),
+	(49, 6, 4, 200.00, 'pendiente', '2025-05-23', '2025-06-01'),
+	(50, 7, 6, 450.00, 'en espera', '2025-05-24', '2025-06-02'),
 	(51, 8, 10, 60.00, 'pendiente', '2025-05-25', '2025-06-03'),
-	(52, 9, 6, 650.00, 'en espera', '2025-05-26', '2025-06-04'),
-	(53, 10, 4, 500.00, 'pendiente', '2025-05-27', '2025-06-05'),
-	(54, 11, 7, 250.00, 'en espera', '2025-05-28', '2025-06-06'),
+	(52, 9, 10, 650.00, 'en espera', '2025-05-26', '2025-06-04'),
+	(53, 10, 7, 500.00, 'pendiente', '2025-05-27', '2025-06-05'),
+	(54, 11, 18, 250.00, 'en espera', '2025-05-28', '2025-06-06'),
 	-- Prestador 1
-	(60, 20, 1, 320.00, 'finalizado', '2025-05-25', '2025-06-01'),
-	(61, 15, 1, 280.00, 'pendiente', '2025-06-05', '2025-06-14'),
-	(62, 15, 1, 300.00, 'en espera', '2025-06-15', '2025-06-25'),
+	(60, 20, 14, 320.00, 'finalizado', '2025-05-25', '2025-06-01'),
+	(61, 15, 20, 280.00, 'pendiente', '2025-06-05', '2025-06-14'),
+	(62, 15, 12, 300.00, 'en espera', '2025-06-15', '2025-06-25'),
 
 
 	-- Prestador 2
-	(57, 17, 2, 180.00, 'finalizado', '2025-05-22', '2025-05-28'),
-	(58, 18, 2, 210.00, 'pendiente', '2025-06-01', '2025-06-10'),
-	(59, 19, 2, 250.00, 'en espera', '2025-06-12', '2025-06-20');
+	(57, 17, 11, 180.00, 'finalizado', '2025-05-22', '2025-05-28'),
+	(58, 18, 15, 210.00, 'pendiente', '2025-06-01', '2025-06-10'),
+	(59, 19, 13, 250.00, 'en espera', '2025-06-12', '2025-06-20');
 
 
 -- Inserción de métodos de pago
