@@ -13,7 +13,9 @@ from app.contrato.controlador_contrato import (
   obtener_comentario_del_contrato,
   create_comentario,
   update_comentario,
-  contrato_pertenece_a_cliente
+  contrato_pertenece_a_cliente,
+  estado_del_contrato,
+  delete_comentario
 )
 
 contratos_bp = Blueprint('contratos', __name__)
@@ -80,17 +82,22 @@ def modificar_contrato_notificacion(conts_id,nom_estado):
 
 @contratos_bp.route('/comentario/<int:conts_id>', methods=['GET'])
 def comentario_por_contrato(conts_id):
+
     comentario = obtener_comentario_del_contrato(conts_id)
     if comentario:
-        calificacion, texto, fecha_creacion = comentario
+        calificacion, texto, fecha_creacion, nombre_cliente, nombre_prestador = comentario
         resultado = {
             "calificacion": calificacion,
             "comentario": texto,
-            "fecha_creacion": fecha_creacion.isoformat() if fecha_creacion else None
+            "fecha_creacion": fecha_creacion.isoformat() if fecha_creacion else None,
+            "nombre_cliente": nombre_cliente,
+            "nombre_prestador": nombre_prestador
         }
         return jsonify(resultado), 200
     else:
         return jsonify({"mensaje": "No se encontró comentario para el contrato"}), 404
+
+
 
 @contratos_bp.route('/nuevo_comentario/<int:conts_id>', methods=['POST'])
 def crear_comentario_contrato(conts_id):
@@ -102,22 +109,78 @@ def crear_comentario_contrato(conts_id):
         abort(403, 'Solo el cliente puede comentar')
 
     data = request.get_json()
+
+    # Validar datos mínimos
+    if not data or 'calificacion' not in data or 'comentario' not in data:
+        return jsonify({'mensaje': 'Faltan datos obligatorios'}), 400
+
+    if not (1 <= data['calificacion'] <= 5):
+        return jsonify({'mensaje': 'Calificación inválida'}), 400
+
     data['contrato_id'] = conts_id
     create_comentario(data)
+
     return jsonify({'message': 'Comentario creado exitosamente'}), 201
 
 
-@contratos_bp.route('/editar_comentario/<int:comentario_id>', methods=['PUT'])
-def editar_comentario_contrato(comentario_id):
+
+@contratos_bp.route('/editar_comentario/<int:conts_id>', methods=['PUT'])
+def editar_comentario_contrato(conts_id):
+    user_id = getattr(g, 'user_id', None)
+    if not user_id:
+        return jsonify({'error': 'No autorizado'}), 401
+
+    # Verifica que el contrato pertenezca al cliente que hace la petición
+    if not contrato_pertenece_a_cliente(conts_id, user_id):
+        return jsonify({'error': 'Solo el cliente puede modificar el comentario'}), 403
+
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'Datos JSON no proporcionados'}), 400
+
+    # Validar campos obligatorios (ejemplo: comentario y calificacion)
+    comentario = data.get('comentario')
+    calificacion = data.get('calificacion')
+
+    if comentario is None or calificacion is None:
+        return jsonify({'error': 'Faltan campos obligatorios'}), 400
+
+    # Llama a la función que actualiza el comentario en la base de datos
+    actualizado = update_comentario(conts_id, data)
+    if not actualizado:
+        return jsonify({'error': 'Comentario no encontrado para este contrato'}), 404
+
+    return jsonify({'message': 'Comentario actualizado exitosamente'}), 200
+
+
+
+@contratos_bp.route('/eliminar_comentario/<int:conts_id>', methods=['DELETE'])
+def eliminar_comentario_contrato(conts_id):
     user_id = getattr(g, 'user_id', None)
     if not user_id:
         abort(401, 'No autorizado')
+    
+    if not contrato_pertenece_a_cliente(conts_id, user_id):
+        abort(403, 'Solo el cliente puede eliminar el comentario')
+    
+    estado = estado_del_contrato(conts_id)
+    if estado != 'finalizado':
+        abort(400, 'Solo se puede eliminar comentarios de contratos finalizados')
 
-    data = request.get_json()
-    contrato_id = data.get('contrato_id')
+    if delete_comentario(conts_id):
+        return jsonify({'message': 'Comentario eliminado exitosamente'}), 200
+    else:
+        abort(404, 'Comentario no encontrado')
 
-    if not contrato_pertenece_a_cliente(contrato_id, user_id):
-        abort(403, 'Solo el cliente puede modificar el comentario')
+@contratos_bp.route('/estado_detalle/<int:conts_id>', methods=['GET'])
+def estado_por_contrato(conts_id):
+    try:
+        estado = estado_del_contrato(conts_id)
+        if estado:
+            return jsonify({"estado": estado}), 200
+        else:
+            return jsonify({"mensaje": "Contrato no encontrado o sin estado"}), 404
+    except Exception as e:
+        print(f"Error al obtener estado: {e}")
+        return jsonify({"error": "Error interno del servidor"}), 500
 
-    update_comentario(comentario_id, data)
-    return jsonify({'message': 'Comentario actualizado exitosamente'}), 200

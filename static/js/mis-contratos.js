@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
     console.log('🚀 [Mis Contratos] Script mis_contratos.js cargado.');
-
     let allContracts = []; // Almacenará todos los contratos sin filtrar
     let currentUserUsername = ''; // Almacenará el username del usuario logueado
 
@@ -92,6 +91,48 @@ document.addEventListener('DOMContentLoaded', function () {
                 profileImageOwnerName = contrato.empleador || 'Prestador Desconocido';
             }
 
+            const comentarioHtmlBlock = `
+                <div class="review-container-card" data-contrato-id="${contrato.contrato_id}">
+                    <button class="ver-comentario-btn">
+                        Comentario
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="comentario-contenido" style="display: none;">
+                        <div class="comentario-existente">
+                            <p><strong>Autor:</strong> <span class="comentario-autor">Autor Desconocido</span></p>
+                            <p><strong>Fecha:</strong> <span class="comentario-fecha">Fecha Desconocida</span></p>
+                            <p><strong>Comentario:</strong> <span class="comentario-texto">No hay comentario aún.</span></p>
+                            <p><strong>Calificación:</strong> <span class="calificacion-estrellas-display">
+                                    <span class="estrella-display">&#9734;</span>
+                                    <span class="estrella-display">&#9734;</span>
+                                    <span class="estrella-display">&#9734;</span>
+                                    <span class="estrella-display">&#9734;</span>
+                                    <span class="estrella-display">&#9734;</span>
+                            </span></p>
+                            <button class="editar-comentario-btn" style="display: none;">Editar Comentario</button>
+                            <button class="eliminar-comentario-btn delete" style="display: none;">Eliminar Comentario</button>
+                        </div>
+
+                        <form class="form-comentario" style="display: none;">
+                            <textarea placeholder="Escribe tu comentario aquí..." required></textarea>
+
+                            <div class="calificacion-estrellas" data-calificacion="0">
+                                    <span class="estrella" data-value="1">&#9733;</span>
+                                    <span class="estrella" data-value="2">&#9733;</span>
+                                    <span class="estrella" data-value="3">&#9733;</span>
+                                    <span class="estrella" data-value="4">&#9733;</span>
+                                    <span class="estrella" data-value="5">&#9733;</span>
+                            </div>
+                            <input type="hidden" name="calificacion" value="0" required />
+
+                            <button type="submit">Guardar Comentario</button>
+                            <button type="button" class="cancelar-edicion-btn">Cancelar</button>
+                        </form>
+                    </div>
+                </div>
+            `;
+
+
             card.innerHTML = `
                 <div class="card-header">
                     <div class="title-dates-row">
@@ -133,12 +174,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         <button class="action-btn begin-btn" data-contrato-id="${contrato.contrato_id}">Comenzar</button>
                         <button class="action-btn reject-btn" data-contrato-id="${contrato.contrato_id}">Rechazar</button>
                     ` : ''}
-                </div>
-            `;
-            
+                </div>`;
+            card.innerHTML+=comentarioHtmlBlock;
             contratosContainer.appendChild(card);
         });
         attachEventListeners(); // Adjunta listeners a los botones recién creados
+        if (typeof window.configurarBotonesComentarios === 'function') {
+        window.configurarBotonesComentarios();
+    }
     }
 
     // Adjunta listeners a los botones de acción de los cards
