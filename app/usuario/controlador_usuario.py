@@ -8,7 +8,7 @@ def get_all_usuarios():
     conn = get_db_connection()
     try:
         with conn.cursor(pymysql.cursors.DictCursor) as cursor:
-            cursor.execute("SELECT usuario_id, username, email, fecha_creacion, admin, url_picture FROM usuario;")
+            cursor.execute("SELECT * FROM usuario;")
             return cursor.fetchall()
     finally:
         conn.close()

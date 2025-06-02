@@ -24,6 +24,27 @@ def get_all_publicaciones(user_id):
     finally:
         conn.close() 
 
+def get_all_publicaciones_by_username(username):
+    conn = get_db_connection()
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute("""SELECT 
+                                p.publicacion_id AS id,  -- Incluye el ID de la publicación
+                                p.titulo, 
+                                cat.nombre AS categoria, 
+                                u.username AS nombre_usuario, 
+                                p.precio, 
+                                p.fecha_creacion, 
+                                p.descripcion 
+                            FROM publicacion p 
+                            INNER JOIN categoria cat ON p.categoria_id = cat.categoria_id
+                            INNER JOIN usuario u ON p.usuario_id = u.usuario_id
+                            WHERE u.username = %s and p.estado = True;
+                           """, (username,))
+            return cursor.fetchall()
+    finally:
+        conn.close() 
+
 def get_publicacion_by_palabra(palabra): 
     conn = get_db_connection()
     try:
@@ -75,7 +96,7 @@ def get_publicacion_by_id(pub_id):
                 LEFT JOIN persona per ON per.usuario_id = u.usuario_id
                 LEFT JOIN empresa emp ON emp.usuario_id = u.usuario_id
                 WHERE p.publicacion_id = %s;""", (pub_id,))
-            return cursor.fetchone()
+            return cursor.fetchall()
     finally:
         conn.close() 
 

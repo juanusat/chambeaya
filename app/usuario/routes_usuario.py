@@ -58,3 +58,4 @@ def api_buscar_usuarios_autocompletar():
         return jsonify([])
     usuarios_encontrados = buscar_usuarios_para_autocompletar_db(query)
     return jsonify(usuarios_encontrados), 200
+

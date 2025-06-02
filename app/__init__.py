@@ -192,6 +192,11 @@ def create_app():
         html = custom_render_html('crear_contrato.html')
         return Response(html, mimetype='text/html')
     
+    @app.route('/ver-perfiles')
+    def ver_perfiles():
+        html = custom_render_html('ver_perfiles.html')
+        return Response(html,mimetype='text/html')
+    
     @app.route('/ver_notificaciones')   
     def ver_notificaciones():
         html = custom_render_html('notificaciones.html')

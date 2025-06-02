@@ -1,238 +1,183 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* usuario.css MODIFICADO */
 
 body {
-  font-family: Arial, sans-serif;
-  background: #f9f9f9;
-  color: #333;
-  line-height: 1.5;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.full-height-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
 }
 
 .container {
-  max-width: 960px;
-  margin: 40px auto;
-  padding: 0 16px;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    max-width: 960px;
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
 }
 
-/* Profile Header */
 .profile-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 24px;
-  padding-bottom: 20px; /* Espacio debajo del header */
-  border-bottom: 1px solid #ddd; /* Línea separadora debajo del header */
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
-/* Avatar circular */
 .avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: #ddd; /* Fondo gris para el círculo */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 20px;
-  flex-shrink: 0;
-  overflow: hidden; /* Asegura que la imagen de perfil se recorte si es muy grande */
-}
-
-.avatar i {
-  font-size: 40px;
-  color: #888; /* Color del icono */
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: #eaeaea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    color: #777;
+    overflow: hidden;
+    margin-right: 1.5rem;
 }
 
 .avatar img {
-  height: inherit;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* Contenedor para nombre y rating */
 .profile-info {
-  display: flex;
-  flex-direction: column; /* Apila nombre y rating verticalmente */
-  justify-content: center; /* Centra verticalmente si hay espacio */
-  flex-grow: 1; /* Permite que este contenedor ocupe el espacio restante */
+    flex-grow: 1;
 }
-
 
 .profile-name {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 5px; /* Espacio entre nombre y rating */
-  color: #333;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #222;
 }
 
-.profile-rating .fa-star,
-.profile-rating .fa-regular { /* Estilos para estrellas llenas y vacías */
-  color: gold; /* Color dorado para las estrellas */
-  margin-right: 4px;
-  font-size: 1.2em; /* Tamaño de las estrellas */
+.profile-rating {
+    color: #f5c518;
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
 }
 
-.profile-rating .fa-regular {
-   color: #ddd; /* Color gris para estrellas vacías */
-}
-
-/* Layout del Contenido */
 .content {
-  display: grid; /* Usamos grid para el layout de dos columnas */
-  grid-template-columns: 1fr 2fr; /* Columna izquierda (Detalles) 1 parte, columna derecha (Publicaciones) 2 partes */
-  gap: 24px; /* Espacio entre las columnas */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
-/* Detalles y Publicaciones sections */
-.details,
-.publicaciones {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra ligera */
+.details h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    color: #2c3e50;
 }
 
-/* Estilos para los títulos de sección */
-.details h2,
-.publicaciones h2 {
-  margin-top: 0; /* Asegura que no haya margen superior extra */
-  margin-bottom: 12px;
-  font-size: 1.4rem; /* Tamaño de título de sección */
-  color: #333;
-  border-bottom: 1px solid #eee; /* Línea debajo del título de sección */
-  padding-bottom: 8px;
-}
-
-
-/* Estilo para el párrafo de descripción dentro de Detalles */
 .details p {
-  margin: 0 0 10px 0; /* Margen inferior para separar párrafos */
-  line-height: 1.6;
-  color: #555;
+    margin: 0.5rem 0;
+    line-height: 1.6;
 }
 
-/* Estilo para el texto en negrita dentro de Detalles */
-.details p strong {
-  font-weight: bold;
-  color: #333; /* Color oscuro para el texto en negrita */
+.details strong {
+    color: #555;
 }
 
-
-/* Publicaciones cards */
-.publicaciones .card { /* Especificidad para tarjetas dentro de publicaciones */
-  border: 1px solid #eee; /* Borde más ligero para tarjetas individuales */
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
-  background-color: #fff; /* Fondo blanco */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Sombra más sutil */
-  transition: box-shadow 0.3s ease;
+/* Publicaciones (Cards Grid) */
+.publicaciones {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
 }
 
-.publicaciones .card:hover {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.card {
+    background-color: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 1rem;
 }
-
 
 .card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 8px;
-  margin-bottom: 12px; /* Espacio entre el header y la fila de detalles/precio */
+    margin-bottom: 0.4rem;
 }
 
 .card-header h3 {
-  font-size: 1.1rem; /* Tamaño del título de la publicación */
-  margin: 0;
-  color: #333;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #007bff;
+    margin: 0;
 }
 
-.card-header .time {
-  font-size: 0.8rem; /* Tamaño de la hora */
-  color: #666;
+/* Tag alineado a la derecha */
+.tag {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.7em;
+    font-weight: 600;
+    text-transform: uppercase;
+    align-self: flex-end;
+    margin-bottom: 0.4rem;
+    white-space: nowrap;
 }
 
-/* Estilo para el tag dentro del card-header */
-.card-header .tag {
-  display: inline-block;
-  background-color: #e0e0e0; /* Fondo gris claro */
-  border-radius: 12px; /* Bordes redondeados */
-  padding: 0.2rem 0.6rem; /* Espaciado interno */
-  font-size: 0.85rem; /* Tamaño de fuente pequeño */
-  font-weight: bold;
-  color: #555; /* Color de texto */
-  margin-left: auto; /* Alinea el tag a la derecha */
+.tag i {
+    margin-right: 4px;
+    color: #fff;
 }
 
-/* Estilo para la fila del cliente/prestador y el precio */
 .card-details-row {
-  display: flex; /* Usa flexbox */
-  align-items: center; /* Centra verticalmente */
-  margin-bottom: 15px; /* Espacio debajo de esta fila */
-  font-size: 0.95em;
-  color: #555;
-}
-
-/* Estilos para el bloque de información del cliente/prestador */
-.client-info {
-  display: flex; /* Usa flexbox para alinear texto y foto */
-  align-items: center; /* Centra verticalmente */
-  gap: 10px; /* Espacio entre el texto y la foto */
-}
-
-.client-info p {
-  margin: 0; /* Eliminar margen por defecto */
-}
-
-/* Estilo para el nombre del cliente/prestador */
-.client-name {
-  font-weight: bold; /* Negrita para el nombre */
-  color: #333; /* Color oscuro para el nombre */
-}
-
-/* Estilo para la imagen de perfil */
-.perfil-img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%; /* Forma circular */
-  object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
-  background-color: #ccc; /* Fondo gris si no hay imagen */
-}
-
-
-/* Estilo para el precio como un tag/recuadro */
-.price-tag {
-  display: inline-block; /* Permite aplicar padding y border */
-  border: 1px solid #bbb; /* Borde gris claro */
-  border-radius: 8px; /* Bordes redondeados */
-  padding: 0.3rem 0.8rem; /* Espacio interno */
-  font-weight: bold;
-  background-color: #f9f9f9; /* Fondo ligeramente gris */
-  color: #000; /* Color de texto negro */
-  
+    margin-bottom: 0.3rem;
 }
 
 .price-tag span {
-  font-weight: bold; /* Asegura que el valor del precio también sea negrita */
+    font-weight: bold;
+    color: #27ae60;
+    font-size: 0.9rem;
 }
 
-
-/* Estilo para la descripción del contrato/publicación */
 .card-description p {
-  margin: 0; /* Eliminar margen por defecto */
-  line-height: 1.6;
-  color: #555;
-  font-size: 0.95rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #444;
+    margin: 0;
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+    .card {
+        padding: 0.9rem;
+    }
 
-/* Asegurar que el contenedor principal de la aplicación y la página ocupen la altura completa si es necesario */
-.app,
-.page,
-.full-height-container {
-  min-height: 100vh;
+    .card-header h3 {
+        font-size: 1rem;
+    }
+
+    .tag {
+        font-size: 0.65em;
+        padding: 0.15rem 0.4rem;
+    }
+
+    .price-tag span {
+        font-size: 0.85rem;
+    }
+
+    .card-description p {
+        font-size: 0.85rem;
+    }
 }
-

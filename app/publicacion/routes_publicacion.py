@@ -9,6 +9,7 @@ from app.publicacion.controlador_publicacion import (
     get_publicacion_by_id_usuario,
     get_publicacion_by_categoria_nombre,
     get_publicacion_by_palabra,
+    get_all_publicaciones_by_username,
 )
 
 publicaciones_bp = Blueprint('publicaciones', __name__)
@@ -18,6 +19,11 @@ def listar_publicaciones():
     if not getattr(g, 'user_id', None):
         return redirect(url_for('inicio'))
     pubs = get_all_publicaciones(getattr(g, 'user_id', None))
+    return jsonify(pubs), 200
+
+@publicaciones_bp.route('/pubs_username/<username>', methods=['GET']) 
+def listar_publicaciones_by_username(username):
+    pubs = get_all_publicaciones_by_username(username)
     return jsonify(pubs), 200
 
 @publicaciones_bp.route('/<int:pub_id>', methods=['GET']) # NO SE USA
