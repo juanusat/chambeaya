@@ -1,6 +1,8 @@
 import pymysql
 import pymysql.cursors
 from app.bd_conn import get_db_connection
+from datetime import datetime
+
 
 def get_mis_comprobantes_pago(user_id):
     conn = get_db_connection()
@@ -129,6 +131,10 @@ def get_comprobantes_by_cliente_id(cliente_id):
 def create_comprobante_pago(data):
     conn = get_db_connection()
     try:
+        # Cambiar el formato de la fecha que se recibe
+        # '2025-06-02 04:17:31' -> '%Y-%m-%d %H:%M:%S'
+        fecha_pago = datetime.strptime(data['fecha_pago'], "%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
+        
         with conn.cursor() as cursor:
             cursor.execute(
                 "INSERT INTO comprobante_contrato (contrato_id, monto, metodo_pago_id, fecha_pago)"
@@ -137,13 +143,14 @@ def create_comprobante_pago(data):
                     data['contrato_id'], 
                     data['monto'], 
                     data['metodo_pago_id'], 
-                    data['fecha_pago']
+                    fecha_pago
                 ),
             )
             conn.commit()
             return cursor.lastrowid
     finally:
         conn.close()
+
 
 def get_comprobantes_by_contrato_id(contrato_id):
     conn = get_db_connection()

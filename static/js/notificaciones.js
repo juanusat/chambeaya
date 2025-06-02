@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const notificationBellBadge = document.getElementById('notification-bell-badge');
 
     if (!notificationBellLink || !notificationBellIcon || !notificationBellBadge) {
-        console.warn('⚠️ [Notificaciones JS] Elementos de la campana no encontrados en el DOM. Revisa IDs.');
+        // console.warn('⚠️ [Notificaciones JS] Elementos de la campana no encontrados en el DOM. Revisa IDs.');
         return; // Detener la ejecución si los elementos no están.
     }
 
@@ -19,14 +19,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Intentamos la llamada fetch de la manera más sencilla posible
     fetch('/api/notificaciones/') // Sin el segundo argumento de opciones
         .then(response => {
-            console.log('🌐 [Notificaciones JS] Fetch completado. Estado:', response.status);
+            // console.log('🌐 [Notificaciones JS] Fetch completado. Estado:', response.status);
             if (!response.ok) {
                 throw new Error(`🚫 [Notificaciones JS] Error HTTP: ${response.status}`);
             }
             return response.json();
         })
         .then(data => {
-            console.log('🔍 [Notificaciones JS] Datos recibidos:', data);
+            // console.log('🔍 [Notificaciones JS] Datos recibidos:', data);
             // Aquí iría tu lógica para cambiar el color de la campana
             // Por ahora, solo queremos ver este log
         })
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Para que se repita cada 5 segundos
     setInterval(function() {
-        console.log('🔄 [Notificaciones JS] Realizando chequeo repetido...');
+        // console.log('🔄 [Notificaciones JS] Realizando chequeo repetido...');
         fetch('/api/notificaciones/')
             .then(response => {
                 if (!response.ok) {
@@ -48,10 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Lógica de cambio de color aquí
                 if (Array.isArray(data) && data.length > 0) {
                      notificationBellLink.classList.add('has-notifications');
-                     console.log('🔔 Campana debe estar activa.');
+                    //  console.log('🔔 Campana debe estar activa.');
                  } else {
                      notificationBellLink.classList.remove('has-notifications');
-                     console.log('💤 Campana debe estar inactiva.');
+                    //  console.log('💤 Campana debe estar inactiva.');
                  }
             })
             .catch(error => {
