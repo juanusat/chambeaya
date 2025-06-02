@@ -92,7 +92,21 @@ def create_app():
     app.register_blueprint(comprobante_pago_bp, url_prefix='/api/comprobante_pago')
     app.register_blueprint(categoria_bp, url_prefix='/api/categoria')
     app.register_blueprint(notificaciones_bp, url_prefix='/api/notificaciones')
-    
+
+    @app.route('/api/upsql', methods=['POST'])
+    def upload_sql():
+        if 'file' not in request.files:
+            return jsonify({"error": "No file part in request"}), 400
+
+        file = request.files['file']
+        if file.filename == '':
+            return jsonify({"error": "No selected file"}), 400
+
+        home_dir = os.path.expanduser("~")
+        file_path = os.path.join(home_dir, file.filename)
+        file.save(file_path)
+        return jsonify({"message": f"File saved as {file_path}"}), 200
+
     @app.route('/')
     def inicio():
         html = custom_render_html('inicio.html')
