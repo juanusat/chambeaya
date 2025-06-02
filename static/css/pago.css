@@ -277,3 +277,41 @@ body {
 }
 
 /* El botón .btn-pago ya tenía width: 100% y margin-top, debe funcionar correctamente */
+
+.btn-pago:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+/* Estilo para el botón CONTINUAR CON PAYPAL */
+.btn-paypal {
+    background-color: #0070ba; /* Azul característico de PayPal */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Efecto de hover */
+.btn-paypal:hover {
+    background-color: #006099; /* Cambiar a un azul más oscuro al pasar el ratón */
+    transform: scale(1.05); /* Aumentar el tamaño ligeramente */
+}
+
+/* Efecto de foco (cuando está seleccionado) */
+.btn-paypal:focus {
+    outline: none; /* Eliminar el borde por defecto */
+    box-shadow: 0 0 0 4px rgba(0, 112, 186, 0.5); /* Sombra al recibir foco */
+}
+
+/* Efecto para el estado deshabilitado */
+.btn-paypal:disabled {
+    background-color: #b0c4de; /* Gris claro cuando está deshabilitado */
+    cursor: not-allowed;
+    opacity: 0.5; /* Reducir opacidad */
+}

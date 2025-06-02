@@ -258,6 +258,12 @@ def create_app():
             abort(403, "No autorizado")
         html = custom_render_html('editar-categoria.html')
         return Response(html, mimetype='text/html')
+    @app.route('/pago.html')
+    def pago_page():
+        if not getattr(g, 'user_id', None):
+            return redirect(url_for('inicio'))
+        html = custom_render_html('pago.html')
+        return Response(html, mimetype='text/html')
 
     return app 
 

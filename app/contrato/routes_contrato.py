@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, abort, g, redirect, url_for
-
+from app.bd_conn import get_db_connection
+import pymysql
 from app.contrato.controlador_contrato import ( 
   get_mis_contratos, 
   get_contratos_by_prestador_id,
@@ -184,3 +185,79 @@ def estado_por_contrato(conts_id):
         print(f"Error al obtener estado: {e}")
         return jsonify({"error": "Error interno del servidor"}), 500
 
+# @contratos_bp.route('/<int:contrato_id>', methods=['GET'])
+# def obtener_contrato_por_id(contrato_id):
+#     if not getattr(g, 'user_id', None):
+#         return redirect(url_for('inicio'))
+#     contratos = get_mis_contratos(getattr(g, 'user_id', None))
+#     contrato = next((c for c in contratos if c['contrato_id'] == contrato_id), None)
+#     if contrato:
+#         return jsonify(contrato), 200
+#     else:
+#         return jsonify({'error': 'Contrato no encontrado'}), 404
+
+@contratos_bp.route('/<int:contrato_id>', methods=['GET'])
+def obtener_contrato_por_id(contrato_id):
+    if not getattr(g, 'user_id', None):
+        return redirect(url_for('inicio'))
+    conn = get_db_connection()
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute("""
+                SELECT 
+                    c.contrato_id,
+                    p.titulo AS servicio,
+                    p.descripcion AS descripcion_servicio,
+                    CASE
+                        WHEN per_pres.usuario_id IS NOT NULL THEN CONCAT(per_pres.nombre, ' ', per_pres.apellido)
+                        WHEN emp_pres.usuario_id IS NOT NULL THEN emp_pres.nombre
+                        ELSE 'Desconocido'
+                    END AS empleador,
+                    u_pres.username AS username_empleado,
+                    CASE
+                        WHEN per_cli.usuario_id IS NOT NULL THEN CONCAT(per_cli.nombre, ' ', per_cli.apellido)
+                        WHEN emp_cli.usuario_id IS NOT NULL THEN emp_cli.nombre
+                        ELSE 'Desconocido'
+                    END AS cliente,
+                    u_cli.username AS username_cliente,
+                    u_pres.url_picture AS imagenP,
+                    u_cli.url_picture AS imagenC,
+                    c.precio,
+                    COALESCE(SUM(cc.monto), 0) AS precio_pagado,  -- suma de pagos hechos para el contrato
+                    c.estado,
+                    c.fecha_inicio,
+                    c.fecha_finalizacion
+                FROM contrato c
+                JOIN publicacion p ON c.servicio_id = p.publicacion_id
+                JOIN usuario u_cli ON c.cliente_id = u_cli.usuario_id
+                LEFT JOIN persona per_cli ON per_cli.usuario_id = u_cli.usuario_id
+                LEFT JOIN empresa emp_cli ON emp_cli.usuario_id = u_cli.usuario_id
+                JOIN usuario u_pres ON c.prestador_id = u_pres.usuario_id
+                LEFT JOIN persona per_pres ON per_pres.usuario_id = u_pres.usuario_id
+                LEFT JOIN empresa emp_pres ON emp_pres.usuario_id = u_pres.usuario_id
+                LEFT JOIN comprobante_contrato cc ON cc.contrato_id = c.contrato_id
+                WHERE c.contrato_id = %s AND (c.prestador_id = %s OR c.cliente_id = %s)
+                GROUP BY 
+                    c.contrato_id,
+                    p.titulo,
+                    p.descripcion,
+                    per_pres.usuario_id,
+                    emp_pres.usuario_id,
+                    u_pres.username,
+                    per_cli.usuario_id,
+                    emp_cli.usuario_id,
+                    u_cli.username,
+                    u_pres.url_picture,
+                    u_cli.url_picture,
+                    c.precio,
+                    c.estado,
+                    c.fecha_inicio,
+                    c.fecha_finalizacion;
+            """, (contrato_id, getattr(g, 'user_id', None), getattr(g, 'user_id', None)))
+            contrato = cursor.fetchone()
+            if contrato:
+                return jsonify(contrato), 200
+            else:
+                return jsonify({'error': 'Contrato no encontrado o acceso denegado'}), 404
+    finally:
+        conn.close()

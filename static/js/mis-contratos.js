@@ -155,8 +155,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 <div class="price-actions">
                     <div class="price-tag">Precio: <span>$${formattedPrice}</span></div>
-                    ${esCliente && contrato.precio && ['en progreso', 'finalizado'].includes(contrato.estado.toLowerCase()) ? 
-                      `<button class="pagar-btn" data-contrato-id="${contrato.contrato_id}">Pagar</button>` : ''}
+                    ${esCliente && contrato.precio && ['en espera', 'en progreso', 'completado'].includes(contrato.estado.toLowerCase()) ?
+                    `<button class="pagar-btn" data-contrato-id="${contrato.contrato_id}">Pagar</button>` : ''}
+
                 </div>
 
                 <div class="client-price-row">
@@ -175,13 +176,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         <button class="action-btn reject-btn" data-contrato-id="${contrato.contrato_id}">Rechazar</button>
                     ` : ''}
                 </div>`;
-            card.innerHTML+=comentarioHtmlBlock;
+            card.innerHTML += comentarioHtmlBlock;
             contratosContainer.appendChild(card);
         });
         attachEventListeners(); // Adjunta listeners a los botones recién creados
         if (typeof window.configurarBotonesComentarios === 'function') {
-        window.configurarBotonesComentarios();
-    }
+            window.configurarBotonesComentarios();
+        }
     }
 
     // Adjunta listeners a los botones de acción de los cards
@@ -220,9 +221,10 @@ document.addEventListener('DOMContentLoaded', function () {
     function handlePagarClick() {
         const contratoId = this.dataset.contratoId;
         console.log(`[Acción] Clic en Pagar para contrato ${contratoId}`);
-        alert(`Simulando redirección para pagar contrato ${contratoId}.`);
-        // Aquí iría la lógica para redirigir a una pasarela de pago
+        // Redirigir a pago.html con el id del contrato en query string
+        window.location.href = `/pago.html?contrato_id=${contratoId}`;
     }
+
 
     // Aplica el filtro seleccionado y vuelve a renderizar
     function applyFilter() {
@@ -275,22 +277,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json();
             })
     ])
-    .then(([contractsData, userData]) => {
-        console.log('🎉 [Inicio] Datos de contratos y usuario obtenidos correctamente.');
-        allContracts = contractsData;
-        currentUserUsername = userData.username;
+        .then(([contractsData, userData]) => {
+            console.log('🎉 [Inicio] Datos de contratos y usuario obtenidos correctamente.');
+            allContracts = contractsData;
+            currentUserUsername = userData.username;
 
-        console.log('📈 [Datos] Contratos recibidos (allContracts):', allContracts); 
-        console.log('👤 [Datos] Username del usuario actual:', currentUserUsername);
+            console.log('📈 [Datos] Contratos recibidos (allContracts):', allContracts);
+            console.log('👤 [Datos] Username del usuario actual:', currentUserUsername);
 
-        applyFilter(); // Aplica el filtro inicial (por defecto "todos")
-    })
-    .catch(error => {
-        console.error('❌ [Error Fatal] Error general al cargar datos iniciales:', error);
-        if (contratosContainer) {
-            contratosContainer.innerHTML = `<p class="error-message">Error al cargar tus contratos o datos de usuario. Por favor, inténtalo de nuevo más tarde. (${error.message})</p>`;
-        }
-    });
+            applyFilter(); // Aplica el filtro inicial (por defecto "todos")
+        })
+        .catch(error => {
+            console.error('❌ [Error Fatal] Error general al cargar datos iniciales:', error);
+            if (contratosContainer) {
+                contratosContainer.innerHTML = `<p class="error-message">Error al cargar tus contratos o datos de usuario. Por favor, inténtalo de nuevo más tarde. (${error.message})</p>`;
+            }
+        });
 
     // Event Listener para el cambio del filtro
     if (filterTypeSelect) {
@@ -309,36 +311,36 @@ document.addEventListener('DOMContentLoaded', function () {
                 'Content-Type': 'application/json',
             }
         })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(err => {
-                    throw new Error(err.error || `Error en la solicitud: ${response.status}`);
-                });
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log(`✅ [Acción API] Contrato ${contratoId} ${estado}ado con éxito:`, data);
-            alert(data.message || `Contrato ${estado}ado exitosamente.`);
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => {
+                        throw new Error(err.error || `Error en la solicitud: ${response.status}`);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(`✅ [Acción API] Contrato ${contratoId} ${estado}ado con éxito:`, data);
+                alert(data.message || `Contrato ${estado}ado exitosamente.`);
 
-            console.log('[Acción API] Recargando contratos para actualizar la vista...');
-            fetch('/api/contratos/')
-                .then(response => {
-                    if (!response.ok) throw new Error(`Error al recargar contratos: ${response.status}`);
-                    return response.json();
-                })
-                .then(updatedData => {
-                    allContracts = updatedData;
-                    applyFilter();
-                    console.log('🔄 [Acción API] Contratos recargados y vista actualizada.');
-                })
-                .catch(error => {
-                    console.error('❌ [Acción API] Error al recargar contratos después de la acción:', error);
-                });
-        })
-        .catch(error => {
-            console.error(`❌ [Acción API] Error al ${estado} el contrato ${contratoId}:`, error);
-            alert(`Hubo un error al ${estado} el contrato: ${error.message}`);
-        });
+                console.log('[Acción API] Recargando contratos para actualizar la vista...');
+                fetch('/api/contratos/')
+                    .then(response => {
+                        if (!response.ok) throw new Error(`Error al recargar contratos: ${response.status}`);
+                        return response.json();
+                    })
+                    .then(updatedData => {
+                        allContracts = updatedData;
+                        applyFilter();
+                        console.log('🔄 [Acción API] Contratos recargados y vista actualizada.');
+                    })
+                    .catch(error => {
+                        console.error('❌ [Acción API] Error al recargar contratos después de la acción:', error);
+                    });
+            })
+            .catch(error => {
+                console.error(`❌ [Acción API] Error al ${estado} el contrato ${contratoId}:`, error);
+                alert(`Hubo un error al ${estado} el contrato: ${error.message}`);
+            });
     }
 });
