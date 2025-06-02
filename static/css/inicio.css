@@ -133,3 +133,24 @@
     font-size: 0.9rem;
     color: #555;
 }
+
+.button-container {
+    text-align: center;
+    margin-top: 30px; 
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #f69999; 
+    color: white; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    font-size: 18px; 
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease; 
+}
+
+.button:hover {
+    background-color: #ecb8b8; 
+}
