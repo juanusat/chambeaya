@@ -16,10 +16,11 @@ from flask_jwt_extended import (
     JWTManager,
     verify_jwt_in_request,
     get_jwt_identity,
-    get_jwt,
+    get_jwt, 
     unset_jwt_cookies
 )
-from flask_jwt_extended.exceptions import NoAuthorizationError
+from flask_jwt_extended.exceptions import NoAuthorizationError, InvalidHeaderError
+from jwt.exceptions import DecodeError
 from jwt.exceptions import ExpiredSignatureError
 from flask import g
 from app.usuario.controlador_usuario import es_admin
@@ -69,12 +70,10 @@ def create_app():
     JWTManager(app)
     
     @app.errorhandler(ExpiredSignatureError)
-    def handle_token_expired_error(error):
-        # Eliminar la cookie del JWT
+    @app.errorhandler(InvalidHeaderError)
+    def handle_invalid_or_expired_token(error):
         response = make_response(redirect(url_for('inicio')))
         unset_jwt_cookies(response)
-    
-        return response
     @app.before_request
     def cargar_usuario_en_g():
         try:
@@ -82,7 +81,7 @@ def create_app():
             g.user_id = int(get_jwt_identity())
             claims = get_jwt()
             g.username = claims.get("username")
-        except NoAuthorizationError:
+        except (NoAuthorizationError, InvalidHeaderError, DecodeError):
             g.user_id = None
             g.username = None
 
