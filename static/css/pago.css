@@ -1,89 +1,109 @@
 /* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
     line-height: 1.6;
     color: #333;
     margin: 0;
     padding: 0;
+    background-color: #ffffff; /* Un gris suave para el fondo */
 }
 
 .width-m {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 30px; /* Aumentado el padding */
 }
 
 /* Layout con Grid */
 .contenedor-principal {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 30px;
+    gap: 40px; /* Aumentado el espacio entre columnas */
     align-items: start;
 }
 
 /* Títulos */
 .titulo h1 {
     text-align: center;
-    font-size: 24px;
-    margin-bottom: 30px;
-    color: #333;
+    font-size: 32px; /* Tamaño de fuente más grande */
+    margin-bottom: 40px; /* Más espacio debajo del título */
+    color: #2c3e50; /* Un color más oscuro para el título principal */
     grid-column: 1 / -1;
-    text-decoration: underline;
+    position: relative; /* Para el underline animado */
 }
 
-.info-pago-container h2 {
-    font-size: 20px;
-    margin-bottom: 15px;
-    color: #333;
+.titulo h1::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+    width: 80px; /* Ancho de la línea */
+    height: 3px; /* Grosor de la línea */
+    background-color: #007bff; /* Color azul para la línea */
+    border-radius: 2px;
 }
 
-/* Checkbox método de pago */
-.checkbox-container {
-    margin: 15px 0;
-    display: flex;
-    align-items: center;
+.info-pago-container h2,
+.metodo-pago-container h2 {
+    font-size: 24px; /* Tamaño de fuente más grande */
+    margin-bottom: 20px; /* Más espacio debajo de los subtítulos */
+    color: #34495e; /* Un gris-azul oscuro */
+    border-bottom: 1px solid #eee; /* Línea sutil debajo de los subtítulos */
+    padding-bottom: 10px;
 }
 
-.checkbox-container input {
-    margin-right: 10px;
-}
+/* Checkbox método de pago - este ya no existe directamente en tu HTML, se usa select */
+/* Eliminado ya que no se utiliza */
 
 .obligatorio {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 20px;
+    font-size: 13px; /* Ligeramente más pequeño */
+    color: #7f8c8d; /* Un gris más suave */
+    margin-bottom: 25px; /* Más espacio */
 }
 
 /* Formulario */
 .formulario-pago {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
+    background-color: #ffffff; /* Fondo blanco para el formulario */
+    border-radius: 12px; /* Bordes más redondeados */
+    padding: 30px; /* Más padding */
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Sombra suave */
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px; /* Más espacio entre grupos de formulario */
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    font-size: 14px;
+    margin-bottom: 8px; /* Más espacio entre label e input */
+    font-weight: 600; /* Un poco más de peso a la fuente del label */
+    font-size: 15px; /* Tamaño de fuente ligeramente más grande */
+    color: #555;
 }
 
-.form-group input {
+.form-group input,
+.metodo-pago-container select { /* Aplicado también al select */
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
+    padding: 12px 15px; /* Más padding interno */
+    border: 1px solid #c0c0c0; /* Borde más definido */
+    border-radius: 6px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente más legible */
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+
+.form-group input:focus,
+.metodo-pago-container select:focus {
+    border-color: #007bff; /* Borde azul al enfocar */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Sombra sutil al enfocar */
+    outline: none; /* Eliminar el outline por defecto */
 }
 
 .fila-doble {
     display: flex;
-    gap: 15px;
+    gap: 20px; /* Más espacio entre los campos */
 }
 
 .fila-doble .form-group {
@@ -93,45 +113,64 @@ body {
 /* Botón de pago */
 .btn-pago {
     width: 100%;
-    padding: 12px;
-    background-color: #007bff;
+    padding: 15px; /* Más padding */
+    background-color: #28a745; /* Un verde más agradable */
     color: white;
     border: none;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 8px; /* Bordes más redondeados */
+    font-size: 18px; /* Tamaño de fuente más grande */
     font-weight: bold;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 25px; /* Más espacio superior */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transición suave */
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2); /* Sombra para el botón */
 }
 
 .btn-pago:hover {
-    background-color: #0069d9;
+    background-color: #218838; /* Verde más oscuro al pasar el ratón */
+    transform: translateY(-2px); /* Pequeño efecto de elevación */
+}
+
+.btn-pago:disabled {
+    opacity: 0.6; /* Un poco más de opacidad */
+    cursor: not-allowed;
+    background-color: #cccccc; /* Gris cuando deshabilitado */
+    transform: translateY(0);
+    box-shadow: none;
 }
 
 /* Términos y condiciones */
 .terminos {
-    font-size: 12px;
-    color: #666;
-    line-height: 1.5;
-    margin-bottom: 30px;
+    font-size: 13px; /* Ligeramente más pequeño */
+    color: #7f8c8d;
+    line-height: 1.6;
+    margin-top: 20px; /* Ajuste el margen superior */
 }
 
 .terminos a {
     color: #007bff;
     text-decoration: none;
+    font-weight: bold; /* Hacer el enlace más visible */
+}
+
+.terminos a:hover {
+    text-decoration: underline;
 }
 
 /* Resumen de contrato */
 .resumen-contrato {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 20px;
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 12px; /* Bordes más redondeados */
+    padding: 30px; /* Más padding */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Sombra suave */
 }
 
 .resumen-contrato h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    color: #333;
+    font-size: 22px; /* Tamaño de fuente más grande */
+    margin-bottom: 20px; /* Más espacio */
+    color: #34495e;
+    border-bottom: 1px solid #eee; /* Línea sutil */
+    padding-bottom: 10px;
 }
 
 .resumen-contrato table {
@@ -140,178 +179,201 @@ body {
 }
 
 .resumen-contrato td {
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
+    padding: 12px 0; /* Más padding para las celdas */
+    border-bottom: 1px solid #f2f2f2; /* Borde más claro */
+    font-size: 15px;
+    color: #555;
+}
+
+.resumen-contrato tr:last-child td {
+    border-bottom: none; /* Eliminar el borde de la última fila */
 }
 
 .resumen-contrato td:last-child {
     text-align: right;
-    font-weight: bold;
+    font-weight: 700; /* Más negrita */
+    color: #2c3e50; /* Color más oscuro */
 }
-/* Mantén todo tu CSS anterior aquí */
-/* ... todos los estilos que proporcionaste antes ... */
 
-/* --- NUEVOS ESTILOS ADICIONALES PARA EL SELECTOR DE MÉTODO Y FORMULARIOS DINÁMICOS --- */
+.resumen-contrato #input-pago {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 15px;
+    text-align: right;
+    max-width: 120px; /* Limitar el ancho del input de pago */
+    box-sizing: border-box;
+}
+
+/* --- ESTILOS ADICIONALES PARA EL SELECTOR DE MÉTODO Y FORMULARIOS DINÁMICOS --- */
 
 /* Estilo para el contenedor de la selección del método de pago */
 .metodo-pago-container {
-    background-color: #f9f9f9; /* Similar al formulario */
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 30px; /* Espacio entre la selección y la info de pago */
-    border: 1px solid #ddd; /* Borde sutil */
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 40px; /* Más espacio */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Sombra suave */
 }
-
-.metodo-pago-container h2 {
-     font-size: 20px;
-     margin-bottom: 15px;
-     color: #333;
-}
-
-/* Estilo para el select del método de pago */
-.metodo-pago-container select {
-     width: 100%;
-     padding: 10px;
-     border: 1px solid #ddd;
-     border-radius: 4px;
-     font-size: 14px;
-     box-sizing: border-box; /* Importante para que padding no afecte width */
-     margin-top: 5px; /* Espacio entre label y select */
-     display: block; /* Asegura que ocupe su propia línea */
-}
-
-/* Estilo para el label del select */
-.metodo-pago-container label {
-    display: block; /* Hace que el label esté en su propia línea */
-    margin-bottom: 5px;
-    font-weight: bold;
-    font-size: 14px;
-}
-
 
 /* Regla para ocultar todos los divs de formulario de método por defecto */
-/* El JavaScript se encargará de mostrar el correcto */
 .metodo-form {
-    display: none; /* Oculto por defecto */
-    margin-top: 20px; /* Espacio entre el h2/obligatorio y el contenido del método */
+    display: none;
+    margin-top: 30px; /* Más espacio superior */
+    padding-top: 20px; /* Padding interno para separar del select */
+    border-top: 1px dashed #eee; /* Línea divisoria sutil */
 }
 
-@media (max-width: 767px) {
-
-    /* Change main grid to a single column */
-    .contenedor-principal {
-        grid-template-columns: 1fr; /* Single column for small screens */
-        gap: 20px; /* Adjust gap if needed for single column */
-    }
-
-    /* Remove grid-column span on title if necessary (optional) */
-    .titulo h1 {
-       /* grid-column: unset; */ /* Keep 1 / -1 to ensure it spans the single column */
-       font-size: 20px; /* Slightly smaller title on small screens */
-    }
-
-    /* Make double-input row stack vertically */
-    .fila-doble {
-        display: block; /* Stacks children vertically */
-        gap: 0; /* Remove gap when stacking */
-    }
-
-    /* Ensure form groups inside .fila-doble take full width */
-    .fila-doble .form-group {
-        flex: unset; /* Remove flex property */
-        width: 100%; /* Ensure they take full width */
-        margin-bottom: 15px; /* Restore margin between stacked items */
-    }
-
-     /* Adjust padding on .width-m for very small screens if needed */
-     .width-m {
-         padding: 15px;
-     }
-
-    /* Optional: Adjust font sizes for smaller screens */
-    body {
-        font-size: 15px;
-    }
-
-    .info-pago-container h2 {
-        font-size: 18px;
-    }
-
-    .resumen-contrato h3 {
-         font-size: 16px;
-    }
-}
-
-/* --- ESTILOS RESPONSIVOS (Asegúrate de que tu media query original esté aquí) --- */
-@media (max-width: 767px) {
-    /* ... tus estilos responsivos anteriores para .contenedor-principal, .fila-doble, etc. ... */
-
-     .metodo-pago-container {
-         margin-bottom: 20px; /* Ajusta el espacio en pantallas pequeñas */
-         padding: 15px; /* Un poco menos padding en móvil */
-     }
-
-     .metodo-form {
-         margin-top: 15px; /* Ajusta el espacio superior en móvil */
-     }
-
-     /* Asegúrate de que los inputs y select dentro de metodo-pago-container */
-     /* también sean 100% de ancho en móvil si no lo son ya */
-     .metodo-pago-container select,
-     .metodo-pago-container input[type="text"], /* Por si agregas inputs aquí */
-     .metodo-pago-container input[type="email"] {
-        width: 100%;
-        box-sizing: border-box;
-     }
-}
-
-/* Asegúrate de tener esta regla de box-sizing en tus estilos generales de input si no está */
-/* Es importante cuando usas width: 100% */
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    box-sizing: border-box; /* Incluye padding y border en el ancho total */
-}
-
-/* El botón .btn-pago ya tenía width: 100% y margin-top, debe funcionar correctamente */
-
-.btn-pago:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
 /* Estilo para el botón CONTINUAR CON PAYPAL */
 .btn-paypal {
     background-color: #0070ba; /* Azul característico de PayPal */
     color: white;
     font-size: 16px;
     font-weight: bold;
-    padding: 12px 24px;
+    padding: 14px 28px; /* Más padding */
     border-radius: 8px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: block; /* Para que ocupe todo el ancho si está solo */
     text-align: center;
+    margin: 20px auto 0 auto; /* Centrar y añadir margen superior */
+    max-width: 300px; /* Limitar el ancho */
+    box-shadow: 0 4px 10px rgba(0, 112, 186, 0.2); /* Sombra para el botón */
 }
 
 /* Efecto de hover */
 .btn-paypal:hover {
-    background-color: #006099; /* Cambiar a un azul más oscuro al pasar el ratón */
-    transform: scale(1.05); /* Aumentar el tamaño ligeramente */
+    background-color: #005a9c; /* Cambiar a un azul más oscuro al pasar el ratón */
+    transform: translateY(-2px); /* Aumentar el tamaño ligeramente */
 }
 
 /* Efecto de foco (cuando está seleccionado) */
 .btn-paypal:focus {
-    outline: none; /* Eliminar el borde por defecto */
-    box-shadow: 0 0 0 4px rgba(0, 112, 186, 0.5); /* Sombra al recibir foco */
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(0, 112, 186, 0.3); /* Sombra al recibir foco */
 }
 
 /* Efecto para el estado deshabilitado */
 .btn-paypal:disabled {
-    background-color: #b0c4de; /* Gris claro cuando está deshabilitado */
+    background-color: #b0c4de;
     cursor: not-allowed;
-    opacity: 0.5; /* Reducir opacidad */
+    opacity: 0.6;
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Estilos específicos para el formulario de depósito */
+#deposito-form p {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+#deposito-form strong {
+    color: #333;
+}
+
+#deposito-form .form-group {
+    margin-top: 20px;
+}
+
+#deposito-form a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+#deposito-form a:hover {
+    text-decoration: underline;
+}
+
+/* Caja de información bancaria */
+#deposito-form div[style] { /* Para apuntar específicamente a ese div con style en línea */
+    background-color: #e8f0fe; /* Un azul muy claro */
+    padding: 20px; /* Más padding */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 25px; /* Más espacio */
+    word-break: break-all;
+    border: 1px solid #d0e0ff; /* Borde suave */
+    color: #2c3e50;
+    font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada para los datos */
+    font-size: 15px;
+}
+
+#deposito-form div[style] p {
+    margin: 5px 0;
+    font-size: 15px;
+}
+
+/* --- ESTILOS RESPONSIVOS --- */
+@media (max-width: 767px) {
+    .contenedor-principal {
+        grid-template-columns: 1fr;
+        gap: 30px; /* Ajuste el espacio en pantallas pequeñas */
+    }
+
+    .width-m {
+        padding: 20px;
+    }
+
+    .titulo h1 {
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+
+    .titulo h1::after {
+        width: 60px;
+        bottom: -8px;
+    }
+
+    .info-pago-container h2,
+    .metodo-pago-container h2 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .formulario-pago,
+    .metodo-pago-container,
+    .resumen-contrato {
+        padding: 25px;
+        border-radius: 10px;
+    }
+
+    .fila-doble {
+        display: block;
+        gap: 0;
+    }
+
+    .fila-doble .form-group {
+        flex: unset;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .form-group input,
+    .metodo-pago-container select {
+        padding: 10px 12px;
+        font-size: 15px;
+    }
+
+    .btn-pago,
+    .btn-paypal {
+        padding: 14px;
+        font-size: 17px;
+    }
+
+    .resumen-contrato h3 {
+        font-size: 20px;
+    }
+
+    .resumen-contrato td {
+        padding: 10px 0;
+        font-size: 14px;
+    }
+
+    #deposito-form div[style] {
+        padding: 15px;
+        font-size: 14px;
+    }
 }
