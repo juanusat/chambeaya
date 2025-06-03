@@ -98,8 +98,6 @@ def comentario_por_contrato(conts_id):
     else:
         return jsonify({"mensaje": "No se encontró comentario para el contrato"}), 404
 
-
-
 @contratos_bp.route('/nuevo_comentario/<int:conts_id>', methods=['POST'])
 def crear_comentario_contrato(conts_id):
     user_id = getattr(g, 'user_id', None)
@@ -122,8 +120,6 @@ def crear_comentario_contrato(conts_id):
     create_comentario(data)
 
     return jsonify({'message': 'Comentario creado exitosamente'}), 201
-
-
 
 @contratos_bp.route('/editar_comentario/<int:conts_id>', methods=['PUT'])
 def editar_comentario_contrato(conts_id):
@@ -152,8 +148,6 @@ def editar_comentario_contrato(conts_id):
         return jsonify({'error': 'Comentario no encontrado para este contrato'}), 404
 
     return jsonify({'message': 'Comentario actualizado exitosamente'}), 200
-
-
 
 @contratos_bp.route('/eliminar_comentario/<int:conts_id>', methods=['DELETE'])
 def eliminar_comentario_contrato(conts_id):

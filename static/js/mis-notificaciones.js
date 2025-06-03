@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
         notificationsContainer.querySelectorAll('.accept-contract-btn').forEach(button => {
             button.addEventListener('click', function() {
                 const contratoId = this.dataset.contratoId;
-                handleContractAction(contratoId, 'en progreso', this.closest('.notification-card')); 
+                handleContractAction(contratoId, 'en espera', this.closest('.notification-card')); 
             });
         });
 

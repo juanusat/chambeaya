@@ -1,90 +1,86 @@
-
+/* Estilos generales para la sección de comentarios */
 .review-container-card {
-    
-    margin-top: auto; 
-    padding: 15px 20px 20px; 
-    background-color: #f8f9fa;
-    border-radius: 0 0 12px 12px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.02); 
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.review-container-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .ver-comentario-btn {
-    background-color: #6c757d; 
+    background-color: #4CAF50; /* Verde */
     color: white;
-    padding: 12px 20px;
+    padding: 10px 15px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 1em;
-    font-weight: 600;
-    width: 100%;
-    box-sizing: border-box;
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    gap: 8px;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    /* Eliminar margin-top si está duplicado de review-container-card */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 100%; /* Ocupa todo el ancho */
+    margin-bottom: 15px;
 }
 
 .ver-comentario-btn:hover {
-    background-color: #5a6268;
+    background-color: #45a049;
     transform: translateY(-2px);
 }
 
-.ver-comentario-btn:active {
-    transform: translateY(1px);
-}
-
-.ver-comentario-btn .fas {
+.ver-comentario-btn i {
     transition: transform 0.3s ease;
 }
 
-.ver-comentario-btn.active .fas {
+.ver-comentario-btn i.fa-chevron-up {
     transform: rotate(180deg);
 }
 
-/* Contenido del comentario (visible/oculto) */
+/* Contenido del comentario (visible al expandir) */
 .comentario-contenido {
-    margin-top: 15px; /* Espacio entre el botón y el contenido */
-    padding: 15px;
-    border: 1px solid #e9ecef;
-    border-radius: 8px;
-    background-color: #ffffff; /* Fondo blanco para el contenido del comentario */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra suave para que destaque un poco */
-    line-height: 1.6;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    margin-top: 15px;
 }
 
-/* Estilos para el comentario existente */
+/* Estilos para el comentario ya existente */
 .comentario-existente {
+    background-color: #e8f5e9; /* Un verde muy claro */
+    border: 1px solid #c8e6c9;
+    border-radius: 8px;
+    padding: 15px;
     margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed #e0e0e0;
 }
 
 .comentario-existente p {
-    margin: 8px 0;
-    color: #495057;
+    margin-bottom: 8px;
+    line-height: 1.5;
+    color: #444;
 }
 
 .comentario-existente strong {
-    color: #343a40;
+    color: #333;
 }
 
-/* Estrellas de visualización (comentario existente) */
-.calificacion-estrellas-display {
-    display: flex;
-    gap: 2px;
-    margin-top: 5px;
+.comentario-texto {
+    font-style: italic;
+    color: #555;
 }
 
+/* Estrellas de visualización del comentario existente */
 .calificacion-estrellas-display .estrella-display {
-    color: #ccc;
-    font-size: 22px;
-}
-
-.calificacion-estrellas-display .estrella-display.filled {
-    color: #ffc107;
+    color: #FFD700; /* Color oro para estrellas llenas */
+    font-size: 1.2em;
+    margin-right: 2px;
 }
 
 /* Botones de acción para el comentario existente */
@@ -92,138 +88,130 @@
 .eliminar-comentario-btn {
     padding: 8px 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 0.9em;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
     margin-top: 10px;
-    margin-right: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .editar-comentario-btn {
-    background-color: #007bff;
+    background-color: #2196F3; /* Azul */
     color: white;
+    margin-right: 10px;
 }
 
 .editar-comentario-btn:hover {
-    background-color: #0056b3;
+    background-color: #1976D2;
+    transform: translateY(-2px);
 }
 
-.eliminar-comentario-btn.delete {
-    background-color: #dc3545;
+.eliminar-comentario-btn {
+    background-color: #f44336; /* Rojo */
     color: white;
 }
 
-.eliminar-comentario-btn.delete:hover {
-    background-color: #c82333;
+.eliminar-comentario-btn:hover {
+    background-color: #d32f2f;
+    transform: translateY(-2px);
 }
 
-
-/* --- Formulario de Comentario (form-comentario) --- */
+/* Estilos para el formulario de comentario */
 .form-comentario {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-}
-
-.form-comentario textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ced4da;
+    gap: 15px;
+    background-color: #e3f2fd; /* Un azul muy claro */
+    border: 1px solid #bbdefb;
     border-radius: 8px;
-    min-height: 100px;
-    resize: vertical;
-    font-size: 0.95em;
-    box-sizing: border-box;
+    padding: 20px;
 }
 
-.form-comentario textarea:focus {
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
-/* Estrellas para calificar (input) */
+/* Estrellas para calificar en el formulario */
 .calificacion-estrellas {
-    unicode-bidi: bidi-override;
-    direction: rtl;
-    text-align: center;
-    padding: 10px 0;
-    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    font-size: 1.8em;
+    cursor: pointer;
+    /* CAMBIO CLAVE: Invertir el orden de las estrellas visualmente */
+    flex-direction: row-reverse;
 }
 
 .calificacion-estrellas .estrella {
-    display: inline-block;
-    cursor: pointer;
-    font-size: 28px;
-    color: #ccc;
-    transition: color 0.2s ease, transform 0.1s ease;
+    color: #ccc; /* Estrellas sin seleccionar */
+    transition: color 0.2s ease;
 }
 
+/* CAMBIO CLAVE: Ajustar la regla de hover y selected */
+/* Selecciona la estrella actual y todas las estrellas "hermanas" que la preceden en el orden HTML
+   (que son las que están a su izquierda en el orden visual invertido) */
+.calificacion-estrellas .estrella.selected,
 .calificacion-estrellas .estrella:hover,
 .calificacion-estrellas .estrella:hover ~ .estrella {
-    color: #ffc107;
+    color: #FFD700; /* Estrellas seleccionadas y al pasar el ratón */
 }
 
-.calificacion-estrellas .estrella.filled {
-    color: #ffc107;
+
+.form-comentario textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    min-height: 80px;
+    resize: vertical;
+    box-sizing: border-box; /* Incluye padding y border en el ancho */
 }
 
-/* Botones del formulario */
-.form-comentario button {
-    padding: 10px 18px;
+
+.form-comentario button[type="submit"],
+.form-comentario .cancelar-edicion-btn {
+    padding: 10px 20px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 1em;
-    font-weight: 600;
+    margin-top: 10px;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .form-comentario button[type="submit"] {
-    background-color: #28a745;
+    background-color: #4CAF50; /* Verde */
     color: white;
 }
 
 .form-comentario button[type="submit"]:hover {
-    background-color: #218838;
+    background-color: #45a049;
+    transform: translateY(-2px);
 }
 
 .form-comentario .cancelar-edicion-btn {
-    background-color: #6c757d;
+    background-color: #607D8B; /* Gris azulado */
     color: white;
 }
 
 .form-comentario .cancelar-edicion-btn:hover {
-    background-color: #5a6268;
+    background-color: #455A64;
+    transform: translateY(-2px);
 }
 
-/* Media queries para responsividad en la sección de comentarios */
-@media (max-width: 576px) {
+/* Responsive adjustments */
+@media (max-width: 600px) {
     .review-container-card {
-        padding: 15px; /* Ajusta el padding para móviles */
-    }
-
-    .ver-comentario-btn {
-        padding: 10px 15px;
-        font-size: 0.95em;
-    }
-
-    .comentario-contenido {
         padding: 10px;
     }
-
-    .calificacion-estrellas .estrella {
-        font-size: 24px;
+    .ver-comentario-btn {
+        font-size: 0.9em;
+        padding: 8px 10px;
     }
-
-    .editar-comentario-btn,
-    .eliminar-comentario-btn,
+    .form-comentario {
+        padding: 15px;
+    }
     .form-comentario button {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 10px;
+        font-size: 0.9em;
+        padding: 8px 15px;
     }
 }
