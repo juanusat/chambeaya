@@ -1,4 +1,4 @@
-create table contrato (
+create table if not exists contrato (
     contrato_id int auto_increment,
     servicio_id int,
     cliente_id int,
@@ -11,7 +11,7 @@ create table contrato (
     check (estado in ('pendiente', 'rechazado', 'en espera', 'en progreso', 'completado', 'finalizado', 'cancelado'))
 );
 
-create table usuario (
+create table if not exists usuario (
     usuario_id int auto_increment,
     username varchar(16) not null unique,
     descripcion varchar(255) not null,
@@ -23,7 +23,7 @@ create table usuario (
     primary key (usuario_id)
 );
 
-create table comprobante_contrato (
+create table if not exists comprobante_contrato (
     comprobante_contrato_id int auto_increment,
     contrato_id int,
     monto decimal(7,2) not null,
@@ -32,7 +32,7 @@ create table comprobante_contrato (
     primary key (comprobante_contrato_id)
 );
 
-create table comentario (
+create table if not exists comentario (
     comentario_id int auto_increment,
     contrato_id int,
     calificacion int,
@@ -42,7 +42,7 @@ create table comentario (
     check (calificacion between 1 and 5)
 );
 
-create table persona (
+create table if not exists persona (
     persona_id int auto_increment,
     usuario_id int unique,
     nombre varchar(100) not null,
@@ -52,13 +52,13 @@ create table persona (
     primary key (persona_id)
 );
 
-create table metodo_pago (
+create table if not exists metodo_pago (
     metodo_pago_id int auto_increment,
     nombre varchar(50) not null unique,
     primary key (metodo_pago_id)
 );
 
-create table publicacion_medio (
+create table if not exists publicacion_medio (
     publicacion_medio_id int auto_increment,
     publicacion_id int not null,
     tamanio int not null,
@@ -66,7 +66,7 @@ create table publicacion_medio (
     primary key (publicacion_medio_id)
 );
 
-create table empresa (
+create table if not exists empresa (
     empresa_id int auto_increment,
     usuario_id int unique,
     nombre varchar(255) not null unique,
@@ -75,13 +75,13 @@ create table empresa (
     primary key (empresa_id)
 );
 
-create table categoria (
+create table if not exists categoria (
     categoria_id int auto_increment,
     nombre varchar(100) not null unique,
     primary key (categoria_id)
 );
 
-create table publicacion (
+create table if not exists publicacion (
     publicacion_id int auto_increment,
     categoria_id int,
     usuario_id int,
