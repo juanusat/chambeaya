@@ -90,11 +90,32 @@ def drop_functions():
         print(f"Función {fn} eliminada.")
 
 def count_rows():
-    query = (
-        "SELECT table_name, table_rows FROM information_schema.tables "
-        "WHERE table_schema=DATABASE() ORDER BY table_name;"
+    query = "SELECT table_name FROM information_schema.tables WHERE table_schema=DATABASE();"
+    proc = subprocess.run(
+        MYSQL_CMD + ['-N', '-e', query],
+        capture_output=True, text=True, check=True
     )
-    subprocess.run(MYSQL_CMD + ['-e', query], check=True)
+    tables = sorted(proc.stdout.strip().split()) if proc.stdout else []
+
+    print(f"{'Tabla':40} | Filas")
+    print("-" * 50)
+
+    total = 0
+    for table in tables:
+        count_query = f"SELECT COUNT(*) FROM `{table}`;"
+        try:
+            count_proc = subprocess.run(
+                MYSQL_CMD + ['-N', '-e', count_query],
+                capture_output=True, text=True, check=True
+            )
+            count = int(count_proc.stdout.strip())
+            total += count
+            print(f"{table:40} | {count}")
+        except subprocess.CalledProcessError:
+            print(f"{table:40} | Error al contar filas")
+
+    print("-" * 50)
+    print(f"{'Total':40} | {total}")
 
 def rebuild():
     reset_tables()
