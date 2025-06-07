@@ -9,12 +9,12 @@
         const termino = pathParts[1];
         fetchUrl = `/api/publicaciones/${termino}`;
 
-    // Ruta "/categoria/termino_busqueda"
+        // Ruta "/categoria/termino_busqueda"
     } else if (pathParts[0] === "categoria" && pathParts[1]) {
         const termino = pathParts[1];
         fetchUrl = `/api/publicaciones/categoria/${termino}`;
 
-    // Si no coincide con ninguno, salimos
+        // Si no coincide con ninguno, salimos
     } else {
         return;
     }
@@ -50,26 +50,38 @@
                 const card = document.createElement("div");
                 card.className = "card";
                 card.innerHTML = `
-                    <div class="card-header">
-                        <h3 class="job-title">${pub.titulo}</h3>
-                        <div class="tag"><i class="fa-solid fa-tag"></i>${pub.categoria}</div>
-                    </div>
+        <div class="card-header">
+            <div class="provider-block">
+                <div class="provider-circle"></div>
+                <div class="provider-info">
+                    <h3 class="job-title">${pub.titulo}</h3>
+                    <span class="provider-name">${pub.nombre_usuario}</span>
+                </div>
+            </div>
+            <div class="fecha-post">Publicado el: <span>${new Date(pub.fecha_creacion).toLocaleDateString()}</span></div>
+            <div class="tag"><i class="fa-solid fa-tag"></i> ${pub.categoria}</div>
+        </div>
 
-                    <div class="card-details-row">
-                        <div class="provider-info">
-                            <span class="provider-name">${pub.nombre_usuario}</span>
-                            <div class="provider-circle"></div>
-                        </div>
-                        <div class="price-tag">Precio: <span>${pub.precio || "No disponible"}</span></div>
-                        <div class="fecha-post">Publicado el: <span>${new Date(pub.fecha_creacion).toLocaleDateString()}</span></div>
-                    </div>
+        <div class="card-content-row">
+            <div class="job-image">
+                ${pub.archivo
+                        ? `<img src="/static/uploads/${pub.archivo}" alt="Imagen de la publicación" />`
+                        : ``
+                    }
+            </div>
 
-                    <div class="job-description">
-                        <p>${pub.descripcion || "Sin descripción disponible."}</p>
-                    </div>
-                `;
+            <div class="job-text-content">
+                <div class="job-description">
+                    <p>${pub.descripcion || "Sin descripción disponible."}</p>
+                </div>
+                <div class="price-tag">Precio: <span>$ ${pub.precio || "No disponible"}</span></div>
+                
+            </div>
+        </div>
+    `;
                 container.appendChild(card);
             });
+
         })
         .catch(error => {
             console.error("Error al cargar publicaciones:", error);
