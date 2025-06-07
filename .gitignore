@@ -8,3 +8,4 @@ cia.sh
 tmux-export*
 .venv/
 r-*
+db_setup/backup-*
