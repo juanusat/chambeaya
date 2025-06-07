@@ -9,11 +9,13 @@
     <link rel="shortcut icon" href="/static/brand/favicon-chambeaya.png" type="image/png">
     <link rel="stylesheet" href="/static/css/mis_contratos.css">
     <link rel="stylesheet" href="/static/css/comen_contrato.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="app">
-        <div class="header"></div> <div class="page">
-            <div class="contratos-listado-principal"> 
+        <div class="header"></div>
+        <div class="page">
+            <div class="contratos-listado-principal">
                 <div class="fila_superior">
                     <h1>Mis Contratos</h1>
                     <div class="filter-container">
@@ -25,13 +27,24 @@
                         </select>
                     </div>
                 </div>
-                <div class="contenedor"> 
+                <div class="contenedor">
                     <div class="lista-contratos" id="contratos-container">
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="footer"></div> </div>
+        <div class="footer"></div>
+    </div>
+
+    <div id="paymentsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Pagos del Contrato</h2>
+            <div id="paymentsList">
+                </div>
+            <p id="noPaymentsMessage" style="display: none;">No hay pagos registrados para este contrato.</p>
+        </div>
+    </div>
     <div class="js">
         <script src="/static/js/main.js"></script>
         <script src="/static/js/mis-contratos.js"></script>
