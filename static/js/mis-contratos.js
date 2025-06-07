@@ -103,6 +103,7 @@ function renderContracts(contractsToRender) {
         console.error('No se puede renderizar: contratosContainer no existe.');
         return;
     }
+
     console.log(`Renderizando ${contractsToRender.length} contratos...`);
     contratosContainer.innerHTML = ''; // Limpia el contenedor antes de renderizar
 
@@ -173,7 +174,7 @@ function renderContracts(contractsToRender) {
 
             <div class="price-actions">
                 <div class="price-tag">Precio: <span>$${formattedPrice}</span></div>
-                ${esCliente && contrato.precio !== null && contrato.precio !== undefined && ['en progreso', 'completado'].includes(contrato.estado?.toLowerCase()) ?
+                ${esCliente && contrato.precio !== null && contrato.precio !== undefined && ['en progreso', 'completado'].includes(contrato.estado?.toLowerCase()) && contrato.estado.toLowerCase() !== 'finalizado' ?
                 `<button class="pagar-btn" data-contrato-id="${contrato.contrato_id}">Pagar</button>` : ''}
             </div>
 
@@ -188,17 +189,17 @@ function renderContracts(contractsToRender) {
                 </div>
             </div>
             <div class="card-actions-buttons">
-                ${esPrestador && contrato.estado && contrato.estado.toLowerCase() === 'en espera' ?
-                `
+                ${esPrestador && contrato.estado && contrato.estado.toLowerCase() === 'en espera' ? 
+                ` 
                     <button class="action-btn begin-btn" data-contrato-id="${contrato.contrato_id}">Comenzar</button>
                     <button class="action-btn cancel-btn" data-contrato-id="${contrato.contrato_id}">Cancelar</button>
                 ` : ''}
-                ${esPrestador && contrato.estado && contrato.estado.toLowerCase() === 'en progreso' ?
+                ${esPrestador && contrato.estado && contrato.estado.toLowerCase() === 'en progreso' ? 
                 `
                     <button class="action-btn complete-btn" data-contrato-id="${contrato.contrato_id}">Completado</button>
                     <button class="action-btn cancel-btn cancel-progress-btn" data-contrato-id="${contrato.contrato_id}">Cancelar</button>
                 ` : ''}
-                ${esPrestador && contrato.estado && contrato.estado.toLowerCase() === 'finalizado' ? // Muestra el botón "Ver pagos" solo si el usuario es prestador y el contrato está finalizado
+                ${esPrestador && contrato.estado && contrato.estado.toLowerCase() === 'finalizado' ? 
                 `<button class="action-btn view-payments-btn" data-contrato-id="${contrato.contrato_id}">Ver pagos</button>` : ''}
             </div>`;
         
@@ -211,8 +212,9 @@ function renderContracts(contractsToRender) {
 
         contratosContainer.appendChild(card); // Añade la tarjeta al contenedor
     });
+
     attachEventListeners(); // Adjunta los event listeners a los botones recién creados
-    
+
     // Llama a la función de comentarios si está definida
     if (typeof window.configurarBotonesComentarios === 'function') {
         window.configurarBotonesComentarios();
@@ -220,6 +222,9 @@ function renderContracts(contractsToRender) {
         console.warn('La función window.configurarBotonesComentarios no está definida. Asegúrate de que mis-comentarios.js se cargue correctamente.');
     }
 }
+
+
+
 
 /**
  * Adjunta los event listeners a todos los botones de acción en las tarjetas de contrato
@@ -375,7 +380,7 @@ async function handleViewPaymentsClick(event) {
 
                     paymentCard.innerHTML = `
                         <p><strong>Monto:</strong> $${formattedAmount}</p>
-                        <p><strong>Método de Pago:</strong> ${payment.metodo_pago_nombre || 'Desconocido'}</p>
+                        <p><strong>Método de Pago:</strong> ${payment.metodo_pago || 'Desconocido'}</p>
                         <p><strong>Fecha de Pago:</strong> ${formattedDate}</p>
                     `;
                     paymentsList.appendChild(paymentCard); // Añade la tarjeta de pago al modal

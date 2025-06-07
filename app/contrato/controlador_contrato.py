@@ -305,6 +305,20 @@ def modificar_contrato(conts_id,nom_estado):
     finally:
         conn.close()
 
+def finalizar_contrato(conts_id):
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            # Cambia el estado del contrato a 'finalizado'
+            cursor.execute(
+                "UPDATE contrato SET estado='finalizado', fecha_finalizacion=NOW() WHERE contrato_id=%s;",
+                (conts_id,),
+            )
+            conn.commit()
+    finally:
+        conn.close()
+
+
 def obtener_comentario_del_contrato(conts_id):
     conn = get_db_connection()
     try:

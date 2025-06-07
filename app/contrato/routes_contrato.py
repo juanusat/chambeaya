@@ -16,7 +16,8 @@ from app.contrato.controlador_contrato import (
   update_comentario,
   contrato_pertenece_a_cliente,
   estado_del_contrato,
-  delete_comentario
+  delete_comentario,
+  finalizar_contrato
 )
 
 contratos_bp = Blueprint('contratos', __name__)
@@ -148,6 +149,16 @@ def editar_comentario_contrato(conts_id):
         return jsonify({'error': 'Comentario no encontrado para este contrato'}), 404
 
     return jsonify({'message': 'Comentario actualizado exitosamente'}), 200
+
+@contratos_bp.route('/editar_contrato/<int:conts_id>/finalizado', methods=['PUT'])
+def finalizar_contrato_route(conts_id):
+    try:
+        finalizar_contrato(conts_id)
+        return jsonify({'message': 'Contrato finalizado exitosamente'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 
 @contratos_bp.route('/eliminar_comentario/<int:conts_id>', methods=['DELETE'])
 def eliminar_comentario_contrato(conts_id):
