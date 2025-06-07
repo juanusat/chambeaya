@@ -45,13 +45,14 @@ def get_all_publicaciones_by_username(username):
     finally:
         conn.close() 
 
-def get_publicacion_by_palabra(palabra): 
+def get_publicacion_by_palabra(palabra):
     conn = get_db_connection()
     try:
-        with conn.cursor(pymysql.cursors.DictCursor) as cursor: 
-            cursor.execute("""
-                SELECT 
-                    CASE 
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute(
+                """
+                SELECT
+                    CASE
                         WHEN per.usuario_id IS NOT NULL THEN per.nombre
                         WHEN emp.usuario_id IS NOT NULL THEN emp.nombre
                         ELSE 'Desconocido'
@@ -61,16 +62,20 @@ def get_publicacion_by_palabra(palabra):
                     p.descripcion,
                     p.precio,
                     p.estado,
-                    p.fecha_creacion
+                    p.fecha_creacion,
+                    pm.archivo
                 FROM publicacion p
                 JOIN usuario u ON p.usuario_id = u.usuario_id
                 JOIN categoria cat ON p.categoria_id = cat.categoria_id
                 LEFT JOIN persona per ON per.usuario_id = u.usuario_id
                 LEFT JOIN empresa emp ON emp.usuario_id = u.usuario_id
+                LEFT JOIN publicacion_medio pm ON pm.publicacion_id = p.publicacion_id
                 WHERE p.titulo LIKE %s;
-            """, ('%' + palabra + '%',))
+                """,
+                ('%' + palabra + '%',)
+            )
             return cursor.fetchall()
-    finally:    
+    finally:
         conn.close()
 
 def get_publicacion_by_id(pub_id):
@@ -143,17 +148,20 @@ def get_publicacion_by_categoria_nombre(nombre_cat):
                     p.descripcion,
                     p.precio,
                     p.estado,
-                    p.fecha_creacion
+                    p.fecha_creacion,
+                    pm.archivo
                 FROM publicacion p
                 JOIN usuario u ON p.usuario_id = u.usuario_id
                 JOIN categoria cat ON p.categoria_id = cat.categoria_id
                 LEFT JOIN persona per ON per.usuario_id = u.usuario_id
                 LEFT JOIN empresa emp ON emp.usuario_id = u.usuario_id
+                LEFT JOIN publicacion_medio pm ON pm.publicacion_id = p.publicacion_id
                 WHERE cat.nombre = %s;
             """, (nombre_cat,))
             return cursor.fetchall()
     finally:
         conn.close()
+
 
 def create_publicacion(data):
     conn = get_db_connection()
