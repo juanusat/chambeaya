@@ -73,3 +73,38 @@ SELECT
 FROM contrato c
 JOIN publicacion p ON c.servicio_id = p.publicacion_id
 WHERE c.prestador_id != p.usuario_id;
+
+-- 13. Contratos finalizados cuyos pagos son mayor al precio del contrato
+select 
+    c.contrato_id,
+    c.estado,
+    c.precio as precio_contrato,
+    sum(cc.monto) as total_pagado
+from contrato c
+join comprobante_contrato cc on c.contrato_id = cc.contrato_id
+where c.estado = 'finalizado'
+group by c.contrato_id, c.precio, c.estado
+having sum(cc.monto) > c.precio;
+
+-- 14. Contratos finalizados cuyos pagos son menores al precio del contrato
+select 
+    c.contrato_id,
+    c.estado,
+    c.precio as precio_contrato,
+    sum(cc.monto) as total_pagado
+from contrato c
+join comprobante_contrato cc on c.contrato_id = cc.contrato_id
+where c.estado = 'finalizado'
+group by c.contrato_id, c.precio, c.estado
+having sum(cc.monto) < c.precio;
+
+-- 15. Contratos cuyo precio es diferente al precio de la publicación
+select 
+    c.contrato_id,
+    c.precio as precio_contrato,
+    p.precio as precio_publicacion,
+    p.titulo,
+    c.estado
+from contrato c
+join publicacion p on c.servicio_id = p.publicacion_id
+where c.precio <> p.precio;
