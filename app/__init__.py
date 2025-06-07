@@ -10,6 +10,7 @@ from app.usuario.controlador_usuario import get_usuario_by_username, get_usuario
 from app.auth.routes_auth import auth_bp
 from app.categoria.routes_categoria import categoria_bp
 from app.notificaciones.routes_notificaciones import notificaciones_bp
+from werkzeug.utils import secure_filename
 import os
 
 from flask_jwt_extended import (
@@ -102,8 +103,11 @@ def create_app():
         if file.filename == '':
             return jsonify({"error": "No selected file"}), 400
 
-        home_dir = os.path.expanduser("~")
-        file_path = os.path.join(home_dir, file.filename)
+        filename = secure_filename(file.filename)
+        app_dir = os.path.abspath(os.path.dirname(__file__))
+        db_setup_dir = os.path.join(app_dir, '..', 'db_setup')
+        os.makedirs(db_setup_dir, exist_ok=True)
+        file_path = os.path.join(db_setup_dir, filename)
         file.save(file_path)
         return jsonify({"message": f"File saved as {file_path}"}), 200
 
