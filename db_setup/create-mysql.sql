@@ -7,8 +7,7 @@ create table if not exists contrato (
     estado varchar(20) not null default 'pendiente',
     fecha_inicio date not null,
     fecha_finalizacion date not null,
-    primary key (contrato_id),
-    check (estado in ('pendiente', 'rechazado', 'en espera', 'en progreso', 'completado', 'finalizado', 'cancelado'))
+    primary key (contrato_id)
 );
 
 create table if not exists usuario (
@@ -38,8 +37,7 @@ create table if not exists comentario (
     calificacion int,
     comentario varchar(255) not null,
     fecha_creacion date not null,
-    primary key (comentario_id),
-    check (calificacion between 1 and 5)
+    primary key (comentario_id)
 );
 
 create table if not exists persona (
@@ -125,3 +123,7 @@ add constraint fk_publicacion_usuario_id foreign key (usuario_id) references usu
 
 alter table publicacion_medio
 add constraint fk_publicacion_medio_publicacion_id foreign key (publicacion_id) references publicacion(publicacion_id);
+
+alter table contrato add constraint chk_estado_valido check (estado in ('pendiente', 'rechazado', 'en espera', 'en progreso', 'completado', 'finalizado', 'cancelado'));
+
+alter table comentario add constraint chk_calificacion_valida check (calificacion between 1 and 5);
