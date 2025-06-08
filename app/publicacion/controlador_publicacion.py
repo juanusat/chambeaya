@@ -14,10 +14,12 @@ def get_all_publicaciones(user_id):
                                 u.username AS nombre_usuario, 
                                 p.precio, 
                                 p.fecha_creacion, 
-                                p.descripcion 
+                                p.descripcion,
+                                pm.archivo
                             FROM publicacion p 
                             INNER JOIN categoria cat ON p.categoria_id = cat.categoria_id
                             INNER JOIN usuario u ON p.usuario_id = u.usuario_id
+                            LEFT JOIN publicacion_medio pm ON pm.publicacion_id = p.publicacion_id
                             WHERE u.usuario_id = %s and p.estado = True;
                            """, (user_id,))
             return cursor.fetchall()
@@ -35,10 +37,12 @@ def get_all_publicaciones_by_username(username):
                                 u.username AS nombre_usuario, 
                                 p.precio, 
                                 p.fecha_creacion, 
-                                p.descripcion 
+                                p.descripcion,
+                                pm.archivo
                             FROM publicacion p 
                             INNER JOIN categoria cat ON p.categoria_id = cat.categoria_id
                             INNER JOIN usuario u ON p.usuario_id = u.usuario_id
+                            LEFT JOIN publicacion_medio pm ON pm.publicacion_id = p.publicacion_id
                             WHERE u.username = %s and p.estado = True;
                            """, (username,))
             return cursor.fetchall()
@@ -94,12 +98,14 @@ def get_publicacion_by_id(pub_id):
                     p.descripcion,
                     p.precio,
                     p.estado,
-                    p.fecha_creacion
+                    p.fecha_creacion,
+                    pm.archivo
                 FROM publicacion p
                 JOIN usuario u ON p.usuario_id = u.usuario_id
                 JOIN categoria cat ON p.categoria_id = cat.categoria_id
                 LEFT JOIN persona per ON per.usuario_id = u.usuario_id
                 LEFT JOIN empresa emp ON emp.usuario_id = u.usuario_id
+                LEFT JOIN publicacion_medio pm ON pm.publicacion_id = p.publicacion_id
                 WHERE p.publicacion_id = %s;""", (pub_id,))
             return cursor.fetchall()
     finally:
@@ -121,12 +127,14 @@ def get_publicacion_by_id_usuario(user_id):
                     p.descripcion,
                     p.precio,
                     p.estado,
-                    p.fecha_creacion
+                    p.fecha_creacion,
+                    pm.archivo
                 FROM publicacion p
                 JOIN usuario u ON p.usuario_id = u.usuario_id
                 JOIN categoria cat ON p.categoria_id = cat.categoria_id
                 LEFT JOIN persona per ON per.usuario_id = u.usuario_id
                 LEFT JOIN empresa emp ON emp.usuario_id = u.usuario_id
+                LEFT JOIN publicacion_medio pm ON pm.publicacion_id = p.publicacion_id
                 WHERE u.usuario_id = %s;""",(user_id,))
             return cursor.fetchone()
     finally: 
