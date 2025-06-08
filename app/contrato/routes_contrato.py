@@ -10,7 +10,10 @@ from app.contrato.controlador_contrato import (
   get_contratos_by_estado,
   create_contrato,
   update_contrato,
-  modificar_contrato,
+  get_contrato_data,
+  marcar_contrato_completado,
+  actualizar_estado_contrato,
+  finalizar_contrato,
   obtener_comentario_del_contrato,
   create_comentario,
   update_comentario,
@@ -73,13 +76,6 @@ def nuevo_contrato():
 def update_contrato(conts_id):
     data = request.get_json()
     update_contrato(conts_id, data)
-    return jsonify({'message': 'Actualizado exitosamente'}), 200
-
-@contratos_bp.route('/editar_contrato/<int:conts_id>/<nom_estado>', methods=['PUT']) # VALIDAR G
-def modificar_contrato_notificacion(conts_id,nom_estado):
-    if not getattr(g, 'user_id', None):
-        return redirect(url_for('inicio'))
-    modificar_contrato(conts_id,nom_estado)
     return jsonify({'message': 'Actualizado exitosamente'}), 200
 
 @contratos_bp.route('/comentario/<int:conts_id>', methods=['GET'])
@@ -255,17 +251,51 @@ def obtener_contrato_por_id(contrato_id):
                 return jsonify({'error': 'Contrato no encontrado o acceso denegado'}), 404
     finally:
         conn.close()
-@contratos_bp.route('/editar_contrato/<int:contrato_id>/finalizado', methods=['PUT'])
-def finalizar_contrato_v2(conts_id):  # Renombrar esta función para evitar el conflicto de nombre
-    try:
-        # Obtener contrato para verificar si ya está pagado completamente
-        contrato = obtener_contrato_por_id(conts_id)
 
-        if contrato['estado'] == 'completado' and contrato['precio'] == contrato['precio_pagado']:
+@contratos_bp.route('/editar_contrato/<int:conts_id>/completado', methods=['PUT'])
+def completar_contrato_route(conts_id):
+    if not getattr(g, 'user_id', None):
+        return redirect(url_for('inicio'))
+    try:
+        contrato = get_contrato_data(conts_id)
+        if not contrato:
+            return jsonify({'error': 'Contrato no encontrado'}), 404
+        if g.user_id != contrato.get('prestador_id'):
+            return jsonify({'error': 'Acceso denegado'}), 403
+        if contrato['precio_pagado'] >= contrato['precio']:
             finalizar_contrato(conts_id)
             return jsonify({'message': 'Contrato finalizado exitosamente'}), 200
-        else:
-            return jsonify({'error': 'El contrato no puede finalizarse hasta que el prestador lo marque como completado y el cliente haya pagado el total.'}), 400
+        marcar_contrato_completado(conts_id)
+        return jsonify({'message': 'Contrato marcado como completado'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
+@contratos_bp.route('/editar_contrato/<int:conts_id>/finalizado', methods=['PUT'])
+def finalizar_contrato_route(conts_id):
+    if not getattr(g, 'user_id', None):
+        return redirect(url_for('inicio'))
+    try:
+        contrato = get_contrato_data(conts_id)
+        if not contrato:
+            return jsonify({'error': 'Contrato no encontrado'}), 404
+        if g.user_id not in (contrato.get('prestador_id'), contrato.get('cliente_id')):
+            return jsonify({'error': 'Acceso denegado'}), 403
+        if contrato['estado'] == 'completado' and contrato['precio_pagado'] >= contrato['precio']:
+            finalizar_contrato(conts_id)
+            return jsonify({'message': 'Contrato finalizado exitosamente'}), 200
+        return jsonify({'error': 'No se puede finalizar: debe estar completado por el prestador y pagado al 100%'}), 400
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@contratos_bp.route('/editar_contrato/<int:conts_id>/<string:nom_estado>', methods=['PUT'])
+def modificar_contrato_estado_route(conts_id, nom_estado):
+    if not getattr(g, 'user_id', None):
+        return redirect(url_for('inicio'))
+    try:
+        contrato = get_contrato_data(conts_id)
+        if not contrato:
+            return jsonify({'error': 'Contrato no encontrado'}), 404
+        actualizar_estado_contrato(conts_id, nom_estado)
+        return jsonify({'message': f"Estado del contrato actualizado a '{nom_estado}'"}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
