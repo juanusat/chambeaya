@@ -165,25 +165,24 @@ VALUES
 
 
 -- Publicación medio
-INSERT INTO publicacion_medio (publicacion_id, tamanio, fecha_hora) VALUES
-(1, 25288, '2025-01-24 08:40:12'),
-(1, 1302011,'2025-01-25 12:41:50'),
-(2, 7051, '2025-04-03 18:09:21'),
-(3, 13317, '2025-03-24 07:50:08'),
-(3, 11495, '2025-03-24 09:32:28'),
-(3, 13493, '2025-03-25 11:22:47'),
-(4, 50150, '2025-04-30 23:11:42'),
-(5, 7496, '2025-03-01 12:36:55'),
-(5, 7964, '2025-03-01 12:39:13'),
-(6, 13579, '2025-03-19 15:27:13'),
-(7, 12457, '2025-04-04 14:45:02'),
-(7, 10923, '2025-04-04 14:54:29'),
-(7, 11923, '2025-04-04 13:03:12'),
-(8, 7618, '2025-05-16 19:33:40'),
-(9, 99569, '2025-02-25 21:18:17'),
-(10, 75920, '2025-03-01 14:18:30'),
-(10, 86520, '2025-03-01 14:25:55');
-
+INSERT INTO publicacion_medio (publicacion_id, tamanio, fecha_hora, archivo) VALUES
+(1, 25288, '2025-01-24 08:40:12','limpieza-de-casas1.webp'),
+(1, 1302011,'2025-01-25 12:41:50','limpieza-de-casas2.png'),
+(2, 7051, '2025-04-03 18:09:21','consulta-medica.jpeg'),
+(3, 13317, '2025-03-24 07:50:08','reparacion-de-motores1.jpeg'),
+(3, 11495, '2025-03-24 09:32:28','reparacion-de-motores2.jpeg'),
+(3, 13493, '2025-03-25 11:22:47','reparacion-de-motores3.jpeg'),
+(4, 50150, '2025-04-30 23:11:42','consultoria-empresarial1.jpg'),
+(5, 7496, '2025-03-01 12:36:55','curso-ingles1.jpeg'),
+(5, 7964, '2025-03-01 12:39:13','curso-ingles2.jpeg'),
+(6, 13579, '2025-03-19 15:27:13','reformas-de-albañileria.jpeg'),
+(7, 12457, '2025-04-04 14:45:02','ing-civil1.jpeg'),
+(7, 10923, '2025-04-04 14:54:29','ing-civil2.jpeg'),
+(7, 11923, '2025-04-04 13:03:12','ing-civil3.jpeg'),
+(8, 7618, '2025-05-16 19:33:40','marketing-digital.jpeg'),
+(9, 99569, '2025-02-25 21:18:17','Diseño-de-logotipos-y-branding1.jpg'),
+(10, 75920, '2025-03-01 14:18:30','fontaneria1.jpg'),
+(10, 86520, '2025-03-01 14:25:55','fontaneria2.jpg');
 
 INSERT INTO contrato (servicio_id, cliente_id, prestador_id, precio ,estado, fecha_inicio, fecha_finalizacion)
 VALUES
@@ -443,23 +442,3 @@ INSERT INTO comentario (contrato_id, calificacion, comentario, fecha_creacion) V
 (44, 5, 'Muy buen servicio y rápido.', '2025-05-31'),
 (45, 4, 'Buen trabajo.', '2025-06-01'),
 (46, 5, 'Excelente atención y calidad.', '2025-06-03');
-
--------Imagenes de publicaciones
-INSERT INTO publicacion_medio (publicacion_medio_id, archivo) VALUES
-  (1,  'limpieza-de-casas1.webp'),
-  (2,  'limpieza-de-casas2.png'),
-  (3,  'consulta-medica.jpeg'),
-  (4,  'reparacion-de-motores1.jpeg'),
-  (5,  'reparacion-de-motores2.jpeg'),
-  (6,  'reparacion-de-motores3.jpeg'),
-  (7,  'consultoria-empresarial1.jpg'),
-  (8,  'curso-ingles1.jpeg'),
-  (9,  'curso-ingles2.jpeg'),
-  (10, 'reformas-de-albañileria.jpeg'),
-  (11, 'ing-civil1.jpeg'),
-  (12, 'ing-civil2.jpeg'),
-  (13, 'ing-civil3.jpeg'),
-  (14, 'marketing-digital.jpeg'),
-  (15, 'Diseño-de-logotipos-y-branding1.jpg'),
-  (16, 'fontaneria1.jpg'),
-  (17, 'fontaneria2.jpg');
