@@ -8,7 +8,7 @@ def get_all_publicaciones(user_id):
     try:
         with conn.cursor(pymysql.cursors.DictCursor) as cursor:
             cursor.execute("""SELECT 
-                                p.publicacion_id AS id,  -- Incluye el ID de la publicación
+                                p.publicacion_id,  -- Incluye el ID de la publicación
                                 p.titulo, 
                                 cat.nombre AS categoria, 
                                 u.username AS nombre_usuario, 
@@ -31,7 +31,7 @@ def get_all_publicaciones_by_username(username):
     try:
         with conn.cursor(pymysql.cursors.DictCursor) as cursor:
             cursor.execute("""SELECT 
-                                p.publicacion_id AS id,  -- Incluye el ID de la publicación
+                                p.publicacion_id,  -- Incluye el ID de la publicación
                                 p.titulo, 
                                 cat.nombre AS categoria, 
                                 u.username AS nombre_usuario, 
@@ -61,6 +61,7 @@ def get_publicacion_by_palabra(palabra):
                         WHEN emp.usuario_id IS NOT NULL THEN emp.nombre
                         ELSE 'Desconocido'
                     END AS nombre_usuario,
+                    p.publicacion_id,
                     cat.nombre AS categoria,
                     p.titulo,
                     p.descripcion,
@@ -151,6 +152,7 @@ def get_publicacion_by_categoria_nombre(nombre_cat):
                         WHEN emp.usuario_id IS NOT NULL THEN emp.nombre
                         ELSE 'Desconocido'
                     END AS nombre_usuario,
+                    p.publicacion_id,
                     cat.nombre AS categoria,
                     p.titulo,
                     p.descripcion,
