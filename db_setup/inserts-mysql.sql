@@ -443,3 +443,23 @@ INSERT INTO comentario (contrato_id, calificacion, comentario, fecha_creacion) V
 (44, 5, 'Muy buen servicio y rápido.', '2025-05-31'),
 (45, 4, 'Buen trabajo.', '2025-06-01'),
 (46, 5, 'Excelente atención y calidad.', '2025-06-03');
+
+-------Imagenes de publicaciones
+INSERT INTO publicacion_medio (publicacion_medio_id, archivo) VALUES
+  (1,  'limpieza-de-casas1.webp'),
+  (2,  'limpieza-de-casas2.png'),
+  (3,  'consulta-medica.jpeg'),
+  (4,  'reparacion-de-motores1.jpeg'),
+  (5,  'reparacion-de-motores2.jpeg'),
+  (6,  'reparacion-de-motores3.jpeg'),
+  (7,  'consultoria-empresarial1.jpg'),
+  (8,  'curso-ingles1.jpeg'),
+  (9,  'curso-ingles2.jpeg'),
+  (10, 'reformas-de-albañileria.jpeg'),
+  (11, 'ing-civil1.jpeg'),
+  (12, 'ing-civil2.jpeg'),
+  (13, 'ing-civil3.jpeg'),
+  (14, 'marketing-digital.jpeg'),
+  (15, 'Diseño-de-logotipos-y-branding1.jpg'),
+  (16, 'fontaneria1.jpg'),
+  (17, 'fontaneria2.jpg');
