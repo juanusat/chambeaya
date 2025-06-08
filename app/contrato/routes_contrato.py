@@ -262,7 +262,7 @@ def completar_contrato_route(conts_id):
             return jsonify({'error': 'Contrato no encontrado'}), 404
         if g.user_id != contrato.get('prestador_id'):
             return jsonify({'error': 'Acceso denegado'}), 403
-        if contrato['precio_pagado'] >= contrato['precio']:
+        if contrato['precio_pagado'] == contrato['precio']:
             finalizar_contrato(conts_id)
             return jsonify({'message': 'Contrato finalizado exitosamente'}), 200
         marcar_contrato_completado(conts_id)
@@ -271,7 +271,7 @@ def completar_contrato_route(conts_id):
         return jsonify({'error': str(e)}), 500
 
 @contratos_bp.route('/editar_contrato/<int:conts_id>/finalizado', methods=['PUT'])
-def finalizar_contrato_route(conts_id):
+def finalizar_contrato_routev2(conts_id):
     if not getattr(g, 'user_id', None):
         return redirect(url_for('inicio'))
     try:

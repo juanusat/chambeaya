@@ -440,6 +440,7 @@ def get_contrato_data(contrato_id):
                     c.contrato_id,
                     c.precio,
                     COALESCE(SUM(cc.monto), 0) AS precio_pagado,
+                    c.prestador_id AS prestador_id,
                     c.estado
                 FROM contrato c
                 LEFT JOIN comprobante_contrato cc ON cc.contrato_id = c.contrato_id
