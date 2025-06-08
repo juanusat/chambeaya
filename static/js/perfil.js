@@ -83,17 +83,19 @@
                 return response.json();
             })
             .then(data => {
-                // Agrupar resultados por ID de publicación
-                const publicationsMap = new Map();
-                data.forEach(item => {
-                    if (!publicationsMap.has(item.id)) {
-                        publicationsMap.set(item.id, { ...item, archivos: [] });
+                // CORREGIDO: Se agrupa usando 'publicacion_id'
+                const publicationsData = data.reduce((acc, item) => {
+                    const id = item.publicacion_id; // Usa 'publicacion_id'
+                    if (!acc[id]) {
+                        acc[id] = { ...item, archivos: [] };
                     }
                     if (item.archivo) {
-                        publicationsMap.get(item.id).archivos.push(item.archivo);
+                        acc[id].archivos.push(item.archivo);
                     }
-                });
-                const pubs = Array.from(publicationsMap.values());
+                    return acc;
+                }, {});
+                
+                const pubs = Object.values(publicationsData);
 
                 // Renderizar las tarjetas
                 const container = document.querySelector(".publicaciones");
