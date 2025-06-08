@@ -293,17 +293,29 @@ def update_contrato(conts_id, data):
     finally:
         conn.close()
 
-def modificar_contrato(conts_id,nom_estado):
+def actualizar_estado_contrato(contrato_id, nuevo_estado):
     conn = get_db_connection()
     try:
         with conn.cursor() as cursor:
-            cursor.execute(
-                "UPDATE contrato SET  estado=%s  WHERE contrato_id=%s;",
-                (nom_estado,conts_id,),
-            )
-            conn.commit()
+            if nuevo_estado == 'finalizado':
+                cursor.execute(
+                    "UPDATE contrato SET estado = %s, fecha_finalizacion = NOW() WHERE contrato_id = %s;",
+                    (nuevo_estado, contrato_id)
+                )
+            else:
+                cursor.execute(
+                    "UPDATE contrato SET estado = %s WHERE contrato_id = %s;",
+                    (nuevo_estado, contrato_id)
+                )
+        conn.commit()
     finally:
         conn.close()
+
+def finalizar_contrato(conts_id):
+    actualizar_estado_contrato(conts_id, 'finalizado')
+
+def marcar_contrato_completado(conts_id):
+    actualizar_estado_contrato(conts_id, 'completado')
 
 def obtener_comentario_del_contrato(conts_id):
     conn = get_db_connection()
@@ -418,3 +430,25 @@ def estado_del_contrato(conts_id):
             else:
                 return None
 
+def get_contrato_data(contrato_id):
+    conn = get_db_connection()
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute(
+                """
+                SELECT
+                    c.contrato_id,
+                    c.precio,
+                    COALESCE(SUM(cc.monto), 0) AS precio_pagado,
+                    c.prestador_id AS prestador_id,
+                    c.estado
+                FROM contrato c
+                LEFT JOIN comprobante_contrato cc ON cc.contrato_id = c.contrato_id
+                WHERE c.contrato_id = %s
+                GROUP BY c.contrato_id, c.precio, c.estado;
+                """,
+                (contrato_id,)
+            )
+            return cursor.fetchone()
+    finally:
+        conn.close()

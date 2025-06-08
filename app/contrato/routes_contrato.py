@@ -10,13 +10,17 @@ from app.contrato.controlador_contrato import (
   get_contratos_by_estado,
   create_contrato,
   update_contrato,
-  modificar_contrato,
+  get_contrato_data,
+  marcar_contrato_completado,
+  actualizar_estado_contrato,
+  finalizar_contrato,
   obtener_comentario_del_contrato,
   create_comentario,
   update_comentario,
   contrato_pertenece_a_cliente,
   estado_del_contrato,
-  delete_comentario
+  delete_comentario,
+  finalizar_contrato
 )
 
 contratos_bp = Blueprint('contratos', __name__)
@@ -72,13 +76,6 @@ def nuevo_contrato():
 def update_contrato(conts_id):
     data = request.get_json()
     update_contrato(conts_id, data)
-    return jsonify({'message': 'Actualizado exitosamente'}), 200
-
-@contratos_bp.route('/editar_contrato/<int:conts_id>/<nom_estado>', methods=['PUT']) # VALIDAR G
-def modificar_contrato_notificacion(conts_id,nom_estado):
-    if not getattr(g, 'user_id', None):
-        return redirect(url_for('inicio'))
-    modificar_contrato(conts_id,nom_estado)
     return jsonify({'message': 'Actualizado exitosamente'}), 200
 
 @contratos_bp.route('/comentario/<int:conts_id>', methods=['GET'])
@@ -149,6 +146,16 @@ def editar_comentario_contrato(conts_id):
 
     return jsonify({'message': 'Comentario actualizado exitosamente'}), 200
 
+@contratos_bp.route('/editar_contrato/<int:conts_id>/finalizado', methods=['PUT'])
+def finalizar_contrato_route(conts_id):
+    try:
+        finalizar_contrato(conts_id)
+        return jsonify({'message': 'Contrato finalizado exitosamente'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
 @contratos_bp.route('/eliminar_comentario/<int:conts_id>', methods=['DELETE'])
 def eliminar_comentario_contrato(conts_id):
     user_id = getattr(g, 'user_id', None)
@@ -179,17 +186,6 @@ def estado_por_contrato(conts_id):
         print(f"Error al obtener estado: {e}")
         return jsonify({"error": "Error interno del servidor"}), 500
 
-# @contratos_bp.route('/<int:contrato_id>', methods=['GET'])
-# def obtener_contrato_por_id(contrato_id):
-#     if not getattr(g, 'user_id', None):
-#         return redirect(url_for('inicio'))
-#     contratos = get_mis_contratos(getattr(g, 'user_id', None))
-#     contrato = next((c for c in contratos if c['contrato_id'] == contrato_id), None)
-#     if contrato:
-#         return jsonify(contrato), 200
-#     else:
-#         return jsonify({'error': 'Contrato no encontrado'}), 404
-
 @contratos_bp.route('/<int:contrato_id>', methods=['GET'])
 def obtener_contrato_por_id(contrato_id):
     if not getattr(g, 'user_id', None):
@@ -197,7 +193,7 @@ def obtener_contrato_por_id(contrato_id):
     conn = get_db_connection()
     try:
         with conn.cursor(pymysql.cursors.DictCursor) as cursor:
-            cursor.execute("""
+            cursor.execute(""" 
                 SELECT 
                     c.contrato_id,
                     p.titulo AS servicio,
@@ -255,3 +251,51 @@ def obtener_contrato_por_id(contrato_id):
                 return jsonify({'error': 'Contrato no encontrado o acceso denegado'}), 404
     finally:
         conn.close()
+
+@contratos_bp.route('/editar_contrato/<int:conts_id>/completado', methods=['PUT'])
+def completar_contrato_route(conts_id):
+    if not getattr(g, 'user_id', None):
+        return redirect(url_for('inicio'))
+    try:
+        contrato = get_contrato_data(conts_id)
+        if not contrato:
+            return jsonify({'error': 'Contrato no encontrado'}), 404
+        if g.user_id != contrato.get('prestador_id'):
+            return jsonify({'error': 'Acceso denegado'}), 403
+        if contrato['precio_pagado'] == contrato['precio']:
+            finalizar_contrato(conts_id)
+            return jsonify({'message': 'Contrato finalizado exitosamente'}), 200
+        marcar_contrato_completado(conts_id)
+        return jsonify({'message': 'Contrato marcado como completado'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@contratos_bp.route('/editar_contrato/<int:conts_id>/finalizado', methods=['PUT'])
+def finalizar_contrato_routev2(conts_id):
+    if not getattr(g, 'user_id', None):
+        return redirect(url_for('inicio'))
+    try:
+        contrato = get_contrato_data(conts_id)
+        if not contrato:
+            return jsonify({'error': 'Contrato no encontrado'}), 404
+        if g.user_id not in (contrato.get('prestador_id'), contrato.get('cliente_id')):
+            return jsonify({'error': 'Acceso denegado'}), 403
+        if contrato['estado'] == 'completado' and contrato['precio_pagado'] >= contrato['precio']:
+            finalizar_contrato(conts_id)
+            return jsonify({'message': 'Contrato finalizado exitosamente'}), 200
+        return jsonify({'error': 'No se puede finalizar: debe estar completado por el prestador y pagado al 100%'}), 400
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@contratos_bp.route('/editar_contrato/<int:conts_id>/<string:nom_estado>', methods=['PUT'])
+def modificar_contrato_estado_route(conts_id, nom_estado):
+    if not getattr(g, 'user_id', None):
+        return redirect(url_for('inicio'))
+    try:
+        contrato = get_contrato_data(conts_id)
+        if not contrato:
+            return jsonify({'error': 'Contrato no encontrado'}), 404
+        actualizar_estado_contrato(conts_id, nom_estado)
+        return jsonify({'message': f"Estado del contrato actualizado a '{nom_estado}'"}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500

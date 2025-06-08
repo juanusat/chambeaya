@@ -290,6 +290,89 @@
     background-color: #c82333;
 }
 
+/* Estilos para el modal */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Permanece en su lugar */
+    z-index: 1000; /* Se superpone a otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Habilita el scroll si es necesario */
+    background-color: rgba(0,0,0,0.4); /* Fondo semi-transparente */
+    padding-top: 60px; /* Espacio para que el modal no esté pegado arriba */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 5% desde la parte superior y centrado */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Podrías ajustarlo según el diseño */
+    max-width: 600px; /* Ancho máximo para el modal */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative; /* Necesario para el botón de cerrar */
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#paymentsList .payment-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#paymentsList .payment-card p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+#paymentsList .payment-card strong {
+    color: #333;
+}
+
+.loading-message, .error-message, .no-payments-message {
+    text-align: center;
+    padding: 20px;
+    color: #555;
+    font-style: italic;
+}
+
+.error-message {
+    color: #d9534f; /* Color para mensajes de error */
+}
+
+/* Estilos para el botón de ver pagos */
+.action-btn.view-payments-btn {
+    background-color: #17a2b8; /* Un color turquesa/azul claro */
+    color: white;
+    /* Asegúrate de que los estilos de los botones .action-btn ya existan */
+}
+
+.action-btn.view-payments-btn:hover {
+    background-color: #138496;
+}
+
 @media (max-width: 1200px) {
     #contratos-container {
         grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
