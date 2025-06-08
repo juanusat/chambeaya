@@ -161,9 +161,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             const contratoResponse = await fetch(`/api/contratos/${contratoId}`);
             const contrato = await contratoResponse.json();
 
-            // Si el pago es el monto total, actualizar el contrato a "Finalizado"
+            // Si el pago es el monto total y el prestador marcó el contrato como "completado", actualizar el contrato a "Finalizado"
             const precioPendiente = contrato.precio - contrato.precio_pagado;
-            if (precioPendiente <= 0) {
+            if (precioPendiente <= 0 && contrato.estado.toLowerCase() === "completado") {
                 // Cambiar el estado del contrato a "Finalizado"
                 await fetch(`/api/contratos/editar_contrato/${contratoId}/finalizado`, {
                     method: 'PUT',
@@ -184,5 +184,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             alert('Error al procesar el pago: ' + error.message);
         }
     });
+
 
 });

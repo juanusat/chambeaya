@@ -127,6 +127,19 @@ function renderContracts(contractsToRender) {
         const fechaFin = contrato.fecha_finalizacion ? new Date(contrato.fecha_finalizacion).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }) : 'N/A';
         const formattedPrice = formatPrice(contrato.precio);
 
+        // Verifica si el contrato está completamente pagado
+        const totalPagado = parseFloat(contrato.precio_pagado) || 0;
+        const precioTotal = parseFloat(contrato.precio) || 0;
+
+        // Deshabilita el botón "Pagar" si el contrato ya está pagado completamente
+        const mostrarBotonPagar = (totalPagado < precioTotal && contrato.estado.toLowerCase() !== 'finalizado') ? true : false;
+
+        // Lógica para mostrar el botón "Pagar" solo si el cliente no ha pagado completamente y el contrato no está en estado finalizado
+        let pagarBtnHtml = '';
+        if (mostrarBotonPagar) {
+            pagarBtnHtml = `<button class="pagar-btn" data-contrato-id="${contrato.contrato_id}">Pagar</button>`;
+        }
+
         // Determinar si el usuario actual es el prestador o el cliente de este contrato
         const esPrestador = currentUserUsername && (contrato.username_empleado && contrato.username_empleado.toLowerCase().trim() === currentUserUsername.toLowerCase().trim());
         const esCliente = currentUserUsername && (contrato.username_cliente && contrato.username_cliente.toLowerCase().trim() === currentUserUsername.toLowerCase().trim());
@@ -177,6 +190,7 @@ function renderContracts(contractsToRender) {
                 ${esCliente && contrato.precio !== null && contrato.precio !== undefined && ['en progreso', 'completado'].includes(contrato.estado?.toLowerCase()) && contrato.estado.toLowerCase() !== 'finalizado' ?
                 `<button class="pagar-btn" data-contrato-id="${contrato.contrato_id}">Pagar</button>` : ''}
             </div>
+
 
             <div class="client-price-row">
                 <div class="client-info">

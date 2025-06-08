@@ -190,17 +190,6 @@ def estado_por_contrato(conts_id):
         print(f"Error al obtener estado: {e}")
         return jsonify({"error": "Error interno del servidor"}), 500
 
-# @contratos_bp.route('/<int:contrato_id>', methods=['GET'])
-# def obtener_contrato_por_id(contrato_id):
-#     if not getattr(g, 'user_id', None):
-#         return redirect(url_for('inicio'))
-#     contratos = get_mis_contratos(getattr(g, 'user_id', None))
-#     contrato = next((c for c in contratos if c['contrato_id'] == contrato_id), None)
-#     if contrato:
-#         return jsonify(contrato), 200
-#     else:
-#         return jsonify({'error': 'Contrato no encontrado'}), 404
-
 @contratos_bp.route('/<int:contrato_id>', methods=['GET'])
 def obtener_contrato_por_id(contrato_id):
     if not getattr(g, 'user_id', None):
@@ -208,7 +197,7 @@ def obtener_contrato_por_id(contrato_id):
     conn = get_db_connection()
     try:
         with conn.cursor(pymysql.cursors.DictCursor) as cursor:
-            cursor.execute("""
+            cursor.execute(""" 
                 SELECT 
                     c.contrato_id,
                     p.titulo AS servicio,
@@ -266,3 +255,17 @@ def obtener_contrato_por_id(contrato_id):
                 return jsonify({'error': 'Contrato no encontrado o acceso denegado'}), 404
     finally:
         conn.close()
+@contratos_bp.route('/editar_contrato/<int:contrato_id>/finalizado', methods=['PUT'])
+def finalizar_contrato_v2(conts_id):  # Renombrar esta función para evitar el conflicto de nombre
+    try:
+        # Obtener contrato para verificar si ya está pagado completamente
+        contrato = obtener_contrato_por_id(conts_id)
+
+        if contrato['estado'] == 'completado' and contrato['precio'] == contrato['precio_pagado']:
+            finalizar_contrato(conts_id)
+            return jsonify({'message': 'Contrato finalizado exitosamente'}), 200
+        else:
+            return jsonify({'error': 'El contrato no puede finalizarse hasta que el prestador lo marque como completado y el cliente haya pagado el total.'}), 400
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
