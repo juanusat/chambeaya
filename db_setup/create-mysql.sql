@@ -61,6 +61,7 @@ create table if not exists publicacion_medio (
     publicacion_id int not null,
     tamanio int not null,
     fecha_hora datetime not null,
+    archivo varchar(40) null,
     primary key (publicacion_medio_id)
 );
 
