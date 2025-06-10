@@ -12,6 +12,7 @@ from app.auth.controlador_auth import (
 )
 import os
 from werkzeug.utils import secure_filename
+from app.seguridad.d_conn import crear_sesion
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -26,10 +27,15 @@ def login():
     if not user:
         return jsonify({"msg": "Credenciales inválidas"}), 401
 
+    from app.auth.controlador_auth import registrar_clave_sesion
+    clave_sesion = registrar_clave_sesion(user['usuario_id'], user['username'], user['email'])
     expires = timedelta(days=30) if remember else None
     access_token = create_access_token(
         identity=str(user['usuario_id']),
-        additional_claims={"username": user['username']},
+        additional_claims={
+            "username": user['username'],
+            "clave": clave_sesion
+        },
         expires_delta=expires
     )
 
