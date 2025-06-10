@@ -69,3 +69,12 @@ def eliminar_sesiones(usuario_id):
             conn.commit()
     finally:
         conn.close()
+
+def eliminar_sesion_por_clave(clave_hash):
+    conn = get_seguridad_conn()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute("DELETE FROM sesiones WHERE clave_hash = %s", (clave_hash,))
+            conn.commit()
+    finally:
+        conn.close()
