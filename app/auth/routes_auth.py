@@ -3,6 +3,7 @@ import random
 import datetime
 from datetime import timedelta
 from flask import Blueprint, request, jsonify, make_response, g, redirect, url_for, current_app
+from flask_jwt_extended import get_jwt
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, set_access_cookies, unset_jwt_cookies
 from app.auth.controlador_auth import (
     verificar_credenciales,
@@ -12,7 +13,8 @@ from app.auth.controlador_auth import (
 )
 import os
 from werkzeug.utils import secure_filename
-from app.seguridad.d_conn import crear_sesion
+from app.seguridad.d_conn import eliminar_sesion_por_clave
+import hashlib
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -44,7 +46,15 @@ def login():
     return resp
 
 @auth_bp.route('/logout', methods=['POST'])
+@jwt_required()
 def logout():
+    claims = get_jwt()
+    clave = claims.get("clave")
+
+    if clave:
+        clave_hash = hashlib.sha256(clave.encode('utf-8')).hexdigest()
+        eliminar_sesion_por_clave(clave_hash)
+
     response = make_response(jsonify({"msg": "Sesión cerrada correctamente"}))
     unset_jwt_cookies(response)
     return response
