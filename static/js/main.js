@@ -1,5 +1,5 @@
 (function () {
-    window.siteA = ['4250', '4251'].includes(location.port)
+    window.siteA = ['4250', '4251'].includes(location.port) || location.origin.includes('pythonanywhere')
 
     const appElement = document.querySelector('.app');
     let headerElement = document.querySelector('.header');
