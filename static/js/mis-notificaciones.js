@@ -1,8 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    if (!!window.no_notifications) {
-        return false
-    }
-
     const notificationsContainer = document.getElementById('lista-notificaciones');
 
     if (!notificationsContainer) {

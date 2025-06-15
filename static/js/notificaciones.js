@@ -25,8 +25,10 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('❌ [Notificaciones JS] Error en fetch o procesamiento de datos:', error);
         });
 
-    // Para que se repita cada 5 segundos
     setInterval(function() {
+        if (!!window.no_notifications) {
+            return false
+        }
         fetch('/api/notificaciones/')
             .then(response => {
                 if (!response.ok) {

@@ -1,7 +1,9 @@
 (function () {
-    window.addEventListener('dblclick', function(event) {
+    window.addEventListener('contextmenu', function(event) {
         if (event.altKey) {
+            event.preventDefault()
             window.no_notifications = !window.no_notifications || false
+            console.log('Estado notificaciones: ' + no_notifications)
         }
     })
     window.siteA = ['4250', '4251'].includes(location.port) || location.origin.includes('pythonanywhere')
