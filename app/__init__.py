@@ -82,7 +82,7 @@ def create_app():
             if claims:
                 user_id = int(get_jwt_identity()) if get_jwt_identity() else None
                 username = claims.get("username")                
-                session_key = claims.get("session_key") or claims.get("clave")
+                session_key = claims.get("clave")
 
                 if user_id and username and session_key:
                     clave_hash_from_jwt = hashlib.sha256(session_key.encode('utf-8')).hexdigest()
