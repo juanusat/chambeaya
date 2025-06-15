@@ -61,6 +61,11 @@
     font-size: 1.2rem;
 }
 
+span.count-rating {
+    margin-inline-start: 8px;
+    color: #a6a6a6;
+}
+
 .content {
     display: flex;
     flex-direction: column;
