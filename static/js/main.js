@@ -1,4 +1,9 @@
 (function () {
+    window.addEventListener('dblclick', function(event) {
+        if (event.altKey) {
+            window.no_notifications = !window.no_notifications || false
+        }
+    })
     window.siteA = ['4250', '4251'].includes(location.port) || location.origin.includes('pythonanywhere')
 
     const appElement = document.querySelector('.app');
@@ -48,5 +53,4 @@
         .catch(err => {
             console.error('Error cargando plantillas:', err);
         });
-
 })();
