@@ -1,10 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('🚀 [Mis Notificaciones JS] Script de mis-notificaciones.html cargado.');
-
     const notificationsContainer = document.getElementById('lista-notificaciones');
 
     if (!notificationsContainer) {
-        console.error('❌ [Mis Notificaciones JS] No se encontró el contenedor #lista-notificaciones. Las notificaciones no se mostrarán.');
         return;
     }
 
@@ -93,7 +90,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => {
             if (!response.ok) {
                 if (response.status === 401 || response.status === 403) {
-                    console.error('🚫 No autorizado. Puede que la sesión haya expirado o no tengas permiso para ver notificaciones de contrato.');
                     throw new Error('No autorizado o sesión expirada.');
                 }
                 throw new Error(`🚫 Error HTTP! Estado: ${response.status}`);
@@ -101,17 +97,14 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json();
         })
         .then(data => {
-            console.log('🔍 Datos de contratos pendientes recibidos (como notificaciones):', data);
             renderContratoNotifications(data);
         })
         .catch(error => {
-            console.error('❌ Error al cargar contratos pendientes:', error);
             notificationsContainer.innerHTML = `<p class="error-message">Error al cargar tus contratos pendientes: ${error.message}</p>`;
         });
 
 
     function handleContractAction(contratoId, estado, cardElement) {
-        console.log(`Intentando cambiar estado de contrato ${contratoId} a: ${estado}`);
 
         const url = `/api/contratos/editar_contrato/${contratoId}/${estado}`;
 
@@ -130,7 +123,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json();
         })
         .then(data => {
-            console.log(`Contrato ${contratoId} ${estado}ado con éxito:`, data);
             alert(data.message || `Contrato ${estado}ado exitosamente.`);
 
             if (cardElement) {
@@ -152,7 +144,6 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => {
             console.error(`❌ Error al ${estado} el contrato ${contratoId}:`, error);
-            alert(`Hubo un error al ${estado} el contrato: ${error.message}`);
         });
     }
 });

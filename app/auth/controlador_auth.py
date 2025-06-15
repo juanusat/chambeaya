@@ -3,16 +3,15 @@ import hashlib
 from app.seguridad.d_conn import get_usuario_by_username, get_sesiones_by_usuario_id
 import uuid
 from app.bd_conn import get_db_connection
-from app.seguridad.d_conn import get_seguridad_conn# <- CORREGIDO
+from app.seguridad.d_conn import get_seguridad_conn
 
-def registrar_clave_sesion(usuario_id, username, email):
+def registrar_clave_sesion(usuario_id, username, email, user_agent):
     clave = str(uuid.uuid4())
     clave_hash = hashlib.sha256(clave.encode('utf-8')).hexdigest()
 
     conn = get_seguridad_conn()
     try:
         with conn.cursor() as cursor:
-            # Asegurar que el usuario exista en la tabla de seguridad
             cursor.execute(
                 "SELECT id FROM usuarios WHERE id = %s", (usuario_id,)
             )
@@ -26,10 +25,10 @@ def registrar_clave_sesion(usuario_id, username, email):
             # Registrar la sesión
             cursor.execute(
                 """
-                INSERT INTO sesiones (usuario_id, clave_hash)
-                VALUES (%s, %s)
+                INSERT INTO sesiones (usuario_id, clave_hash, user_agent)
+                VALUES (%s, %s, %s)
                 """,
-                (usuario_id, clave_hash)
+                (usuario_id, clave_hash, user_agent)
             )
             conn.commit()
         return clave

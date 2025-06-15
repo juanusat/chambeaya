@@ -1,4 +1,11 @@
 (function () {
+    window.addEventListener('contextmenu', function(event) {
+        if (event.altKey) {
+            event.preventDefault()
+            window.no_notifications = !window.no_notifications || false
+            console.log('Estado notificaciones: ' + no_notifications)
+        }
+    })
     window.siteA = ['4250', '4251'].includes(location.port) || location.origin.includes('pythonanywhere')
 
     const appElement = document.querySelector('.app');
@@ -48,5 +55,4 @@
         .catch(err => {
             console.error('Error cargando plantillas:', err);
         });
-
 })();

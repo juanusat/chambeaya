@@ -12,22 +12,19 @@ from app.auth.routes_auth import auth_bp
 from app.categoria.routes_categoria import categoria_bp
 from app.notificaciones.routes_notificaciones import notificaciones_bp
 from werkzeug.utils import secure_filename
-import os
+from app.seguridad.d_conn import get_sesion_by_usuario_id_and_clave_hash, update_sesion_ultimo_acceso
 
 from flask_jwt_extended import (
     JWTManager,
     verify_jwt_in_request,
     get_jwt_identity,
-    get_jwt, 
-    unset_jwt_cookies
+    get_jwt
 )
-from flask_jwt_extended.exceptions import NoAuthorizationError, InvalidHeaderError
-from jwt.exceptions import DecodeError
-from jwt.exceptions import ExpiredSignatureError
 from flask import g
 from app.usuario.controlador_usuario import es_admin
-from app.config import JWT_CONFIG, SECRET_KEY
-import jwt
+from app.config import JWT_CONFIG
+import os
+import hashlib
 
 def custom_render_html(template_path):
     with open(f"site/{template_path}", 'r', encoding='utf-8') as f:
@@ -70,22 +67,34 @@ def create_app():
         app.config[key] = value
     
     JWTManager(app)
-    
-    @app.errorhandler(ExpiredSignatureError)
-    @app.errorhandler(InvalidHeaderError)
-    def handle_invalid_or_expired_token(error):
-        response = make_response(redirect(url_for('inicio')))
-        unset_jwt_cookies(response)
+
     @app.before_request
-    def cargar_usuario_en_g():
+    def cargar_usuario_en_g_y_validar_sesion():
+        g.user_id = None
+        g.username = None
+        g.session_valid = False
+
         try:
-            verify_jwt_in_request()
-            g.user_id = int(get_jwt_identity())
+            verify_jwt_in_request(optional=True)
             claims = get_jwt()
-            g.username = claims.get("username")
-        except (NoAuthorizationError, InvalidHeaderError, DecodeError):
-            g.user_id = None
-            g.username = None
+
+            if claims:
+                user_id = int(get_jwt_identity()) if get_jwt_identity() else None
+                username = claims.get("username")                
+                session_key = claims.get("session_key") or claims.get("clave")
+
+                if user_id and username and session_key:
+                    clave_hash_from_jwt = hashlib.sha256(session_key.encode('utf-8')).hexdigest()
+                    sesion = get_sesion_by_usuario_id_and_clave_hash(user_id, clave_hash_from_jwt)
+
+                    if sesion:
+                        update_sesion_ultimo_acceso(sesion['id'])
+                        g.user_id = user_id
+                        g.username = username
+                        g.session_valid = True
+
+        except Exception as e:
+            print(f"❌ Error en verificación de sesión: {e}")
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(publicaciones_bp, url_prefix='/api/publicaciones')
@@ -274,5 +283,3 @@ def create_app():
         return Response(html, mimetype='text/html')
 
     return app 
-
-  

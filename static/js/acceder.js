@@ -32,12 +32,37 @@
         const password = document.getElementById('password').value;
         const keepLoggedIn = document.getElementById('keep-logged-in').checked;
 
+        let navegadorInfo = "Desconocido";
+
+        if (navigator.userAgentData) {
+            const uaData = navigator.userAgentData;
+            const brands = uaData.brands.map(b => `${b.brand} v${b.version}`).join(', ');
+            const platform = uaData.platform || "Desconocido";
+            navegadorInfo = `${brands} para ${platform}`;
+        } else {
+            const ua = navigator.userAgent;
+            if (ua.includes("Chrome")) {
+                navegadorInfo = "Chrome para " + detectarSistema(ua);
+            } else if (ua.includes("Firefox")) {
+                navegadorInfo = "Firefox para " + detectarSistema(ua);
+            } else if (ua.includes("Safari")) {
+                navegadorInfo = "Safari para " + detectarSistema(ua);
+            } else {
+                navegadorInfo = "Navegador desconocido";
+            }
+        }
+
         try {
             const response = await fetch('/api/auth/login', {
                 method: 'POST',
                 credentials: 'same-origin', // para enviar/recibir cookies
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password, remember: keepLoggedIn })
+                body: JSON.stringify({
+                    username,
+                    password,
+                    remember: keepLoggedIn,
+                    dispositivo: navegadorInfo
+                })
             });
 
             const data = await response.json();
