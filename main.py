@@ -24,6 +24,11 @@ if __name__ == '__main__':
     if os.getenv('PYTHONANYWHERE_DOMAIN'):
         run_http()
     else:
+        print(40 * "-")
+        print("-> Acceder desde  http://127.0.0.1:4250/")
+        print("-> Acceder desde https://127.0.0.1:4251/")
+        print(40 * "-")
+        print()
         t1 = threading.Thread(target=run_http)
         t2 = threading.Thread(target=run_https)
         t1.start()
