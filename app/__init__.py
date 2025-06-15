@@ -13,6 +13,8 @@ from app.categoria.routes_categoria import categoria_bp
 from app.notificaciones.routes_notificaciones import notificaciones_bp
 from werkzeug.utils import secure_filename
 import os
+import hashlib
+from app.seguridad.d_conn import get_sesion_by_usuario_id_and_clave_hash, update_sesion_ultimo_acceso
 
 from flask_jwt_extended import (
     JWTManager,
@@ -76,16 +78,51 @@ def create_app():
     def handle_invalid_or_expired_token(error):
         response = make_response(redirect(url_for('inicio')))
         unset_jwt_cookies(response)
+
     @app.before_request
-    def cargar_usuario_en_g():
+    def cargar_usuario_en_g_y_validar_sesion():
+        g.user_id = None
+        g.username = None
+        g.session_valid = False
+
         try:
             verify_jwt_in_request()
-            g.user_id = int(get_jwt_identity())
+            user_id = int(get_jwt_identity())
             claims = get_jwt()
-            g.username = claims.get("username")
-        except (NoAuthorizationError, InvalidHeaderError, DecodeError):
-            g.user_id = None
-            g.username = None
+            username = claims.get("username")
+            session_key = claims.get("session_key")
+
+            if user_id and username and session_key:
+                clave_hash_from_jwt = hashlib.sha256(session_key.encode('utf-8')).hexdigest()
+
+                sesion = get_sesion_by_usuario_id_and_clave_hash(user_id, clave_hash_from_jwt)
+
+                if sesion:
+                    update_sesion_ultimo_acceso(sesion['id'])
+                    g.user_id = user_id
+                    g.username = username
+                    g.session_valid = True
+                else:
+                    response = make_response(redirect(url_for('inicio')))
+                    unset_jwt_cookies(response)
+                    return response
+
+            else:
+                response = make_response(redirect(url_for('inicio')))
+                unset_jwt_cookies(response)
+                return response
+
+        except (NoAuthorizationError, InvalidHeaderError, DecodeError, ExpiredSignatureError):
+            if request.path not in ['/inicio', '/login', '/registro']:
+                response = make_response(redirect(url_for('inicio')))
+                unset_jwt_cookies(response)
+                return response
+            
+        except Exception as e:
+            app.logger.error(f"Error inesperado en before_request: {e}")
+            response = make_response(redirect(url_for('inicio')))
+            unset_jwt_cookies(response)
+            return response
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(publicaciones_bp, url_prefix='/api/publicaciones')
@@ -274,5 +311,3 @@ def create_app():
         return Response(html, mimetype='text/html')
 
     return app 
-
-  
