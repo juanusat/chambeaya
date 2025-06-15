@@ -43,6 +43,19 @@
      * @param {object} data - El objeto con los datos del usuario.
      */
     function populateProfile(data) {
+        const profileRatingElement = document.querySelector('.profile-rating');
+        if (profileRatingElement) {
+            const rating = Math.round(data.calificacion_promedio || 0);
+            let starHtml = Array.from({ length: 5 }, (_, index) => {
+                if (index < rating) {
+                    return '<i class="fa-solid fa-star"></i>';
+                } else {
+                    return '<i class="fa-regular fa-star"></i>';
+                }
+            }).join('');
+            starHtml += `<span class="count-rating">(${data.cantidad_contratos})</span>`;
+            profileRatingElement.innerHTML = starHtml;
+        }
         const avatarElement = document.querySelector('.avatar');
         if (avatarElement) {
             avatarElement.innerHTML = data.url_picture

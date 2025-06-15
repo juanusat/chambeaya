@@ -1,3 +1,4 @@
+from decimal import Decimal
 from flask import Flask, render_template, abort, Response, request, jsonify
 from flask import redirect, url_for, make_response
 import json
@@ -121,9 +122,13 @@ def create_app():
         profile = get_usuario_profile_by_username(username)
         if not profile:
             abort(404, description="Usuario no encontrado")
-        for key, value in profile.items():
+
+
+        for key, value in list(profile.items()):
             if isinstance(value, date):
                 profile[key] = value.isoformat()
+            elif isinstance(value, Decimal):
+                profile[key] = float(value)
 
         if profile['persona_id'] is not None:
             user_type = 'persona'

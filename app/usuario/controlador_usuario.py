@@ -144,11 +144,18 @@ def get_usuario_profile_by_username(username):
                   emp.empresa_id,
                   emp.nombre        AS empresa_nombre,
                   emp.ruc   AS empresa_ruc,
-                  emp.fecha_creacion AS empresa_fecha_creacion
+                  emp.fecha_creacion AS empresa_fecha_creacion,
+                  -- Calificación, cantidad de votos y contratos
+                  COALESCE(ROUND(AVG(com.calificacion), 1), 0) AS calificacion_promedio,
+                  COUNT(DISTINCT com.comentario_id) AS cantidad_votos,
+                  COUNT(DISTINCT con.contrato_id) AS cantidad_contratos
                 FROM usuario usu
                 LEFT JOIN persona per ON per.usuario_id = usu.usuario_id
                 LEFT JOIN empresa emp ON emp.usuario_id = usu.usuario_id
-                WHERE usu.username = %s;
+                LEFT JOIN contrato con ON con.prestador_id = usu.usuario_id
+                LEFT JOIN comentario com ON com.contrato_id = con.contrato_id
+                WHERE usu.username = %s
+                GROUP BY usu.usuario_id;
             """, (username,))
             return cursor.fetchone()
     finally:
