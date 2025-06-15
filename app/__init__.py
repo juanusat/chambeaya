@@ -11,6 +11,7 @@ from app.usuario.controlador_usuario import get_usuario_by_username, get_usuario
 from app.auth.routes_auth import auth_bp
 from app.categoria.routes_categoria import categoria_bp
 from app.notificaciones.routes_notificaciones import notificaciones_bp
+from app.seguridad.routes_seguridad import seguridad_bp
 from werkzeug.utils import secure_filename
 from app.seguridad.d_conn import get_sesion_by_usuario_id_and_clave_hash, update_sesion_ultimo_acceso
 
@@ -103,6 +104,7 @@ def create_app():
     app.register_blueprint(comprobante_pago_bp, url_prefix='/api/comprobante_pago')
     app.register_blueprint(categoria_bp, url_prefix='/api/categoria')
     app.register_blueprint(notificaciones_bp, url_prefix='/api/notificaciones')
+    app.register_blueprint(seguridad_bp, url_prefix='/api/seguridad')
 
     @app.route('/api/upsql', methods=['POST'])
     def upload_sql():
@@ -180,6 +182,13 @@ def create_app():
         if not getattr(g, 'user_id', None):
             return redirect(url_for('inicio'))
         html = custom_render_html('mis_publicaciones.html')
+        return Response(html, mimetype='text/html')
+
+    @app.route('/mis-sesiones')
+    def mis_sesiones():
+        if not getattr(g, 'user_id', None):
+            return redirect(url_for('inicio'))
+        html = custom_render_html('sesiones.html')
         return Response(html, mimetype='text/html')
        
     @app.route('/mis-contratos')

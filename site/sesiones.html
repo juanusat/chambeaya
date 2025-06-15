@@ -14,9 +14,116 @@
     <div class="app">
         <div class="header"></div>
         <div class="page">
-            <div class="full-height-container">
-                Aquí va el contenido, reemplazar el elemento superior
-            </div>
+            <h2>Mis Sesiones Activas</h2>
+<p>Aquí puedes ver todos los dispositivos desde donde has iniciado sesión. Puedes cerrar las sesiones que no reconozas.</p>
+
+<div id="sesiones-lista">
+    <!-- Las sesiones se cargarán aquí dinámicamente -->
+    <p>Cargando tus sesiones...</p>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sesionesListaDiv = document.getElementById('sesiones-lista');
+
+        // 1. Función para cargar las sesiones
+        async function cargarSesiones() {
+            try {
+                const response = await fetch('/api/seguridad/sesiones');
+                if (!response.ok) {
+                    throw new Error(`Error del servidor: ${response.status}`);
+                }
+                const sesiones = await response.json();
+                
+                // Limpiamos el contenedor
+                sesionesListaDiv.innerHTML = ''; 
+
+                if (sesiones.length === 0) {
+                    sesionesListaDiv.innerHTML = '<p>No tienes sesiones activas.</p>';
+                    return;
+                }
+
+                // Creamos la lista de sesiones
+                const ul = document.createElement('ul');
+                sesiones.forEach(sesion => {
+                    const li = document.createElement('li');
+                    li.dataset.claveHash = sesion.clave_hash;
+
+                    // Mostramos información útil de la sesión
+                    let info = `
+                        <strong>Dispositivo:</strong> ${sesion.user_agent || 'No identificado'} <br>
+                        <strong>Iniciada:</strong> ${sesion.creado_en} <br>
+                        <strong>Último Acceso:</strong> ${sesion.ultimo_acceso}
+                    `;
+                    
+                    if (sesion.es_actual) {
+                        info += ' <strong>(Esta sesión)</strong>';
+                        li.innerHTML = info;
+                    } else {
+                        // Si no es la sesión actual, añadimos un botón para invalidarla
+                        li.innerHTML = `
+                           ${info} <button class="invalidar-btn">Cerrar Sesión</button>
+                        `;
+                    }
+                    ul.appendChild(li);
+                });
+                sesionesListaDiv.appendChild(ul);
+
+            } catch (error) {
+                console.error('Error al cargar las sesiones:', error);
+                sesionesListaDiv.innerHTML = '<p class="error">No se pudieron cargar tus sesiones. Inténtalo de nuevo más tarde.</p>';
+            }
+        }
+
+        // 2. Función para invalidar una sesión
+        async function invalidarSesion(claveHash, elementoLi) {
+            if (!confirm('¿Estás seguro de que quieres cerrar esta sesión?')) {
+                return;
+            }
+            try {
+                const response = await fetch(`/api/seguridad/sesiones/${claveHash}`, {
+                    method: 'DELETE'
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || `Error del servidor: ${response.status}`);
+                }
+                
+                // Si la eliminación fue exitosa, eliminamos el elemento de la lista
+                elementoLi.style.transition = 'opacity 0.5s ease';
+                elementoLi.style.opacity = '0';
+                setTimeout(() => elementoLi.remove(), 500);
+
+            } catch (error) {
+                console.error('Error al invalidar la sesión:', error);
+                alert(`No se pudo invalidar la sesión: ${error.message}`);
+            }
+        }
+
+        // 3. Añadir event listener para los botones de invalidar
+        sesionesListaDiv.addEventListener('click', (event) => {
+            if (event.target.classList.contains('invalidar-btn')) {
+                const li = event.target.closest('li');
+                const claveHash = li.dataset.claveHash;
+                invalidarSesion(claveHash, li);
+            }
+        });
+
+        // Carga inicial de las sesiones al cargar la página
+        cargarSesiones();
+    });
+</script>
+
+<style>
+    /* Estilos básicos para que se vea mejor */
+    #sesiones-lista ul { list-style: none; padding: 0; }
+    #sesiones-lista li { background: #f4f4f4; border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 5px; }
+    .invalidar-btn { float: right; background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
+    .invalidar-btn:hover { background: #c82333; }
+    .error { color: #dc3545; }
+</style>
+
         </div>
         <div class="footer"></div> 
     </div>
