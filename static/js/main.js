@@ -1,4 +1,5 @@
 (function () {
+    window.no_notifications = true
     window.addEventListener('contextmenu', function(event) {
         if (event.altKey) {
             event.preventDefault()

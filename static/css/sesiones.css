@@ -1,0 +1,47 @@
+.sessions-list-container {
+    max-width: 800px;
+    margin: 2.5rem auto;
+    padding: 0 15px;
+}
+
+.sessions-list-container h2 {
+    margin-bottom: 12px;
+}
+
+#sesiones-lista ul {
+    margin-top: 22px;
+    list-style: none;
+    padding: 0;
+}
+
+#sesiones-lista li {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#sesiones-lista li p {
+    margin-bottom: 3px;
+}
+
+.invalidar-btn {
+    margin-top: 12px;
+    display: block;
+    font-size: 14px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.invalidar-btn:hover {
+    background: #c82333;
+}
+
+.error {
+    color: #dc3545;
+}

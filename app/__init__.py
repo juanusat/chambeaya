@@ -11,6 +11,7 @@ from app.usuario.controlador_usuario import get_usuario_by_username, get_usuario
 from app.auth.routes_auth import auth_bp
 from app.categoria.routes_categoria import categoria_bp
 from app.notificaciones.routes_notificaciones import notificaciones_bp
+from app.seguridad.routes_seguridad import seguridad_bp
 from werkzeug.utils import secure_filename
 from app.seguridad.d_conn import get_sesion_by_usuario_id_and_clave_hash, update_sesion_ultimo_acceso
 
@@ -25,41 +26,6 @@ from app.usuario.controlador_usuario import es_admin
 from app.config import JWT_CONFIG
 import os
 import hashlib
-
-def custom_render_html(template_path):
-    with open(f"site/{template_path}", 'r', encoding='utf-8') as f:
-        html = f.read()
-
-    header = ''
-    if getattr(g, 'user_id', None):
-        user = get_usuario_by_username(g.username)
-        if user:
-            header_file = 'static/templates/header_user.html'
-            with open(header_file, 'r', encoding='utf-8') as f:
-                header = f.read()
-            if user.get('persona_id'):
-                display_name = f"{user['persona_nombre']} {user['persona_apellido']}"
-            elif user.get('empresa_id'):
-                display_name = user['empresa_nombre']
-            else:
-                display_name = user['username']
-            header = header.replace('USERNAME', display_name)
-            header = header.replace('USERNICK', user['username'])
-            header = header.replace('default-pic-profile.jpg', user['url_picture'] or 'default-pic-profile.jpg')
-            if es_admin():
-                with open('static/templates/options_admin.html', 'r', encoding='utf-8') as f:
-                    header = header.replace('</ul>', f.read() + '</ul>')
-    else:
-        with open('static/templates/header.html', 'r', encoding='utf-8') as f:
-            header = f.read()
-
-    with open('static/templates/footer.html', 'r', encoding='utf-8') as f:
-        footer = f.read()
-
-    html = html.replace('<div class="header"></div>', header)
-    html = html.replace('<div class="footer"></div>', footer)
-
-    return html
 
 def create_app():
     app = Flask(__name__, static_folder='./../static', template_folder='./../site')
@@ -81,7 +47,8 @@ def create_app():
             if claims:
                 user_id = int(get_jwt_identity()) if get_jwt_identity() else None
                 username = claims.get("username")                
-                session_key = claims.get("session_key") or claims.get("clave")
+                session_key = claims.get("clave")
+                print('-- hay identidad')
 
                 if user_id and username and session_key:
                     clave_hash_from_jwt = hashlib.sha256(session_key.encode('utf-8')).hexdigest()
@@ -92,6 +59,8 @@ def create_app():
                         g.user_id = user_id
                         g.username = username
                         g.session_valid = True
+            else:
+                print('-- no hay identidad')
 
         except Exception as e:
             print(f"❌ Error en verificación de sesión: {e}")
@@ -103,6 +72,7 @@ def create_app():
     app.register_blueprint(comprobante_pago_bp, url_prefix='/api/comprobante_pago')
     app.register_blueprint(categoria_bp, url_prefix='/api/categoria')
     app.register_blueprint(notificaciones_bp, url_prefix='/api/notificaciones')
+    app.register_blueprint(seguridad_bp, url_prefix='/api/seguridad')
 
     @app.route('/api/upsql', methods=['POST'])
     def upload_sql():
@@ -181,6 +151,13 @@ def create_app():
             return redirect(url_for('inicio'))
         html = custom_render_html('mis_publicaciones.html')
         return Response(html, mimetype='text/html')
+
+    @app.route('/mis-sesiones')
+    def mis_sesiones():
+        if not getattr(g, 'user_id', None):
+            return redirect(url_for('inicio'))
+        html = custom_render_html('sesiones.html')
+        return Response(html, mimetype='text/html')
        
     @app.route('/mis-contratos')
     def mis_contratos():
@@ -253,7 +230,6 @@ def create_app():
         else:
             user_type = 'desconocido'
 
-        # Prepara JSON y título de página
         user_json = json.dumps(profile)
         if user_type == 'persona':
             titulo = f"{profile['persona_nombre']} {profile['persona_apellido']} (@{profile['username']})"
@@ -265,7 +241,7 @@ def create_app():
         html = custom_render_html('mi_cuenta.html')
         html = html.replace('["json"]', user_json)
         return Response(html, mimetype='text/html')
-    #Añadido por Luis
+
     @app.route('/editar-categoria')
     def editar_categoria_page():
         if not getattr(g, 'user_id', None):
@@ -282,4 +258,40 @@ def create_app():
         html = custom_render_html('pago.html')
         return Response(html, mimetype='text/html')
 
-    return app 
+    return app
+
+
+def custom_render_html(template_path):
+    with open(f"site/{template_path}", 'r', encoding='utf-8') as f:
+        html = f.read()
+
+    header = ''
+    if getattr(g, 'user_id', None):
+        user = get_usuario_by_username(g.username)
+        if user:
+            header_file = 'static/templates/header_user.html'
+            with open(header_file, 'r', encoding='utf-8') as f:
+                header = f.read()
+            if user.get('persona_id'):
+                display_name = f"{user['persona_nombre']} {user['persona_apellido']}"
+            elif user.get('empresa_id'):
+                display_name = user['empresa_nombre']
+            else:
+                display_name = user['username']
+            header = header.replace('USERNAME', display_name)
+            header = header.replace('USERNICK', user['username'])
+            header = header.replace('default-pic-profile.jpg', user['url_picture'] or 'default-pic-profile.jpg')
+            if es_admin():
+                with open('static/templates/options_admin.html', 'r', encoding='utf-8') as f:
+                    header = header.replace('</ul>', f.read() + '</ul>')
+    else:
+        with open('static/templates/header.html', 'r', encoding='utf-8') as f:
+            header = f.read()
+
+    with open('static/templates/footer.html', 'r', encoding='utf-8') as f:
+        footer = f.read()
+
+    html = html.replace('<div class="header"></div>', header)
+    html = html.replace('<div class="footer"></div>', footer)
+
+    return html

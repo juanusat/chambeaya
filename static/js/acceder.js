@@ -36,9 +36,12 @@
 
         if (navigator.userAgentData) {
             const uaData = navigator.userAgentData;
-            const brands = uaData.brands.map(b => `${b.brand} v${b.version}`).join(', ');
+            const firstValidBrand = uaData.brands.find(b => b.brand !== "Not/A)Brand");
             const platform = uaData.platform || "Desconocido";
-            navegadorInfo = `${brands} para ${platform}`;
+            
+            if (firstValidBrand) {
+                navegadorInfo = `${firstValidBrand.brand} v${firstValidBrand.version} para ${platform}`;
+            }
         } else {
             const ua = navigator.userAgent;
             if (ua.includes("Chrome")) {
@@ -55,7 +58,7 @@
         try {
             const response = await fetch('/api/auth/login', {
                 method: 'POST',
-                credentials: 'same-origin', // para enviar/recibir cookies
+                credentials: 'same-origin',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     username,
