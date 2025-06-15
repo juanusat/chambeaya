@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+    return
     console.log('🚀 [Mis Notificaciones JS] Script de mis-notificaciones.html cargado.');
 
     const notificationsContainer = document.getElementById('lista-notificaciones');
