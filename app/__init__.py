@@ -27,41 +27,6 @@ from app.config import JWT_CONFIG
 import os
 import hashlib
 
-def custom_render_html(template_path):
-    with open(f"site/{template_path}", 'r', encoding='utf-8') as f:
-        html = f.read()
-
-    header = ''
-    if getattr(g, 'user_id', None):
-        user = get_usuario_by_username(g.username)
-        if user:
-            header_file = 'static/templates/header_user.html'
-            with open(header_file, 'r', encoding='utf-8') as f:
-                header = f.read()
-            if user.get('persona_id'):
-                display_name = f"{user['persona_nombre']} {user['persona_apellido']}"
-            elif user.get('empresa_id'):
-                display_name = user['empresa_nombre']
-            else:
-                display_name = user['username']
-            header = header.replace('USERNAME', display_name)
-            header = header.replace('USERNICK', user['username'])
-            header = header.replace('default-pic-profile.jpg', user['url_picture'] or 'default-pic-profile.jpg')
-            if es_admin():
-                with open('static/templates/options_admin.html', 'r', encoding='utf-8') as f:
-                    header = header.replace('</ul>', f.read() + '</ul>')
-    else:
-        with open('static/templates/header.html', 'r', encoding='utf-8') as f:
-            header = f.read()
-
-    with open('static/templates/footer.html', 'r', encoding='utf-8') as f:
-        footer = f.read()
-
-    html = html.replace('<div class="header"></div>', header)
-    html = html.replace('<div class="footer"></div>', footer)
-
-    return html
-
 def create_app():
     app = Flask(__name__, static_folder='./../static', template_folder='./../site')
     for key, value in JWT_CONFIG.items():
@@ -262,7 +227,6 @@ def create_app():
         else:
             user_type = 'desconocido'
 
-        # Prepara JSON y título de página
         user_json = json.dumps(profile)
         if user_type == 'persona':
             titulo = f"{profile['persona_nombre']} {profile['persona_apellido']} (@{profile['username']})"
@@ -274,7 +238,7 @@ def create_app():
         html = custom_render_html('mi_cuenta.html')
         html = html.replace('["json"]', user_json)
         return Response(html, mimetype='text/html')
-    #Añadido por Luis
+
     @app.route('/editar-categoria')
     def editar_categoria_page():
         if not getattr(g, 'user_id', None):
@@ -291,4 +255,40 @@ def create_app():
         html = custom_render_html('pago.html')
         return Response(html, mimetype='text/html')
 
-    return app 
+    return app
+
+
+def custom_render_html(template_path):
+    with open(f"site/{template_path}", 'r', encoding='utf-8') as f:
+        html = f.read()
+
+    header = ''
+    if getattr(g, 'user_id', None):
+        user = get_usuario_by_username(g.username)
+        if user:
+            header_file = 'static/templates/header_user.html'
+            with open(header_file, 'r', encoding='utf-8') as f:
+                header = f.read()
+            if user.get('persona_id'):
+                display_name = f"{user['persona_nombre']} {user['persona_apellido']}"
+            elif user.get('empresa_id'):
+                display_name = user['empresa_nombre']
+            else:
+                display_name = user['username']
+            header = header.replace('USERNAME', display_name)
+            header = header.replace('USERNICK', user['username'])
+            header = header.replace('default-pic-profile.jpg', user['url_picture'] or 'default-pic-profile.jpg')
+            if es_admin():
+                with open('static/templates/options_admin.html', 'r', encoding='utf-8') as f:
+                    header = header.replace('</ul>', f.read() + '</ul>')
+    else:
+        with open('static/templates/header.html', 'r', encoding='utf-8') as f:
+            header = f.read()
+
+    with open('static/templates/footer.html', 'r', encoding='utf-8') as f:
+        footer = f.read()
+
+    html = html.replace('<div class="header"></div>', header)
+    html = html.replace('<div class="footer"></div>', footer)
+
+    return html
