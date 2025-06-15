@@ -33,6 +33,7 @@ def login():
     user_agent_str = request.json.get("dispositivo", "Desconocido")
     clave_sesion = registrar_clave_sesion(user['usuario_id'], user['username'], user['email'], user_agent_str)
     expires = timedelta(days=30) if remember else None
+    print('-------' + str(expires))
     access_token = create_access_token(
         identity=str(user['usuario_id']),
         additional_claims={

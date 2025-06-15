@@ -1,4 +1,5 @@
 (function () {
+    return false
     const logged = localStorage.getItem('logged');
     const keep = localStorage.getItem('keepLoggedIn');
     const sessionOn = sessionStorage.getItem('sessionActive');

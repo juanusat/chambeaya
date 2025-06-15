@@ -48,6 +48,7 @@ def create_app():
                 user_id = int(get_jwt_identity()) if get_jwt_identity() else None
                 username = claims.get("username")                
                 session_key = claims.get("clave")
+                print('-- hay identidad')
 
                 if user_id and username and session_key:
                     clave_hash_from_jwt = hashlib.sha256(session_key.encode('utf-8')).hexdigest()
@@ -58,6 +59,8 @@ def create_app():
                         g.user_id = user_id
                         g.username = username
                         g.session_valid = True
+            else:
+                print('-- no hay identidad')
 
         except Exception as e:
             print(f"❌ Error en verificación de sesión: {e}")
