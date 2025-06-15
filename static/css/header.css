@@ -80,6 +80,7 @@ picture img {
 
 
 .dropdown {
+    z-index: 1000;
     position: absolute;
     top: 60px;
     right: 10px;
