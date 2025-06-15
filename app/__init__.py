@@ -12,24 +12,19 @@ from app.auth.routes_auth import auth_bp
 from app.categoria.routes_categoria import categoria_bp
 from app.notificaciones.routes_notificaciones import notificaciones_bp
 from werkzeug.utils import secure_filename
-import os
-import hashlib
 from app.seguridad.d_conn import get_sesion_by_usuario_id_and_clave_hash, update_sesion_ultimo_acceso
 
 from flask_jwt_extended import (
     JWTManager,
     verify_jwt_in_request,
     get_jwt_identity,
-    get_jwt, 
-    unset_jwt_cookies
+    get_jwt
 )
-from flask_jwt_extended.exceptions import NoAuthorizationError, InvalidHeaderError
-from jwt.exceptions import DecodeError
-from jwt.exceptions import ExpiredSignatureError
 from flask import g
 from app.usuario.controlador_usuario import es_admin
-from app.config import JWT_CONFIG, SECRET_KEY
-import jwt
+from app.config import JWT_CONFIG
+import os
+import hashlib
 
 def custom_render_html(template_path):
     with open(f"site/{template_path}", 'r', encoding='utf-8') as f:
@@ -75,54 +70,31 @@ def create_app():
 
     @app.before_request
     def cargar_usuario_en_g_y_validar_sesion():
-        # 1. Inicializa g con valores por defecto en cada petición.
         g.user_id = None
         g.username = None
         g.session_valid = False
 
-        # 2. Usa verify_jwt_in_request(optional=True).
-        #    Esto evita lanzar un error si el token no está. Es perfecto para
-        #    manejar rutas públicas y protegidas sin lógica extra.
         try:
             verify_jwt_in_request(optional=True)
             claims = get_jwt()
 
-            # 3. Si hay claims (es decir, un token válido fue encontrado)
             if claims:
-                user_id = int(get_jwt_identity())
-                username = claims.get("username")
-                session_key = claims.get("session_key")
+                user_id = int(get_jwt_identity()) if get_jwt_identity() else None
+                username = claims.get("username")                
+                session_key = claims.get("session_key") or claims.get("clave")
 
-                # Realiza tu validación de sesión personalizada
                 if user_id and username and session_key:
                     clave_hash_from_jwt = hashlib.sha256(session_key.encode('utf-8')).hexdigest()
                     sesion = get_sesion_by_usuario_id_and_clave_hash(user_id, clave_hash_from_jwt)
 
                     if sesion:
-                        # ¡Éxito! El usuario está autenticado y su sesión es válida.
                         update_sesion_ultimo_acceso(sesion['id'])
                         g.user_id = user_id
                         g.username = username
                         g.session_valid = True
-                    else:
-                        # El token es válido, pero la sesión en la BD no.
-                        # Esto podría ser un cierre de sesión desde otro dispositivo.
-                        # Simplemente no asignamos el usuario y dejamos que las rutas
-                        # que requieren login fallen o redirijan.
-                        # Opcional: podrías querer forzar el borrado de cookies aquí.
-                        pass
-        
-        # 3. Si el token está corrupto, expirado, etc., simplemente no hacemos nada.
-        #    g.user_id seguirá siendo None, y las rutas públicas funcionarán.
-        except (DecodeError, ExpiredSignatureError) as e:
-            app.logger.warning(f"Token inválido o expirado: {e}")
-            # No es necesario redirigir aquí, g.user_id ya es None.
-            pass
+
         except Exception as e:
-            app.logger.error(f"Error inesperado en before_request: {e}")
-            # En caso de un error grave, es mejor no hacer nada y dejar
-            # que g.user_id sea None.
-            pass
+            print(f"❌ Error en verificación de sesión: {e}")
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(publicaciones_bp, url_prefix='/api/publicaciones')
