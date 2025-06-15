@@ -10,5 +10,7 @@ CREATE TABLE sesiones (
     usuario_id INT NOT NULL,
     clave_hash VARCHAR(255) NOT NULL,
     creado_en DATETIME DEFAULT CURRENT_TIMESTAMP,
+    ultimo_acceso DATETIME DEFAULT CURRENT_TIMESTAMP,
+    user_agent VARCHAR(255),
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
