@@ -4,7 +4,12 @@
     padding: 0 15px;
 }
 
+.sessions-list-container h2 {
+    margin-bottom: 12px;
+}
+
 #sesiones-lista ul {
+    margin-top: 22px;
     list-style: none;
     padding: 0;
 }
@@ -17,13 +22,19 @@
     border-radius: 5px;
 }
 
+#sesiones-lista li p {
+    margin-bottom: 3px;
+}
+
 .invalidar-btn {
-    float: right;
+    margin-top: 12px;
+    display: block;
+    font-size: 14px;
     background: #dc3545;
     color: white;
     border: none;
-    padding: 5px 10px;
-    border-radius: 3px;
+    padding: 6px 14px;
+    border-radius: 4px;
     cursor: pointer;
 }
 

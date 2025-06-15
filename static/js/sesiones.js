@@ -1,5 +1,24 @@
 
 document.addEventListener('DOMContentLoaded', () => {
+    function formatearFechaLegible(fechaStr) {
+        if (!fechaStr) return 'Fecha no disponible';
+
+        const fecha = new Date(fechaStr.replace(' ', 'T'));
+
+        if (isNaN(fecha.getTime())) return 'Fecha inválida';
+
+        const opciones = {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+        };
+
+        return fecha.toLocaleString('es-ES', opciones);
+    }
+
     const sesionesListaDiv = document.getElementById('sesiones-lista');
 
     async function cargarSesiones() {
@@ -21,20 +40,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 const li = document.createElement('li');
                 li.dataset.claveHash = sesion.clave_hash;
 
-                let info = `
-                    <strong>Dispositivo:</strong> ${sesion.user_agent || 'No identificado'} <br>
-                    <strong>Iniciada:</strong> ${sesion.creado_en} <br>
-                    <strong>Último Acceso:</strong> ${sesion.ultimo_acceso}
-                `;
-                
+                const dispositivoP = document.createElement('p');
+                dispositivoP.innerHTML = `<strong>Dispositivo:</strong> ${sesion.user_agent || 'No identificado'}`;
+
+                const iniciadaP = document.createElement('p');
+                iniciadaP.innerHTML = `<strong>Iniciada:</strong> ${formatearFechaLegible(sesion.creado_en)}`;
+
+                const accesoP = document.createElement('p');
+                accesoP.innerHTML = `<strong>Último Acceso:</strong> ${formatearFechaLegible(sesion.ultimo_acceso)}`;
+
+                li.appendChild(dispositivoP);
+                li.appendChild(iniciadaP);
+                li.appendChild(accesoP);
+
                 if (sesion.es_actual) {
-                    info += ' <strong>(Esta sesión)</strong>';
-                    li.innerHTML = info;
+                    const actualP = document.createElement('p');
+                    actualP.innerHTML = `<strong>(Esta sesión)</strong>`;
+                    li.appendChild(actualP);
                 } else {
-                    li.innerHTML = `
-                        ${info} <button class="invalidar-btn">Cerrar Sesión</button>
-                    `;
+                    const button = document.createElement('button');
+                    button.classList.add('invalidar-btn');
+                    button.textContent = 'Cerrar Sesión';
+                    li.appendChild(button);
                 }
+
                 ul.appendChild(li);
             });
             sesionesListaDiv.appendChild(ul);
