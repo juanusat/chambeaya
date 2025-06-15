@@ -30,7 +30,8 @@ def login():
         return jsonify({"msg": "Credenciales inválidas"}), 401
 
     from app.auth.controlador_auth import registrar_clave_sesion
-    clave_sesion = registrar_clave_sesion(user['usuario_id'], user['username'], user['email'])
+    user_agent_str = request.json.get("dispositivo", "Desconocido")
+    clave_sesion = registrar_clave_sesion(user['usuario_id'], user['username'], user['email'], user_agent_str)
     expires = timedelta(days=30) if remember else None
     access_token = create_access_token(
         identity=str(user['usuario_id']),
