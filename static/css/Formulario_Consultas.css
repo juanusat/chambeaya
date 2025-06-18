@@ -1,0 +1,155 @@
+.consultas-page-main {
+    flex-grow: 1;
+    max-width: 1200px; /* Ancho para el contenido principal */
+    margin: 20px auto;
+    padding: 0 25px;
+}
+
+/* Sección Hero de Consultas */
+.consultas-hero {
+    text-align: left;
+    padding: 70px 30px;
+    margin-bottom: 10px;
+    background-color: #FFF5EE; /* Fondo casi blanco-durazno */
+}
+
+.consultas-hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.2em;
+    color: #FF6F61; /* Coral para el título principal */
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.consultas-hero .intro-text {
+    font-size: 1.4em;
+    color: #6C7A89;
+    max-width: 1200px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Sección del Formulario de Contacto */
+.contact-form-section {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    display: flex; /* Usamos flexbox para el formulario y la info */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    gap: 40px; /* Espacio entre el formulario y la info */
+    align-items: flex-start; /* Alinea los elementos al inicio */
+}
+
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    width: 100%; /* Asegura que el contenedor del formulario y la info ocupen todo el ancho */
+}
+
+.consultas-form {
+    flex: 2; /* El formulario toma más espacio */
+    min-width: 300px; /* Ancho mínimo para el formulario */
+}
+
+.form-info {
+    flex: 1; /* La información de contacto toma menos espacio */
+    min-width: 250px; /* Ancho mínimo para la info */
+    padding-left: 30px;
+    border-left: 2px solid #FFDAB9; /* Separador visual */
+}
+
+.form-info h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em;
+    color: #FF6F61;
+    margin-bottom: 20px;
+}
+
+.form-info p {
+    font-size: 1em;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.form-info p i {
+    color: #FF6F61; /* Iconos en color coral */
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.form-info a {
+    color: #4CAF50; /* Verde para enlaces de contacto */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.form-info a:hover {
+    color: #388e3c;
+    text-decoration: underline;
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.1em;
+    color: #2C3E50;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    color: #333;
+    background-color: #fcfcfc;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #FF6F61; /* Borde coral al enfocar */
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 111, 97, 0.2); /* Sombra suave de coral */
+}
+
+.form-group textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+    min-height: 120px;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 15px 25px;
+    background-color: #4CAF50; /* Verde para el botón */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.submit-btn:hover {
+    background-color: #388e3c; /* Verde más oscuro al pasar el mouse */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
