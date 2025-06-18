@@ -1,0 +1,142 @@
+/* Estilos para el main de la Historia */
+.history-page-main {
+    flex-grow: 1;
+    max-width: 1200px;
+    margin: 40px auto; /* Más margen */
+    padding: 0 25px;
+}
+
+/* Sección Hero de la Historia */
+.history-hero {
+    text-align: center;
+    padding: 60px 0; /* Más padding vertical */
+    margin-bottom: 50px; /* Más margen inferior */
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.358); 
+}
+
+.history-hero h1 {
+    font-family: 'Montserrat', sans-serif; /* Otra fuente para títulos */
+    font-size: 3.2em; /* Título más grande */
+    color: #FF6F61; /* Coral para el título principal */
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.history-hero .intro-text {
+    font-size: 1.4em; /* Texto intro más grande */
+    color: #6C7A89; /* Gris cálido */
+    max-width: 850px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Estilos para cada sección de la historia */
+.history-section {
+    background-color: #fff; /* Fondo blanco */
+    padding: 40px; /* Más padding */
+    margin-bottom: 40px; /* Más margen inferior */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.358); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #f0f0f0; /* Borde sutil */
+}
+
+.history-section.light-bg {
+    background-color: #fcf4f4; /* Fondo ligeramente diferente para alternar, un coral muy claro */
+    border-color: #ffe0e0;
+}
+
+.history-section .content-wrapper {
+    max-width: 900px;
+    width: 100%;
+}
+
+.history-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.4em; /* Títulos de sección más grandes */
+    color: #FF6F61; /* Coral para los subtítulos */
+    margin-bottom: 30px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.history-section h2::after {
+    content: '';
+    position: absolute;
+    width: 80px; /* Línea decorativa más corta */
+    height: 3px;
+    background-color: #FFDAB9; /* Durazno */
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+
+.history-section .text-and-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px; /* Más espacio */
+}
+
+.history-section .text-and-image p {
+    flex: 1;
+    font-size: 1.15em; /* Texto un poco más grande */
+    color: #444;
+    text-align: justify;
+    line-height: 1.8; /* Mayor espacio entre líneas para lectura */
+}
+
+.history-section .text-and-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* Bordes redondeados para imágenes */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1); /* Sombra más pronunciada */
+    border: 3px solid #FFDAB9; /* Borde durazno alrededor de la imagen */
+}
+
+/* Estilo para invertir el orden de texto/imagen en algunas secciones */
+.history-section .text-and-image.reverse-order {
+    flex-direction: column-reverse;
+}
+
+/* Call to Action al final de la historia */
+.history-call-to-action {
+    text-align: center;
+    padding: 60px 30px;
+    background: linear-gradient(135deg, #FF6F61 0%, #FFDAB9 100%); /* Degradado coral a durazno */
+    border-radius: 15px;
+    margin-top: 50px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    color: white; /* Texto blanco para contraste */
+}
+
+.history-call-to-action p {
+    font-size: 1.8em; /* Mensaje CTA más grande */
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+.history-call-to-action .btn-primary {
+    background-color: #2e7d32; /* Un verde oscuro para el botón de acción */
+    color: white;
+    padding: 18px 35px; /* Botón más grande */
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.3em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.history-call-to-action .btn-primary:hover {
+    background-color: #388e3c; /* Verde más claro al hover */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}

@@ -1,0 +1,345 @@
+.social-media-main {
+    flex-grow: 1;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 25px;
+    box-sizing: border-box;
+}
+
+/* Sección Hero de Redes Sociales */
+.social-hero {
+    text-align: center;
+    padding: 60px 0; /* Más padding vertical */
+    margin-bottom: 50px; /* Más margen inferior */
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.358); 
+}
+
+.social-hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.2em;
+    color: #FF6F61; /* Coral para el título principal */
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.social-hero .intro-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4em;
+    color: #6C7A89;
+    max-width: 850px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Sección de Canales de Redes Sociales (Grid de Tarjetas) */
+.social-channels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Mínimo 250px, se ajusta */
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.channel-card {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    border: 1px solid #f0f0f0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+.channel-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    background-color: #f5e9e7;
+}
+
+.channel-card i {
+    font-size: 3.8em; /* Icono grande de la red social */
+    margin-bottom: 20px;
+    color: #2C3E50; /* Azul Marino Oscuro para todos los iconos de las tarjetas */
+    transition: color 0.3s ease;
+}
+
+/* Opcional: Si quieres que el icono de la tarjeta cambie de color al pasar el mouse por la tarjeta */
+.channel-card:hover i {
+    color: #FF6F61; /* Coral al hover */
+}
+
+.channel-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em;
+    color: #2C3E50;
+    margin-bottom: 15px;
+}
+
+.channel-card p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    color: #6C7A89;
+    margin-bottom: 25px; /* Más espacio antes del botón */
+    line-height: 1.6;
+}
+
+.btn-channel {
+    display: inline-block;
+    background-color: #ffffff; /* Verde de acento para los botones */
+    color: white; /* Texto blanco en el botón */
+    padding: 12px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1.05em;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn-channel:hover {
+    background-color: #FF6F61; /* Verde más oscuro al hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.btn-channel i {
+    font-size: 0.9em; /* Icono dentro del botón más pequeño */
+    margin-left: 10px;
+    vertical-align: middle;
+    color: white; /* Asegura que el icono dentro del botón sea blanco */
+    margin-bottom: 0; /* Anula el margin-bottom del icono general */
+}
+
+/* Eliminadas las reglas de color específicas por marca para mantener la paleta de ChambeaYa */
+
+
+/* Sección de Beneficios */
+.benefits-section {
+    background-color: #FBFCF8; /* Blanco/Crema */
+    padding: 60px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    margin-bottom: 60px;
+    border: 1px solid #eee;
+}
+
+.benefits-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8em;
+    color: #FF6F61;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.benefits-section h2::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 3px;
+    background-color: #FFDAB9;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+.benefit-item {
+    padding: 25px;
+    background-color: #FFF5EE; /* Fondo casi blanco-durazno para los items */
+    border-radius: 10px;
+    border: 1px solid #FFDAB9;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.benefit-item i {
+    font-size: 2.5em;
+    color: #ffb2ab; /* Verde para los iconos de beneficios */
+    margin-bottom: 15px;
+}
+
+.benefit-item h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4em;
+    color: #2C3E50;
+    margin-bottom: 10px;
+}
+
+.benefit-item p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95em;
+    color: #6C7A89;
+    line-height: 1.5;
+}
+
+
+/* Sección de Llamada a la Acción al final */
+.call-to-action-social {
+    background-color: #2C3E50; /* Azul Marino Oscuro */
+    color: white;
+    padding: 60px 40px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 40px; /* Margen antes del footer */
+}
+
+.call-to-action-social h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8em;
+    color: #FFDAB9; /* Durazno para el título */
+    margin-bottom: 25px;
+}
+
+.call-to-action-social p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em;
+    color: #bbb;
+    max-width: 700px;
+    margin: 0 auto 35px auto;
+    line-height: 1.6;
+}
+
+.social-footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Más espacio entre los iconos grandes */
+    flex-wrap: wrap; /* Permite que los iconos se envuelvan en pantallas pequeñas */
+}
+
+.social-footer-links a {
+    color: #FF6F61; /* Coral para los iconos grandes del CTA */
+    font-size: 3.5em; /* Iconos muy grandes para el CTA */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-footer-links a:hover {
+    color: #FFDAB9; /* Durazno al hover */
+    transform: scale(1.1) translateY(-5px);
+}
+
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .social-hero h1 {
+        font-size: 2.5em;
+    }
+    .social-hero .intro-text {
+        font-size: 1.2em;
+    }
+
+    .social-channels-grid {
+        grid-template-columns: 1fr; /* Una columna en móviles */
+    }
+
+    .benefits-section {
+        padding: 40px 25px;
+    }
+    .benefits-section h2 {
+        font-size: 2.2em;
+    }
+
+    .benefits-grid {
+        grid-template-columns: 1fr; /* Una columna en móviles */
+    }
+
+    .call-to-action-social {
+        padding: 40px 25px;
+    }
+    .call-to-action-social h2 {
+        font-size: 2.2em;
+    }
+    .call-to-action-social p {
+        font-size: 1em;
+    }
+
+    .social-footer-links a {
+        font-size: 2.8em; /* Iconos más pequeños en móvil */
+        gap: 15px; /* Ajuste de gap para móviles */
+    }
+}
+
+@media (max-width: 480px) {
+    .social-media-main {
+        margin: 25px auto;
+        padding: 0 15px;
+    }
+
+    .social-hero {
+        padding: 40px 15px;
+        margin-bottom: 40px;
+    }
+    .social-hero h1 {
+        font-size: 1.8em;
+    }
+    .social-hero .intro-text {
+        font-size: 1em;
+    }
+
+    .channel-card {
+        padding: 25px;
+    }
+    .channel-card i {
+        font-size: 3em;
+    }
+    .channel-card h3 {
+        font-size: 1.5em;
+    }
+    .channel-card p {
+        font-size: 0.9em;
+        margin-bottom: 20px;
+    }
+    .btn-channel {
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+
+    .benefits-section {
+        padding: 30px 15px;
+        margin-bottom: 40px;
+    }
+    .benefits-section h2 {
+        font-size: 1.8em;
+    }
+    .benefit-item {
+        padding: 20px;
+    }
+    .benefit-item i {
+        font-size: 2em;
+    }
+    .benefit-item h4 {
+        font-size: 1.2em;
+    }
+    .benefit-item p {
+        font-size: 0.85em;
+    }
+
+    .call-to-action-social {
+        padding: 30px 15px;
+        margin-bottom: 30px;
+    }
+    .call-to-action-social h2 {
+        font-size: 1.8em;
+    }
+    .call-to-action-social p {
+        font-size: 0.9em;
+    }
+    .social-footer-links {
+        gap: 15px;
+    }
+    .social-footer-links a {
+        font-size: 2.2em; /* Más pequeños para móviles muy pequeños */
+    }
+}

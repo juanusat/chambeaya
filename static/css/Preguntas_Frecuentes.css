@@ -1,0 +1,367 @@
+.faqs-main {
+    flex-grow: 1;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 25px;
+    box-sizing: border-box;
+}
+
+/* Sección Hero de FAQs */
+.faqs-hero {
+    text-align: center;
+    padding: 70px 30px;
+    margin-bottom: 60px;
+    background-color: #fdfdfd;
+    border-radius: 15px;
+    border: 3px solid #ffffff;
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.358); 
+}
+
+.faqs-hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.2em;
+    color: #FF6F61;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.faqs-hero .intro-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4em;
+    color: #6C7A89;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Sección de Categorías de FAQs */
+.faqs-categories {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.faqs-categories h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2em;
+    color: #2C3E50;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.faqs-categories h2::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 3px;
+    background-color: #FFDAB9;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+}
+
+.category-card {
+    background-color: #FBFCF8; /* Blanco/Crema */
+    padding: 25px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    border: 1px solid #eee;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    background-color: #FFF5EE; /* Fondo casi blanco-durazno al hover */
+}
+
+.category-card i {
+    font-size: 2.8em;
+    color: #FF6F61; /* Coral para los iconos de categoría */
+    margin-bottom: 15px;
+}
+
+.category-card span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em;
+    color: #2C3E50; /* Azul Marino Oscuro */
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Lista de Preguntas Frecuentes (Acordeón) */
+.faqs-list {
+    margin-bottom: 60px;
+    
+}
+
+.faqs-list h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5em;
+    color: #2C3E50; /* Azul Marino Oscuro */
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #FFDAB9; /* Línea separadora */
+    background-color: #FFDAB9;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.faq-item {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    overflow: hidden; /* Asegura que el contenido oculto no se desborde */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.faq-question {
+    background-color: #FBFCF8; /* Blanco/Crema para la pregunta */
+    color: #2C3E50; /* Azul Marino Oscuro */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.15em;
+    font-weight: 600;
+    width: 100%;
+    padding: 20px 25px;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question:hover {
+    background-color: #f5e9e7; /* Durazno al hover */
+    color: #2C3E50;
+}
+
+.faq-question::after {
+    content: '\002B'; /* Símbolo de más Unicode */
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #FF6F61; /* Coral para el símbolo */
+    margin-left: 15px;
+    transition: transform 0.3s ease;
+}
+
+.faq-question.active::after {
+    content: "\2212"; /* Símbolo de menos Unicode */
+    transform: rotate(0deg); /* Asegura que no rote si no es necesario */
+}
+
+.faq-answer {
+    padding: 0 25px;
+    background-color: #fcfcfc; /* Un blanco muy suave para la respuesta */
+    max-height: 0; /* Oculto por defecto */
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Transición suave */
+}
+
+.faq-answer p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    color: #6C7A89;
+    line-height: 1.6;
+    padding-bottom: 20px; /* Padding para el párrafo dentro de la respuesta */
+}
+
+/* Cuando la respuesta está activa */
+.faq-answer.active {
+    max-height: 500px; /* Suficiente altura para el contenido */
+    padding: 20px 25px; /* Restaura el padding cuando está activo */
+}
+
+
+/* Sección de CTA de Contacto */
+.faqs-contact-cta {
+    background-color: #2C3E50; /* Azul Marino Oscuro */
+    color: white;
+    padding: 60px 40px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 40px; /* Margen antes del footer */
+}
+
+.faqs-contact-cta h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8em;
+    color: #FFDAB9; /* Durazno para el título */
+    margin-bottom: 25px;
+}
+
+.faqs-contact-cta p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em;
+    color: #bbb;
+    max-width: 700px;
+    margin: 0 auto 35px auto;
+    line-height: 1.6;
+}
+
+.btn-contact-support {
+    display: inline-block;
+    background-color: #4CAF50; /* Verde de acento */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.btn-contact-support:hover {
+    background-color: #388e3c; /* Verde más oscuro */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.btn-contact-support i {
+    margin-left: 10px;
+    font-size: 1.1em;
+}
+
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .faqs-hero h1 {
+        font-size: 2.5em;
+    }
+    .faqs-hero .intro-text {
+        font-size: 1.2em;
+    }
+
+    .faqs-categories h2 {
+        font-size: 2em;
+    }
+    .categories-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajuste para menos columnas si son pequeñas */
+    }
+    .category-card {
+        padding: 20px 15px;
+    }
+    .category-card i {
+        font-size: 2.2em;
+        margin-bottom: 10px;
+    }
+    .category-card span {
+        font-size: 1.1em;
+    }
+
+    .faqs-list h2 {
+        font-size: 2em;
+        margin-bottom: 25px;
+    }
+    .faq-question {
+        font-size: 1em;
+        padding: 18px 20px;
+    }
+    .faq-answer {
+        padding: 0 20px;
+    }
+    .faq-answer p {
+        font-size: 0.95em;
+        padding-bottom: 18px;
+    }
+
+    .faqs-contact-cta {
+        padding: 40px 25px;
+    }
+    .faqs-contact-cta h2 {
+        font-size: 2.2em;
+    }
+    .faqs-contact-cta p {
+        font-size: 1em;
+    }
+    .btn-contact-support {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .faqs-main {
+        margin: 25px auto;
+        padding: 0 15px;
+    }
+    .faqs-hero {
+        padding: 40px 15px;
+        margin-bottom: 40px;
+    }
+    .faqs-hero h1 {
+        font-size: 1.8em;
+    }
+    .faqs-hero .intro-text {
+        font-size: 0.9em;
+    }
+
+    .faqs-categories h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+    .categories-grid {
+        grid-template-columns: 1fr; /* Una columna en móviles pequeños */
+    }
+    .category-card {
+        padding: 18px 15px;
+    }
+    .category-card i {
+        font-size: 2em;
+    }
+    .category-card span {
+        font-size: 1em;
+    }
+
+    .faqs-list h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+    .faq-question {
+        font-size: 0.95em;
+        padding: 15px 18px;
+    }
+    .faq-question::after {
+        font-size: 1.3em;
+    }
+    .faq-answer {
+        padding: 0 18px;
+    }
+    .faq-answer p {
+        font-size: 0.9em;
+        padding-bottom: 15px;
+    }
+
+    .faqs-contact-cta {
+        padding: 30px 15px;
+        margin-bottom: 30px;
+    }
+    .faqs-contact-cta h2 {
+        font-size: 1.8em;
+    }
+    .faqs-contact-cta p {
+        font-size: 0.9em;
+    }
+    .btn-contact-support {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+}

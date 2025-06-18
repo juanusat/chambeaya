@@ -1,0 +1,278 @@
+.social-impact-main {
+    flex-grow: 1;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 25px;
+}
+
+/* Sección Hero de Impacto Social */
+.impact-hero {
+    text-align: center;
+    padding: 60px 0; /* Más padding vertical */
+    margin-bottom: 50px; /* Más margen inferior */
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.358); 
+}
+
+.impact-hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.2em; /* Tamaño de título grande */
+    color: #FF6F61; /* Coral para el título principal */
+    margin-bottom: 20px;
+    line-height: 1.2;
+    /* Eliminadas animaciones y text-shadow del h1 */
+}
+
+.impact-hero .intro-text {
+    font-size: 1.4em; /* Texto intro grande */
+    color: #6C7A89; /* Gris cálido para el texto */
+    max-width: 850px;
+    margin: 0 auto; /* Centra el párrafo */
+    line-height: 1.6;
+    /* Eliminadas animaciones y text-shadow del intro-text */
+}
+/* Sección de Pilares de Impacto */
+.impact-values {
+    margin-bottom: 50px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.impact-values h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.4em;
+    color: #FF6F61;
+    margin-bottom: 30px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.impact-values h2::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 3px;
+    background-color: #FFDAB9;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.value-item {
+    background-color: #ecd9d4; /* Un coral muy claro */
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid #ffe0e0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.value-item i {
+    font-size: 3.5em; /* Tamaño grande para los iconos */
+    color: #FF6F61; /* Coral para los iconos */
+    margin-bottom: 15px;
+}
+
+.value-item h3 {
+    font-size: 1.4em;
+    color: #2C3E50;
+    margin-bottom: 10px;
+}
+
+.value-item p {
+    font-size: 0.95em;
+    color: #6C7A89;
+}
+
+/* Sección de Historias que Inspiran */
+.impact-stories {
+    padding: 50px 0;
+    margin-bottom: 50px;
+    background-color: #ecd9d4; /* Alterna el color de fondo */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.impact-stories .content-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+.impact-stories h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.4em;
+    color: #ecd9d4;
+    margin-bottom: 30px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.impact-stories h2::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 3px;
+    background-color: #FFDAB9;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.story-carousel {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las historias se envuelvan */
+    justify-content: center;
+    gap: 30px;
+}
+
+.story-item {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    flex: 1; /* Permite que se expandan */
+    min-width: 280px; /* Ancho mínimo para cada historia */
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.story-item:hover {
+    transform: translateY(-5px);
+}
+
+.story-item img {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 3px solid #FFDAB9;
+}
+
+.story-item h3 {
+    font-size: 1.25em;
+    color: #2C3E50;
+    margin-bottom: 10px;
+}
+
+.story-item p {
+    font-size: 0.9em;
+    color: #6C7A89;
+    line-height: 1.6;
+}
+
+/* Sección de Cifras de Impacto */
+.impact-stats {
+    margin-bottom: 50px;
+    padding: 40px;
+    background-color: #ebcbc3; /* Durazno suave */
+    border-radius: 15px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.impact-stats h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.4em;
+    color: #FF6F61;
+    margin-bottom: 30px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.impact-stats h2::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 3px;
+    background-color: #FF6F61; /* Línea de coral */
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.stat-item {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+}
+
+.stat-item .stat-number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3em; /* Números grandes */
+    font-weight: 700;
+    color: #FF6F61; /* Coral para los números */
+    display: block; /* Para que ocupe toda la línea */
+    margin-bottom: 5px;
+}
+
+.stat-item .stat-description {
+    font-size: 1.1em;
+    color: #2C3E50;
+    font-weight: 500;
+}
+
+/* Call to Action */
+.impact-cta {
+    text-align: center;
+    padding: 60px 30px;
+    background: linear-gradient(135deg, #FF6F61 0%, #FFDAB9 100%);
+    border-radius: 15px;
+    margin-top: 50px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    color: white;
+}
+
+.impact-cta p {
+    font-size: 1.8em;
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+.impact-cta .btn-secondary {
+    background-color: #2e7d32; /* Un verde oscuro para el botón */
+    color: white;
+    padding: 18px 35px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.3em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.impact-cta .btn-secondary:hover {
+    background-color: #388e3c;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
