@@ -9,9 +9,10 @@
 /* Sección Hero de Redes Sociales */
 .social-hero {
     text-align: center;
-    padding: 70px 30px;
-    margin-bottom: 60px;
-    background-color: #FFF5EE;
+    padding: 60px 0; /* Más padding vertical */
+    margin-bottom: 50px; /* Más margen inferior */
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.358); 
 }
 
 .social-hero h1 {
@@ -40,7 +41,7 @@
 }
 
 .channel-card {
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
@@ -53,6 +54,7 @@
 .channel-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    background-color: #f5e9e7;
 }
 
 .channel-card i {

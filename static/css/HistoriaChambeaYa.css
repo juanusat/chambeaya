@@ -12,7 +12,7 @@
     padding: 60px 0; /* Más padding vertical */
     margin-bottom: 50px; /* Más margen inferior */
     border-radius: 15px; /* Bordes más redondeados */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Sombra más prominente */
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.358); 
 }
 
 .history-hero h1 {
@@ -37,7 +37,7 @@
     padding: 40px; /* Más padding */
     margin-bottom: 40px; /* Más margen inferior */
     border-radius: 12px; /* Bordes redondeados */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Sombra suave */
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.358); 
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -11,7 +11,7 @@
     padding: 60px 0;
     margin-bottom: 50px;
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.358); 
 }
 
 .creators-hero h1 {
@@ -42,10 +42,10 @@
     background-color: #fff;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efecto hover */
-    border: 1px solid #f0f0f0;
+    border: 1px solid white;
 }
 
 .team-member:hover {

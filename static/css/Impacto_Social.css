@@ -7,10 +7,11 @@
 
 /* Sección Hero de Impacto Social */
 .impact-hero {
-    text-align: center; /* Asegura la alineación central del texto */
-    padding: 70px 30px; /* Un padding generoso */
-    margin-bottom: 60px;
-    background-color: #FFF5EE; /* Fondo casi blanco-durazno */
+    text-align: center;
+    padding: 60px 0; /* Más padding vertical */
+    margin-bottom: 50px; /* Más margen inferior */
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.358); 
 }
 
 .impact-hero h1 {
@@ -69,7 +70,7 @@
 }
 
 .value-item {
-    background-color: #fcf4f4; /* Un coral muy claro */
+    background-color: #ecd9d4; /* Un coral muy claro */
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -103,7 +104,7 @@
 .impact-stories {
     padding: 50px 0;
     margin-bottom: 50px;
-    background-color: #fcf4f4; /* Alterna el color de fondo */
+    background-color: #ecd9d4; /* Alterna el color de fondo */
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
@@ -117,7 +118,7 @@
 .impact-stories h2 {
     font-family: 'Montserrat', sans-serif;
     font-size: 2.4em;
-    color: #FF6F61;
+    color: #ecd9d4;
     margin-bottom: 30px;
     text-align: center;
     position: relative;
@@ -183,7 +184,7 @@
 .impact-stats {
     margin-bottom: 50px;
     padding: 40px;
-    background-color: #FFDAB9; /* Durazno suave */
+    background-color: #ebcbc3; /* Durazno suave */
     border-radius: 15px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.1);
 }

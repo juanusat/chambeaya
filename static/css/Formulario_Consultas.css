@@ -7,10 +7,11 @@
 
 /* Sección Hero de Consultas */
 .consultas-hero {
-    text-align: left;
-    padding: 70px 30px;
-    margin-bottom: 10px;
-    background-color: #FFF5EE; /* Fondo casi blanco-durazno */
+    text-align: center;
+    padding: 60px 0; /* Más padding vertical */
+    margin-bottom: 50px; /* Más margen inferior */
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.358); 
 }
 
 .consultas-hero h1 {
