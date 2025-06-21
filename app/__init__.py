@@ -58,7 +58,6 @@ def create_app():
                         g.user_id = user_id
                         g.username = username
                         g.session_valid = True
-            else:
 
         except Exception as e:
             print(f"❌ Error en verificación de sesión: {e}")
