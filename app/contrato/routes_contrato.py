@@ -89,11 +89,12 @@ def comentario_por_contrato(conts_id):
             "comentario": texto,
             "fecha_creacion": fecha_creacion.isoformat() if fecha_creacion else None,
             "nombre_cliente": nombre_cliente,
-            "nombre_prestador": nombre_prestador
+            "nombre_prestador": nombre_prestador,
+            "count": 1
         }
         return jsonify(resultado), 200
     else:
-        return jsonify({"mensaje": "No se encontró comentario para el contrato"}), 404
+        return jsonify({"mensaje": "No se encontró comentario para el contrato", "count": 0}), 200
 
 @contratos_bp.route('/nuevo_comentario/<int:conts_id>', methods=['POST'])
 def crear_comentario_contrato(conts_id):
@@ -114,6 +115,8 @@ def crear_comentario_contrato(conts_id):
         return jsonify({'mensaje': 'Calificación inválida'}), 400
 
     data['contrato_id'] = conts_id
+    print('Datos del comentario:')
+    print(data)
     create_comentario(data)
 
     return jsonify({'message': 'Comentario creado exitosamente'}), 201
