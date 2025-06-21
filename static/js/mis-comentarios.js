@@ -90,15 +90,27 @@
 
     window.configurarBotonesComentarios = function() {
         initializeCustomModal();
+        // Inicializa hover, click y reset para las estrellas
+        document.querySelectorAll('.calificacion-estrellas').forEach(container => {
+            const estrellas = Array.from(container.querySelectorAll('.estrella'));
 
+            estrellas.forEach(estrella => {
+                const mouseEnterHandler = () => hoverStars(container, +estrella.dataset.value);
+                estrella.removeEventListener('mouseenter', mouseEnterHandler);
+                estrella.addEventListener('mouseenter', mouseEnterHandler);
+
+                const clickHandler = () => selectStars(container, +estrella.dataset.value);
+                estrella.removeEventListener('click', clickHandler);
+                estrella.addEventListener('click', clickHandler);
+            });
+
+            const mouseLeaveHandler = () => resetStars(container);
+            container.removeEventListener('mouseleave', mouseLeaveHandler);
+            container.addEventListener('mouseleave', mouseLeaveHandler);
+        });
         document.querySelectorAll('.ver-comentario-btn').forEach(boton => {
             boton.removeEventListener('click', handleVerComentarioClick);
             boton.addEventListener('click', handleVerComentarioClick);
-        });
-
-        document.querySelectorAll('.calificacion-estrellas .estrella').forEach(estrella => {
-            estrella.removeEventListener('click', handleEstrellaClick);
-            estrella.addEventListener('click', handleEstrellaClick);
         });
 
         document.querySelectorAll('.form-comentario').forEach(form => {
@@ -122,6 +134,28 @@
         });
     };
 
+    function hoverStars(container, valor) {
+        container.querySelectorAll('.estrella').forEach(el => {
+            el.classList.toggle('active', +el.dataset.value <= valor);
+        });
+    }
+
+    function selectStars(container, valor) {
+        container.dataset.calificacion = valor;
+        const input = container.nextElementSibling;
+        if (input && input.name === 'calificacion') input.value = valor;
+        container.querySelectorAll('.estrella').forEach(el => {
+            el.classList.toggle('active', +el.dataset.value <= valor);
+        });
+    }
+
+    function resetStars(container) {
+        const cal = +container.dataset.calificacion || 0;
+        container.querySelectorAll('.estrella').forEach(el => {
+            el.classList.toggle('active', +el.dataset.value <= cal);
+        });
+    }
+
     async function handleVerComentarioClick() {
         const contenedorCard = this.closest('.review-container-card');
         const contenido = contenedorCard.querySelector('.comentario-contenido');
@@ -140,9 +174,14 @@
             try {
                 // Intentar obtener el comentario existente
                 const respuestaComentario = await fetch(`/api/contratos/comentario/${contratoId}`);
+                let dataComentario
                 if (respuestaComentario.ok) {
-                    const dataComentario = await respuestaComentario.json();
-
+                    dataComentario = await respuestaComentario.json();
+                } else {
+                    return showMessage('No se pudo obtener el comentario del contrato.', 'error');
+                }
+                if (dataComentario.count > 0) {
+                    comentarioExistenteDiv.classList.remove('preset');
                     comentarioExistenteDiv.style.display = 'block';
                     formComentario.style.display = 'none';
 
@@ -162,13 +201,12 @@
                 } else {
                     // No existing comment, show the form if contract is completed or finalized
                     comentarioExistenteDiv.style.display = 'none';
-                    
+                    comentarioExistenteDiv.classList.add('preset');
                     const estadoResp = await fetch(`/api/contratos/estado_detalle/${contratoId}`);
                     if (!estadoResp.ok) {
                         throw new Error('No se pudo obtener estado del contrato para mostrar el formulario.');
                     }
                     const estadoData = await estadoResp.json();
-
                     // Muestra el formulario si el estado es 'completado' o 'finalizado'
                     if (estadoData.estado === 'completado' || estadoData.estado === 'finalizado') {
                         formComentario.style.display = 'block';
@@ -177,7 +215,6 @@
                         formComentario.querySelector('input[name="calificacion"]').value = '0';
                         formComentario.querySelectorAll('.calificacion-estrellas .estrella').forEach(s => s.classList.remove('selected'));
                     } else {
-                        // Esto debería ser un caso raro si mis-contratos.js ya filtró, pero es un fallback
                         formComentario.style.display = 'none';
                         contenedorCard.querySelector('.comentario-texto').textContent = 'No hay comentario aún.';
                         contenedorCard.querySelector('.comentario-autor').textContent = 'Autor Desconocido';
@@ -201,24 +238,6 @@
             }
         }
     }
-
-    function handleEstrellaClick() {
-        const estrellasContainer = this.closest('.calificacion-estrellas');
-        const calificacionInput = estrellasContainer.nextElementSibling;
-        const clickedValue = parseInt(this.dataset.value);
-
-        estrellasContainer.dataset.calificacion = clickedValue;
-        calificacionInput.value = clickedValue;
-
-        estrellasContainer.querySelectorAll('.estrella').forEach(estrella => {
-            if (parseInt(estrella.dataset.value) <= clickedValue) {
-                estrella.classList.add('selected');
-            } else {
-                estrella.classList.remove('selected');
-            }
-        });
-    }
-
     async function handleComentarioFormSubmit(event) {
         event.preventDefault();
         const form = event.target;
@@ -333,9 +352,11 @@
         const contenedorCard = this.closest('.review-container-card');
         const comentarioExistenteDiv = contenedorCard.querySelector('.comentario-existente');
         const formComentario = contenedorCard.querySelector('.form-comentario');
-
+        
+        if (!comentarioExistenteDiv.classList.contains('preset')) {
+            comentarioExistenteDiv.style.display = 'block';
+        }
         formComentario.style.display = 'none';
-        comentarioExistenteDiv.style.display = 'block';
     }
 
     initializeCustomModal();
