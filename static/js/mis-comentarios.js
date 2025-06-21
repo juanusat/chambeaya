@@ -241,6 +241,7 @@
     async function handleComentarioFormSubmit(event) {
         event.preventDefault();
         const form = event.target;
+        console.log(form)
         const contenedorCard = form.closest('.review-container-card');
         const contratoId = contenedorCard.dataset.contratoId;
         const comentarioTexto = form.querySelector('textarea').value;
@@ -248,6 +249,7 @@
 
         if (!comentarioTexto || calificacion === 0) {
             showMessage('Por favor, escribe un comentario y selecciona una calificación.', 'info');
+            console.log('wwweeee')
             return;
         }
 

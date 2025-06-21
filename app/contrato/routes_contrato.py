@@ -115,8 +115,6 @@ def crear_comentario_contrato(conts_id):
         return jsonify({'mensaje': 'Calificación inválida'}), 400
 
     data['contrato_id'] = conts_id
-    print('Datos del comentario:')
-    print(data)
     create_comentario(data)
 
     return jsonify({'message': 'Comentario creado exitosamente'}), 201

@@ -370,9 +370,10 @@ def create_comentario(data):
                 )
             )
             conn.commit()
+        return True
+    except Exception as e:
+        return False
     finally:
-        conn.close()
-
         conn.close()
 
 def update_comentario(conts_id,data):
@@ -380,15 +381,17 @@ def update_comentario(conts_id,data):
     try:
         with conn.cursor() as cursor:
             cursor.execute(
-                "UPDATE comentario SET calificacion=%s, comentario=%s,fecha_creacion=%s WHERE contrato_id=%s;",
+                "UPDATE comentario SET calificacion=%s, comentario=%s WHERE contrato_id=%s;",
                 (
                     data['calificacion'],
                     data['comentario'],
-                    data['fecha_creacion'],
                     conts_id
                 ),
             )
             conn.commit()
+        return True
+    except Exception as e:
+        return False
     finally:
         conn.close()
 
@@ -401,8 +404,10 @@ def delete_comentario(conts_id):
             )
             conn.commit()  # Asegura que los cambios se guarden
             return cursor.rowcount > 0  # True si se eliminaron filas
+    except Exception as e:
+        return False
     finally:
-        conn.close() 
+        conn.close()
 
 def contrato_pertenece_a_cliente(conts_id, cliente_id):
     conn = get_db_connection()
