@@ -196,10 +196,10 @@ function renderContracts(contractsToRender) {
                 <div class="client-info">
                     <p>Cliente: <span class="client-name">${contrato.cliente || 'Desconocido'}</span></p>
                     <p>Prestador: <span class="client-name">${contrato.empleador || 'Desconocido'}</span></p>
-                    <div class="other-user-display">
+                    <a class="other-user-display" href="/@${esPrestador ? contrato.username_cliente : contrato.username_empleado}" target="_blank">
                         <img src="${profileImageUrlToDisplay}" alt="${profileImageAltText}" class="perfil-img">
                         <span class="other-user-name">${profileImageOwnerName}</span>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div class="card-actions-buttons">
