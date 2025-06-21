@@ -121,7 +121,8 @@
 
 .contract-card .card-header .title-dates-row {
     flex-grow: 1;
-    margin-right: 15px;
+    margin-right: 14px;
+    margin-bottom: 14px;
 }
 
 .contract-card .card-header .nombre {
